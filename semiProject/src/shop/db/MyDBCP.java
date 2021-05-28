@@ -1,4 +1,4 @@
-package test.db;
+package shop.db;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

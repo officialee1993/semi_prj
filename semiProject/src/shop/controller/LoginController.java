@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import shop.db.MyDBCP;
 import shop_dao.Membersdao;
-import test.db.MyDBCP;
 
 
 @WebServlet("/login")
@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet{
 			if(find) {
 				HttpSession session = req.getSession();
 				session.setAttribute("id", id);
-				resp.sendRedirect(req.getContextPath()+"/result.jsp");
+				resp.sendRedirect(req.getContextPath()+"/shop/index.jsp");
 			}else {
 				resp.sendRedirect(req.getContextPath()+"/shop/login.jsp");
 			

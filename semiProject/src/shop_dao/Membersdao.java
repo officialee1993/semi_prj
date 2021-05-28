@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import test.db.MyDBCP;
+import shop.db.MyDBCP;
 
 public class Membersdao {
 
