@@ -1,0 +1,237 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap');
+a{
+	color:#222222;
+}
+a:hover{
+	color:#222222;
+}
+.my_row{
+	width:1050px;
+	margin:0 auto;
+	padding:10px 0;
+}
+#container_wrap{
+	position:relative;
+}
+/*헤더*/
+.header > .my_row > .header_box{
+	display:flex;
+	justify-content: space-between;
+}
+.header > .my_row > .header_box > .logo > img{
+	width:60px;
+}
+.header > .my_row > .header_box >  .header_menu{
+	padding:20px 0;
+	font-size:16px;
+	font-weight:600;
+	margin-left:50px;
+}
+
+ .header > .my_row > .header_box > .header_menu > ul{
+	display:flex;
+}
+ .header > .my_row > .header_box > .header_menu > ul > li{
+	margin-left:40px;
+}
+.header .menu_dropdown{
+	width:100%;
+	background-color:#ffffff;
+	display:flex;
+	justify-content: center;
+	position:absolute;
+	z-index:100;
+	display:none;
+}
+.header .menu_dropdown ul li{
+	padding:20px;
+}
+ .header >  .my_row > .header_box >.header_menu > ul > li:nth-child(1){
+	margin-left:0px;
+}
+.header > .my_row > .header_box > .btn_wrap{
+	padding:20px 0;
+}
+.header > .my_row > .header_box > .btn_wrap > a{
+	font-size:14px;
+	font-weight:400;
+}
+ .header > .my_row > .header_box > .btn_wrap > a:nth-child(1){
+	margin-right:20px;
+}
+/*푸터*/
+.footer{
+	width:100%;
+	background-color:#333;
+	color:#ffffff;
+	text-align:center;
+	padding:20px 0;
+	font-size:12px;
+}
+.footer_bottom{
+	position:absolute;
+	bottom:0;
+}
+/*메인_배너*/
+.banner{
+	width:100%;
+}
+/*메인_콘텐트*/
+.content{
+	padding-bottom:79px;
+}
+.content > .my_row > .item_box > .title{
+	padding:79px 0 35px;
+	text-align:center;
+	font-size:28px;
+}
+.content > .my_row > .item_box > ul{
+	display:flex;
+}
+.content > .my_row > .item_box > ul > li{
+	margin-left:14px;
+}
+.content > .my_row > .item_box > ul > li:nth-of-type(1){
+	margin-left:0px;
+}
+.content > .my_row > .item_box > ul > li > a > img{
+	width:252px;
+}
+.content > .my_row > .item_box > ul > li > .text_box{
+	text-align:center;
+}
+.content > .my_row > .item_box > ul > li > div > .price{
+	font-size:16px;
+	color:#000000;
+	padding:5px 0;
+}
+.content > .my_row > .item_box > ul > li > div > .title{
+	font-size:16px;color:#333333;
+	padding:10px 0;
+}
+/*로그인 페이지*/
+.content .my_row .login_box{
+	width:340px;
+	margin:100px auto;
+}
+.content .my_row h3.form_title{
+	font-size:20px;
+	font-weight:800;
+	text-align:center;
+}
+.content .my_row .login_box .login_insert{
+	margin-top:20px;
+}
+.content .my_row .form-control{
+	font-size:14px;
+	padding:15px 5px;
+}
+.content .my_row .form-label{
+	font-size:14px;
+	color:#222;
+}
+.content .my_row .login_box .login_search_box{
+	font-size:12px;
+	text-align:center;
+}
+.content .my_row .login_box .login_search_box a{
+	margin-left:10px;
+}
+.content .my_row .login_box .login_search_box a:nth-child(1){
+	position:relative;
+}
+.content .my_row .login_box .login_search_box a:nth-child(1)::after{
+	content:'';
+	display:block;
+	position:absolute;
+	right:-7px;
+	top:4px;
+	width:1px;
+	height:10px;
+	background-color:black;
+}
+.content .my_row .login_box .btn{
+	margin-top:20px;
+	width:100%;
+	padding:10px 0;
+}
+.content .my_row .join_box h3{
+	font-size:20px;
+	font-weight:800;
+	text-align:center;
+}
+.content .my_row .join_wrap{
+	width:640px;
+	margin:100px auto;
+}
+.content .my_row .join_wrap .join_box form{
+	margin-top:50px;
+}
+.content .my_row .join_wrap .join_box form .mb-3 label{
+	position:relative;
+}
+.content .my_row .join_wrap .join_box form .mb-3 label::after{
+	content:"*";
+	color:red;
+	position:absolute;
+	right:-10px;
+	top:0;
+}
+.content .my_row .join_wrap .join_box form .mb-3:last-of-type label::after{
+	content:"";
+}
+.content .my_row .join_wrap .join_box form .btn_wrap{
+	text-align:center;
+}
+.content .my_row .join_wrap .join_box form .btn{
+	margin-top:20px;
+	width:30%;
+	margin:50px auto;
+	padding:10px 0;
+}
+/*상품 상세*/
+.content .my_row .detail_box{
+	width:100%;
+	display:flex;
+}
+.content .my_row .detail_box .left_box{
+	width:40%;
+}
+.content .my_row .detail_box .left_box img{
+	width:430px;
+	height:430px;
+}
+.content .my_row .detail_box .right_box{
+	width:60%;
+}
+.content .my_row .detail_box .right_box .text_box{
+	margin-left:200px;
+	font-size:16px;
+}
+.content .my_row .detail_box .right_box .text_box h4{
+	font-size:24px;
+	margin-top:40px;
+	font-weight:700;
+}
+.content .my_row .detail_box .right_box .text_box h5{
+	margin-top:40px;
+	font-size:16px;
+}
+.content .my_row .detail_box .right_box .text_box p{
+	margin-top:20px;
+	font-size:28px;
+	font-weight:700;
+}
+.content .my_row .detail_box .right_box .text_box .goods_count{
+	margin-top:10px;
+	width:50px;
+}
+.content .my_row .detail_box .right_box .btn_box{
+	margin:100px 0;
+	text-align:center;
+}
+.content .my_row .detail_box .right_box .btn_box .btn{
+	width:30%;
+	padding:10px 0;
+}
