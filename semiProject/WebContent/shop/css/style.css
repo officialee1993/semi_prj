@@ -11,9 +11,6 @@ a:hover{
 	margin:0 auto;
 	padding:10px 0;
 }
-#container_wrap{
-	position:relative;
-}
 /*헤더*/
 .header > .my_row > .header_box{
 	display:flex;
@@ -68,10 +65,6 @@ a:hover{
 	text-align:center;
 	padding:20px 0;
 	font-size:12px;
-}
-.footer_bottom{
-	position:absolute;
-	bottom:0;
 }
 /*메인_배너*/
 .banner{

@@ -1,27 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <header class="p-3 mb-3 border-bottom">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-        </a>
-
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
-        </ul>
-
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-        </form>
-
-        <div class="dropdown text-end">
-         <button type="button" class="btn btn-outline-dark">로그인</button>
-         <button type="button" class="btn btn-outline-dark">회원가입</button>
-        </div>
-      </div>
-    </div>
-  </header>
+	<div class="header">
+	<div class="my_row">
+		<div class="header_box">
+			<div class="logo">
+			<img src="images/logo2.png"/>
+			</div>
+			<div class="header_menu" id="header_menu">
+			<ul>
+				<li><a href="">신상품</a></li>
+				<li><a href="">남성</a></li>
+				<li><a href="">여성</a></li>
+			</ul>
+			</div>
+		<div class="btn_wrap">
+			<a href="">로그인</a>
+			<a href="">회원가입</a>
+		</div>
+		</div>
+		</div>
+		<div class="menu_dropdown" id="menu_dropdown">
+					<ul>
+					<li><a href="">신상품</a></li>
+					</ul>
+					<ul>
+					<li><a href="">상의</a></li>
+					<li><a href="">하의</a></li>
+					<li><a href="">신발</a></li>
+					</ul>
+					<ul>
+					<li><a href="">상의</a></li>
+					<li><a href="">하의</a></li>
+					<li><a href="">신발</a></li>
+					</ul>
+					
+			</div>
+	</div>

@@ -14,41 +14,7 @@
 </head>
 <body>
 <!-- header -->
-	<div class="header">
-	<div class="my_row">
-		<div class="header_box">
-			<div class="logo">
-			<img src="images/logo2.png"/>
-			</div>
-			<div class="header_menu" id="header_menu">
-			<ul>
-				<li><a href="">신상품</a></li>
-				<li><a href="">남성</a></li>
-				<li><a href="">여성</a></li>
-			</ul>
-			</div>
-		<div class="btn_wrap">
-			<a href="">로그인</a>
-			<a href="">회원가입</a>
-		</div>
-		</div>
-		</div>
-		<div class="menu_dropdown" id="menu_dropdown">
-					<ul>
-					<li><a href="">신상품</a></li>
-					</ul>
-					<ul>
-					<li><a href="">상의</a></li>
-					<li><a href="">하의</a></li>
-					<li><a href="">신발</a></li>
-					</ul>
-					<ul>
-					<li><a href="">상의</a></li>
-					<li><a href="">하의</a></li>
-					<li><a href="">신발</a></li>
-					</ul>
-			</div>
-	</div>
+	<jsp:include page="header.jsp"/>
 	<!-- header END -->
 	<!-- content -->
 	<div class="content">
@@ -105,9 +71,7 @@
 
 
 	<!-- footer -->
-	<div class="footer">
-		<p>All Rights Reserved</p>
-	</div>
+	<jsp:include page="footer.jsp"/>
 <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
