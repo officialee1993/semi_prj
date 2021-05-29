@@ -26,7 +26,7 @@
 			</c:otherwise>
 			</c:choose>
 			
-			<a href="">회원가입</a>
+			<a href="${cp}/shop/join">회원가입</a>
 			
 		</div>
 		</div>
