@@ -37,6 +37,8 @@ public class Membersdao {
 		}catch (SQLException s) {
 			s.getMessage();
 			return null;
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
 		}
 		
 	}
@@ -60,6 +62,8 @@ public class Membersdao {
 		}catch (SQLException s) {
 			s.getMessage();
 			return null;
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
 		}
 		
 	}
