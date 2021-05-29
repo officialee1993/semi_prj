@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<div class="header">
 	<div class="my_row">
 		<div class="header_box">
@@ -17,11 +18,11 @@
 			<c:choose>
 			
 			<c:when test="${empty sessionScope.id}">
-			<a href="${pageContext.request.contextPath}/shop/login.jsp">로그인</a>
+			<a href="${cp}/shop/login">로그인</a>
 			</c:when>
 			
 			<c:otherwise>
-			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+			<a href="${cp}/shop/logout">로그아웃</a>
 			</c:otherwise>
 			</c:choose>
 			

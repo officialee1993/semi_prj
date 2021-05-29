@@ -18,8 +18,18 @@ import shop.db.MyDBCP;
 import shop_dao.Membersdao;
 
 
-@WebServlet("/login")
+@WebServlet("/shop/login")
 public class LoginController extends HttpServlet{
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		req.setAttribute("top", "/shop/header.jsp");
+		req.setAttribute("content", "/shop/login.jsp");
+		req.setAttribute("footer", "/shop/footer.jsp");
+		
+		req.getRequestDispatcher("/shop/index.jsp").forward(req, resp);
+	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -33,9 +43,9 @@ public class LoginController extends HttpServlet{
 			if(find) {
 				HttpSession session = req.getSession();
 				session.setAttribute("id", id);
-				resp.sendRedirect(req.getContextPath()+"/shop/index.jsp");
+				resp.sendRedirect(req.getContextPath()+"/shop/index");
 			}else {
-				resp.sendRedirect(req.getContextPath()+"/shop/login.jsp");
+				resp.sendRedirect(req.getContextPath()+"/shop/login");
 			
 			}
 

@@ -13,10 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 public class IndexController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String top=(String)req.getAttribute("top");
+		String content=(String)req.getAttribute("content");
 		String footer=(String)req.getAttribute("footer");
 		if(top==null) {
 			top="/shop/header.jsp";
 		}
+		if(content==null) {
+			content="/shop/home.jsp";
+		}
+		
 		if(footer==null) {
 			footer="/shop/footer.jsp";
 		}
@@ -26,6 +31,7 @@ public class IndexController extends HttpServlet {
 		ServletContext application=getServletContext();
 		application.setAttribute("cp", cp);
 		req.setAttribute("top", top);
+		req.setAttribute("content", content);
 		req.setAttribute("footer", footer);
 		req.getRequestDispatcher("/shop/index.jsp").forward(req, resp);
 	}
