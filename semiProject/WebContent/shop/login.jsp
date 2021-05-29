@@ -55,12 +55,13 @@
 		<div class="my_row">
 			<div class="login_box">
 				<h3 class="form_title">로그인</h3>
-				<form class="login_insert" method="" action="">
+				
+				<form class="login_insert" method="post" action="${pageContext.request.contextPath}/login">
 				<div class="mb-3">
 				  <label for="" class=""></label>
-				  <input name="??" type="text" class="form-control" id="asd" placeholder="아이디를 입력해주세요">
+				  <input name="id" type="text" class="form-control" id="asd" placeholder="아이디를 입력해주세요">
 				  <label for="" class=""></label>
-				  <input name="??" type="password" class="form-control" id="zxc" placeholder="비밀번호를 입력해주세요">
+				  <input name="pwd" type="password" class="form-control" id="zxc" placeholder="비밀번호를 입력해주세요">
 				</div>
 				<div class="login_search_box">
 					<a href="">아이디 찾기</a>
@@ -68,6 +69,7 @@
 				</div>
 				<button type="submit" class="btn btn-dark">로그인</button>
 				</form>
+				
 				<button type="button" class="btn btn-light">회원가입</button>
 				
 			</div>

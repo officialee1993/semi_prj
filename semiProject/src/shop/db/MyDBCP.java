@@ -1,4 +1,4 @@
-package test.db;
+package shop.db;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,15 +13,14 @@ import javax.sql.DataSource;
 public class MyDBCP {
 	private static DataSource ds=null;
 	
-	static {//static 멤버를 초기화 할때는 생성자가 아닌 static블록을 사용한다.
+	static {
 		Context initContext;
 		try {
 			initContext = new InitialContext();
 			Context envContext  = (Context)initContext.lookup("java:/comp/env");
 			ds = (DataSource)envContext.lookup("jdbc/myoracle");
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 	}
 	
