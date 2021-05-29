@@ -101,7 +101,7 @@
 				
 				<div class="comment_list review_comment_list">
 				<!-- 댓글입력시 추가될 div className -->
-				<div class="comment_box review_comment_box">
+				<div class="comment_box">
 				<p class="writer">작성자</p>
 				<span class="content">영락과 얼마나 넣는 장식하는 두손을 보이는 동산에는 아름다우냐? 못할 든 이상의 전인 것이다. 뜨거운지라, 공자는 그들은 운다. 용감하고 열락의 위하여서 것이다. </span>
 				</div>
