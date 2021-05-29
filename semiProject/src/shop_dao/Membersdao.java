@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.management.remote.JMXConnectionNotification;
+
 import shop.db.MyDBCP;
 
 public class Membersdao {
@@ -15,6 +17,78 @@ public class Membersdao {
 		return instance;
 	}
 	
+	public String find_pwd(String id , String email) {
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs= null;
+		String pwd =null;
+		try {
+			con = MyDBCP.getConnection();
+			String sql = "select * from members where id=? and email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, email);
+			rs= pstmt.executeQuery();
+			if(rs.next()) {
+				pwd = rs.getString("pwd");
+			}
+			return pwd ; 
+		}catch (SQLException s) {
+			s.getMessage();
+			return null;
+		}
+		
+	}
+	public String find_id(String name , String email) {
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs= null;
+		String id =null;
+		try {
+			con = MyDBCP.getConnection();
+			String sql = "select * from members where name=? and email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			rs= pstmt.executeQuery();
+			if(rs.next()) {
+				id = rs.getString("id");
+			}
+			return id ; 
+		}catch (SQLException s) {
+			s.getMessage();
+			return null;
+		}
+		
+	}
+	public int insert(String id , String pwd , String name , String phone , String email, String address ) {
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		try {
+			con = MyDBCP.getConnection();
+			String sql = "insert into members values(?,?,?,?,?,?)";
+			pstmt= con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+			pstmt.setString(3, name);
+			pstmt.setString(4, phone);
+			pstmt.setString(5, email);
+			pstmt.setString(6, address);
+			
+			int n = pstmt.executeUpdate();
+			
+			return n ; 
+			
+		}catch(SQLException s) {
+			s.getMessage();
+			return -1; 
+		}finally {
+			MyDBCP.close(con, pstmt, null);
+		}
+	}
 	public boolean isMember(String id , String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null; 
@@ -39,6 +113,8 @@ public class Membersdao {
 			s.getMessage();
 			return false;
 			
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
 		}
 	}
 }

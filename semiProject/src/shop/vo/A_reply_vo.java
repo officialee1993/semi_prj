@@ -2,7 +2,7 @@ package shop.vo;
 
 import java.util.Date;
 
-public class A_reply {
+public class A_reply_vo {
 	
 	private int a_r_no;
 	private String wr_id;
@@ -10,9 +10,9 @@ public class A_reply {
 	private Date wr_date;
 	private int a_b_num ; 
 	
-	public A_reply() {}
+	public A_reply_vo() {}
 
-	public A_reply(int a_r_no, String wr_id, String a_r_content, Date wr_date, int a_b_num) {
+	public A_reply_vo(int a_r_no, String wr_id, String a_r_content, Date wr_date, int a_b_num) {
 		super();
 		this.a_r_no = a_r_no;
 		this.wr_id = wr_id;

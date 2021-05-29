@@ -2,7 +2,7 @@ package shop.vo;
 
 import java.util.Date;
 
-public class Q_board {
+public class Q_board_vo {
 
 	private int q_b_num ;
 	private String q_b_name ;
@@ -13,9 +13,9 @@ public class Q_board {
 	private String id   ;
 	private int p_num  ;
 	
-	public Q_board() {}
+	public Q_board_vo() {}
 
-	public Q_board(int q_b_num, String q_b_name, String q_b_title, String q_b_content, String q_b_pwd, Date wr_date,
+	public Q_board_vo(int q_b_num, String q_b_name, String q_b_title, String q_b_content, String q_b_pwd, Date wr_date,
 			String id, int p_num) {
 		super();
 		this.q_b_num = q_b_num;

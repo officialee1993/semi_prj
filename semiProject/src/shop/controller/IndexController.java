@@ -34,5 +34,6 @@ public class IndexController extends HttpServlet {
 		req.setAttribute("content", content);
 		req.setAttribute("footer", footer);
 		req.getRequestDispatcher("/shop/index.jsp").forward(req, resp);
+		
 	}
 }

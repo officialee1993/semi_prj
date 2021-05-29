@@ -2,7 +2,7 @@ package shop.vo;
 
 import java.util.Date;
 
-public class Q_reply {
+public class Q_reply_vo {
 	
 	private int q_r_num  ;
 	private String wr_id  ;
@@ -10,9 +10,9 @@ public class Q_reply {
 	private Date wr_date  ;
 	private int q_b_num   ;
 	
-	public Q_reply() {}
+	public Q_reply_vo() {}
 
-	public Q_reply(int q_r_num, String wr_id, String q_r_content, Date wr_date, int q_b_num) {
+	public Q_reply_vo(int q_r_num, String wr_id, String q_r_content, Date wr_date, int q_b_num) {
 		super();
 		this.q_r_num = q_r_num;
 		this.wr_id = wr_id;

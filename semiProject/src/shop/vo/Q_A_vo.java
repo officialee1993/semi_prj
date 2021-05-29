@@ -2,16 +2,16 @@ package shop.vo;
 
 import java.util.Date;
 
-public class Q_A {
+public class Q_A_vo {
 
 	private int q_a_num ;
 	private String q_a_title ;
 	private String q_a_content  ;
 	private Date q_a_date  ;
 	
-	public Q_A() {}
+	public Q_A_vo() {}
 
-	public Q_A(int q_a_num, String q_a_title, String q_a_content, Date q_a_date) {
+	public Q_A_vo(int q_a_num, String q_a_title, String q_a_content, Date q_a_date) {
 		super();
 		this.q_a_num = q_a_num;
 		this.q_a_title = q_a_title;

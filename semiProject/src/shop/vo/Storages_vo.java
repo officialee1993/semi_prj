@@ -1,6 +1,6 @@
 package shop.vo;
 
-public class Storages {
+public class Storages_vo {
 
 	private int s_num;
 	private int s_count ;
@@ -8,9 +8,9 @@ public class Storages {
 	private int o_num ;
 	private int p_num ;
 	
-	public Storages() {}
+	public Storages_vo() {}
 
-	public Storages(int s_num, int s_count, String p_size, int o_num, int p_num) {
+	public Storages_vo(int s_num, int s_count, String p_size, int o_num, int p_num) {
 		super();
 		this.s_num = s_num;
 		this.s_count = s_count;

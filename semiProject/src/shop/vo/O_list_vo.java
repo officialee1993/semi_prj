@@ -1,12 +1,12 @@
 package shop.vo;
 
-public class O_list {
+public class O_list_vo {
 private String o_count;
 private int o_num; 
 private int s_num; 
-public O_list() {}
+public O_list_vo() {}
 
-public O_list(String o_count, int o_num, int s_num) {
+public O_list_vo(String o_count, int o_num, int s_num) {
 	super();
 	this.o_count = o_count;
 	this.o_num = o_num;

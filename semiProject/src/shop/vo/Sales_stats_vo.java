@@ -1,15 +1,15 @@
 package shop.vo;
 
-public class Sales_stats {
+public class Sales_stats_vo {
 
 	private int all_Sales;
 	private String p_price ;
 	private String o_date ;
 	private int p_count ;
 	
-	public Sales_stats() {}
+	public Sales_stats_vo() {}
 
-	public Sales_stats(int all_Sales, String p_price, String o_date, int p_count) {
+	public Sales_stats_vo(int all_Sales, String p_price, String o_date, int p_count) {
 		super();
 		this.all_Sales = all_Sales;
 		this.p_price = p_price;

@@ -2,7 +2,7 @@ package shop.vo;
 
 import java.util.Date;
 
-public class Product {
+public class Product_vo {
 
 	private int p_num ;
 	private String p_name ;
@@ -14,9 +14,9 @@ public class Product {
 	private String save_img_name  ;
 	private String cg_name ; 
 	
-	public Product() {}
+	public Product_vo() {}
 
-	public Product(int p_num, String p_name, String p_count, String p_price, int p_click_num, Date p_date,
+	public Product_vo(int p_num, String p_name, String p_count, String p_price, int p_click_num, Date p_date,
 			String ori_img_name, String save_img_name, String cg_name) {
 		super();
 		this.p_num = p_num;

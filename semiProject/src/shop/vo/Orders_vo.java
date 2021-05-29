@@ -2,7 +2,7 @@ package shop.vo;
 
 import java.util.Date;
 
-public class Orders {
+public class Orders_vo {
 	private int o_num ;
 	private String rec_name ;
 	private String rec_phone ;
@@ -15,9 +15,9 @@ public class Orders {
 	private int p_num ;
 	private int b_num  ;
 	
-	public Orders () {}
+	public Orders_vo () {}
 
-	public Orders(int o_num, String rec_name, String rec_phone, String rec_addr, int all_sum_price, String payname,
+	public Orders_vo(int o_num, String rec_name, String rec_phone, String rec_addr, int all_sum_price, String payname,
 			Date o_date, String o_state, String id, int p_num, int b_num) {
 		super();
 		this.o_num = o_num;

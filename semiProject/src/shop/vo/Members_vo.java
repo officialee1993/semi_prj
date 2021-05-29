@@ -1,6 +1,6 @@
 package shop.vo;
 
-public class Members {
+public class Members_vo {
 
 	private String id ; 
 	private String pwd; 
@@ -9,9 +9,9 @@ public class Members {
 	private String email;
 	private String address;
 	
-	public Members() {}
+	public Members_vo() {}
 
-	public Members(String id, String pwd, String name, String phone, String email, String address) {
+	public Members_vo(String id, String pwd, String name, String phone, String email, String address) {
 		super();
 		this.id = id;
 		this.pwd = pwd;

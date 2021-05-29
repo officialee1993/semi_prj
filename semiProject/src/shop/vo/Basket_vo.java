@@ -2,14 +2,14 @@ package shop.vo;
 
 
 
-public class Basket {
+public class Basket_vo {
 	private int b_num; 
 	private int p_count ; 
 	private int p_num ; 
 	private String id ;
-	public Basket() {}
+	public Basket_vo() {}
 	
-	public Basket(int b_num, int p_count, int p_num, String id) {
+	public Basket_vo(int b_num, int p_count, int p_num, String id) {
 		super();
 		this.b_num = b_num;
 		this.p_count = p_count;

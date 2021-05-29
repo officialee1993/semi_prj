@@ -1,11 +1,11 @@
 package shop.vo;
 
-public class P_img {
+public class P_img_vo {
 private int p_i_num; 
 private int p_num ; 
-public P_img() {}
+public P_img_vo() {}
 
-public P_img(int p_i_num, int p_num) {
+public P_img_vo(int p_i_num, int p_num) {
 	super();
 	this.p_i_num = p_i_num;
 	this.p_num = p_num;

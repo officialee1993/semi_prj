@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import shop.vo.Members_vo;
+import shop_dao.Membersdao;
+
 @WebServlet("/shop/join")
 public class JoinController extends HttpServlet{
 	@Override
@@ -22,6 +25,8 @@ public class JoinController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		req.setCharacterEncoding("utf-8");
+		
 		String id = req.getParameter("id");
 		String pwd = req.getParameter("pwd");
 		String name = req.getParameter("name");
@@ -29,9 +34,19 @@ public class JoinController extends HttpServlet{
 		String email = req.getParameter("email");
 		String address = req.getParameter("address");
 		
+		System.out.println(id+""+pwd+""+name+""+phone+" "+ email+""+address);
+		Members_vo vo = new Members_vo(id, pwd, name, phone, email, address);
 		
-
+		Membersdao dao = Membersdao.getinstance();
+		int n = dao.insert(id, pwd, name, phone, email, address);
 		
+		if( n>0) {
+			resp.sendRedirect(req.getContextPath()+"/shop/join_ok");
+			
+		}else {
+			System.out.println("½ÇÆÐ ");
+			
+		}
 		
 	}
 

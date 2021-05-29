@@ -1,13 +1,13 @@
 package shop.vo;
 
-public class Categroy {
+public class Category_vo {
 
 	private String c_name ; 
 	private String r_c_name  ; 
 	
-	public Categroy() {}
+	public Category_vo() {}
 
-	public Categroy(String c_name, String r_c_name) {
+	public Category_vo(String c_name, String r_c_name) {
 		super();
 		this.c_name = c_name;
 		this.r_c_name = r_c_name;

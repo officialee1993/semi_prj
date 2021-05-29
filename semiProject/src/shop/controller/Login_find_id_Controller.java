@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import shop_dao.Membersdao;
+
 @WebServlet("/shop/login_find_id")
 public class Login_find_id_Controller extends HttpServlet{
 
@@ -19,6 +21,26 @@ public class Login_find_id_Controller extends HttpServlet{
 		req.setAttribute("footer", "/shop/footer.jsp");
 		
 		req.getRequestDispatcher("/shop/index.jsp").forward(req, resp);
+		
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		Membersdao dao= Membersdao.getinstance();
+		String name = req.getParameter("name");
+		String email = req.getParameter("email");
+		
+		String id = dao.find_id(name, email);
+		if(id !=null) {
+			req.setAttribute("id", id);
+			req.getRequestDispatcher("/shop/login").forward(req, resp);
+			System.out.println("아이디 : "+ id);
+		}else {
+			System.out.println("아이디 없음");
+		}
+		
+		
+		
 		
 	}
 }
