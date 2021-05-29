@@ -206,7 +206,7 @@ a:hover{
 	width:60%;
 }
 .content .my_row .detail_box .right_box .text_box{
-	margin-left:200px;
+	margin-left:100px;
 	font-size:16px;
 }
 .content .my_row .detail_box .right_box .text_box h4{
@@ -215,23 +215,289 @@ a:hover{
 	font-weight:700;
 }
 .content .my_row .detail_box .right_box .text_box h5{
-	margin-top:40px;
 	font-size:16px;
+	margin-top:20px;
 }
 .content .my_row .detail_box .right_box .text_box p{
 	margin-top:20px;
-	font-size:28px;
+	font-size:24px;
 	font-weight:700;
 }
-.content .my_row .detail_box .right_box .text_box .goods_count{
-	margin-top:10px;
-	width:50px;
+.content .my_row .detail_box .right_box .text_box .form-control{
+	width:70px;height:20px;margin-top:20px;
 }
 .content .my_row .detail_box .right_box .btn_box{
-	margin:100px 0;
-	text-align:center;
+	margin:50px 0 0 100px;
 }
 .content .my_row .detail_box .right_box .btn_box .btn{
 	width:30%;
 	padding:10px 0;
 }
+.content .my_row .detail_box .right_box .btn_box .btn-dark:hover{
+	background-color:#f90;
+	color:#fff;
+	border:0px solid #f90;
+}
+.content .my_row .detail_box .right_box .btn_box .btn-outline-dark:hover{
+	background-color:#f90;
+	color:#fff;
+	border:0px solid #f90;
+}
+.content .my_row .detail_box .right_box select{
+	width:100px;
+	margin-top:20px;
+}
+.content .my_row .board{
+	margin-top:50px;
+}
+.content .my_row .board h3{
+	font-size:20px;
+	font-weight:800;
+	text-align:center;
+}
+.content .my_row .board .table{
+	margin-top:50px;
+}
+.content .my_row .board .table th{
+	padding:15px 0;
+}
+.content .my_row .board .table td{
+	padding:15px 0;
+}
+.content .my_row .board .board_page{
+	text-align:center;
+}
+.content .my_row .board .board_content p{
+	line-height:24px;
+	text-align:left;
+}
+
+.content .my_row .question_board{
+	border-top:1px solid #222;
+}
+.content .my_row .question_board h3{
+	margin-top:50px;
+}
+.content .my_row .question_board .question_board_page{
+	position:relative;
+}
+.content .my_row .question_board .question_board_page #question_write{
+	position:absolute;
+	right:0;
+	padding:10px;
+}
+.content .my_row .question_board .question_board_page #question_write:hover{
+	background-color:white;
+	color:#222;
+}
+/*댓글창*/
+.content .my_row .board .comment_list .comment_box{
+	border-top:1px solid #ddd;
+}
+.content .my_row .board .comment_list .comment_box{
+	margin-top:10px;
+	text-align:left;
+}
+.content .my_row .board .comment_list .comment_box .writer{
+	font-weight:700;
+}
+.content .my_row .board .comment_list .comment_box .content{
+	font-weight:500;
+	line-height:20px;
+}
+/* 주문페이지 상품정보 */
+.content .my_row .goods_order_detail{
+	margin-top:50px;
+}
+
+.content .my_row .goods_order_detail table{
+	width:640px;
+	margin:0 auto;
+	text-align:center;
+	border-collapse: collapse;
+	font-size:12px;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	
+}
+.content .my_row .goods_order_detail table th{
+	padding:10px 0;
+	font-weight:700;
+	border-bottom:1px solid #ddd;
+}
+
+.content .my_row .goods_order_detail table tr td{
+	vertical-align:middle;
+}
+/*나의 주문상세 내역*/
+.content .my_row .goods_order_mydetail_top .goods_order_mydetail_textbox{
+	margin-top:50px;
+}
+.content .my_row .goods_order_mydetail_top .goods_order_mydetail_textbox h3{
+	font-size:20px;
+	font-weight:800;
+	margin-top:50px;
+	padding-bottom:20px;
+}
+.content .my_row .goods_order_mydetail_top .goods_order_mydetail_textbox{
+	margin-top:20px;
+}
+.content .my_row .goods_order_mydetail_top .goods_order_mydetail_textbox span{
+	font-size:14px;
+	font-weight:300;
+}
+.content .my_row .goods_order_mydetail_top .goods_order_mydetail_textbox span:nth-of-type(2){
+	font-size:14px;
+	font-weight:300;
+	margin-left:20px;
+}
+.content .my_row .goods_order_mydetail_top .goods_order_mydetail_textbox span span.order_detail_text{
+	font-size:14px;
+	font-weight:700;
+}
+.content .my_row .goods_order_mydetail_top .goods_order_mydetail_table{
+	border-collapse: collapse;
+	margin-top:20px;
+	width:100%;
+	font-size:16px;
+	text-align:center;
+}
+.content .my_row .goods_order_mydetail_top .goods_order_mydetail_table th{
+	border-top:3px solid #000;
+	padding:20px 0;
+}
+.content .my_row .goods_order_mydetail_top .goods_order_mydetail_table td{
+	border-top:1px solid #ddd;
+	font-size:14px;
+}
+/*나의 주문 상세내역 끝*/
+	
+/*나의 주문 상세내역 배송정보*/
+.content .my_row .goods_order_mydetail_bottom1{
+	width:50%;
+}
+.content .my_row .goods_order_mydetail_bottom1 .goods_order_mydetail_textbox{
+	margin-top:50px;
+}
+.content .my_row .goods_order_mydetail_bottom1 .goods_order_mydetail_textbox h3{
+	font-size:20px;
+	font-weight:800;
+	margin-top:50px;
+	padding-bottom:20px;
+}
+.content .my_row .goods_order_mydetail_bottom1 .goods_order_mydetail_textbox{
+	margin-top:20px;
+}
+.content .my_row .goods_order_mydetail_bottom1 .goods_order_mydetail_textbox span{
+	font-size:14px;
+	font-weight:300;
+}
+.content .my_row .goods_order_mydetail_bottom1 .goods_order_mydetail_textbox span:nth-of-type(2){
+	font-size:14px;
+	font-weight:300;
+	margin-left:20px;
+}
+.content .my_row .goods_order_mydetail_bottom1 .goods_order_mydetail_textbox span span.order_detail_text{
+	font-size:14px;
+	font-weight:700;
+}
+.content .my_row .goods_order_mydetail_bottom1 .goods_order_mydetail_table{
+	border-collapse: collapse;
+	width:100%;
+	font-size:16px;
+	text-align:center;
+}
+.content .my_row .goods_order_mydetail_bottom1 .goods_order_mydetail_table th{
+	border-top:2px solid #000;
+	padding:20px 0;
+}
+.content .my_row .goods_order_mydetail_bottom1 .goods_order_mydetail_table td{
+	border-top:1px solid #ddd;
+	font-size:14px;
+	padding:20px 0;
+}
+
+.content .my_row .goods_order_mydetail_bottom2{
+	width:50%;
+}
+.content .my_row .goods_order_mydetail_bottom2 .goods_order_mydetail_textbox{
+	margin-top:50px;
+}
+.content .my_row .goods_order_mydetail_bottom2 .goods_order_mydetail_textbox h3{
+	font-size:20px;
+	font-weight:800;
+	margin-top:50px;
+	padding-bottom:20px;
+}
+.content .my_row .goods_order_mydetail_bottom2 .goods_order_mydetail_textbox{
+	margin-top:20px;
+}
+.content .my_row .goods_order_mydetail_bottom2 .goods_order_mydetail_textbox span{
+	font-size:14px;
+	font-weight:300;
+}
+.content .my_row .goods_order_mydetail_bottom2 .goods_order_mydetail_textbox span:nth-of-type(2){
+	font-size:14px;
+	font-weight:300;
+	margin-left:20px;
+}
+.content .my_row .goods_order_mydetail_bottom2 .goods_order_mydetail_textbox span span.order_detail_text{
+	font-size:14px;
+	font-weight:700;
+}
+.content .my_row .goods_order_mydetail_bottom2 .goods_order_mydetail_table{
+	border-collapse: collapse;
+	width:100%;
+	font-size:16px;
+	text-align:center;
+}
+.content .my_row .goods_order_mydetail_bottom2 .goods_order_mydetail_table th{
+	border-top:2px solid #000;
+	padding:20px 0;
+}
+.content .my_row .goods_order_mydetail_bottom2 .goods_order_mydetail_table td{
+	border-top:1px solid #ddd;
+	font-size:14px;
+	padding:20px 0;
+}
+/*나의 주문 상세내역 배송정보 끝*/
+/*장바구니 시작*/
+.content .my_row .goods_cart{
+	margin-top:100px;
+}
+.content .my_row .goods_cart h3{
+	font-size:20px;
+	font-weight:800;
+	text-align:center;
+}
+.content .my_row .goods_cart .goods_cart_list{
+	margin-top:50px;
+}
+.content .my_row .goods_cart .goods_cart_list table{
+	width:640px;
+	margin:0 auto;
+	text-align:center;
+	border-collapse: collapse;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	font-size:12px;
+	padding:10px 0;
+}
+.content .my_row .goods_cart .goods_cart_list table th{
+	padding:10px 0;
+	font-weight:700;
+}
+
+.content .my_row .goods_cart .goods_cart_list table tr td{
+	vertical-align:middle;
+}
+.content .my_row .goods_cart .goods_cart_list .btn_wrap{
+	text-align:center;
+}
+.content .my_row .goods_cart .goods_cart_list form .btn{
+	margin-top:20px;
+	width:200px;
+	margin:50px auto;
+	padding:10px 0;
+}
+/*장바구니 끝*/

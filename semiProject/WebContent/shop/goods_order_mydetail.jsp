@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="css/reset.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<title>Insert title here</title>
 </head>
 <body>
 <div class="container_wrap">
@@ -47,48 +47,80 @@
 					<li><a href="">하의</a></li>
 					<li><a href="">신발</a></li>
 					</ul>
-					
 			</div>
 	</div>
 	<!-- header END -->
 	<div class="content">
 		<div class="my_row">
-			<div class="join_wrap">
-			<div class="join_box">
-				<h3 class="form_title">회원가입</h3>
-				<form action="" method="">
-				<div class="mb-3">
-  				<label for="" class="form-label">아이디</label>
-  				<input type="text" class="form-control" id="" placeholder="~자 이상의 영문과 숫자를 조합">
-  				</div>
-  				<div class="mb-3">
-  				<label for="" class="form-label">비밀번호</label>
-  				<input type="password" class="form-control" id="" placeholder="비밀번호를 입력해주세요">
-  				</div>
-  				<div class="mb-3">
-  				<label for="" class="form-label">이름</label>
-  				<input type="text" class="form-control" id="" placeholder="이름을 입력해주세요">
-  				</div>
-  				<div class="mb-3">
-  				<label for="" class="form-label">주소</label>
-  				<input type="text" class="form-control" id="" placeholder="주소를 입력해주세요">
-  				</div>
-  				<div class="mb-3">
-  				<label for="" class="form-label">이메일</label>
-  				<input type="email" class="form-control" id="" placeholder="이메일을 입력해주세요">
-  				</div>
-  				<div class="mb-3">
-  				<label for="" class="form-label">전화번호</label>
-  				<input type="text" class="form-control" id="" placeholder="전화번호를 입력해주세요">
-  				</div>
-  				<div class="btn_wrap">
-  				<button type="submit" class="btn btn-dark">가입하기</button>
-  				</div>
-				</form>
+		<!-- 주문상세내역 -->
+			<div class="goods_order_mydetail_top">
+			<div class="goods_order_mydetail_textbox">
+				<h3>주문 상세 내역</h3>
+				<span>주문번호<span class="order_detail_text">2021102125</span></span>
+				<span>주문일자<span class="order_detail_text">2020.01.01</span></span>
+			</div>
+			<table class="goods_order_mydetail_table">
+				<tr>
+					<th style="width:50%">상품정보</th>
+					<th style="width:10%">사이즈</th>
+					<th style="width:10%">수량</th>
+					<th style="width:10%">결제방법</th>
+					<th style="width:10%">주문금액</th>
+					<th style="width:10%">주문상태</th>
+				</tr>
+				<tr>
+				<td style="text-align:left"><img src="images/ex01.jpg" style="width:150px;vertical-align:middle;">
+				<span style="margin-left:85px">asdasdasdasd</span>
+				</td>
+				<td>L</td>
+				<td>10</td>
+				<td>계좌이체</td>
+				<td>10,000</td>
+				<td>입금완료</td>
+				</tr>
+			</table>
+			</div>
+			
+			<!-- 배송지 정보 -->
+			<div class="goods_order_mydetail_bottom_box" style="display:flex">
+			<div class="goods_order_mydetail_bottom1">
+			<div class="goods_order_mydetail_textbox">
+			<h3>수령인 정보</h3>
+			</div>
+			<table class="goods_order_mydetail_table">
+				<tr>
+					<th>이름</th>
+					<th>연락처</th>
+					<th>수령인 주소</th>
+				</tr>
+				<tr>
+				<td>이찬호</td>
+				<td>010-1234-1234</td>
+				<td>서울시</td>
+				</tr>
+			</table>
+			</div>
+			
+			<div class="goods_order_mydetail_bottom2">
+			<div class="goods_order_mydetail_textbox">
+			<h3>최종결제 정보</h3>
+			</div>
+			<table class="goods_order_mydetail_table">
+				<tr>
+				<th>상품 원가</th>
+				<th>결제 할인</th>
+				<th>결제 금액</th>
+				</tr>
+				<tr>
+				<td>10,000원</td>
+				<td>-1,000원</td>
+				<td>9000원</td>
+				</tr>
+			</table>
 			</div>
 			</div>
-		</div>
-	</div>
+			</div>
+			</div>
 	<!-- footer -->
 	<div class="footer">
 		<p>All Rights Reserved</p>
