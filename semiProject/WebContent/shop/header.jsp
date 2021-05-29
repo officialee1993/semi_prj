@@ -14,8 +14,19 @@
 			</ul>
 			</div>
 		<div class="btn_wrap">
-			<a href="">로그인</a>
+			<c:choose>
+			
+			<c:when test="${empty sessionScope.id}">
+			<a href="${pageContext.request.contextPath}/shop/login.jsp">로그인</a>
+			</c:when>
+			
+			<c:otherwise>
+			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+			</c:otherwise>
+			</c:choose>
+			
 			<a href="">회원가입</a>
+			
 		</div>
 		</div>
 		</div>
