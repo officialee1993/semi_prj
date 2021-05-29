@@ -8,7 +8,6 @@
 	});
 
 	/*문의게시판 작성 팝업 */
-  	
 	document.getElementById('question_write').addEventListener('click',function(){
 	document.getElementById('question_modal').focus();
 	});
