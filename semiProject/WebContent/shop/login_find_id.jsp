@@ -36,11 +36,10 @@
 						document.getElementById("login_insert").style.display="none";
 						document.getElementById("form_title").innerHTML="아이디 찾기 성공";
 						document.getElementById("find_id_lch").appendChild(p);
-						alert(result);
-
+							
 					}else{
 						document.getElementById("not_found").innerHTML="정보를 찾을수 없습니다."
-							alert("정보가 없습니다");
+
 					}
 				}
 			};
