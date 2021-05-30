@@ -53,6 +53,30 @@ a:hover{
  .header > .my_row > .header_box > .btn_wrap > a:nth-child(1){
 	margin-right:20px;
 }
+/*헤더 마이페이지 메뉴*/
+.header .my_row .header_box .btn_wrap{
+	position:relative;
+}
+.header .my_row .header_box .btn_wrap .header_mypage:hover .header_mypage_menu{
+	display:block;
+}
+.header .my_row .header_box .btn_wrap .header_mypage_menu{
+	position:absolute;
+	top:50px;
+	left:60px;
+	font-size:12px;
+	color:#222;
+	z-index:100;
+	width:100px;
+	padding:10px;
+	background-color:#fff;
+	border:1px solid #ddd;
+	display:none;
+}
+.header .my_row .header_box .btn_wrap .header_mypage_menu li{
+	padding:5px;
+}
+/*헤더 마이페이지 메뉴 끝*/
 /*푸터*/
 .footer{
 	width:100%;

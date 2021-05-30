@@ -32,5 +32,7 @@ public class ProductuploadController extends HttpServlet {
 		String orgfileName = mr.getOriginalFileName("p_file");
 		String savefileName = mr.getFilesystemName("p_file");
 		
+		
+		
 	}
 }

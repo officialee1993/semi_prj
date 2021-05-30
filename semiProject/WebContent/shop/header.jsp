@@ -19,14 +19,21 @@
 			
 			<c:when test="${empty sessionScope.id}">
 			<a href="${cp}/shop/login">로그인</a>
+			<a href="${cp}/shop/join">회원가입</a>
 			</c:when>
 			
 			<c:otherwise>
 			<a href="${cp}/shop/logout">로그아웃</a>
+			<a href="${cp}/shop/mypage_orderlist" class="header_mypage" id="header_mypage">마이페이지
+			</a>
+			<ul class="header_mypage_menu" id="header_mypage_menu">
+			<li><a href="${cp }/shop/mypage_orderlist">주문내역</a></li>
+			<li><a href="${cp }/shop/mypage_reviewlist">구매후기</a></li>
+			<li><a href="${cp }/shop/mypage_questionlist">문의내역</a></li>
+			<li><a href="${cp }/shop/mypage_info_modify">개인정보수정</a></li>
+			</ul>
 			</c:otherwise>
 			</c:choose>
-			
-			<a href="${cp}/shop/join">회원가입</a>
 			
 		</div>
 		</div>
