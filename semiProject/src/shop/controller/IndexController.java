@@ -20,8 +20,8 @@ public class IndexController extends HttpServlet {
 		}
 		if(content==null) {
 			content="/shop/home.jsp";
+
 		}
-		
 		if(footer==null) {
 			footer="/shop/footer.jsp";
 		}

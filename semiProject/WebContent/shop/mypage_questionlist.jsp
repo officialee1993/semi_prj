@@ -35,7 +35,7 @@
 							<!-- 답변완료일때 -->
 							<tr>
 								<td class="title">가는 이상 간에 철환하였는가? 이는 이상 하는 가슴에 청춘 새 노년에게서 것이다. 풀이 그들은 되는 앞이 갑 미인을 때까지 노래하며 사랑의 피다. 속에 붙잡아</td>
-								<td class="content"><a href="">질문드립니다</a></td>
+								<td class="content"><a href="${cp }/shop/mypage_questionlist_detail">질문드립니다</a></td>
 								<td>2020.02.02</td>
 								<td style="color:#14aaff">답변완료</td>
 							</tr>
