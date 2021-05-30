@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<div class="content">
 		<div class="my_row">
 		<!-- 상품설명 -->
 			<div class="detail_box">
 				<div class="left_box">
-					<img src="images/ex01.jpg">
+					
+					<img src="${cp}/shop/productimgs/${vo.save_img_name}">
 				</div>
 				<form class="right_box" action="" method="">
 				<div class="text_box">
-					<h4>제품명</h4>
+					<h4>${vo.p_name}</h4>
 					<h5 style="margin-top:50px;">가격</h5>
-					<p>50,000원</p>
+					<p>${vo.p_price}원</p>
 					<input type="number" class="form-control" min="0" placeholder="수량">
 					<select name="" class="form-select form-select-sm" aria-label=".form-select-sm example">
 					  <option selected>사이즈</option>

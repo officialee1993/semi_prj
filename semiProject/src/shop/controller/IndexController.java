@@ -36,11 +36,7 @@ public class IndexController extends HttpServlet {
 		application.setAttribute("cp", cp);
 		Productdao dao = Productdao.getinstance();
 		ArrayList<Product_vo> list = dao.list();
-		if(list != null) {
-			System.out.println("성공");
-		}else {
-			System.out.println("실패");
-		}
+	
 		req.setAttribute("top", top);
 		req.setAttribute("list", list);
 		req.setAttribute("content", content);

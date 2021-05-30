@@ -17,7 +17,34 @@ public class Productdao {
 		public static Productdao getinstance() {
 			return instnce;
 		}
-		
+		public Product_vo getinfo(int p_num) {
+			
+			Connection con = null;
+			PreparedStatement pstmt = null; 
+			ResultSet rs = null; 
+			Product_vo vo = null;
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select * from product where p_num=?";
+				pstmt= con.prepareStatement(sql);
+				pstmt.setInt(1, p_num);
+				rs= pstmt.executeQuery();
+				if(rs.next()) {
+					vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+							rs.getInt("p_click_num"), rs.getDate("p_date"),
+							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getString("cg_name"));
+					
+				}
+				return vo; 
+				
+			}catch(SQLException s) {
+				s.getMessage();
+				return null;
+				
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
 		public ArrayList<Product_vo> list(){
 			Connection con = null; 
 			PreparedStatement pstmt = null; 
@@ -38,6 +65,8 @@ public class Productdao {
 			}catch (SQLException s) {
 				s.getMessage();
 				return null;
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
 			}
 		}
 		public int insert(Product_vo vo ) {
@@ -65,6 +94,8 @@ public class Productdao {
 			}catch(SQLException s) {
 				s.getMessage();
 				return -1;
+			}finally {
+				MyDBCP.close(con, pstmt, null);
 			}
 		}
 }
