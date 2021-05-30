@@ -31,6 +31,7 @@
 					let xml=xhr.responseXML;
 					let result=xml.getElementsByTagName("result")[0].textContent;
 					if(result!=""){
+						
 						let p=document.createElement("p");
 						p.innerHTML=result;
 						document.getElementById("login_insert").style.display="none";
@@ -40,7 +41,7 @@
 
 					}else{
 						document.getElementById("not_found").innerHTML="정보를 찾을수 없습니다."
-							alert("정보가 없습니다");
+					//	alert("정보가 없습니다");
 					}
 				}
 			};
