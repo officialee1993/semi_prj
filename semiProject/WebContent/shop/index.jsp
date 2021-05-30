@@ -28,7 +28,7 @@
 
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 /*헤더 드롭다운*/
 document.getElementById("header_menu").addEventListener('mouseover',function(){
 document.getElementById("menu_dropdown").style.display='flex';
@@ -46,7 +46,7 @@ document.getElementById('question_write').addEventListener('click',function(){
 document.getElementById('question_modal').focus();
 });	
 
-</script>
+</script> -->
 <!--<script type="text/javascript" src="js/main.js"></script>  -->
 </body>
 </html>
