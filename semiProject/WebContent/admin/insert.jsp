@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,21 +7,21 @@
 </head>
 <body>
 <form method="post" action="${pageContext.request.contextPath}/product/upload" enctype="multipart/form-data">
-
-»óÇ°¹øÈ£<br>
-<input type="text" name ="p_num"><br>
-»óÇ°ÀÌ¸§<br>
+<!-- 
+ìƒí’ˆë²ˆí˜¸<br>
+<input type="text" name ="p_num"><br> -->
+ìƒí’ˆì´ë¦„<br>
 <input type="text" name ="p_name"><br>
-»óÇ°¼ö·®<br>
+ìƒí’ˆìˆ˜ëŸ‰<br>
 <input type="text" name ="p_count"><br>
-»óÇ°°¡°Ý<br>
+ìƒí’ˆê°€ê²©<br>
 <input type="text" name ="p_price"><br>
-Ä«Å×°í¸®¸í<br>
+ì¹´í…Œê³ ë¦¬ëª…<br>
 <input type="text" name ="cg_name"><br>
-Ã·ºÎÆÄÀÏ<br>
+ì²¨ë¶€íŒŒì¼<br>
 <input type="file" name ="p_file"><br>
 
-<input type="submit" value ="Àü¼Û">
+<input type="submit" value ="ì „ì†¡">
 </form>
 </body>
 </html>

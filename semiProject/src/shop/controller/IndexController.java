@@ -1,6 +1,7 @@
 package shop.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import admin.dao.Productdao;
+import shop.vo.Product_vo;
 
 @WebServlet("/shop/index")
 public class IndexController extends HttpServlet {
@@ -20,7 +24,6 @@ public class IndexController extends HttpServlet {
 		}
 		if(content==null) {
 			content="/shop/home.jsp";
-			
 		}
 		
 		if(footer==null) {
@@ -31,7 +34,15 @@ public class IndexController extends HttpServlet {
 		String cp=req.getContextPath();
 		ServletContext application=getServletContext();
 		application.setAttribute("cp", cp);
+		Productdao dao = Productdao.getinstance();
+		ArrayList<Product_vo> list = dao.list();
+		if(list != null) {
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+		}
 		req.setAttribute("top", top);
+		req.setAttribute("list", list);
 		req.setAttribute("content", content);
 		req.setAttribute("footer", footer);
 		req.getRequestDispatcher("/shop/index.jsp").forward(req, resp);

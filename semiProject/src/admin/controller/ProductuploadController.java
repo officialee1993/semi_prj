@@ -11,11 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import admin.dao.Productdao;
+import shop.vo.Product_vo;
+
 @WebServlet("/product/upload")
 public class ProductuploadController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String saveDir = getServletContext().getRealPath("/shop/images");
+		
+		String saveDir = getServletContext().getRealPath("/shop/productimgs");
 		MultipartRequest mr = new MultipartRequest(req, // request 객체
 				saveDir, // 업로드할 디렉토리 경로
 				1024 * 1024 * 5, // 최대 업로드 크기(바이트)
@@ -24,14 +28,23 @@ public class ProductuploadController extends HttpServlet {
 		);
 		System.out.println("업로드 경로:" + saveDir);
 		
-		String p_num = mr.getParameter("p_num");
+		//int p_num = Integer.parseInt(mr.getParameter("p_num"));
 		String p_name = mr.getParameter("p_name");
-		String p_count = mr.getParameter("p_count");
-		String p_price = mr.getParameter("p_price");
+		int p_count =  Integer.parseInt(mr.getParameter("p_count"));
+		int p_price = Integer.parseInt(mr.getParameter("p_price"));
 		String cg_name = mr.getParameter("cg_name");
 		String orgfileName = mr.getOriginalFileName("p_file");
 		String savefileName = mr.getFilesystemName("p_file");
-		
+		System.out.println(p_name+" "+ p_count+" "+ p_price+" "+ cg_name +" "+orgfileName+" "+ savefileName );
+		Product_vo vo = new Product_vo(0, p_name, p_count, p_price, 0, null, orgfileName, savefileName, cg_name);
+		Productdao dao = Productdao.getinstance();
+		int n = dao.insert(vo);
+		if(n>0) {
+			System.out.println("성공");		
+			resp.sendRedirect(req.getContextPath()+"/admin/insert.jsp");
+		}else {
+			System.out.println("실패");
+		}
 		
 		
 	}
