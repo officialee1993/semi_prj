@@ -1,22 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="css/reset.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<title>Insert title here</title>
-</head>
-<body>
-<!-- header -->
-<jsp:include page="header.jsp"/>
-<!-- header END -->
-
 <div class="content">
 	<div class="my_row">
 		<div class="mypage">
@@ -24,33 +7,36 @@
 			<div class="mypage_sidemenu">
 				<h3>마이페이지</h3>
 				<ul>
-					<li><a href="">주문내역</a></li>
-					<li><a href="">구매후기</a></li>
-					<li><a href="">문의내역</a></li>
-					<li><a href="">개인정보수정</a></li>
+					<li><a href="${cp }/shop/mypage_orderlist">주문내역</a></li>
+					<li><a href="${cp }/shop/mypage_reviewlist">구매후기</a></li>
+					<li><a href="${cp }/shop/mypage_questionlist">문의내역</a></li>
+					<li><a href="${cp }/shop/mypage_info_modify">개인정보수정</a></li>
 				</ul>
 			</div>
-			<!-- 구매후기내역 -->
+			<!-- 상품후기내역 -->
 			<div class="mypage_orderlist">
 					<h3>구매후기</h3>
-					<div class="mypage_reviewlist_wrap">
+					<div class="mypage_reviewlist_wrap mypage_reviewlist_wrap2">
 						<table>
 							<tr>
-								<th></th>
-								<th></th>
-								<th></th>
-								
+								<th width="30%">제목</th>
+								<th width="55%">내용</th>
+								<th width="15%">날짜</th>
+							</tr>
+							<tr>
+								<td>후기입니다</td>
+								<td class="content"><a href="">가는 이상 간에 철환하였는가? 이는 이상 하는 가슴에 청춘 새 노년에게서 것이다. 풀이 그들은 되는 앞이 갑 미인을 때까지 노래하며 사랑의 피다.</a></td>
+								<td>2020.02.02</td>
+							</tr>
+							<tr>
+								<td class="title">가는 이상 간에 철환하였는가? 이는 이상 하는 가슴에 청춘 새 노년에게서 것이다. 풀이 그들은 되는 앞이 갑 미인을 때까지 노래하며 사랑의 피다. 속에 붙잡아</td>
+								<td class="content"><a href="">제품좋아요</a></td>
+								<td>2020.02.02</td>
 							</tr>
 						</table>
+						
 					</div>
 				</div>
 		</div>
 	</div>
 </div>
-
-<!-- footer -->
-<jsp:include page="footer.jsp"/>
-<!-- footer-end -->
-<script type="text/javascript" src="js/main.js"></script>
-</body>
-</html>

@@ -16,9 +16,6 @@ a:hover{
 	display:flex;
 	justify-content: space-between;
 }
-.header > .my_row > .header_box > .logo > img{
-	width:60px;
-}
 .header > .my_row > .header_box >  .header_menu{
 	padding:20px 0;
 	font-size:16px;
@@ -35,7 +32,6 @@ a:hover{
 .header .menu_dropdown{
 	width:100%;
 	background-color:#ffffff;
-	display:flex;
 	justify-content: center;
 	position:absolute;
 	z-index:100;
@@ -64,6 +60,7 @@ a:hover{
 	color:#ffffff;
 	text-align:center;
 	padding:20px 0;
+	margin-top:100px;
 	font-size:12px;
 }
 /*메인_배너*/
@@ -250,12 +247,14 @@ a:hover{
 }
 .content .my_row .board .table{
 	margin-top:50px;
+	table-layout: fixed;
 }
 .content .my_row .board .table th{
 	padding:15px 0;
 }
 .content .my_row .board .table td{
 	padding:15px 0;
+	white-space:nowrap;  text-overflow:ellipsis; overflow:hidden;
 }
 .content .my_row .board .board_page{
 	text-align:center;
@@ -311,7 +310,7 @@ a:hover{
 	font-size:12px;
 	border-top:1px solid #ddd;
 	border-bottom:1px solid #ddd;
-	
+	table-layout: fixed;
 }
 .content .my_row .goods_order_detail table th{
 	padding:10px 0;
@@ -321,6 +320,7 @@ a:hover{
 
 .content .my_row .goods_order_detail table tr td{
 	vertical-align:middle;
+	white-space:nowrap;  text-overflow:ellipsis; overflow:hidden;
 }
 /*나의 주문상세 내역*/
 .content .my_row .goods_order_mydetail_top .goods_order_mydetail_textbox{
@@ -354,6 +354,7 @@ a:hover{
 	width:100%;
 	font-size:16px;
 	text-align:center;
+	table-layout: fixed;
 }
 .content .my_row .goods_order_mydetail_top .goods_order_mydetail_table th{
 	border-top:3px solid #000;
@@ -362,6 +363,7 @@ a:hover{
 .content .my_row .goods_order_mydetail_top .goods_order_mydetail_table td{
 	border-top:1px solid #ddd;
 	font-size:14px;
+	white-space:nowrap;  text-overflow:ellipsis; overflow:hidden;
 }
 /*나의 주문 상세내역 끝*/
 	
@@ -399,6 +401,7 @@ a:hover{
 	width:100%;
 	font-size:16px;
 	text-align:center;
+	table-layout: fixed;
 }
 .content .my_row .goods_order_mydetail_bottom1 .goods_order_mydetail_table th{
 	border-top:2px solid #000;
@@ -408,6 +411,7 @@ a:hover{
 	border-top:1px solid #ddd;
 	font-size:14px;
 	padding:20px 0;
+	white-space:nowrap;  text-overflow:ellipsis; overflow:hidden;
 }
 
 .content .my_row .goods_order_mydetail_bottom2{
@@ -443,6 +447,7 @@ a:hover{
 	width:100%;
 	font-size:16px;
 	text-align:center;
+	table-layout: fixed;
 }
 .content .my_row .goods_order_mydetail_bottom2 .goods_order_mydetail_table th{
 	border-top:2px solid #000;
@@ -452,6 +457,7 @@ a:hover{
 	border-top:1px solid #ddd;
 	font-size:14px;
 	padding:20px 0;
+	white-space:nowrap;  text-overflow:ellipsis; overflow:hidden;
 }
 /*나의 주문 상세내역 배송정보 끝*/
 /*장바구니 시작*/
@@ -475,6 +481,7 @@ a:hover{
 	border-bottom:1px solid #ddd;
 	font-size:12px;
 	padding:10px 0;
+	table-layout: fixed;
 }
 .content .my_row .goods_cart .goods_cart_list table th{
 	padding:10px 0;
@@ -483,6 +490,7 @@ a:hover{
 
 .content .my_row .goods_cart .goods_cart_list table tr td{
 	vertical-align:middle;
+	white-space:nowrap;  text-overflow:ellipsis; overflow:hidden;
 }
 .content .my_row .goods_cart .goods_cart_list .btn_wrap{
 	text-align:center;
@@ -615,6 +623,7 @@ a:hover{
 	border-collapse: collapse;
 	width:100%;
 	margin-top:20px;
+	table-layout: fixed;
 }
 .content .my_row .mypage .mypage_orderlist .mypage_orderlist_wrap table tr td img{
 	width:90px;
@@ -629,8 +638,81 @@ a:hover{
 .content .my_row .mypage .mypage_orderlist .mypage_orderlist_wrap table tr td{
 	font-size:14px;
 	font-weight:300;
+	white-space:nowrap;  text-overflow:ellipsis; overflow:hidden;
 }
 /*마이페이지 주문내역 끝*/
-/*마이페이지 후기작성*/
-
-/*마이페이지 후기작성 끝*/
+/*마이페이지 문의내역*/
+.content .my_row .mypage .mypage_orderlist .mypage_reviewlist_wrap{
+	margin-top:20px;
+}
+.content .my_row .mypage .mypage_orderlist .mypage_reviewlist_wrap table{
+	width:100%;
+	border-collapse: collapse;
+	text-align:center;
+	table-layout: fixed;
+}
+.content .my_row .mypage .mypage_orderlist .mypage_reviewlist_wrap table tr th{
+	border-top:1px solid #222;
+	border-bottom:1px solid #222;
+	padding:10px;
+	white-space:nowrap;  text-overflow:ellipsis; overflow:hidden;
+}
+.content .my_row .mypage .mypage_orderlist .mypage_reviewlist_wrap table tr td{
+	white-space:nowrap;  text-overflow:ellipsis; overflow:hidden;
+	padding:10px;
+	font-weight:200;
+	font-size:14px;
+	border-bottom:1px solid #ddd;
+}
+/*마이페이지 문의내역 끝*/
+/*마이페이지 문의내역 자세히보기*/
+.content .mypage_orderlist > .mypage_questionlist_detail{
+	margin-top:10px;
+}
+.content .mypage_orderlist > .mypage_questionlist_detail_reply{
+	margin-top:10px;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	padding:20px;
+}
+.content .mypage_orderlist > .mypage_questionlist_detail_reply span{
+	font-size:14px;color:#555;
+}
+.content .mypage_orderlist > .mypage_questionlist_detail_reply p{
+	font-size:14px;color:#333;
+	margin-top:10px;
+	line-height:22px;
+}
+/*마이페이지 문의내역 끝*/
+/*마이페이지 구매후기내역*/
+.content .mypage_orderlist > mypage_reviewlist_wrap2{
+	font-size:14px;color:#333;
+	margin-top:10px;
+	line-height:22px;
+}
+/*마이페이지 구매후기내역 끝*/
+/*마이페이지 개인정보수정*/
+.content .mypage_orderlist > .mypage_password_check{
+	margin-top:50px;
+	text-align:center;
+}
+.content .mypage_orderlist > .mypage_password_check > .mb-3{
+	font-size:14px;
+	color:#333;
+	width:30%;
+	margin:0 auto;
+}
+.content .mypage_orderlist > .mypage_password_check > .mb-3 > .form-control{
+	text-align:center;
+}
+.content .mypage_orderlist > .mypage_info_modify{
+	margin-top:50px;
+}
+.content .mypage_orderlist > .mypage_info_modify > form{
+	width:70%;
+	margin:0 auto;
+}
+.content .mypage_orderlist > .mypage_info_modify > form > .btn_wrap{
+	text-align:center;
+}
+/*마이페이지 개인정보수정 끝*/

@@ -14,18 +14,33 @@
 </head>
 <body>
 <!-- header -->
-
 <jsp:include page="${top }"/>
 
-	<!-- header END -->
-	<jsp:include page="${content }"/>
-	<!-- footer -->
-	<div>
-	<jsp:include page="${footer }"/>
-	</div>
+
+<!-- content -->
+<jsp:include page="${content }"/>
+
+
+<!-- footer -->
+<jsp:include page="${footer }"/>
 
 
 
-<script type="text/javascript" src="js/main.js"></script>
+
+
+<script type="text/javascript">
+/*헤더 드롭다운*/
+document.getElementById("header_menu").addEventListener('mouseover',function(){
+document.getElementById("menu_dropdown").style.display='flex';
+});
+document.getElementById("menu_dropdown").addEventListener('mouseleave',function(){
+menu_dropdown.style.display='none';
+});
+/*문의글 등록*/
+document.getElementById('question_write').addEventListener('click',function(){
+document.getElementById('question_modal').focus();
+});	
+</script>
+<!--<script type="text/javascript" src="js/main.js"></script>  -->
 </body>
 </html>

@@ -5,13 +5,13 @@
 	<div class="my_row">
 		<div class="header_box">
 			<div class="logo">
-			<img src="images/logo2.png"/>
+			<a href="${cp }/shop/index"><img onmouseover="this.src='images/logo_a.png'" onmouseout="this.src='images/logo_org.png'" style="width:60px;height:61px;" src="images/logo_org.png"/></a>
 			</div>
 			<div class="header_menu" id="header_menu">
 			<ul>
-				<li><a href="">신상품</a></li>
-				<li><a href="">남성</a></li>
-				<li><a href="">여성</a></li>
+				<li><a href="${cp }/shop/goods_list">신상품</a></li>
+				<li><a href="${cp }/shop/goods_list">남성</a></li>
+				<li><a href="${cp }/shop/goods_list">여성</a></li>
 			</ul>
 			</div>
 		<div class="btn_wrap">
@@ -33,17 +33,17 @@
 		</div>
 		<div class="menu_dropdown" id="menu_dropdown">
 					<ul>
-					<li><a href="">신상품</a></li>
+					<li><a href="${cp }/shop/goods_list">신상품</a></li>
 					</ul>
 					<ul>
-					<li><a href="">상의</a></li>
-					<li><a href="">하의</a></li>
-					<li><a href="">신발</a></li>
+					<li><a href="${cp }/shop/goods_list">상의</a></li>
+					<li><a href="${cp }/shop/goods_list">하의</a></li>
+					<li><a href="${cp }/shop/goods_list">신발</a></li>
 					</ul>
 					<ul>
-					<li><a href="">상의</a></li>
-					<li><a href="">하의</a></li>
-					<li><a href="">신발</a></li>
+					<li><a href="${cp }/shop/goods_list">상의</a></li>
+					<li><a href="${cp }/shop/goods_list">하의</a></li>
+					<li><a href="${cp }/shop/goods_list">신발</a></li>
 					</ul>
 					
 			</div>

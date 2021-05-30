@@ -46,7 +46,6 @@ public class LoginController extends HttpServlet{
 				resp.sendRedirect(req.getContextPath()+"/shop/index");
 			}else {
 				resp.sendRedirect(req.getContextPath()+"/shop/login");
-			
 			}	
 	}
 }

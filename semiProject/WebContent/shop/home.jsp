@@ -31,38 +31,38 @@
 				</div>
 				<ul>
 					<li>
-						<a href="">
+						<a href="${cp}/shop/goods_detail">
 						<img src="images/ex01.jpg">
 						</a>
 						<div class="text_box">
-						<a href="" class="price">[巢己]寂明1</a>
+						<a href="${cp}/shop/goods_detail" class="price">[巢己]寂明1</a>
 						<p class="price">10,000盔</p>
 						</div>
 					</li>
 					<li>
-						<a href="">
+						<a href="${cp}/shop/goods_detail">
 						<img src="images/ex01.jpg">
 						</a>
 						<div class="text_box">
-						<a href="" class="price">[巢己]寂明1</a>
+						<a href="${cp}/shop/goods_detail" class="price">[巢己]寂明1</a>
 						<p class="price">10,000盔</p>
 						</div>
 					</li>
 					<li>
-						<a href="">
+						<a href="${cp}/shop/goods_detail">
 						<img src="images/ex01.jpg">
 						</a>
 						<div class="text_box">
-						<a href="" class="price">[巢己]寂明1</a>
+						<a href="${cp}/shop/goods_detail" class="price">[巢己]寂明1</a>
 						<p class="price">10,000盔</p>
 						</div>
 					</li>
 					<li>
-						<a href="">
+						<a href="${cp}/shop/goods_detail">
 						<img src="images/ex01.jpg">
 						</a>
 						<div class="text_box">
-						<a href="" class="price">[巢己]寂明1</a>
+						<a href="${cp}/shop/goods_detail" class="price">[巢己]寂明1</a>
 						<p class="price">10,000盔</p>
 						</div>
 					</li>

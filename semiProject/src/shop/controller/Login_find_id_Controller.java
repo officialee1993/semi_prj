@@ -34,13 +34,9 @@ public class Login_find_id_Controller extends HttpServlet{
 		if(id !=null) {
 			req.setAttribute("id", id);
 			req.getRequestDispatcher("/shop/login").forward(req, resp);
-			System.out.println("¾ÆÀÌµð : "+ id);
+			System.out.println("ï¿½ï¿½ï¿½Ìµï¿½ : "+ id);
 		}else {
-			System.out.println("¾ÆÀÌµð ¾øÀ½");
+			System.out.println("ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
-		
-		
-		
-		
 	}
 }
