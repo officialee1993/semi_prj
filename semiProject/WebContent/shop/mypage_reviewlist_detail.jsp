@@ -19,11 +19,11 @@
 					<form class="mypage_questionlist_detail">
 						<div class="mb-3">
  						<label for="" class="form-label"></label>
-  						<input type="text" class="form-control" id="" readonly/>
+  						<input type="text" readonly class="form-control-plaintext" id="">
 						</div>
 						<div class="mb-3">
 						<label for="" class="form-label"></label>
-						<textarea class="form-control" id="" rows="5" readonly/></textarea>
+						<textarea readonly class="form-control-plaintext" id="" rows="5" readonly/></textarea>
 						</div>
 						<div class="btn_wrap" style="text-align:right;">
 						<button onclick="" type="button" class="btn btn-outline-dark" style="font-size:14px;">삭제</button>

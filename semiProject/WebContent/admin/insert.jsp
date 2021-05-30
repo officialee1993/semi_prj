@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
+
 <title>insert.jsp</title>
 </head>
 <body>

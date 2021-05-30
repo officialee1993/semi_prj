@@ -22,7 +22,7 @@
 				<button type="submit" class="btn btn-dark">로그인</button>
 				</form>
 				
-				<button type="button" class="btn btn-light">회원가입</button>
+				<button type="button" onclick="location.href='${pageContext.request.contextPath }/shop/join'" class="btn btn-light">회원가입</button>
 				
 			</div>
 		</div>

@@ -14,6 +14,7 @@
 </head>
 <body>
 
+
 <div class="admin_content">
 
 	<div class="admin_content_menu_wrap">
@@ -34,44 +35,64 @@
 	<!-- 관리자 페이지 콘텐츠 영역 -->
 	<div class="admin_content_wrap">
 		<div class="title_wrap">
-			<h3>상품등록</h3>
+			<h3>주문상세</h3>
 		</div>
 		<div class="admin_content_box">
-			<div class="goods_insert">
-				<form action="" method="">
-				<div class="category_wrap">
-				<select class="form-select form-select-sm" aria-label=".form-select-sm example">
-				  <option selected>카테고리(대)</option>
-				  <option value="1">남성</option>
-				  <option value="2">여성</option>
-				</select>
-				<select class="form-select form-select-sm" aria-label=".form-select-sm example">
-				  <option selected>카테고리(소)</option>
-				  <option value="1">상의</option>
-				  <option value="2">하의</option>
-				  <option value="3">신발</option>
-				</select>
-				</div>
-				<div class="mb-3">
-				  <label for="" class="form-label"></label>
-				  <input type="text" class="form-control" id="" placeholder="상품명">
-				</div>
-				<div class="mb-3">
-				  <label for="" class="form-label"></label>
-				  <input type="text" class="form-control" id="" placeholder="가격">
-				</div>
-				<div class="mb-3">
-				  <label for="" class="form-label"></label>
-				  <input type="text" class="form-control" id="" placeholder="수량">
-				</div>
-				<div class="input-group mb-3">
-				  <input type="file" class="form-control" id="inputGroupFile02">
-				  <label class="input-group-text" for="inputGroupFile02"></label>
-				</div>
-				<div class="btn_wrap">
-					<button type="button" class="btn btn-outline-dark">등록</button>
-				</div>
-				</form>
+			<div class="admin_goods_list admin_order_detail">
+			<div class="order_info">
+				<h5>주문 정보</h5>
+				<table>
+				<tr>
+					<th>주문번호</th>
+					<th>주문날짜</th>
+					<th>결제금액</th>
+					<th>주문상태</th>
+				</tr>
+				<tr>
+					<td>20123124</td>
+					<td>2021.12.12</td>
+					<td>50,000원</td>
+					<td>입금완료</td>
+				</tr>
+				</table>
+			</div>
+			
+			<div class="orderer_info">
+				<h5>주문자 정보</h5>
+				<table>
+				<tr>
+					<th>아이디</th>
+					<th>주문자명</th>
+					<th>연락처</th>
+					<th>배송지 주소</th>
+				</tr>
+				<tr>
+					<td>test</td>
+					<td>이찬호</td>
+					<td>010-1234-1234</td>
+					<td>서울</td>
+				</tr>
+				</table>
+			</div>
+
+			<div class="goods_info">
+				<h5>상품 정보</h5>
+				<table>
+				<tr>
+					<th>상품번호</th>
+					<th>상품명</th>
+					<th>수량</th>
+					<th>상품금액</th>
+				</tr>
+				<tr>
+					<td>23</td>
+					<td>반팔</td>
+					<td>10</td>
+					<td>50,000원</td>
+				</tr>
+				</table>
+			</div>
+
 			</div>
 		</div>
 	</div>

@@ -13,8 +13,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<div class="admin_content">
+	
+	<div class="admin_content">
 
 	<div class="admin_content_menu_wrap">
 		<div class="logo_wrap"><img src="images/logo_org_white.png"></div>
@@ -34,7 +34,7 @@
 	<!-- 관리자 페이지 콘텐츠 영역 -->
 	<div class="admin_content_wrap">
 		<div class="title_wrap">
-			<h3>상품등록</h3>
+			<h3>상품수정</h3>
 		</div>
 		<div class="admin_content_box">
 			<div class="goods_insert">
@@ -76,6 +76,6 @@
 		</div>
 	</div>
 </div>
-
+	
 </body>
 </html>
