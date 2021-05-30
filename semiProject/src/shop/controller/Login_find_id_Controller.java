@@ -26,17 +26,5 @@ public class Login_find_id_Controller extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Membersdao dao= Membersdao.getinstance();
-		String name = req.getParameter("name");
-		String email = req.getParameter("email");
-		
-		String id = dao.find_id(name, email);
-		if(id !=null) {
-			req.setAttribute("id", id);
-			req.getRequestDispatcher("/shop/login").forward(req, resp);
-			System.out.println("���̵� : "+ id);
-		}else {
-			System.out.println("���̵� ����");
-		}
 	}
 }

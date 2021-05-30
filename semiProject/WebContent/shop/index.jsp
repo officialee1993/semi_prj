@@ -36,11 +36,24 @@ document.getElementById("menu_dropdown").style.display='flex';
 document.getElementById("menu_dropdown").addEventListener('mouseleave',function(){
 menu_dropdown.style.display='none';
 });
+/*마이페이지 드롭다운*/
+/* document.getElementById("header_mypage").addEventListener('click',function(){
+document.getElementById("header_mypage_menu").style.display='block';
+});
+ */
 /*문의글 등록*/
 document.getElementById('question_write').addEventListener('click',function(){
 document.getElementById('question_modal').focus();
 });	
+
 </script>
 <!--<script type="text/javascript" src="js/main.js"></script>  -->
 </body>
 </html>
+
+
+
+
+
+
+

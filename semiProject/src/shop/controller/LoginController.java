@@ -33,7 +33,6 @@ public class LoginController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
 			String id = req.getParameter("id");
 		
 			String pwd = req.getParameter("pwd");
