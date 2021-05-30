@@ -33,18 +33,18 @@
 					let result=xml.getElementsByTagName("result")[0].textContent;
 					
 					if(result!=""){
-						//alert(result);
+					
 						let p=document.createElement("p");
 						p.innerHTML=result;
 						document.getElementById("form_title1").innerHTML="비밀번호 찾기 성공";
 						document.getElementById("find_pwd").innerHTML="<br><br><br><br><br><br> 찾는 아이디 : "+result;
 					
-						//alert(result);
+						
 
 					}else{
 						document.getElementById("not_found").innerHTML="정보를 찾을수 없습니다."
 						
-					//	alert("정보가 없습니다");
+					
 					}
 				}
 			};
