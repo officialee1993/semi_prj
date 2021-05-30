@@ -14,7 +14,10 @@ a:hover{
 	height: 100vh;
 	display:flex;
 }
+.admin_content .admin_content_box .admin_order_list a{
+	font-weight:700;
 
+}
 .admin_content .admin_content_menu_wrap{
 	width:20%;
 	height: 100vh;
@@ -156,6 +159,42 @@ a:hover{
 	margin-top:50px;
 }
 
+.admin_content .admin_content_wrap .admin_content_box .question_detail{
+	width:100%;
+	display:flex;
+}
+.admin_content .admin_content_wrap .admin_content_box .question_detail form{
+	width:50%;
+}
+
+.question_detail .question_detail_goodsinfo{
+	width:50%;
+}
+.question_detail .question_detail_goodsinfo table{
+	width:100%;
+	text-align:center;
+	border-collapse: collapse;
+	table-layout: fixed;
+	margin-top:200px;
+}
+
+.question_detail .question_detail_goodsinfo table tr th{
+	vertical-align:middle;
+	padding:10px;
+	border-bottom:1px solid #ddd;
+	font-size:14px;
+	font-weight:700;
+}
+
+.question_detail .question_detail_goodsinfo table tr td{
+	padding:10px 0;
+	white-space:nowrap;  
+	text-overflow:ellipsis; 
+	overflow:hidden;
+	vertical-align:middle;
+	border-bottom:1px solid #ddd;
+	font-size:14px;
+}
 /*콘텐츠 영역 끝*/
 
 

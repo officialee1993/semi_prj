@@ -6,8 +6,8 @@ public class Product_vo {
 
 	private int p_num ;
 	private String p_name ;
-	private String p_count ;
-	private String p_price ;
+	private int p_count ;
+	private int p_price ;
 	private int p_click_num ;
 	private Date p_date ;
 	private String ori_img_name ;
@@ -16,7 +16,7 @@ public class Product_vo {
 	
 	public Product_vo() {}
 
-	public Product_vo(int p_num, String p_name, String p_count, String p_price, int p_click_num, Date p_date,
+	public Product_vo(int p_num, String p_name, int p_count, int p_price, int p_click_num, Date p_date,
 			String ori_img_name, String save_img_name, String cg_name) {
 		super();
 		this.p_num = p_num;
@@ -46,19 +46,19 @@ public class Product_vo {
 		this.p_name = p_name;
 	}
 
-	public String getP_count() {
+	public int getP_count() {
 		return p_count;
 	}
 
-	public void setP_count(String p_count) {
+	public void setP_count(int p_count) {
 		this.p_count = p_count;
 	}
 
-	public String getP_price() {
+	public int getP_price() {
 		return p_price;
 	}
 
-	public void setP_price(String p_price) {
+	public void setP_price(int p_price) {
 		this.p_price = p_price;
 	}
 

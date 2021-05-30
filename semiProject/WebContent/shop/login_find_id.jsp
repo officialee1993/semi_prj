@@ -8,6 +8,8 @@
 				<h3 class="form_title" id="form_title">아이디 찾기</h3>
 				<div id="find_id_lch" style="text-align:center;"></div>
 				<div id ="find_id">
+				
+				
 				<div class="mb-3">
 				  <label for="" class=""></label>
 				  <input name="name" type="text" class="form-control" id="name" placeholder="이름을 입력해주세요">
@@ -17,6 +19,7 @@
 				</div>
 				<button onclick="idfind()" class="btn btn-dark">찾기</button>
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -36,6 +39,7 @@
 					if(result!=""){
 						document.getElementById("find_id").style.display="none";
 						let p=document.createElement("p");
+
 						let a=document.createElement("a");
 						p.innerHTML=result;
 						p.style.textAlign="center";
@@ -47,6 +51,10 @@
 						a.innerHTML="로그인";
 						a.href="${pageContext.request.contextPath }/shop/login";
 
+						p.innerHTML=result;
+						document.getElementById("form_title1").innerHTML="아이디 찾기 성공";
+						document.getElementById("find_id").innerHTML="<br><br><br><br><br><br> 찾는 아이디 : "+result;
+					
 					}else{
 						document.getElementById("not_found").innerHTML="정보를 찾을수 없습니다.";
 					//	alert("정보가 없습니다");
