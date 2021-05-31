@@ -751,12 +751,11 @@ a:hover{
 }
 .content .mypage_orderlist > .mypage_info_modify{
 	margin-top:50px;
-}
-.content .mypage_orderlist > .mypage_info_modify > form{
 	width:70%;
 	margin:0 auto;
 }
-.content .mypage_orderlist > .mypage_info_modify > form > .btn_wrap{
+
+.content .mypage_orderlist > .mypage_info_modify > .btn_wrap{
 	text-align:center;
 }
 /*마이페이지 개인정보수정 끝*/
