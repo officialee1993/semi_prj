@@ -2,31 +2,37 @@ package shop.vo;
 
 public class Category_vo {
 
-	private String c_name ; 
-	private String r_c_name  ; 
-	
+	private int cg_id ; 
+	private String cg_name  ; 
+	private int p_id;
 	public Category_vo() {}
-
-	public Category_vo(String c_name, String r_c_name) {
+	
+	public Category_vo(int cg_id, String cg_name, int p_id) {
 		super();
-		this.c_name = c_name;
-		this.r_c_name = r_c_name;
+		this.cg_id = cg_id;
+		this.cg_name = cg_name;
+		this.p_id = p_id;
 	}
 
-	public String getC_name() {
-		return c_name;
+	public int getCg_id() {
+		return cg_id;
+	}
+	public void setCg_id(int cg_id) {
+		this.cg_id = cg_id;
+	}
+	public String getCg_name() {
+		return cg_name;
+	}
+	public void setCg_name(String cg_name) {
+		this.cg_name = cg_name;
+	}
+	public int getP_id() {
+		return p_id;
+	}
+	public void setP_id(int p_id) {
+		this.p_id = p_id;
 	}
 
-	public void setC_name(String c_name) {
-		this.c_name = c_name;
-	}
-
-	public String getR_c_name() {
-		return r_c_name;
-	}
-
-	public void setR_c_name(String r_c_name) {
-		this.r_c_name = r_c_name;
-	}
+	
 	
 }
