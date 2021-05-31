@@ -29,13 +29,12 @@
 			<div class="item_box">
 				<div class="title">
 					<p>New Product</p>
-					
 				</div>
 				<ul>
 				<c:forEach var="vo" items="${list}">
-			
+				
 					<li>
-						<a href="${cp}/shop/goods_detail">
+						<a href="${cp}/shop/goods_detail?p_num=${vo.p_num}">
 						<img src="${cp}/shop/productimgs/${vo.save_img_name}">
 						</a>
 						<div class="text_box">
@@ -46,35 +45,6 @@
 				
 				</c:forEach>
 					
-					
-					
-<%-- 					<li>
-						<a href="${cp}/shop/goods_detail">
-						<img src="images/ex01.jpg">
-						</a>
-						<div class="text_box">
-						<a href="${cp}/shop/goods_detail" class="price">[巢己]寂明1</a>
-						<p class="price">10,000盔</p>
-						</div>
-					</li>
-					<li>
-						<a href="${cp}/shop/goods_detail">
-						<img src="images/ex01.jpg">
-						</a>
-						<div class="text_box">
-						<a href="${cp}/shop/goods_detail" class="price">[巢己]寂明1</a>
-						<p class="price">10,000盔</p>
-						</div>
-					</li>
-					<li>
-						<a href="${cp}/shop/goods_detail">
-						<img src="images/ex01.jpg">
-						</a>
-						<div class="text_box">
-						<a href="${cp}/shop/goods_detail" class="price">[巢己]寂明1</a>
-						<p class="price">10,000盔</p>
-						</div>
-					</li> --%>
 				</ul>
 			</div>
 		</div>
