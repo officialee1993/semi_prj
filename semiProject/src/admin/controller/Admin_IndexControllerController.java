@@ -32,6 +32,6 @@ public class Admin_IndexControllerController extends HttpServlet{
 
 		req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
 		
-		 System.out.println("test");
+		 System.out.println("test  ");
 	}
 }
