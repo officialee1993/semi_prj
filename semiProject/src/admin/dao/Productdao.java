@@ -49,6 +49,9 @@ public class Productdao {
 				//System.out.println(vo.getP_name()+"/ "+vo.getP_count()+"/"+vo.getP_price()+"/"+vo.getP_click_num()+"/"+vo.getOri_img_name()+"/"+vo.getSave_img_name()+"/"+vo.getCg_name());
 				con = MyDBCP.getConnection();
 				String sql = "insert into product values(product_seq.nextval,?,?,?,?,sysdate,?,?,?)";
+				
+				String sql2 = "insert into product values(product_seq.nextval,?,?,?,?,sysdate,?,?,?)";
+				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, vo.getP_name());
 				pstmt.setInt(2,	vo.getP_count());
