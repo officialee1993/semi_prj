@@ -126,6 +126,9 @@ a:hover{
 	margin-top:20px;
 	text-align:center;
 }
+.admin_content .admin_content_wrap .admin_content_box .admin_goods_list table tr td button{
+	font-size:12px;
+}
 /*상품 등록*/
 .admin_content .admin_content_wrap .admin_content_box .goods_insert{
 	width:50%;
@@ -195,6 +198,19 @@ a:hover{
 	border-bottom:1px solid #ddd;
 	font-size:14px;
 }
+/*매출통계*/
+.admin_content_wrap .admin_content_box .admin_goods_list .order_info .sales_date{
+	margin:20px 0 0 0;
+}
+.admin_content_wrap .admin_content_box .admin_goods_list .order_info .sales_date .sales_result{
+	font-weight:700;
+	margin-left:50px;
+}
+.admin_content_wrap .admin_content_box .admin_goods_list .order_info .sales_date button{
+	font-size:12px;
+}
+
+
 /*콘텐츠 영역 끝*/
 
 
