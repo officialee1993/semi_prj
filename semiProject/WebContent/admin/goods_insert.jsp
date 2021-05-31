@@ -9,19 +9,19 @@
 		<div class="admin_content_box">
 			<div class="goods_insert">
 				<!-- 상품등록 폼 -->
-				<form method="post" action="${pageContext.request.contextPath}/product/upload" enctype="multipart/form-data">
+				<form method="post" action="${pageContext.request.contextPath}/admin/goods_insert" enctype="multipart/form-data">
 				<!-- 카테고리 -->
 				<div class="category_wrap">
-				<select name ="cg_name" class="form-select form-select-sm" aria-label=".form-select-sm example">
+				<select name ="cgb_num" class="form-select form-select-sm" aria-label=".form-select-sm example">
 				  <option selected>카테고리(대)</option>
 				  <option value="1">남성</option>
 				  <option value="2">여성</option>
 				</select>
-				<select class="form-select form-select-sm" aria-label=".form-select-sm example">
+				<select name ="cgs_name"  class="form-select form-select-sm" aria-label=".form-select-sm example">
 				  <option selected>카테고리(소)</option>
-				  <option value="1">상의</option>
-				  <option value="2">하의</option>
-				  <option value="3">신발</option>
+				  <option value="상의">상의</option>
+				  <option value="하의">하의</option>
+				  <option value="신발">신발</option>
 				</select>
 				</div>
 				<!-- 상품정보 -->

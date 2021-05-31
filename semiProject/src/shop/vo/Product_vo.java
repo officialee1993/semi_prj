@@ -12,12 +12,12 @@ public class Product_vo {
 	private Date p_date ;
 	private String ori_img_name ;
 	private String save_img_name  ;
-	private String cg_name ; 
+	private int cg_id ; 
 	
 	public Product_vo() {}
 
 	public Product_vo(int p_num, String p_name, int p_count, int p_price, int p_click_num, Date p_date,
-			String ori_img_name, String save_img_name, String cg_name) {
+			String ori_img_name, String save_img_name, int cg_id) {
 		super();
 		this.p_num = p_num;
 		this.p_name = p_name;
@@ -27,7 +27,7 @@ public class Product_vo {
 		this.p_date = p_date;
 		this.ori_img_name = ori_img_name;
 		this.save_img_name = save_img_name;
-		this.cg_name = cg_name;
+		this.cg_id = cg_id;
 	}
 
 	public int getP_num() {
@@ -94,13 +94,14 @@ public class Product_vo {
 		this.save_img_name = save_img_name;
 	}
 
-	public String getCg_name() {
-		return cg_name;
+	public int getCg_id() {
+		return cg_id;
 	}
 
-	public void setCg_name(String cg_name) {
-		this.cg_name = cg_name;
+	public void setCg_id(int cg_id) {
+		this.cg_id = cg_id;
 	}
+
 	
 	
 	

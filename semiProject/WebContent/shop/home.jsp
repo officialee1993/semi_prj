@@ -1,3 +1,4 @@
+<%@page import="admin.dao.Productdao"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -38,7 +39,9 @@
 						<img src="${cp}/shop/productimgs/${vo.save_img_name}">
 						</a>
 						<div class="text_box">
-						<a href="${cp}/shop/goods_detail" class="price">[${vo.cg_name}]${vo.p_name}</a>
+
+					
+						<a href="${cp}/shop/goods_detail" class="price">${vo.p_name}</a>
 						<p class="price">${vo.p_price}</p>
 						</div>
 					</li>
