@@ -7,14 +7,16 @@ public class Basket_vo {
 	private int p_count ; 
 	private int p_num ; 
 	private String id ;
+	private String P_size; 
 	public Basket_vo() {}
 	
-	public Basket_vo(int b_num, int p_count, int p_num, String id) {
+	public Basket_vo(int b_num, int p_count, int p_num, String id, String p_size) {
 		super();
 		this.b_num = b_num;
 		this.p_count = p_count;
 		this.p_num = p_num;
 		this.id = id;
+		P_size = p_size;
 	}
 
 	public int getB_num() {
@@ -41,6 +43,16 @@ public class Basket_vo {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public String getP_size() {
+		return P_size;
+	}
+	public void setP_size(String p_size) {
+		P_size = p_size;
+	}
+	
+	
+	
+	
 	
 	
 }

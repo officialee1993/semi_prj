@@ -2,4 +2,5 @@
     pageEncoding="UTF-8"%>
 	<div class="footer">
 		<p>All Rights Reserved</p>
+		
 	</div>

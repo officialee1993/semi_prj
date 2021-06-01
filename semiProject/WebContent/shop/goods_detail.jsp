@@ -1,6 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+
+<script type="text/javascript">
+function checkData(){
+	
+	//alert("checkData");
+	var p_count=document.getElementsByName("p_count")[0];
+	var p_size=document.getElementsByName("p_size")[0];
+	if(p_count.value.length==0){
+		alert("수량 체크하세요");
+		p_count.focus();
+		return false;	
+	}
+	
+	if(p_size.value=='사이즈'){
+		alert("사이즈 체크하세요");
+		p_size.focus();
+		return false;	
+	}
+	
+}
+</script>
+
 	<div class="content">
 		<div class="my_row">
 		<!-- 상품설명 -->
@@ -9,12 +33,12 @@
 					
 					<img src="${cp}/shop/productimgs/${vo.save_img_name}">
 				</div>
-				<form class="right_box" method="post">
+				<form class="right_box" method="post" onsubmit="return checkData()">
 				<div class="text_box">
 					<h4>${vo.p_name}</h4>
 					<h5 style="margin-top:50px;">가격</h5>
 					<p>${vo.p_price}원</p>
-					<input type="number" class="form-control" min="0" placeholder="수량" name="p_count">
+					<input type="number" class="form-control" min="0" placeholder="수량" name="p_count" >
 					<select name="p_size" class="form-select form-select-sm" aria-label=".form-select-sm example">
 					  <option selected>사이즈</option>
 					  <option value="M">M</option>
@@ -23,7 +47,8 @@
 					</select>
 				</div>
 				<div class="btn_box">
-					<input type="submit" formaction="${cp}/shop/goods_order" class="btn btn-outline-dark" value="구매하기">
+				
+					<input type="submit" formaction="${cp}/shop/goods_order?p_num=${vo.p_num}" class="btn btn-outline-dark" value="구매하기">
 					<input type="submit" formaction="${cp}/shop/goods_cart?p_num=${vo.p_num}" class="btn btn-dark" style="margin-left:10px" value="장바구니">
 												
 				</div>
