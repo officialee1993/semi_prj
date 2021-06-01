@@ -26,20 +26,20 @@ public class Admin_GoodsInsertController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String saveDir = getServletContext().getRealPath("/shop/productimgs");
-		MultipartRequest mr = new MultipartRequest(req, // request °´Ã¼
-				saveDir, // ¾÷·ÎµåÇÒ µð·ºÅä¸® °æ·Î
-				1024 * 1024 * 5, // ÃÖ´ë ¾÷·Îµå Å©±â(¹ÙÀÌÆ®)
-				"utf-8", // ÀÎÄÚµù ¹æ½Ä
-				new DefaultFileRenamePolicy()// µ¿ÀÏÇÑ ÆÄÀÏ¸íÀÌ Á¸ÀçÇÒ½Ã ÆÄÀÏ¸íµÚ¿¡ ÀÏ·Ã¹øÈ£(1,2,3,)À» ºÙ¿©¼­ ÆÄÀÏ »ý¼º
+		MultipartRequest mr = new MultipartRequest(req, // request ï¿½ï¿½Ã¼
+				saveDir, // ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ä¸® ï¿½ï¿½ï¿½
+				1024 * 1024 * 5, // ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Îµï¿½ Å©ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½Æ®)
+				"utf-8", // ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½
+				new DefaultFileRenamePolicy()// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½Ú¿ï¿½ ï¿½Ï·Ã¹ï¿½È£(1,2,3,)ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		);
-		System.out.println("¾÷·Îµå °æ·Î:" + saveDir);
+		System.out.println("ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½:" + saveDir);
 		
 		//int p_num = Integer.parseInt(mr.getParameter("p_num"));
 		String p_name = mr.getParameter("p_name");
 		int p_count =  Integer.parseInt(mr.getParameter("p_count"));
 		int p_price = Integer.parseInt(mr.getParameter("p_price"));
-		int cgb_num = Integer.parseInt(mr.getParameter("cgb_num"));// ³²¼º ¿©¼º..
-		String cgs_name = mr.getParameter("cgs_name"); // »óÀÇ ÇÏÀÇ...
+		int cgb_num = Integer.parseInt(mr.getParameter("cgb_num"));// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½..
+		String cgs_name = mr.getParameter("cgs_name"); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½...
 		String orgfileName = mr.getOriginalFileName("p_file");
 		String savefileName = mr.getFilesystemName("p_file");
 		
@@ -56,12 +56,10 @@ public class Admin_GoodsInsertController extends HttpServlet{
 		 int n = dao.insert(vo); 
 		 
 		 if(n>0) { 
-			 System.out.println("¼º°ø");
+			 System.out.println("ï¿½ï¿½ï¿½ï¿½");
 		 resp.sendRedirect(req.getContextPath()+"/admin/goods_insert"); } 
 		 else {
-		 System.out.println("½ÇÆÐ"); 
-	 }
-		 
-		 
+		 System.out.println("ï¿½ï¿½ï¿½ï¿½"); 
+	 } 
 	}
 }

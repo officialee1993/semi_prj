@@ -31,7 +31,9 @@
 				<div class="title">
 					<p>New Product</p>
 				</div>
-				<ul>
+				<div class="slide_wrapper">
+				
+				<ul class="slides">
 				<c:forEach var="vo" items="${list}">
 				
 					<li>
@@ -41,14 +43,55 @@
 						<div class="text_box">
 
 					
-						<a href="${cp}/shop/goods_detail" class="price">${vo.p_name}</a>
+						<a href="${cp}/shop/goods_detail?p_num=${vo.p_num}" class="price">${vo.p_name}</a>
 						<p class="price">${vo.p_price}</p>
 						</div>
-					</li>
-				
+					</li> 
+
+
 				</c:forEach>
 					
 				</ul>
+				
+				</div>
+				<p class="controls">
+					<span class="prev">테스트</span>
+					<span class="next">테스트</span>
+				</p>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		var slides=document.querySelector('.slides'),
+			slide=document.querySelectorAll('.slides li'),
+			currentIdx=0,
+			slideCount=slide.length,
+			prevBtn = document.querySelector('.prev'),
+			slideWidth = 340,
+			slideMargin = 15,
+			nextBtn = document.querySelector('.next');
+			
+			slides.style.width=(slideWidth+slideMargin)*slideCount-slideMargin + 'px';
+		
+			function moveSlide(num){
+				slides.style.left=-num*360+15+'px';
+				currentIdx=num;
+			}
+			nextBtn.addEventListener('click',function(){
+				if(currentIdx<slideCount-1){
+					 moveSlide(currentIdx+1);
+				}else{
+					moveSlide(0);
+				}
+				
+			});
+			prevBtn.addEventListener('click',function(){
+				if(currentIdx>0){
+					 moveSlide(currentIdx-1);
+				}else{
+					moveSlide(slideCount-3);
+				}
+				
+			});
+	</script>
