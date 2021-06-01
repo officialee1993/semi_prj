@@ -27,3 +27,10 @@
 			</div>
 		</div>
 	</div>
+<%-- <c:choose>
+	<c:when test="${requestScope.loginFail==true}">
+		<script>
+			alert("아이디 혹은 비밀번호가 맞지 않습니다");
+		</script>
+	</c:when>
+</c:choose> --%>

@@ -115,35 +115,56 @@ a:hover{
 .content{
 	padding-bottom:79px;
 }
+
+
 .content > .my_row > .item_box > .title{
 	padding:79px 0 35px;
 	text-align:center;
 	font-size:28px;
 }
-.content > .my_row > .item_box > ul{
+.content > .my_row > .item_box > .slide_wrapper{
+	position:relative;
+	width:1050px;
+	overflow:hidden;
+	height:383.6px;
+}
+.content > .my_row > .item_box > .slide_wrapper ul.slides{
+	position:absolute;
+	left:0;
 	display:flex;
+	transition:left 0.5s;
 }
-.content > .my_row > .item_box > ul > li{
-	margin-left:14px;
+.content > .my_row > .item_box > .slide_wrapper > ul > li:not(:first-child){
+	margin-left:15px;
 }
-.content > .my_row > .item_box > ul > li:nth-of-type(1){
-	margin-left:0px;
+.content > .my_row > .item_box > .slide_wrapper > ul > li > a > img{
+	width:340px;
 }
-.content > .my_row > .item_box > ul > li > a > img{
-	width:252px;
-}
-.content > .my_row > .item_box > ul > li > .text_box{
+.content > .my_row > .item_box > .slide_wrapper > ul > li > .text_box{
 	text-align:center;
 }
-.content > .my_row > .item_box > ul > li > div > .price{
+.content > .my_row > .item_box > .slide_wrapper > ul > li > div > .price{
 	font-size:16px;
 	color:#000000;
 	padding:5px 0;
 }
-.content > .my_row > .item_box > ul > li > div > .title{
+.content > .my_row > .item_box > .slide_wrapper > ul > li > div > .title{
 	font-size:16px;color:#333333;
 	padding:10px 0;
 }
+.content > .my_row > .item_box > .controls{
+	text-align:center;
+}
+.content > .my_row > .item_box > .controls span{
+	background:#333;
+	color:#fff;
+	padding:10px 20px;
+	margin:0 10px;
+}
+
+/*
+	
+*/
 /*로그인 페이지*/
 .content .my_row .login_box{
 	width:340px;
