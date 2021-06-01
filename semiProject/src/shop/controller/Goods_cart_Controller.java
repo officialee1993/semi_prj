@@ -31,5 +31,6 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 		req.setAttribute("footer", "/shop/footer.jsp");
 
 		req.getRequestDispatcher("/shop/index.jsp").forward(req, resp);
+		System.out.println("test");
 }
 }
