@@ -17,11 +17,11 @@
 							<th></th>
 						</tr>
 						<tr>
-							<td style=""><img src="images/ex01.jpg" style="width:100px;"></td>
-							<td>반팔</td>
-							<td>가격</td>
-							<td><input type="number" class="form-control" min="0" placeholder="0" style="width:50px;height:20px;margin:0 auto;"></td>
-							<td>10,000원</td>
+							<td style=""><img src="${cp}/shop/productimgs/${vo.save_img_name}" style="width:100px;"></td>
+							<td>${vo.p_name}</td>
+							<td>${vo.p_price}</td>
+							<td><input type="number" class="form-control" min="0" placeholder="0" style="width:50px;height:20px;margin:0 auto;" value="${p_count}"></td>
+							<td>${price*p_count}원</td>
 							<td><a href="">삭제</a></td>
 						</tr>
 					</table>
