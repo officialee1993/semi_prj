@@ -58,6 +58,6 @@ public class Admin_GoodsInsertController extends HttpServlet{
 		 if(n>0) { 
 
 		 resp.sendRedirect(req.getContextPath()+"/admin/goods_insert"); } 
-		 
+
 	}
 }

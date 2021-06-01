@@ -12,11 +12,11 @@
 						<th style="width:10%">가격</th>
 					</tr>
 					<tr>
-						<td><img src="images/ex01.jpg" style="width:200px;"></td>
-						<td>제품명</td>
-						<td>사이즈</td>
-						<td>수량</td>
-						<td>가격</td>
+						<td><img src="${cp}/shop/productimgs/${vo.save_img_name}" style="width:200px;"></td>
+						<td>${vo.p_name}</td>
+						<td>${p_size}</td>
+						<td>${p_count}</td>
+						<td>${vo.p_price*p_count}원</td>
 					</tr>
 				</table>
 			</div>
