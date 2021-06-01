@@ -56,8 +56,10 @@ public class Admin_GoodsInsertController extends HttpServlet{
 		 int n = dao.insert(vo); 
 		 
 		 if(n>0) { 
-
+			 System.out.println("상품등록 성공 ");
 		 resp.sendRedirect(req.getContextPath()+"/admin/goods_insert"); } 
-
+		 else {
+			 System.out.println("상품 등록 실패 ");
+		 }
 	}
 }

@@ -31,7 +31,7 @@ public class Basketdao {
 		try {
 			ArrayList< BasketList_vo> basketlist = new ArrayList<BasketList_vo>();
 			con = MyDBCP.getConnection();
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+id);
+			
 			String sql = "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count from Product p,Basket b where id=? and p.p_num = b.p_num";
 			
 			pstmt = con.prepareStatement(sql);
@@ -39,10 +39,6 @@ public class Basketdao {
 			rs= pstmt.executeQuery();
 			
 			while(rs.next()) {
-				System.out.println(rs.getString("save_img_name"));
-				System.out.println(rs.getString("p_name"));
-				System.out.println(rs.getInt("p_price"));
-				System.out.println(rs.getString("p_size"));
 				
 			BasketList_vo basketlistvo = new BasketList_vo(rs.getString("save_img_name"), rs.getString("p_name"), rs.getInt("p_price"), rs.getInt("p_count"),rs.getString("p_size"));
 				

@@ -34,15 +34,21 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	 	int price = vo.getP_price();
 	 	
 	 	Basketdao basketdao = Basketdao.getinstance();
-	 	basketdao.insert(p_count, p_num, id, p_size);
+	 	int n = basketdao.insert(p_count, p_num, id, p_size);
+	 	if(n>0) {
+	 		System.out.println("장바구니 저장 성공 ");
+	 	}else {
+	 		System.out.println("장바구니 저장 실패");
+	 	}
 	 	
 	 	basketlistvo= basketdao.basketlist(id);
 	 
+	 	if( basketlistvo !=null) {
+	 		System.out.println("리스트 불러오기 성공");
+	 	}else {
+	 		System.out.println("리스트 불러오기 실패 ");
+	 	}
 	 	req.setAttribute("basketlistvo", basketlistvo);
-//	 	req.setAttribute("p_count", p_count);
-//	 	req.setAttribute("p_size", p_size);
-//	 	req.setAttribute("price", price);
-//	 	req.setAttribute("vo", vo);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content", "/shop/goods_cart.jsp");
 		req.setAttribute("footer", "/shop/footer.jsp");
