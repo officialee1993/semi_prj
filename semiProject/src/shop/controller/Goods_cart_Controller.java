@@ -18,8 +18,30 @@ import shop.vo.Product_vo;
 import shop_dao.Basketdao;
 @WebServlet("/shop/goods_cart")
 public class Goods_cart_Controller extends HttpServlet{
-@Override
-protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ArrayList<BasketList_vo> basketlistvo = new ArrayList<BasketList_vo>();
+		
+		HttpSession session = req.getSession();
+		String id = (String)session.getAttribute("id");
+		Basketdao basketdao = Basketdao.getinstance();
+		basketlistvo= basketdao.basketlist(id);
+		 
+	 	if( basketlistvo !=null) {
+	 		System.out.println("리스트 불러오기 성공");
+	 	}else {
+	 		System.out.println("리스트 불러오기 실패 ");
+	 	}
+	 	req.setAttribute("basketlistvo", basketlistvo);
+		req.setAttribute("top", "/shop/header.jsp");
+		req.setAttribute("content", "/shop/goods_cart.jsp");
+		req.setAttribute("footer", "/shop/footer.jsp");
+
+		req.getRequestDispatcher("/shop/index.jsp").forward(req, resp);
+		
+	}
+	@Override
+		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		int p_num = Integer.parseInt(req.getParameter("p_num"));
 		int p_count = Integer.parseInt(req.getParameter("p_count")); // 수량 
@@ -54,7 +76,7 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 		req.setAttribute("footer", "/shop/footer.jsp");
 
 		req.getRequestDispatcher("/shop/index.jsp").forward(req, resp);
-	
 		
-}
+		}
+
 }

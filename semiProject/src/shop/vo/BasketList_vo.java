@@ -6,15 +6,17 @@ public class BasketList_vo {
 	private int p_price;
 	private int p_count;
 	private String p_size;
+	private int b_num;
 	public BasketList_vo() {}
 	
-	public BasketList_vo(String save_img_name, String p_name, int p_price, int p_count, String p_size) {
+	public BasketList_vo(String save_img_name, String p_name, int p_price, int p_count, String p_size, int b_num) {
 		super();
 		this.save_img_name = save_img_name;
 		this.p_name = p_name;
 		this.p_price = p_price;
 		this.p_count = p_count;
 		this.p_size = p_size;
+		this.b_num = b_num;
 	}
 
 	public String getSave_img_name() {
@@ -47,6 +49,14 @@ public class BasketList_vo {
 	public void setP_size(String p_size) {
 		this.p_size = p_size;
 	}
+	public int getB_num() {
+		return b_num;
+	}
+	public void setB_num(int b_num) {
+		this.b_num = b_num;
+	}
+	
+	
 
 
 }

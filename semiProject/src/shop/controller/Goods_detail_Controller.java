@@ -25,5 +25,6 @@ public class Goods_detail_Controller extends HttpServlet{
 		req.setAttribute("footer", "/shop/footer.jsp");
 
 		req.getRequestDispatcher("/shop/index.jsp").forward(req, resp);
+		
 	}
 }

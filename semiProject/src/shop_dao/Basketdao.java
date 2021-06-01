@@ -20,7 +20,27 @@ public class Basketdao {
 	private Basketdao () {}
 
 	
-
+	public int basketdelete(int b_num) {
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		
+		
+		try {
+			con = MyDBCP.getConnection();
+			String sql = "delete from basket where b_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, b_num);
+			int n = pstmt.executeUpdate();
+			return n ; 
+			
+		}catch (SQLException s) {
+			System.out.println(s.getMessage());
+			return -1; 
+		}finally {
+			MyDBCP.close(con, pstmt, null);
+		}
+	}
+	
 	public ArrayList<BasketList_vo> basketlist(String id){
 		
 		Connection con = null; 
@@ -32,7 +52,7 @@ public class Basketdao {
 			ArrayList< BasketList_vo> basketlist = new ArrayList<BasketList_vo>();
 			con = MyDBCP.getConnection();
 			
-			String sql = "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count from Product p,Basket b where id=? and p.p_num = b.p_num";
+			String sql = "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where id=? and p.p_num = b.p_num";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -40,7 +60,8 @@ public class Basketdao {
 			
 			while(rs.next()) {
 				
-			BasketList_vo basketlistvo = new BasketList_vo(rs.getString("save_img_name"), rs.getString("p_name"), rs.getInt("p_price"), rs.getInt("p_count"),rs.getString("p_size"));
+			BasketList_vo basketlistvo = new BasketList_vo(rs.getString("save_img_name"), rs.getString("p_name"),
+						rs.getInt("p_price"), rs.getInt("p_count"),rs.getString("p_size"),rs.getInt("b_num"));
 				
 			basketlist.add(basketlistvo);
 				
