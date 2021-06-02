@@ -1,31 +1,40 @@
 package shop.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Q_board_vo {
-
-	private int q_b_num ;
-	private String q_b_name ;
-	private String q_b_title ;
-	private String q_b_content ;
-	private String q_b_pwd  ;
-	private Date wr_date ;
-	private String id   ;
-	private int p_num  ;
+	private int q_b_num;
+	private String id;
+	private String q_b_category;
+	private String q_b_title;
+	private String q_b_content;
+	private String q_b__pwd;
+	private Date wr_date;
+	private String q_b_state;
+	private int p_num;
 	
 	public Q_board_vo() {}
-
-	public Q_board_vo(int q_b_num, String q_b_name, String q_b_title, String q_b_content, String q_b_pwd, Date wr_date,
-			String id, int p_num) {
+	
+	public Q_board_vo(int q_b_num, String id, String q_b_category, String q_b_title, String q_b_content,
+			String q_b__pwd, Date wr_date, String q_b_state, int p_num) {
 		super();
 		this.q_b_num = q_b_num;
-		this.q_b_name = q_b_name;
+		this.id = id;
+		this.q_b_category = q_b_category;
 		this.q_b_title = q_b_title;
 		this.q_b_content = q_b_content;
-		this.q_b_pwd = q_b_pwd;
+		this.q_b__pwd = q_b__pwd;
 		this.wr_date = wr_date;
-		this.id = id;
+		this.q_b_state = q_b_state;
 		this.p_num = p_num;
+	}
+
+	public String getQ_b_state() {
+		return q_b_state;
+	}
+
+	public void setQ_b_state(String q_b_state) {
+		this.q_b_state = q_b_state;
 	}
 
 	public int getQ_b_num() {
@@ -36,12 +45,20 @@ public class Q_board_vo {
 		this.q_b_num = q_b_num;
 	}
 
-	public String getQ_b_name() {
-		return q_b_name;
+	public String getId() {
+		return id;
 	}
 
-	public void setQ_b_name(String q_b_name) {
-		this.q_b_name = q_b_name;
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getQ_b_category() {
+		return q_b_category;
+	}
+
+	public void setQ_b_category(String q_b_category) {
+		this.q_b_category = q_b_category;
 	}
 
 	public String getQ_b_title() {
@@ -60,12 +77,12 @@ public class Q_board_vo {
 		this.q_b_content = q_b_content;
 	}
 
-	public String getQ_b_pwd() {
-		return q_b_pwd;
+	public String getQ_b__pwd() {
+		return q_b__pwd;
 	}
 
-	public void setQ_b_pwd(String q_b_pwd) {
-		this.q_b_pwd = q_b_pwd;
+	public void setQ_b__pwd(String q_b__pwd) {
+		this.q_b__pwd = q_b__pwd;
 	}
 
 	public Date getWr_date() {
@@ -76,14 +93,6 @@ public class Q_board_vo {
 		this.wr_date = wr_date;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public int getP_num() {
 		return p_num;
 	}
@@ -91,5 +100,7 @@ public class Q_board_vo {
 	public void setP_num(int p_num) {
 		this.p_num = p_num;
 	}
+	
+	
 	
 }

@@ -249,6 +249,7 @@ a:hover{
 .content .my_row .detail_box{
 	width:100%;
 	display:flex;
+	margin-top:50px;
 }
 .content .my_row .detail_box .left_box{
 	width:40%;
@@ -321,6 +322,11 @@ a:hover{
 	padding:15px 0;
 	white-space:nowrap;  text-overflow:ellipsis; overflow:hidden;
 }
+.content .my_row .board .table td div.question_div{
+	margin-top:10px;
+	padding:10px;
+	display:none;
+}
 .content .my_row .board .board_page{
 	text-align:center;
 }
@@ -348,6 +354,14 @@ a:hover{
 	color:#222;
 }
 /*댓글창*/
+.content .my_row .board .review_content{
+	display:none;
+}
+.content .my_row .board .question_content{
+	display:none;
+}
+
+
 .content .my_row .board .comment_list .comment_box{
 	border-top:1px solid #ddd;
 }
@@ -787,4 +801,29 @@ a.find_success{
 	margin-top:50px;
 	font-size:20px;
 }
+/*plaintext form*/
+.content .my_row .question_detail{
+	margin-top:50px;
+}
+.content .my_row .question_detail h3{
+	font-size:20px;
+	font-weight:800;
+	text-align:center;
+	padding-bottom:40px;
+}
+.content .my_row .question_detail .form-control-plaintext{
+	border:1px solid #ddd;
+	border-radius:5px;
+	padding:10px;
+	margin-top:10px;
+}
 
+.content .my_row .question_detail .question_answer{
+	margin-top:50px;
+}
+.content .my_row .question_detail .question_answer .admin_wrapper .form-control-plaintext{
+	margin-top:0px;
+}
+.content .my_row .questionDetail_pwdWrapper .questionDetail_pwdBox{
+	margin:auto;
+}
