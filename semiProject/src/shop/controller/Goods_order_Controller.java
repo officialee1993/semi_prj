@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import admin.dao.Productdao;
 import shop.vo.Product_vo;
@@ -16,9 +17,13 @@ public class Goods_order_Controller extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		int p_num = Integer.parseInt(req.getParameter("p_num"));
+		int p_num = Integer.parseInt(req.getParameter("p_num")); //상품번호
 		int p_count = Integer.parseInt(req.getParameter("p_count")); // 수량 
-		String p_size = req.getParameter("p_size");
+		
+		HttpSession session = req.getSession();
+		String id = (String)session.getAttribute("id");
+		
+		String p_size = req.getParameter("p_size"); //사이즈 
 		
 		Productdao dao = Productdao.getinstance();
 		Product_vo vo= dao.getinfo(p_num);
