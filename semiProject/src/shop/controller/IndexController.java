@@ -16,6 +16,7 @@ import shop.vo.Product_vo;
 @WebServlet("/shop/index")
 public class IndexController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String top=(String)req.getAttribute("top");
 		String content=(String)req.getAttribute("content");
 		String footer=(String)req.getAttribute("footer");

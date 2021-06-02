@@ -38,15 +38,15 @@ public class Admin_GoodsInsertController extends HttpServlet{
 		String p_name = mr.getParameter("p_name");
 		int p_count =  Integer.parseInt(mr.getParameter("p_count"));
 		int p_price = Integer.parseInt(mr.getParameter("p_price"));
-		int cgb_num = Integer.parseInt(mr.getParameter("cgb_num"));
-		String cgs_name = mr.getParameter("cgs_name"); 
+		int p_id = Integer.parseInt(mr.getParameter("p_id"));
+		String cg_name = mr.getParameter("cg_name"); 
 		String orgfileName = mr.getOriginalFileName("p_file");
 		String savefileName = mr.getFilesystemName("p_file");
 		
-		//System.out.println(p_name+" "+ p_count+" "+ p_price+" "+ cgs_name +" "+orgfileName+" "+ savefileName );
+		System.out.println("goodinsertcontroller: "+p_name+" "+ p_count+" "+p_id+" "+ p_price+" "+ cg_name +" "+orgfileName+" "+ savefileName );
 		Productdao dao = Productdao.getinstance();
 		
-		int cg_id = dao.cg_idgetinfo(cgb_num , cgs_name);
+		int cg_id = dao.cg_idgetinfo(p_id , cg_name);
 		
 		
 		  Product_vo vo = new Product_vo(0, p_name, p_count, p_price, 0, null,

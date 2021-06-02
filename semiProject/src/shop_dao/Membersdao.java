@@ -87,7 +87,7 @@ public class Membersdao {
 			return n ; 
 			
 		}catch(SQLException s) {
-			s.getMessage();
+			System.out.println(s.getMessage());
 			return -1; 
 		}finally {
 			MyDBCP.close(con, pstmt, null);
