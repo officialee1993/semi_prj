@@ -50,11 +50,6 @@ public class Goods_cart_Controller extends HttpServlet{
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
 		
-		Productdao dao = Productdao.getinstance();
-		Product_vo vo =  dao.getinfo(p_num);
-	 
-	 	int price = vo.getP_price();
-	 	
 	 	Basketdao basketdao = Basketdao.getinstance();
 	 	int n = basketdao.insert(p_count, p_num, id, p_size);
 	 	if(n>0) {

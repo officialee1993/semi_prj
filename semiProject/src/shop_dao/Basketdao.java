@@ -18,7 +18,27 @@ public class Basketdao {
 		return instance; 
 	}
 	private Basketdao () {}
-
+	
+	public int basket_b_num_max() {
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs= null;
+		
+		try {
+			con = MyDBCP.getConnection();
+			String sql = "select NVL(max(b_num),0)bnum from basket";
+			pstmt=con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int bnum = rs.getInt("bnum");
+			
+			return bnum ; 
+		}catch(SQLException s) {
+			s.getMessage();
+			return -1 ; 
+		}
+	}
 	
 	public int basketdelete(int b_num) {
 		Connection con = null; 

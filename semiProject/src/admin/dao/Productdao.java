@@ -130,7 +130,7 @@ public class Productdao {
 			PreparedStatement pstmt = null; 
 			try {
 				
-				//System.out.println(vo.getP_name()+"/ "+vo.getP_count()+"/"+vo.getP_price()+"/"+vo.getP_click_num()+"/"+vo.getOri_img_name()+"/"+vo.getSave_img_name()+"/"+vo.getCg_id());
+				System.out.println(vo.getP_name()+"/ "+vo.getP_count()+"/"+vo.getP_price()+"/"+vo.getP_click_num()+"/"+vo.getOri_img_name()+"/"+vo.getSave_img_name()+"/"+vo.getCg_id());
 				con = MyDBCP.getConnection();
 				String sql = "insert into product values(product_seq.nextval,?,?,?,?,sysdate,?,?,?)";
 				

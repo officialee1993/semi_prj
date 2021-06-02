@@ -24,23 +24,24 @@
 			<div class="join_wrap">
 			<div class="join_box">
 				<h3 class="form_title">상품주문</h3>
-				<form action="" method="">
+				
+				<form action="${cp}/shop/goods_order_ok?p_num=${vo.p_num}&b_num_max=${b_num_max}&ALL_SUM_PRICE=${vo.p_price*p_count}" method="post">
 				<div class="mb-3">
   				<label for="" class="form-label">수령인</label>
-  				<input type="text" class="form-control" id="" placeholder="수령인 성함을 입력해주세요">
+  				<input type="text" class="form-control" name ="rec_name" placeholder="수령인 성함을 입력해주세요">
   				</div>
   				<div class="mb-3">
   				<label for="" class="form-label">연락처</label>
-  				<input type="password" class="form-control" id="" placeholder="연락처를 입력해주세요">
+  				<input type="text" class="form-control" name ="rec_phone" placeholder="연락처를 입력해주세요">
   				</div>
   				<div class="mb-3">
   				<label for="" class="form-label">주소</label>
-  				<input type="text" class="form-control" id="" placeholder="주소를 입력해주세요">
+  				<input type="text" class="form-control" name ="rec_addr" placeholder="주소를 입력해주세요">
   				</div>
-  				<select class="form-select" aria-label="Default select example">
+  				<select class="form-select" aria-label="Default select example" name ="payname">
   				<option selected>결제방법</option>
- 				<option value="1">계좌이체</option>
- 				<option value="2">카드</option>
+ 				<option value="계좌이체">계좌이체</option>
+ 				<option value="카드">카드</option>
 				</select>
   				<div class="btn_wrap">
   				<button type="submit" class="btn btn-dark">50,000원 주문하기</button>
