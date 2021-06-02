@@ -12,6 +12,7 @@ public class Mypage_info_modify_Controller extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("top", "/shop/header.jsp");
+		req.setAttribute("sidemenu", "/shop/mypage_sidemenu.jsp");
 		req.setAttribute("content", "/shop/mypage_info_modify.jsp");
 		req.setAttribute("footer", "/shop/footer.jsp");
 

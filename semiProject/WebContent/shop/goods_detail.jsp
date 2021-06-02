@@ -46,14 +46,17 @@ function checkData(){
 					</select>
 				</div>
 				<div class="btn_box">
-				
 					<input type="submit" formaction="${cp}/shop/goods_order?p_num=${vo.p_num}" class="btn btn-outline-dark" value="구매하기">
-					<input type="submit" formaction="${cp}/shop/goods_cart?p_num=${vo.p_num}" class="btn btn-dark" style="margin-left:10px" value="장바구니">
-												
+					<input type="submit" formaction="${cp}/shop/goods_cart?p_num=${vo.p_num}" class="btn btn-dark" style="margin-left:10px" value="장바구니">		
 				</div>
 				</form>
 			</div>
 		<!-- 상품설명 END -->
+		
+		
+		
+		
+		
 		<!-- 후기 게시판 -->
 		<div class="board review_board">
 			<h3>상품후기</h3>
@@ -72,7 +75,6 @@ function checkData(){
 				<a id="review_title" href="">제목
 				</a>
 				<div class="board_content review_content"><p>시들어 이는 모래뿐일 관현악이며, 같은 원대하고, 봄바람이다. 영락과 얼마나 넣는 장식하는 두손을 보이는 동산에는 아름다우냐? 못할 든 이상의 전인 것이다. 뜨거운지라, 공자는 그들은 운다. 용감하고 열락의 위하여서 것이다. 꽃이 생생하며, 밝은 그들은 꽃 바이며, 낙원을 어디 것이다. 할지니, 청춘을 충분히 열락의 새가 힘차게 두기 방지하는 끓는다. 밝은 듣기만 구하지 가진 것이 없으면 끓는 용기가 동력은 사막이다. 들어 청춘에서만 인간이 타오르고 찾아 노래하며 끓는 것이다. 영락과 청춘을 보이는 뿐이다.</p>
-				
 				<div class="comment_list review_comment_list">
 				<!-- 댓글입력시 추가될 div className -->
 				<div class="comment_box">
@@ -99,16 +101,6 @@ function checkData(){
 				
 			</tr>
 			<!-- 반복문 종료 -->
-			<tr style="text-align:center;">
-				<td>후기</td>
-				<td>이찬호</td>
-				<td>
-				<a id="review_title" href="">제목
-				</a>
-				<div class="review_content"></div>
-				</td>
-				<td>2021-05-28</td>
-			</tr>
 			</table>
 			<!-- 후기 게시판 페이징 번호 -->
 			<div class="board_page review_board_page">
@@ -118,6 +110,12 @@ function checkData(){
 			</div>
 		</div>
 		<!-- 후기 게시판 END -->
+		
+		
+		
+		
+		
+		
 		
 		<!-- 문의 게시판 -->
 		<div class="board question_board">
@@ -335,6 +333,23 @@ function questionA(id){
 	var pwd=document.getElementById("pwd").value;
 	var content=document.getElementById("content").value;
 
+	if(category=='문의유형'){
+		alert("문의유형을 선택하세요")
+		return;
+	}
+	if(title==''){
+		alert("제목을 입력하세요")
+		return;
+	}
+	if(pwd==''){
+		alert("비밀번호를 입력하세요")
+		return;
+	}
+	if(content==''){
+		alert("내용을 입력하세요")
+		return;
+	}
+	
 	var question_table=document.getElementById("question_table");
 	
 	let xhr=new XMLHttpRequest();

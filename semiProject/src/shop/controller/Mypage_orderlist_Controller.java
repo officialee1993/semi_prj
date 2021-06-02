@@ -12,6 +12,7 @@ public class Mypage_orderlist_Controller extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("top", "/shop/header.jsp");
+		req.setAttribute("sidemenu", "/shop/mypage_sidemenu.jsp");
 		req.setAttribute("content", "/shop/mypage_orderlist.jsp");
 		req.setAttribute("footer", "/shop/footer.jsp");
 
