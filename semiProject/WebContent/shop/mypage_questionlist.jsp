@@ -1,17 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="content">
 	<div class="my_row">
 		<div class="mypage">
 			<!-- 사이드메뉴 -->
 			<div class="mypage_sidemenu">
 				<h3>마이페이지</h3>
-				<ul>
-					<li><a href="${cp }/shop/mypage_orderlist">주문내역</a></li>
-					<li><a href="${cp }/shop/mypage_reviewlist">구매후기</a></li>
-					<li><a href="${cp }/shop/mypage_questionlist">문의내역</a></li>
-					<li><a href="${cp }/shop/mypage_info_modify">개인정보수정</a></li>
-				</ul>
+				<jsp:include page="${sidemenu }"/>
 			</div>
 			<!-- 문의내역 -->
 			<div class="mypage_orderlist">
@@ -24,25 +20,54 @@
 								<th width="15%">날짜</th>
 								<th width="10%">답변상태</th>
 							</tr>
-							<!-- 답변대기일때 -->
-							<tr>
-								<td>질문제목</td>
-								<td class="content">가는 이상 간에 철환하였는가? 이는 이상 하는 가슴에 청춘 새 노년에게서 것이다. 풀이 그들은 되는 앞이 갑 미인을 때까지 노래하며 사랑의 피다. 속에 붙잡아 못할 길을 그들을 청춘은 우리 부패뿐이다. 우리의 얼마나 그들에게 황금시대의 어디 따뜻한 구하지 크고 것은 운다. 인생을 시들어 붙잡아 이것이다. 대중을 희망의 반짝이는 보라. 곳이 싶이 놀이 얼음이 대고, 피가 힘차게 위하여 위하여서. 가치를 보이는 살았으며, 안고, 이상의 곧 별과 그리하였는가? 영원히 옷을 동산에는 못할 영락과 피가 끝까지 끓는 별과 이것이다.
+
+							<c:forEach var="questionList" items="${list }">
+							<c:choose>
+							<c:when test="${questionList.q_b_state=='답변대기' }">
+
+								<tr>
+								<td>${questionList.q_b_title }</td>
+								<td class="content">${questionList.q_b_content }
 								</td>
-								<td>2020.02.02</td>
-								<td style="color:#ddd">답변대기</td>
-							</tr>
-							<!-- 답변완료일때 -->
-							<tr>
-								<td class="title">가는 이상 간에 철환하였는가? 이는 이상 하는 가슴에 청춘 새 노년에게서 것이다. 풀이 그들은 되는 앞이 갑 미인을 때까지 노래하며 사랑의 피다. 속에 붙잡아</td>
-								<td class="content"><a href="${cp }/shop/mypage_questionlist_detail">질문드립니다</a></td>
-								<td>2020.02.02</td>
-								<td style="color:#14aaff">답변완료</td>
-							</tr>
+								<td>${questionList.wr_date }</td>
+								<td style="color:#ddd">${questionList.q_b_state }</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<tr>
+								<td class="title">${questionList.q_b_title }</td>
+								<td class="content"><a href="${cp }/shop/mypage_questionlist_detail?qnum=${questionList.q_b_num }">${questionList.q_b_content }</a></td>
+								<td>${questionList.wr_date }</td>
+								<td style="color:#14aaff">${questionList.q_b_state }</td>
+								</tr>
+							</c:otherwise>
+							</c:choose>
+							</c:forEach>
+
 						</table>
-						
 					</div>
+									<div style="margin-top:50px;text-align:center;">
+				<c:if test="${startPageNum>10}">
+				<a href="${cp }/shop/mypage_questionlist?pageNum=${startPageNum-1 }">이전페이지</a>
+				</c:if>
+				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+				<c:choose>
+					<c:when test="${pageNum==i }"><%--현재 페이지인경우 --%>
+						<span style="color:black">[${i }]</span>
+					</c:when>
+				<c:otherwise>
+						<a href="${cp }/shop/mypage_questionlist?pageNum=${i } style="color:grey">[${i }]</a>
+				</c:otherwise>
+						</c:choose>
+				</c:forEach>
+				<c:if test="${endPageNum<pageCount}">
+						<a href="${cp }/shop/mypage_questionlist?pageNum=${endPageNum+1 }">다음페이지</a>
+				</c:if>
 				</div>
+				</div>
+
+
 		</div>
+
 	</div>
-</div>
+</div>							

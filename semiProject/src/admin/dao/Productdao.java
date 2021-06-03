@@ -107,7 +107,11 @@ public class Productdao {
 			ArrayList< Product_vo> list = new ArrayList<Product_vo>();
 			try {
 				con = MyDBCP.getConnection();
-				String sql = "select * from product";
+				String sql = "select * from("
+						+ " select p.*,rownum rnum from("
+						+ " select * from product"
+						+ " order by p_date desc) p)"
+						+ " where rnum<10";
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 				while(rs.next()) {

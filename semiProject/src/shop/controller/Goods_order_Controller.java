@@ -18,21 +18,22 @@ public class Goods_order_Controller extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		int p_num = Integer.parseInt(req.getParameter("p_num")); // »óÇ°¹øÈ£
-		int p_count = Integer.parseInt(req.getParameter("p_count")); // ¼ö·® 
+		int p_num = Integer.parseInt(req.getParameter("p_num")); // ï¿½ï¿½Ç°ï¿½ï¿½È£
+		int p_count = Integer.parseInt(req.getParameter("p_count")); // ï¿½ï¿½ï¿½ï¿½ 
 		
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
 		
-		String p_size = req.getParameter("p_size"); //»çÀÌÁî 
+		String p_size = req.getParameter("p_size"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		Basketdao basketdao = Basketdao.getinstance();
 		
-		int n = basketdao.insert(p_count, p_num, id, p_size);// Àå¹Ù±¸´Ï µî·Ï 
-		int b_num_max = basketdao.basket_b_num_max(); //ÃÖ±Ù ÁÖ¹® Àå¹Ù±¸´Ï¹øÈ£ 
+		int n = basketdao.insert(p_count, p_num, id, p_size);// ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
+		System.out.println("ìž¥ë°”êµ¬ë‹ˆ ì‚½ìž…:"+n);
+		int b_num_max = basketdao.basket_b_num_max(); //ï¿½Ö±ï¿½ ï¿½Ö¹ï¿½ ï¿½ï¿½Ù±ï¿½ï¿½Ï¹ï¿½È£ 
 		//System.out.println(basket_b_num_max);
 		
 		Productdao dao = Productdao.getinstance();
-		Product_vo vo= dao.getinfo(p_num); // »óÇ°¹øÈ£ 
+		Product_vo vo= dao.getinfo(p_num); // ï¿½ï¿½Ç°ï¿½ï¿½È£ 
 		
 		req.setAttribute("b_num_max",b_num_max);
 		req.setAttribute("vo", vo);

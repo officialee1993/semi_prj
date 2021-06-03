@@ -22,12 +22,17 @@ public class Goods_detail_Controller extends HttpServlet{
 		int p_num = Integer.parseInt(req.getParameter("p_num"));
 		String spageNum=req.getParameter("pageNum");
 		
+		System.out.println(p_num);
+		
 		int pageNum=1;
 		if(spageNum!=null) {
 			pageNum=Integer.parseInt(spageNum);
 		}
 		int startRow=(pageNum-1)*10+1;
 		int endRow=startRow+9;
+		
+		System.out.println("sp:"+spageNum);
+		System.out.println("p:"+pageNum);
 		
 		QuestionDao qdao=QuestionDao.getinstance();
 		ArrayList<CommentsVo> list=qdao.questionList(p_num,startRow,endRow);
