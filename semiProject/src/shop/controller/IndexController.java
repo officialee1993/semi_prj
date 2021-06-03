@@ -25,7 +25,6 @@ public class IndexController extends HttpServlet {
 		}
 		if(content==null) {
 			content="/shop/home.jsp";
-
 		}
 		if(footer==null) {
 			footer="/shop/footer.jsp";
@@ -37,8 +36,8 @@ public class IndexController extends HttpServlet {
 		Productdao dao = Productdao.getinstance();
 		ArrayList<Product_vo> list = dao.list();
 		
-
-
+		
+		
 		req.setAttribute("top", top);
 		req.setAttribute("list", list);
 		req.setAttribute("content", content);
