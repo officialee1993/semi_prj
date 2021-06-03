@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="content">
 	<div class="my_row">
 		<div class="mypage">
@@ -22,36 +23,24 @@
 								<th></th>
 							</tr>
 							
-							<tr>
-								<td><img src="images/ex01.jpg"></td>
-								<td>반팔</td>
-								<td>50,000원</td>
-								<td>2021.05.05</td>
-								<td>652465234</td>
-								<td>입금완료</td>
+							<c:forEach var="vo" items="${requestScope.list}">
+							
+								<tr>
+							
+								<td><img src="${cp}/shop/productimgs/${vo.save_img_name}"></td>
+								<td>${vo.cg_name}</td>
+								<td>${vo.all_sum_price}원</td>
+								<td>${vo.o_date}</td>
+								<td>${vo.o_num}</td>
+								<td>${vo.o_state}</td>
 								<td></td>
 							</tr>
 							
-							<tr>
-								<td><img src="images/ex01.jpg"></td>
-								<td>반팔</td>
-								<td>50,000원</td>
-								<td>2021.05.05</td>
-								<td>652465234</td>
-								<td>배송완료</td>
-								<td><a href="${cp }/shop/mypage_orderlist_review">후기작성</a></td>
-							</tr>
-
-							<tr>
-								<td><img src="images/ex01.jpg"></td>
-								<td>반팔</td>
-								<td>50,000원</td>
-								<td>2021.05.05</td>
-								<td>652465234</td>
-								<td>배송완료</td>
-								<td><a href="${cp }/shop/mypage_orderlist_review">후기작성</a></td>
-							</tr>
-
+							</c:forEach>
+							
+					
+							
+						
 						</table>
 						
 					</div>
