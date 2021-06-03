@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import shop.vo.Orders_vo;
 import shop.vo.Product_Orderlist_vo;
@@ -20,7 +21,10 @@ public class Mypage_orderlist_Controller extends HttpServlet {
 		
 		ArrayList<Product_Orderlist_vo> list = new ArrayList<Product_Orderlist_vo>();
 		OrderDao orderdao = OrderDao.getinstance();
-		list = orderdao.ordervo_list_info();
+		
+		HttpSession session = req.getSession();
+		String id =(String)session.getAttribute("id");
+		list = orderdao.ordervo_list_info(id);
 		if(list !=null) {
 			System.out.println("장바구니 모든 주문list 불러오기 성공");
 		}else {

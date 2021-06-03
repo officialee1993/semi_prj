@@ -102,7 +102,7 @@ public Orders_vo ordervoinfo (){
 		}
 	}
 
-public ArrayList<Product_Orderlist_vo> ordervo_list_info (){
+public ArrayList<Product_Orderlist_vo> ordervo_list_info (String id){
 	
 	Connection con = null; 
 	PreparedStatement pstmt = null; 
@@ -113,10 +113,10 @@ public ArrayList<Product_Orderlist_vo> ordervo_list_info (){
 	
 		con = MyDBCP.getConnection();
 		
-		String sql = "select * from orders o, product p , category c where o.p_num = p.p_num and p.cg_id =  c.cg_id";
+		String sql = "select * from orders o, product p , category c , basket b where o.p_num = p.p_num and p.cg_id =  c.cg_id and o.b_num = b.b_num and b.id =?";
 		
 		pstmt = con.prepareStatement(sql);
-	
+		pstmt.setString(1, id);
 		rs= pstmt.executeQuery();
 		
 		while(rs.next()) {
