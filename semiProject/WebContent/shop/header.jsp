@@ -24,6 +24,7 @@
 			
 			<c:otherwise>
 			<a href="${cp}/shop/logout">로그아웃</a>
+			<a href="${cp}/shop/goods_cart" class="header_basket" id="header_basket">장바구니 </a>
 			<a href="${cp}/shop/mypage_orderlist" class="header_mypage" id="header_mypage">마이페이지
 			</a>
 			<ul class="header_mypage_menu" id="header_mypage_menu">

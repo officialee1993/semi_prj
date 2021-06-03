@@ -16,6 +16,7 @@ import shop.vo.Product_vo;
 @WebServlet("/shop/index")
 public class IndexController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String top=(String)req.getAttribute("top");
 		String content=(String)req.getAttribute("content");
 		String footer=(String)req.getAttribute("footer");
@@ -24,21 +25,21 @@ public class IndexController extends HttpServlet {
 		}
 		if(content==null) {
 			content="/shop/home.jsp";
-
 		}
 		if(footer==null) {
 			footer="/shop/footer.jsp";
 		}
 		
-		
 		String cp=req.getContextPath();
 		ServletContext application=getServletContext();
 		application.setAttribute("cp", cp);
 		Productdao dao = Productdao.getinstance();
+		
+		
 		ArrayList<Product_vo> list = dao.list();
 		
-
-
+		
+		
 		req.setAttribute("top", top);
 		req.setAttribute("list", list);
 		req.setAttribute("content", content);

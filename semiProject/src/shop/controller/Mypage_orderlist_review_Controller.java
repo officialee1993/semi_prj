@@ -13,6 +13,7 @@ public class Mypage_orderlist_review_Controller extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		req.setAttribute("top", "/shop/header.jsp");
+		req.setAttribute("sidemenu", "/shop/mypage_sidemenu.jsp");
 		req.setAttribute("content", "/shop/mypage_orderlist_review.jsp");
 		req.setAttribute("footer", "/shop/footer.jsp");
 

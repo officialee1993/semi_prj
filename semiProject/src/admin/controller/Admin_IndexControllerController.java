@@ -31,6 +31,5 @@ public class Admin_IndexControllerController extends HttpServlet{
 		req.setAttribute("content", content);
 
 		req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
-		
 	}
 }

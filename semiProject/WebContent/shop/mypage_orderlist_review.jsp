@@ -5,12 +5,7 @@
 			<div class="mypage">
 				<div class="mypage_sidemenu">
 					<h3>마이페이지</h3>
-					<ul>
-					<li><a href="${cp }/shop/mypage_orderlist">주문내역</a></li>
-					<li><a href="${cp }/shop/mypage_reviewlist">구매후기</a></li>
-					<li><a href="${cp }/shop/mypage_questionlist">문의내역</a></li>
-					<li><a href="${cp }/shop/mypage_info_modify">개인정보수정</a></li>
-					</ul>
+					<jsp:include page="${sidemenu }"/>
 				</div>
 				<div class="mypage_orderlist">
 					<h3>후기작성</h3>

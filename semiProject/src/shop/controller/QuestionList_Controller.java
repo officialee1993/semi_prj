@@ -7,15 +7,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-@WebServlet("/shop/mypage_reviewlist")
-public class Mypage_reviewlist_Controller extends HttpServlet{
+@WebServlet("/shop/questionlist")
+public class QuestionList_Controller extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("top", "/shop/header.jsp");
-		req.setAttribute("sidemenu", "/shop/mypage_sidemenu.jsp");
-		req.setAttribute("content", "/shop/mypage_reviewlist.jsp");
-		req.setAttribute("footer", "/shop/footer.jsp");
-
-		req.getRequestDispatcher("/shop/index.jsp").forward(req, resp);
+		
+		String spageNum=req.getParameter("pageNum");
+		int pageNum=1;
+		if(spageNum!=null) {
+			pageNum=Integer.parseInt(spageNum);
+		}
+		
 	}
 }

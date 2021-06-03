@@ -164,7 +164,11 @@ public ArrayList<Product_vo> wo_list_all(){
 			ArrayList< Product_vo> list = new ArrayList<Product_vo>();
 			try {
 				con = MyDBCP.getConnection();
-				String sql = "select * from product";
+				String sql = "select * from("
+						+ " select p.*,rownum rnum from("
+						+ " select * from product"
+						+ " order by p_date desc) p)"
+						+ " where rnum<10";
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -187,7 +191,7 @@ public ArrayList<Product_vo> wo_list_all(){
 			PreparedStatement pstmt = null; 
 			try {
 				
-				//System.out.println(vo.getP_name()+"/ "+vo.getP_count()+"/"+vo.getP_price()+"/"+vo.getP_click_num()+"/"+vo.getOri_img_name()+"/"+vo.getSave_img_name()+"/"+vo.getCg_id());
+				System.out.println(vo.getP_name()+"/ "+vo.getP_count()+"/"+vo.getP_price()+"/"+vo.getP_click_num()+"/"+vo.getOri_img_name()+"/"+vo.getSave_img_name()+"/"+vo.getCg_id());
 				con = MyDBCP.getConnection();
 				String sql = "insert into product values(product_seq.nextval,?,?,?,?,sysdate,?,?,?)";
 				

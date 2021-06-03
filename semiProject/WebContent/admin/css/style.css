@@ -178,7 +178,7 @@ a:hover{
 	text-align:center;
 	border-collapse: collapse;
 	table-layout: fixed;
-	margin-top:200px;
+	margin-top:30px;
 }
 
 .question_detail .question_detail_goodsinfo table tr th{
@@ -209,7 +209,12 @@ a:hover{
 .admin_content_wrap .admin_content_box .admin_goods_list .order_info .sales_date button{
 	font-size:12px;
 }
-
+.col-sm-10{
+	width:100%;
+}
+.form-control-plaintext{
+	border:1px solid #ddd;
+}
 
 /*콘텐츠 영역 끝*/
 

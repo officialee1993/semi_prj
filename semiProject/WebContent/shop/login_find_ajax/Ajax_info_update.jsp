@@ -41,7 +41,6 @@
 	}finally{
 		MyDBCP.close(con,pstmt,null);
 	}
-	
 	response.setContentType("text/xml;charset=utf-8");
 	PrintWriter pw=response.getWriter();
 	pw.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");

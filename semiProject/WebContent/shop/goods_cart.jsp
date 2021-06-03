@@ -7,7 +7,7 @@
 			<div class="goods_cart">
 				<h3>장바구니</h3>
 				<div class="goods_cart_list">
-				<form action="">
+				<form action="${cp}/shop/goods_list_order" method="post">
 					<table>
 						<tr>
 							<th></th>
@@ -27,7 +27,7 @@
 							<td>${basketvo.p_price}</td>
 							<td><input type="number" class="form-control" min="0" placeholder="0" style="width:50px;height:20px;margin:0 auto;" value="${basketvo.p_count}"></td>
 							<td>${basketvo.p_price*basketvo.p_count}원</td>
-							<td><a href="${cp}//shop/goods_cart_delete">삭제</a></td>
+							<td><a href="${cp}/shop/goods_cart_delete?b_num=${basketvo.b_num}">삭제</a></td>
 						</tr>
 						
 						</c:forEach>

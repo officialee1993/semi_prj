@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import shop.db.MyDBCP;
 import shop.vo.BasketList_vo;
-import shop.vo.Basket_vo;
+
 
 public class Basketdao {
 	
@@ -18,10 +18,76 @@ public class Basketdao {
 		return instance; 
 	}
 	private Basketdao () {}
-
 	
-
-	public ArrayList<BasketList_vo> basketlist(String id){
+	public int basket_all_sum_price(String id) {
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; 
+		int all_sum_price =0;
+		try {
+			con = MyDBCP.getConnection();
+			String sql = "select sum(p.p_price)all_sum_price from Product p,Basket b, orders o where b.id=? and p.p_num = b.p_num and b.b_num not like o.b_num";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				all_sum_price = rs.getInt("all_sum_price");
+			}
+			return all_sum_price;
+		}catch (SQLException s) {
+			s.getMessage();
+			return -1;
+		}finally {
+			
+		}
+	}
+	
+	public int basket_b_num_max() {
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs= null;
+		
+		try {
+			con = MyDBCP.getConnection();
+			String sql = "select NVL(max(b_num),0)bnum from basket";
+			pstmt=con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int bnum = rs.getInt("bnum");
+			
+			return bnum ; 
+		}catch(SQLException s) {
+			s.getMessage();
+			return -1 ; 
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+	}
+	
+	public int basketdelete(int b_num) {
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		
+		
+		try {
+			con = MyDBCP.getConnection();
+			String sql = "delete from basket where b_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, b_num);
+			int n = pstmt.executeUpdate();
+			return n ; 
+			
+		}catch (SQLException s) {
+			System.out.println(s.getMessage());
+			return -1; 
+		}finally {
+			MyDBCP.close(con, pstmt, null);
+		}
+	}
+	
+	public ArrayList<BasketList_vo> notorder_basketlist(String id){ 
 		
 		Connection con = null; 
 		PreparedStatement pstmt = null; 
@@ -31,20 +97,57 @@ public class Basketdao {
 		try {
 			ArrayList< BasketList_vo> basketlist = new ArrayList<BasketList_vo>();
 			con = MyDBCP.getConnection();
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+id);
-			String sql = "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count from Product p,Basket b where id=? and p.p_num = b.p_num";
 			
+			String sql = "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id=? and p.p_num = b.p_num";
+			// 회원에 따른 모든 방바구니 (주문 통한 장바구니도 포함 ) 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs= pstmt.executeQuery();
 			
 			while(rs.next()) {
-				System.out.println(rs.getString("save_img_name"));
-				System.out.println(rs.getString("p_name"));
-				System.out.println(rs.getInt("p_price"));
-				System.out.println(rs.getString("p_size"));
 				
-			BasketList_vo basketlistvo = new BasketList_vo(rs.getString("save_img_name"), rs.getString("p_name"), rs.getInt("p_price"), rs.getInt("p_count"),rs.getString("p_size"));
+			BasketList_vo basketlistvo = new BasketList_vo(rs.getString("save_img_name"), rs.getString("p_name"),
+						rs.getInt("p_price"), rs.getInt("p_count"),rs.getString("p_size"),rs.getInt("b_num"));
+				
+			basketlist.add(basketlistvo);
+				
+			}
+			return basketlist;
+			
+			
+		}catch(SQLException s) {
+			System.out.println(s.getMessage());
+			return null; 
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+	}
+
+	public ArrayList<BasketList_vo> basketlist(String id){ //구매 한번 후 장바구니 list 가능 // 이거 쳐야 한다. 
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+	
+		
+		try {
+			ArrayList< BasketList_vo> basketlist = new ArrayList<BasketList_vo>();
+			con = MyDBCP.getConnection();
+			
+			String sql = "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id=? and p.p_num = b.p_num\r\n"
+					+ "minus\r\n"
+					+ "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,o.b_num from Product p,orders o ,Basket b where o.id=? and p.p_num = o.p_num and o.b_num=b.b_num\r\n"
+					;
+			// 장바구이네서 주문한 장바구니 제외하고 뽑아 노는 sql 구현 하기 
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, id);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+			BasketList_vo basketlistvo = new BasketList_vo(rs.getString("save_img_name"), rs.getString("p_name"),
+						rs.getInt("p_price"), rs.getInt("p_count"),rs.getString("p_size"),rs.getInt("b_num"));
 				
 			basketlist.add(basketlistvo);
 				
