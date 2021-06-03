@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- content -->
 <div class="content">
 	<div class="my_row">
@@ -20,41 +21,16 @@
 				</ul>
 				<div class="goods_list_imgbox_wrap">
 					<!-- 반복문에 들어갈 엘리먼트 -->
-					<div class="goods_list_imgbox">
-						<div><a href="${cp }/shop/goods_detail"><img src="images/ex01.jpg"></a></div>
-						<a href="${cp }/shop/goods_detail" class="textbox">
-						<span class="title">남성 반팔</span>
-						<span class="price">50,000원</span>
-						</a>
-					</div>
-
-					<div class="goods_list_imgbox">
-						<div><a href="${cp }/shop/goods_detail"><img src="images/ex01.jpg"></a></div>
-						<a href="${cp }/shop/goods_detail" class="textbox">
-						<span class="title">남성 반팔</span>
-						<span class="price">50,000원</span>
-						</a>
-					</div>					<div class="goods_list_imgbox">
-						<div><a href="${cp }/shop/goods_detail"><img src="images/ex01.jpg"></a></div>
-						<a href="${cp }/shop/goods_detail" class="textbox">
-						<span class="title">남성 반팔</span>
-						<span class="price">50,000원</span>
-						</a>
-					</div>					<div class="goods_list_imgbox">
-						<div><a href="${cp }/shop/goods_detail"><img src="images/ex01.jpg"></a></div>
-						<a href="${cp }/shop/goods_detail" class="textbox">
-						<span class="title">남성 반팔</span>
-						<span class="price">50,000원</span>
-						</a>
-					</div>					<div class="goods_list_imgbox">
-						<div><a href="${cp }/shop/goods_detail"><img src="images/ex01.jpg"></a></div>
-						<a href="${cp }/shop/goods_detail" class="textbox">
-						<span class="title">남성 반팔</span>
-						<span class="price">50,000원</span>
-						</a>
-					</div>
-
-
+					<c:forEach var="vo" items="${list }">
+						<div class="goods_list_imgbox">
+							<div><a href="${cp }/shop/goods_detail"><img src="${cp }/shop/productimgs/${vo.save_img_name }"></a></div>
+							<a href="${cp }/shop/goods_detail" class="textbox">
+							<span class="title">${vo.p_name }</span>
+							<span class="price">${vo.p_price }원</span>
+							</a>
+						</div>
+					</c:forEach>
+					
 				</div>
 			</div>
 		</div>
