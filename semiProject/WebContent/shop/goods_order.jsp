@@ -44,7 +44,7 @@
  				<option value="카드">카드</option>
 				</select>
   				<div class="btn_wrap">
-  				<button type="submit" class="btn btn-dark">50,000원 주문하기</button>
+  				<button type="submit" class="btn btn-dark">${vo.p_price*p_count}원 주문하기</button>
   				</div>
 				</form>
 			</div>

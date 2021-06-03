@@ -7,7 +7,7 @@
 			<div class="goods_cart">
 				<h3>장바구니</h3>
 				<div class="goods_cart_list">
-				<form action="">
+				<form action="${cp}/shop/goods_list_order" method="post">
 					<table>
 						<tr>
 							<th></th>

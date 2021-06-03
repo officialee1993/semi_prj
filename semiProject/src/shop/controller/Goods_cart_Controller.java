@@ -14,8 +14,10 @@ import javax.websocket.Session;
 import admin.dao.Productdao;
 import shop.vo.BasketList_vo;
 import shop.vo.Basket_vo;
+import shop.vo.Orders_vo;
 import shop.vo.Product_vo;
 import shop_dao.Basketdao;
+import shop_dao.OrderDao;
 @WebServlet("/shop/goods_cart")
 public class Goods_cart_Controller extends HttpServlet{
 	@Override
@@ -25,13 +27,30 @@ public class Goods_cart_Controller extends HttpServlet{
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
 		Basketdao basketdao = Basketdao.getinstance();
-		basketlistvo= basketdao.basketlist(id);
-		 
-	 	if( basketlistvo !=null) {
-	 		System.out.println("리스트 불러오기 성공");
+		
+		OrderDao orderdao = OrderDao.getinstance();
+	 	Orders_vo  ordervo = orderdao.ordervoinfo();
+	 	if(ordervo ==null) {
+	 		
+	 		basketlistvo= basketdao.notorder_basketlist(id);
+	 		 
+		 	if( basketlistvo !=null) {
+		 		System.out.println("리스트 불러오기 성공");
+		 	}else {
+		 		System.out.println("리스트 불러오기 실패 ");
+		 	}
 	 	}else {
-	 		System.out.println("리스트 불러오기 실패 ");
+	 		
+	 		basketlistvo= basketdao.basketlist(id);
+	 		 
+		 	if( basketlistvo !=null) {
+		 		System.out.println("리스트 불러오기 성공");
+		 	}else {
+		 		System.out.println("리스트 불러오기 실패 ");
+		 	}
+		 	
 	 	}
+	 	
 	 	req.setAttribute("basketlistvo", basketlistvo);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content", "/shop/goods_cart.jsp");
@@ -58,13 +77,29 @@ public class Goods_cart_Controller extends HttpServlet{
 	 		System.out.println("장바구니 저장 실패");
 	 	}
 	 	
-	 	basketlistvo= basketdao.basketlist(id);
-	 
-	 	if( basketlistvo !=null) {
-	 		System.out.println("리스트 불러오기 성공");
+	 	OrderDao orderdao = OrderDao.getinstance();
+	 	Orders_vo  ordervo = orderdao.ordervoinfo();
+	 	if(ordervo ==null) {
+	 		
+	 		basketlistvo= basketdao.notorder_basketlist(id);
+	 		 
+		 	if( basketlistvo !=null) {
+		 		System.out.println("리스트 불러오기 성공");
+		 	}else {
+		 		System.out.println("리스트 불러오기 실패 ");
+		 	}
 	 	}else {
-	 		System.out.println("리스트 불러오기 실패 ");
+	 		
+	 		basketlistvo= basketdao.basketlist(id);
+	 		 
+		 	if( basketlistvo !=null) {
+		 		System.out.println("리스트 불러오기 성공");
+		 	}else {
+		 		System.out.println("리스트 불러오기 실패 ");
+		 	}
+		 	
 	 	}
+	 	
 	 	req.setAttribute("basketlistvo", basketlistvo);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content", "/shop/goods_cart.jsp");
