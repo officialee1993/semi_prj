@@ -27,12 +27,20 @@ public class OrderDao {
 		PreparedStatement pstmt = null; 
 		PreparedStatement pstmt2 = null; 
 		Statement stmt2 = null; 
+<<<<<<< HEAD
 	
+=======
+		System.out.println("二쇰Ц 1�떒怨�");
+>>>>>>> branch 'master' of https://github.com/officialee1993/semi_prj.git
 		String sql="insert into orders values(ORDERS_SEQ.nextval,?,?,?,?,?,SYSDATE,?,?,?,?)";
 		String sql2="insert into a_board(a_b_num,wr_id,o_num) values(A_board_SEQ.nextval,?,ORDERS_SEQ.currval)";
 		String sql3="insert into a_reply(a_r_no,a_b_num) values(a_reply_seq.nextval,A_board_SEQ.currval)";
 		try {
+<<<<<<< HEAD
 			
+=======
+			System.out.println("二쇰Ц 2�떒怨�");
+>>>>>>> branch 'master' of https://github.com/officialee1993/semi_prj.git
 			con = MyDBCP.getConnection();
 			con.setAutoCommit(false);
 			pstmt =con.prepareStatement(sql);
@@ -53,8 +61,13 @@ public class OrderDao {
 
 			stmt2=con.createStatement();
 			int n3=stmt2.executeUpdate(sql3);
+<<<<<<< HEAD
 			
 		
+=======
+
+			System.out.println("二쇰Ц�꽦怨�?");
+>>>>>>> branch 'master' of https://github.com/officialee1993/semi_prj.git
 			
 			con.commit();
 			return n3;
