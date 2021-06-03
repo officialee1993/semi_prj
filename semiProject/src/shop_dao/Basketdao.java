@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import oracle.jdbc.driver.DBConversion;
 import shop.db.MyDBCP;
 import shop.vo.BasketList_vo;
+import shop.vo.Basket_sum_price_vo;
 
 
 public class Basketdao {
@@ -19,6 +21,39 @@ public class Basketdao {
 	}
 	private Basketdao () {}
 	
+public ArrayList<Basket_sum_price_vo> basket_sum_price(String id) {
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; 
+		ArrayList<Basket_sum_price_vo> list = new ArrayList<Basket_sum_price_vo>();
+		try {
+			con = MyDBCP.getConnection();
+			String sql = "SELECT p_num,b_num ,C*P all_sum_price\r\n"
+					+ "FROM(\r\n"
+					+ "SELECT p_num, b_num,p_count C , P_PRICE P FROM (\r\n"
+					+ "select p.p_price ,b.p_count ,b.b_num, b.p_num from Product p,Basket b where b.id=? and p.p_num = b.p_num\r\n"
+					+ "minus\r\n"
+					+ "select p.p_price ,b.p_count ,o.b_num, b.p_num from Product p,orders o ,Basket b where o.id=? and p.p_num = o.p_num and o.b_num=b.b_num\r\n"
+					+ "))";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				
+				Basket_sum_price_vo basket_sum_price_vo = new Basket_sum_price_vo(rs.getInt("b_num"), rs.getInt("all_sum_price"),rs.getInt("p_num"));
+				list.add(basket_sum_price_vo);
+			}
+			return list;
+		}catch (SQLException s) {
+			System.out.println(s.getMessage());
+			return null;
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+	}
+
 	public int basket_all_sum_price(String id) {
 		
 		Connection con = null; 
@@ -27,7 +62,13 @@ public class Basketdao {
 		int all_sum_price =0;
 		try {
 			con = MyDBCP.getConnection();
-			String sql = "select sum(p.p_price)all_sum_price from Product p,Basket b, orders o where b.id=? and p.p_num = b.p_num and b.b_num not like o.b_num";
+			String sql = "SELECT SUM(C*P) all_sum_price \r\n"
+					+ "FROM(\r\n"
+					+ "SELECT p_count C , P_PRICE P FROM (\r\n"
+					+ "select p.p_price  ,b.p_count ,b.b_num from Product p,Basket b where b.id='one' and p.p_num = b.p_num\r\n"
+					+ "minus\r\n"
+					+ "select p.p_price ,b.p_count ,o.b_num from Product p,orders o ,Basket b where o.id=? and p.p_num = o.p_num and o.b_num=b.b_num\r\n"
+					+ "))";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();

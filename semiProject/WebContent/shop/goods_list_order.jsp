@@ -31,7 +31,7 @@
 			<div class="join_box">
 				<h3 class="form_title">상품주문</h3><!-- 여기서부터 수정 sql 수정 해야 하고 all_sum_price 부분 수정 해야한다. -->
 				
-				<form action="${cp}/shop/goods_order_ok?p_num=${vo.p_num}&b_num_max=${b_num_max}&ALL_SUM_PRICE=${all_sum_price}" method="post">
+				<form action="${cp}/shop/goods_list_order_ok?p_num=${vo.p_num}" method="post">
 				<div class="mb-3">
   				<label for="" class="form-label">수령인</label>
   				<input type="text" class="form-control" name ="rec_name" placeholder="수령인 성함을 입력해주세요">
