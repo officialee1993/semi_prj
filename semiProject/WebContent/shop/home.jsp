@@ -44,7 +44,7 @@
 
 					
 						<a href="${cp}/shop/goods_detail?p_num=${vo.p_num}" class="price">${vo.p_name}</a>
-						<p class="price">${vo.p_price}</p>
+						<p class="price">${vo.p_price}원</p>
 						</div>
 					</li> 
 
@@ -52,11 +52,11 @@
 				</c:forEach>
 					
 				</ul>
-				
+
 				</div>
 				<p class="controls">
-					<span class="prev">테스트</span>
-					<span class="next">테스트</span>
+					<span class="prev"></span>
+					<span class="next"></span>
 				</p>
 			</div>
 		</div>
@@ -79,7 +79,7 @@
 				currentIdx=num;
 			}
 			nextBtn.addEventListener('click',function(){
-				if(currentIdx<slideCount-1){
+				if(currentIdx<slideCount-3){
 					 moveSlide(currentIdx+1);
 				}else{
 					moveSlide(0);

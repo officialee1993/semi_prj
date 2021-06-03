@@ -161,12 +161,30 @@ a:hover{
 }
 .content > .my_row > .item_box > .controls{
 	text-align:center;
+	position:relative;
+	top:-230px;
 }
-.content > .my_row > .item_box > .controls span{
-	background:#333;
-	color:#fff;
-	padding:10px 20px;
+.content > .my_row > .item_box > .controls span:nth-child(1){
 	margin:0 10px;
+	position:absolute;
+	left:-100px;
+	display:block;
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-right: 20px solid #ddd;/* 화살표 */
+}
+.content > .my_row > .item_box > .controls span:nth-child(2){
+	margin:0 10px;
+	position:absolute;
+	right:-100px;
+	display:block;
+		width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-left: 20px solid #ddd;/* 화살표 */
 }
 
 /*
