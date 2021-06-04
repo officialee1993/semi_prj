@@ -46,10 +46,8 @@ public class OrderDao {
 
 			stmt2=con.createStatement();
 			int n3=stmt2.executeUpdate(sql3);
-
-			System.out.println("주문성공?");
-			
 			con.commit();
+			System.out.println("주문성공");
 			return n3;
 		}catch (SQLException s) {
 			s.printStackTrace();

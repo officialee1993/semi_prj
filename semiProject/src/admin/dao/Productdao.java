@@ -88,14 +88,11 @@ public class Productdao {
 					vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
 							rs.getInt("p_click_num"), rs.getDate("p_date"),
 							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
-					
 				}
 				return vo; 
-				
 			}catch(SQLException s) {
 				s.getMessage();
 				return null;
-				
 			}finally {
 				MyDBCP.close(con, pstmt, rs);
 			}

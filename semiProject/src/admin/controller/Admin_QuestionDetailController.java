@@ -15,6 +15,7 @@ public class Admin_QuestionDetailController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		
 		int qnum=Integer.parseInt(req.getParameter("qnum"));
 		QuestionDao dao=QuestionDao.getinstance();
 		Q_board_vo vo=dao.adminQDetail(qnum);

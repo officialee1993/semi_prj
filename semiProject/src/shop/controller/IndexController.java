@@ -29,7 +29,6 @@ public class IndexController extends HttpServlet {
 		if(footer==null) {
 			footer="/shop/footer.jsp";
 		}
-		
 		String cp=req.getContextPath();
 		ServletContext application=getServletContext();
 		application.setAttribute("cp", cp);
