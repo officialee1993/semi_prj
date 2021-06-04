@@ -45,10 +45,14 @@ public class Goods_detail_Controller extends HttpServlet{
 		QuestionDao qdao=QuestionDao.getinstance();
 		ArrayList<CommentsVo> list=qdao.questionList(p_num,startRow,endRow);
 		
+<<<<<<< HEAD
 		int pageCount=(int)Math.ceil(qdao.getCount(p_num)/10.0);
 		//시작페이지 번호
+=======
+		
+>>>>>>> refs/remotes/origin/master
 		int startPageNum=((pageNum-1)/10*10)+1;//(pageNum%10)*10+1;
-		//끝페이지 번호 
+		
 		int endPageNum=startPageNum+9;
 		if(endPageNum>pageCount) {
 			endPageNum=pageCount;

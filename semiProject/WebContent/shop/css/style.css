@@ -77,6 +77,9 @@ a:hover{
  .header > .my_row > .header_box > .btn_wrap > a:nth-child(1){
 	margin-right:20px;
 }
+ .header > .my_row > .header_box > .btn_wrap > a:nth-child(2){
+	margin-right:20px;
+}
 /*헤더 마이페이지 메뉴*/
 .header .my_row .header_box .btn_wrap{
 	position:relative;
@@ -84,6 +87,10 @@ a:hover{
 .header .my_row .header_box .btn_wrap .header_mypage:hover .header_mypage_menu{
 	display:block;
 }
+.header .my_row .header_box .btn_wrap .header_mypage:hover .header_mypage_menu{
+	display:block;
+}
+
 .header .my_row .header_box .btn_wrap .header_mypage_menu{
 	position:absolute;
 	top:50px;

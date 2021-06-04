@@ -34,7 +34,7 @@ public class JoinController extends HttpServlet{
 		String email = req.getParameter("email");
 		String address = req.getParameter("address");
 		
-		System.out.println(id+""+pwd+""+name+""+phone+" "+ email+""+address);
+		System.out.println(id+""+pwd+""+name+""+phone+" "+ email+" "+address);
 		Members_vo vo = new Members_vo(id, pwd, name, phone, email, address);
 		
 		Membersdao dao = Membersdao.getinstance();

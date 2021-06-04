@@ -5,23 +5,24 @@
 <div class="content">
 	<div class="my_row">
 		<div class="goods_list">
-			<h3>남성</h3>
+			<h3>여성</h3>
 			<div class="goods_list_box">
 				<ul class="goods_list_box_category">
-					<li><a href="${cp }/shop/goods_detail">상의</a></li>
-					<li><a href="${cp }/shop/goods_detail">하의</a></li>
-					<li><a href="${cp }/shop/goods_detail">신발</a></li>
+					<li><a href="${cp }/shop/goods_list_women_under?cg_id=${3}">상의</a></li>
+					<li><a href="${cp }/shop/goods_list_women_under?cg_id=${4}">하의</a></li>
+					<li><a href="${cp }/shop/goods_list_women_under?cg_id=${5}">신발</a></li>
 					<li>
-					<select class="form-select form-select-sm" aria-label=".form-select-sm example">
-					  <option selected>신상품순</option>
-					  <option value="1">낮은 가격순</option>
-					  <option value="2">높은 가격순</option>
+					<select class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="if(this.value) location.href=(this.value);">
+					  <option disabled selected values> -- 정렬 -- </option>
+					  <option value="${cp }/shop/goods_list_new">신상품순</option>
+					  <option value="${cp }/shop/goods_list_low">낮은 가격순</option>
+					  <option value="${cp }/shop/goods_list_high">높은 가격순</option>
 					</select>
 					</li>
 				</ul>
 				<div class="goods_list_imgbox_wrap">
-					<!-- 반복문에 들어갈 엘리먼트 -->
-					<c:forEach var="vo" items="${list }">
+				
+					<c:forEach var="vo" items="${wo_pro_vo }">
 						<div class="goods_list_imgbox">
 							<div><a href="${cp }/shop/goods_detail"><img src="${cp }/shop/productimgs/${vo.save_img_name }"></a></div>
 							<a href="${cp }/shop/goods_detail" class="textbox">

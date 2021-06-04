@@ -11,7 +11,7 @@
 			<ul>
 				<li><a href="${cp }/shop/goods_list">신상품</a></li>
 				<li><a href="${cp }/shop/goods_list">남성</a></li>
-				<li><a href="${cp }/shop/goods_list">여성</a></li>
+				<li><a href="${cp }/shop/goods_list_women">여성</a></li>
 			</ul>
 			</div>
 		<div class="btn_wrap">
@@ -24,6 +24,7 @@
 			
 			<c:otherwise>
 			<a href="${cp}/shop/logout">로그아웃</a>
+			<a href="${cp}/shop/goods_cart" class="header_basket" id="header_basket">장바구니 </a>
 			<a href="${cp}/shop/mypage_orderlist" class="header_mypage" id="header_mypage">마이페이지
 			</a>
 			<ul class="header_mypage_menu" id="header_mypage_menu">
@@ -48,9 +49,9 @@
 					<li><a href="${cp }/shop/goods_list">신발</a></li>
 					</ul>
 					<ul>
-					<li><a href="${cp }/shop/goods_list">상의</a></li>
-					<li><a href="${cp }/shop/goods_list">하의</a></li>
-					<li><a href="${cp }/shop/goods_list">신발</a></li>
+					<li><a href="${cp }/shop/goods_list_women_under?cg_id=${3}">상의</a></li>
+					<li><a href="${cp }/shop/goods_list_women_under?cg_id=${4}">하의</a></li>
+					<li><a href="${cp }/shop/goods_list_women_under?cg_id=${5}">신발</a></li>
 					</ul>
 					
 			</div>

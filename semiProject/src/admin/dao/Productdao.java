@@ -19,6 +19,63 @@ public class Productdao {
 			return instnce;
 		}
 		
+		public ArrayList<Product_vo> pro_list(int cg_id){
+			
+			Connection con = null;
+			PreparedStatement pstmt = null; 
+			ResultSet rs = null;
+			ArrayList<Product_vo> wo_pro_list = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select * from product where cg_id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cg_id);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+							rs.getInt("p_click_num"), rs.getDate("p_date"),
+							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					wo_pro_list.add(vo);
+				}
+				return wo_pro_list;
+				
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+				
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
+		
+public ArrayList<Product_vo> wo_list_all(){
+			
+			Connection con = null;
+			PreparedStatement pstmt = null; 
+			ResultSet rs = null;
+			ArrayList<Product_vo> wo_list_all = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select * from product where cg_id=any(3,4,5)";
+				pstmt = con.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+							rs.getInt("p_click_num"), rs.getDate("p_date"),
+							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					wo_list_all.add(vo);
+				}
+				return wo_list_all;
+				
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+				
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
+		
 		public int cg_idgetinfo(int cgb_num ,String cgs_name ) {
 			
 			Connection con = null;

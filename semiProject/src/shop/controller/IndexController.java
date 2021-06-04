@@ -33,6 +33,8 @@ public class IndexController extends HttpServlet {
 		ServletContext application=getServletContext();
 		application.setAttribute("cp", cp);
 		Productdao dao = Productdao.getinstance();
+		
+		
 		ArrayList<Product_vo> list = dao.list();
 		
 		
