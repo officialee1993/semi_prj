@@ -17,7 +17,7 @@ public class Goods_order_Controller extends HttpServlet{
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		req.setCharacterEncoding("utf-8");
 		int p_num = Integer.parseInt(req.getParameter("p_num")); // ��ǰ��ȣ
 		int p_count = Integer.parseInt(req.getParameter("p_count")); // ���� 
 		

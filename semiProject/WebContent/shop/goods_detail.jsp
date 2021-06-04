@@ -23,6 +23,73 @@ function checkData(){
 	}
 	
 }
+
+//댓글리스트 등록클릭시 새로고침
+	function list(status){
+	//var a_b_num=document.getElementById("a_b_num").value;
+//var reply_wrap=document.getElementById("reply_wrap");
+
+var a_b_num=document.getElementsByClassName("a_b_num")[status].value;
+var reply_wrap_box=document.getElementsByClassName("reply_wrap_box")[status];
+
+let xhr=new XMLHttpRequest();
+xhr.onreadystatechange=function(){
+if(xhr.readyState==4 && xhr.status==200){
+	
+	let childs=reply_wrap_box.childNodes;
+
+	for(let i=childs.length-1;i>=1;i--){
+		reply_wrap_box.removeChild(childs.item(i));
+	}  
+	
+	let xml=xhr.responseXML;
+	let comm=xml.getElementsByTagName("comm");
+	for(let i=0;i<comm.length;i++){
+		
+		/*<div class="reply_box">
+		<p class="reply_id">댓글아이디</p>
+		<p class="reply_con">댓글내용</p>
+		<p class="reply_date">댓글날짜</p>
+		</div> */
+		let content=comm[i].getElementsByTagName("content")[0].textContent;
+		if(content!='null'){
+			let reply_box=document.createElement("div");
+			let reply_id=document.createElement("p");
+			let reply_con=document.createElement("p");
+			let reply_date=document.createElement("p");
+			
+			reply_box.className="reply_box";
+			reply_id.className="reply_id";
+			reply_con.className="reply_con";
+			reply_date.className="reply_date";
+			
+			reply_box.appendChild(reply_id);
+			reply_box.appendChild(reply_con);
+			reply_box.appendChild(reply_date);
+			
+			let renum=comm[i].getElementsByTagName("renum")[0].textContent;
+			let id=comm[i].getElementsByTagName("id")[0].textContent;
+			let date=comm[i].getElementsByTagName("date")[0].textContent;
+			let abnum=comm[i].getElementsByTagName("abnum")[0].textContent;
+			
+			reply_id.innerHTML=id;
+			reply_con.innerHTML=content;
+			reply_date.innerHTML=date;
+							
+			reply_wrap_box.appendChild(reply_box);
+		}
+		
+		
+	
+		
+	}
+}
+};
+xhr.open('get','${pageContext.request.contextPath }/shop/commentlist?a_b_num='+a_b_num,true);
+xhr.send();
+}
+
+
 </script>
 
 	<div class="content">
@@ -56,8 +123,147 @@ function checkData(){
 		
 		
 		
+		<div class="board review_board">
+		<h3>상품후기</h3>
+		<div class="review_wrap">
+		<c:forEach var="list" items="${rlist }" varStatus="status">
+			<c:choose>			
+				<c:when test="${not empty list.a_b_content }">
+					<input class="a_b_num" id="a_b_num" type="hidden" value="${list.a_b_num }">
+					<div class="review_box">
+					<p class="review_id">${list.wr_id }</p>
+					<p class="review_con">${list.a_b_content }</p>
+					<p class="review_date">${list.wr_date }</p>
+					<div class="reply_wrap" id="reply_wrap" class="reply_wrap">
+					<div class="mb-3">
+  						<label for="" class="form-label"></label>
+						<textarea name="comments" id="comments" class="form-control" rows="1"></textarea>
+						<button onclick="addComments(${list.a_b_num },${status.index });list(${status.index });" type="button" class="btn btn-outline-secondary">등록</button>
+					</div>
+					</div>
+					<div class="reply_wrap_box">
+
+					</div>
+					</div>
+						<script>
+						/*페이지 접속시 댓글 노출*/
+					 	function listAllReply(){
+						 	//var a_b_num=document.getElementById("a_b_num").value;
+							//var reply_wrap=document.getElementById("reply_wrap");
+							
+							var a_b_num=document.getElementsByClassName("a_b_num")[${status.index }].value;
+							var reply_wrap_box=document.getElementsByClassName("reply_wrap_box")[${status.index }];
+							
+							let xhr=new XMLHttpRequest();
+							xhr.onreadystatechange=function(){
+							if(xhr.readyState==4 && xhr.status==200){
+								
+								let childs=reply_wrap_box.childNodes;
+
+								for(let i=childs.length-1;i>=1;i--){
+									reply_wrap_box.removeChild(childs.item(i));
+								}  
+								
+								let xml=xhr.responseXML;
+								let comm=xml.getElementsByTagName("comm");
+								for(let i=0;i<comm.length;i++){
+									
+									/*<div class="reply_box">
+									<p class="reply_id">댓글아이디</p>
+									<p class="reply_con">댓글내용</p>
+									<p class="reply_date">댓글날짜</p>
+									</div> */
+									let content=comm[i].getElementsByTagName("content")[0].textContent;
+									if(content!='null'){
+										let reply_box=document.createElement("div");
+										let reply_id=document.createElement("p");
+										let reply_con=document.createElement("p");
+										let reply_date=document.createElement("p");
+										
+										reply_box.className="reply_box";
+										reply_id.className="reply_id";
+										reply_con.className="reply_con";
+										reply_date.className="reply_date";
+										
+										reply_box.appendChild(reply_id);
+										reply_box.appendChild(reply_con);
+										reply_box.appendChild(reply_date);
+										
+										let renum=comm[i].getElementsByTagName("renum")[0].textContent;
+										let id=comm[i].getElementsByTagName("id")[0].textContent;
+										let date=comm[i].getElementsByTagName("date")[0].textContent;
+										let abnum=comm[i].getElementsByTagName("abnum")[0].textContent;
+										
+										reply_id.innerHTML=id;
+										reply_con.innerHTML=content;
+										reply_date.innerHTML=date;
+														
+										reply_wrap_box.appendChild(reply_box);
+									}
+									
+									
+								
+									
+								}
+							}
+						};
+						xhr.open('get','${pageContext.request.contextPath }/shop/commentlist?a_b_num='+a_b_num,true);
+						xhr.send();
+					}listAllReply();
+						</script>
+				</c:when>
+			</c:choose>
+		</c:forEach>
 		
-		<!-- 후기 게시판 -->
+
+							
+
+
+	 	<script>
+
+	 	
+	 	
+	 	//댓글추가..
+	 	function addComments(a_b_num,status){
+	 		
+	 		if(${sessionScope.id==null}){
+	 			alert("로그인해주세요");
+	 			return;
+	 		}
+	 		
+	 		//var comments=document.getElementById("comments").value;
+	 		var comments=document.getElementsByName("comments")[status].value;
+	 		
+	 		
+	 		
+	 		let xhr=new XMLHttpRequest();
+	 		xhr.onreadystatechange=function(){
+	 			if(xhr.readyState==4 && xhr.status==200){
+	 				let xml=xhr.responseXML;
+	 				let result=xml.getElementsByTagName("code")[0].textContent;
+
+	 				if(result=='success')
+	 					list();
+	 					
+	 			}
+	 		};
+	 		xhr.open('post','${pageContext.request.contextPath }/shop/comments.do',true);
+	 		//post방식으로 요청시 콘텐트타입에서 인코딩방식 설정하기 - 꼭 해줘야 함
+	 		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	 		let params="a_b_num="+a_b_num+"&comments="+comments;
+	 		xhr.send(params);
+	 	}
+	 	</script>
+
+
+
+
+		</div>
+		</div>
+
+
+		
+		<!-- <!-- 후기 게시판
 		<div class="board review_board">
 			<h3>상품후기</h3>
 			<table class="table table-striped table-hover" style="font-size:14px;">
@@ -67,7 +273,7 @@ function checkData(){
 				<th scope="col" style="width:55%;">제목</th>
 				<th scope="col" style="width:20%;">작성일</th>
 			</tr>
-			<!-- 반복문 시작 -->
+			반복문 시작
 			<tr style="text-align:center;">
 				<td>후기</td>
 				<td>이찬호</td>
@@ -76,7 +282,7 @@ function checkData(){
 				</a>
 				<div class="board_content review_content"><p>시들어 이는 모래뿐일 관현악이며, 같은 원대하고, 봄바람이다. 영락과 얼마나 넣는 장식하는 두손을 보이는 동산에는 아름다우냐? 못할 든 이상의 전인 것이다. 뜨거운지라, 공자는 그들은 운다. 용감하고 열락의 위하여서 것이다. 꽃이 생생하며, 밝은 그들은 꽃 바이며, 낙원을 어디 것이다. 할지니, 청춘을 충분히 열락의 새가 힘차게 두기 방지하는 끓는다. 밝은 듣기만 구하지 가진 것이 없으면 끓는 용기가 동력은 사막이다. 들어 청춘에서만 인간이 타오르고 찾아 노래하며 끓는 것이다. 영락과 청춘을 보이는 뿐이다.</p>
 				<div class="comment_list review_comment_list">
-				<!-- 댓글입력시 추가될 div className -->
+				댓글입력시 추가될 div className
 				<div class="comment_box">
 				<p class="writer">작성자</p>
 				<span class="content">영락과 얼마나 넣는 장식하는 두손을 보이는 동산에는 아름다우냐? 못할 든 이상의 전인 것이다. 뜨거운지라, 공자는 그들은 운다. 용감하고 열락의 위하여서 것이다. </span>
@@ -86,30 +292,30 @@ function checkData(){
 				<p class="writer">작성자</p>
 				<span class="content">영락과 얼마나 넣는 장식하는 두손을 보이는 동산에는 아름다우냐? 못할 든 이상의 전인 것이다. 뜨거운지라, 공자는 그들은 운다. 용감하고 열락의 위하여서 것이다. </span>
 				</div>
-				<!-- 댓글입력시 추가될 div className 끝 -->
+				댓글입력시 추가될 div className 끝
 				</div>
-				<!-- 댓글 입력폼 -->
+				댓글 입력폼
 				<div class="mb-3" style="display:flex">
   				<label for="" class="form-label"></label>
   				<textarea class="form-control" id="" rows="1"></textarea>
   				<button type="button" class="btn btn-secondary" style="width:70px;margin-left:10px;">등록</button>
 				</div>
-				<!-- 댓글 입력폼 끝 -->
+				댓글 입력폼 끝
 				</div>
 				</td>
 				<td>2021-05-28</td>
 				
 			</tr>
-			<!-- 반복문 종료 -->
+			반복문 종료
 			</table>
-			<!-- 후기 게시판 페이징 번호 -->
+			후기 게시판 페이징 번호
 			<div class="board_page review_board_page">
 			<span>이전</span>
 			<span>1</span>
 			<span>다음</span>
 			</div>
 		</div>
-		<!-- 후기 게시판 END -->
+		후기 게시판 END --> 
 		
 		
 		
@@ -320,9 +526,6 @@ function checkData(){
 function questionLoginMsg(){
 	alert("로그인하세요");
 }
-
-
-
 //문의글 추가
 function questionA(id){
 	//파라미터 넘길 값
@@ -356,14 +559,14 @@ function questionA(id){
 	
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
-			console.log("1");
+
 			let result=xhr.responseText;
-			console.log("2");
+
 			let json=JSON.parse(result);
-			console.log("3");
+
 			
 			if(json.result==true){
-				console.log("4");
+
 				document.getElementById("closeBtn").click();
 				title="";
 				pwd="";
@@ -381,6 +584,11 @@ function questionA(id){
 	let params="category="+category+"&title="+title+"&content="+content+"&pwd="+pwd+"&p_num="+p_num;
 	xhr.send(params);
 }
+
+
+
+
+
 </script>
 	
 	

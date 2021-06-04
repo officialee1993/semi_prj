@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="content">
 	<div class="my_row">
 		<div class="mypage">
@@ -18,18 +19,18 @@
 								<th width="55%">내용</th>
 								<th width="15%">날짜</th>
 							</tr>
-							<tr>
-								<td>후기입니다</td>
-								<td class="content"><a href="${cp }/shop/mypage_reviewlist_detail">가는 이상 간에 철환하였는가? 이는 이상 하는 가슴에 청춘 새 노년에게서 것이다. 풀이 그들은 되는 앞이 갑 미인을 때까지 노래하며 사랑의 피다.</a></td>
-								<td>2020.02.02</td>
-							</tr>
-							<tr>
-								<td class="title">가는 이상 간에 철환하였는가? 이는 이상 하는 가슴에 청춘 새 노년에게서 것이다. 풀이 그들은 되는 앞이 갑 미인을 때까지 노래하며 사랑의 피다. 속에 붙잡아</td>
-								<td class="content"><a href="${cp }/shop/mypage_reviewlist_detail">제품좋아요</a></td>
-								<td>2020.02.02</td>
-							</tr>
+							<c:forEach var="list" items="${myReviewList }">
+							<c:choose>
+								<c:when test="${not empty list.a_b_content }">
+								<tr>
+								<td>${list.a_b_title }</td>
+								<td class="content"><a href="${cp }/shop/mypage_reviewlist_detail?title=${list.a_b_title }&content=${list.a_b_content }">${list.a_b_content }</a></td>
+								<td>${list.wr_date }</td>
+								</tr>
+								</c:when>
+							</c:choose>
+							</c:forEach>
 						</table>
-						
 					</div>
 				</div>
 		</div>
