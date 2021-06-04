@@ -68,7 +68,7 @@ public class Admin_GoodsModify_ok_Controller extends HttpServlet {
 		
 		req.setAttribute("list", list);
 		req.setAttribute("sidemenu", "/admin/sidemenu.jsp");
-		req.setAttribute("content", "/admin/goods_list.jsp");
+		req.setAttribute("content", "/admin/goods_list");
 		req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
 	}
 }
