@@ -28,12 +28,12 @@ public class Goods_detail_Controller extends HttpServlet{
 		
 		
 		
-		//후기목록 불러오기
+		//�썑湲곕ぉ濡� 遺덈윭�삤湲�
 		ReviewDao rdao=ReviewDao.getinstance();
 		ArrayList<A_board_vo> rlist=rdao.goodsReviewList(p_num);
 		System.out.println("test4"+rlist);
 		
-		//문의사항 페이징처리
+		//臾몄쓽�궗�빆 �럹�씠吏뺤쿂由�
 		int pageNum=1;
 		if(spageNum!=null) {
 			pageNum=Integer.parseInt(spageNum);
@@ -41,16 +41,16 @@ public class Goods_detail_Controller extends HttpServlet{
 		int startRow=(pageNum-1)*10+1;
 		int endRow=startRow+9;
 		
-		//문의사항 글목록 불러오기
+		//臾몄쓽�궗�빆 湲�紐⑸줉 遺덈윭�삤湲�
 		QuestionDao qdao=QuestionDao.getinstance();
 		ArrayList<CommentsVo> list=qdao.questionList(p_num,startRow,endRow);
 		
-<<<<<<< HEAD
+
 		int pageCount=(int)Math.ceil(qdao.getCount(p_num)/10.0);
-		//시작페이지 번호
-=======
+
+
 		
->>>>>>> refs/remotes/origin/master
+
 		int startPageNum=((pageNum-1)/10*10)+1;//(pageNum%10)*10+1;
 		
 		int endPageNum=startPageNum+9;

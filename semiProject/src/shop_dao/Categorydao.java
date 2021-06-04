@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import oracle.jdbc.driver.DBConversion;
 import shop.db.MyDBCP;
+import shop.vo.Cgname_Pid_select_vo;
 
 public class Categorydao {
 	
@@ -42,4 +43,33 @@ public class Categorydao {
 		}
 		
 	}
+	
+	public Cgname_Pid_select_vo cgname_pid_select(int cg_id) {
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null; 
+		Cgname_Pid_select_vo vo = null;
+		try {
+				con = MyDBCP.getConnection();
+				String sql = "select cg_name, p_id from category where cg_id=?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, cg_id);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					
+					vo = new Cgname_Pid_select_vo(rs.getString("cg_name"), rs.getInt("p_id"));
+					
+				}
+				
+				return vo;
+		}catch (SQLException s) {
+			System.out.println(s.getMessage());
+			return null;
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+		
+	}
+	
 }

@@ -11,7 +11,7 @@
 		function checkData() {
 
 			var cg_id = document.getElementsByName("cg_id")[0];
-			var p_id = document.getElementsByName("p_id")[0];
+			var str_p_id = document.getElementsByName("str_p_id")[0];
 			var p_name = document.getElementsByName("p_name")[0];
 			var p_price = document.getElementsByName("p_price")[0];
 			var p_count = document.getElementsByName("p_count")[0];
@@ -22,9 +22,9 @@
 				return false;
 
 			}
-			if (p_id.value == '카테고리(소)') {
+			if (str_p_id.value == '카테고리(소)') {
 				alert("카테고리(소) 체크하세요");
-				p_id.focus();
+				str_p_id.focus();
 				return false;
 
 			}
@@ -54,13 +54,13 @@
 				method="post" onsubmit="return checkData();">
 				<div class="category_wrap">
 					<select class="form-select form-select-sm"
-						aria-label=".form-select-sm example" id="p_id" name="p_id">
-						<option selected>카테고리(대)</option>
+						aria-label=".form-select-sm example" id="str_p_id" name="str_p_id">
+						<option selected>${str_p_id}</option>
 						<option value="1">남성</option>
 						<option value="2">여성</option>
 					</select> <select class="form-select form-select-sm"
-						aria-label=".form-select-sm example" id="cg_name" name="cg_name">
-						<option selected>카테고리(소)</option>
+						aria-label=".form-select-sm example" id="cg_name" name="cg_name" >
+						<option selected>${cg_name} </option>
 						<option value="상의">상의</option>
 						<option value="하의">하의</option>
 						<option value="신발">신발</option>
@@ -68,15 +68,15 @@
 				</div>
 				<div class="mb-3">
 					<label for="" class="form-label"></label> <input type="text"
-						class="form-control" id="p_name" placeholder="상품명" name="p_name" >
+						class="form-control" id="p_name" placeholder="상품명" name="p_name" value="${vo.p_name}" >
 				</div>
 				<div class="mb-3">
 					<label for="" class="form-label"></label> <input type="text"
-						class="form-control" id="p_price" placeholder="가격" name="p_price">
+						class="form-control" id="p_price" placeholder="가격" name="p_price" value="${vo.p_price}">
 				</div>
 				<div class="mb-3">
 					<label for="" class="form-label"></label> <input type="text"
-						class="form-control" id="p_count" placeholder="수량" name="p_count">
+						class="form-control" id="p_count" placeholder="수량" name="p_count" value="${vo.p_count}">
 				</div>
 				<div class="input-group mb-3">
 					<input type="file" class="form-control" id="save_img_name"
