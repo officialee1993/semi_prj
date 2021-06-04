@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 	<!-- 관리자 페이지 콘텐츠 영역 -->
 	<div class="admin_content_wrap">
@@ -37,62 +38,18 @@
 					<th width="5%"></th>
 					<th width="5%"></th>
 				</tr>
+		<c:forEach var="vo" items="${list}">
 				<tr>
-					<td><img src="images/ex01.jpg" width="80px;" style="vertical-aling:middle"></td>
-					<td>반팔</td>
-					<td>5,000원</td>
-					<td>10</td>
-					<td>2021-05-05</td>
-					<td>100</td>
-					<td><button onclick="location.href='${cp }/admin/goods_modify'" type="button" class="btn btn-outline-dark">수정</button></td>
+					<td><img src="${cp}/shop/productimgs/${vo.save_img_name}" width="80px;" style="vertical-aling:middle"></td>
+					<td>${vo.cg_name}</td>
+					<td>${vo.p_price}원</td>
+					<td>${vo.p_count}</td>
+					<td>${vo.p_date}</td>
+					<td>${vo.p_click_num}</td>
+					<td><button onclick="location.href='${cp}/admin/goods_modify?p_num=${vo.p_num}'" type="button" class="btn btn-outline-dark">수정</button></td>
 					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
 				</tr>
-
-				
-				<tr>
-					<td><img src="images/ex01.jpg" width="80px;" style="vertical-aling:middle"></td>
-					<td>반팔</td>
-					<td>5,000원</td>
-					<td>10</td>
-					<td>2021-05-05</td>
-					<td>100</td>
-					<td><button onclick="location.href='${cp }/admin/goods_modify'" type="button" class="btn btn-outline-dark">수정</button></td>
-					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
-				</tr>
-				
-				<tr>
-					<td><img src="images/ex01.jpg" width="80px;" style="vertical-aling:middle"></td>
-					<td>반팔</td>
-					<td>5,000원</td>
-					<td>10</td>
-					<td>2021-05-05</td>
-					<td>100</td>
-					<td><button onclick="location.href='${cp }/admin/goods_modify'" type="button" class="btn btn-outline-dark">수정</button></td>
-					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
-				</tr>
-				
-				<tr>
-					<td><img src="images/ex01.jpg" width="80px;" style="vertical-aling:middle"></td>
-					<td>반팔</td>
-					<td>5,000원</td>
-					<td>10</td>
-					<td>2021-05-05</td>
-					<td>100</td>
-					<td><button onclick="location.href='${cp }/admin/goods_modify'" type="button" class="btn btn-outline-dark">수정</button></td>
-					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
-				</tr>
-				
-				<tr>
-					<td><img src="images/ex01.jpg" width="80px;" style="vertical-aling:middle"></td>
-					<td>반팔</td>
-					<td>5,000원</td>
-					<td>10</td>
-					<td>2021-05-05</td>
-					<td>100</td>
-					<td><button onclick="location.href='${cp }/admin/goods_modify'" type="button" class="btn btn-outline-dark">수정</button></td>
-					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
-				</tr>
-				
+		</c:forEach>
 			</table>
 			
 			<div class="goods_pagenum">

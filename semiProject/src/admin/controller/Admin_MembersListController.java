@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 public class Admin_MembersListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		
 		req.setAttribute("sidemenu", "/admin/sidemenu.jsp");
 		req.setAttribute("content", "/admin/members_list.jsp");
-
 		req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
 	}
 }

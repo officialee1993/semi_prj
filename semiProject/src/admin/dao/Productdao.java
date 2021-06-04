@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import shop.db.MyDBCP;
 import shop.vo.Category_vo;
+import shop.vo.Product_category_vo;
 import shop.vo.Product_vo;
 import shop_dao.Membersdao;
 
@@ -17,6 +18,78 @@ public class Productdao {
 		private Productdao() {}
 		public static Productdao getinstance() {
 			return instnce;
+		}
+		public int product_not_img_update(int p_num , String p_name, int p_price, int p_count, int cg_id) {
+			Connection con = null; 
+			PreparedStatement pstmt = null; 
+			 
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "update product set p_name= ? ,p_price=? ,p_count=? , cg_id=? where p_num =?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, p_name);
+				pstmt.setInt(2, p_price);
+				pstmt.setInt(3, p_count);
+				pstmt.setInt(4, cg_id);
+				pstmt.setInt(5, p_num);
+				
+				int n = pstmt.executeUpdate();
+				return n;
+			}catch(SQLException s) {
+				
+				System.out.println(s.getMessage());
+				return -1;
+			}
+		}
+		public int productupdate(int p_num , String p_name, int p_price, int p_count,String save_img_name, int cg_id) {
+			Connection con = null; 
+			PreparedStatement pstmt = null; 
+			 
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "update product set p_name= ? ,p_price=? ,p_count=? ,save_img_name=? , cg_id=? where p_num =?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, p_name);
+				pstmt.setInt(2, p_price);
+				pstmt.setInt(3, p_count);
+				pstmt.setString(4, save_img_name);
+				pstmt.setInt(5, cg_id);
+				pstmt.setInt(6, p_num);
+				
+				int n = pstmt.executeUpdate();
+				return n;
+			}catch(SQLException s) {
+				
+				System.out.println(s.getMessage());
+				return -1;
+			}
+		}
+		public ArrayList<Product_category_vo> pro_cate_list(){
+			
+			Connection con = null; 
+			PreparedStatement pstmt = null; 
+			ResultSet rs = null; 
+			Product_category_vo vo =null;
+			ArrayList<Product_category_vo> list = new ArrayList<Product_category_vo>();
+			try {
+				
+				con = MyDBCP.getConnection();
+				String sql = "select p.p_num,p.p_name,p.p_count,p.p_price,p.p_click_num,p.p_date,p.save_img_name,c.cg_name from product p , category c where p.cg_id=c.cg_id";
+				pstmt =con .prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					
+					vo = new Product_category_vo(rs.getInt("p_num") ,rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),rs.getInt("p_click_num"),
+								rs.getDate("p_date"), rs.getString("save_img_name"), rs.getString("cg_name"));
+					list.add(vo);
+									
+				}
+				return list; 
+			}catch(SQLException s) {
+				s.getMessage();
+				return null; 
+			}
+			
 		}
 		
 		public ArrayList<Product_vo> pro_list(int cg_id){
