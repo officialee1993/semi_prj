@@ -7,25 +7,58 @@
 		<div class="title_wrap">
 			<h3>상품목록</h3>
 		</div>
+		
+		<script type="text/javascript">
+		function checkData(){
+			
+			var ct_gory = document.getElementsByName("ct_gory")[0];
+			var search = document.getElementsByName("search")[0];
+			if(ct_gory.value == "카테고리"){
+				alert("카테고리 체크하세요");
+				ct_gory.focus();
+				return false;
+			}
+			if(search.value.length == 0){
+				alert("검색어 입력하세요");
+				search.focus();
+				return false;
+			}
+			return;
+		}
+		
+		</script>
 		<div class="admin_content_box">
 			<div class="admin_goods_menu">
 				<ul>
 					<li><a class="menu_btn" href="">남성</a></li>
 					<li><a class="menu_btn" href="">여성</a></li>
-					<!-- ajax로 ? -->
+					
+					
+					
 					<li class="category">
 					
-						<select class="form-select form-select-sm" aria-label=".form-select-sm example">
-						  <option selected>카테고리</option>
-						  <option value="ALL">ALL</option>
-						  <option value="상의">상의</option>
-						  <option value="하의">하의</option>
-						  <option value="신발">신발</option>
-						</select>
+					<form action="${pageContext.request.contextPath}/admin/goods_search" method="post" onsubmit="return checkData();">
+					<div>
+						<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="ct_gory">
 						
-						<input id="" class="form-control form-control-sm" type="text" placeholder="검색어를 입력해주세요" aria-label=".form-control-sm example">
-						<button type="button" onclick="" class="btn btn-outline-dark catrgory_btn">검색</button>
-					</li>
+						<option selected>카테고리</option>
+						<option value="ALL">ALL</option>
+						<option value="상의">상의</option>
+						<option value="하의">하의</option>
+						<option value="신발">신발</option>
+						  
+						</select>
+					
+						<input id="search" class="form-control form-control-sm" type="text" placeholder="검색어를 입력해주세요" aria-label=".form-control-sm example" name = "search" >						
+					
+						<input type="submit" value="검색">
+					</div>
+					
+					</form>
+					
+					 </li>
+					
+					
 				</ul>
 			</div>
 			<div class="admin_goods_list">
@@ -41,9 +74,10 @@
 					<th width="5%"></th>
 				</tr>
 		<c:forEach var="vo" items="${list}">
+		
 				<tr>
 					<td><img src="${cp}/shop/productimgs/${vo.save_img_name}" width="80px;" style="vertical-aling:middle"></td>
-					<td>${vo.cg_name}</td>
+					<td>${vo.p_name}</td>
 					<td>${vo.p_price}원</td>
 					<td>${vo.p_count}</td>
 					<td>${vo.p_date}</td>
@@ -51,6 +85,7 @@
 					<td><button onclick="location.href='${cp}/admin/goods_modify?p_num=${vo.p_num}'" type="button" class="btn btn-outline-dark">수정</button></td>
 					<td><button onclick="location.href='${cp}/admin/goods_delete?p_num=${vo.p_num}'" type="button" class="btn btn-outline-dark">삭제</button></td>
 				</tr>
+				
 		</c:forEach>
 			</table>
 			
