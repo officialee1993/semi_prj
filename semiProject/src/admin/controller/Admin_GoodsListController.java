@@ -19,6 +19,8 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	ArrayList<Product_category_vo> list = new ArrayList<Product_category_vo>();
 	Productdao prodductdao = Productdao.getinstance();
 	list = prodductdao.pro_cate_list();
+	
+	
 	if(list !=null) {
 		System.out.println("상품 list 불러오기 성공");
 	}else {
@@ -28,6 +30,8 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	req.setAttribute("sidemenu", "/admin/sidemenu.jsp");
 	req.setAttribute("content", "/admin/goods_list.jsp");
 	req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
+	
+	
 	
 	}
 }

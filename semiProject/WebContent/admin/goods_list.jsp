@@ -14,13 +14,15 @@
 					<li><a class="menu_btn" href="">여성</a></li>
 					<!-- ajax로 ? -->
 					<li class="category">
+					
 						<select class="form-select form-select-sm" aria-label=".form-select-sm example">
 						  <option selected>카테고리</option>
-						  <option value="1">ALL</option>
-						  <option value="2">상의</option>
-						  <option value="3">하의</option>
-						  <option value="4">신발</option>
+						  <option value="ALL">ALL</option>
+						  <option value="상의">상의</option>
+						  <option value="하의">하의</option>
+						  <option value="신발">신발</option>
 						</select>
+						
 						<input id="" class="form-control form-control-sm" type="text" placeholder="검색어를 입력해주세요" aria-label=".form-control-sm example">
 						<button type="button" onclick="" class="btn btn-outline-dark catrgory_btn">검색</button>
 					</li>
