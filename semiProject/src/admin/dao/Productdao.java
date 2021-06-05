@@ -19,7 +19,7 @@ public class Productdao {
 		public static Productdao getinstance() {
 			return instnce;
 		}
-<<<<<<< HEAD
+
 		public ArrayList<Product_vo> pro_order_new_date(int cg_id){
 			Connection con = null; 
 			PreparedStatement pstmt = null; 
@@ -167,7 +167,7 @@ public class Productdao {
 				MyDBCP.close(con, pstmt, rs);
 			}
 		}
-=======
+
 		
 		public int product_delete(int p_num) {
 			
@@ -264,7 +264,7 @@ public class Productdao {
 			
 		}
 		
->>>>>>> branch 'master' of https://github.com/officialee1993/semi_prj.git
+
 		public ArrayList<Product_vo> pro_list(int cg_id){
 			
 			Connection con = null;
