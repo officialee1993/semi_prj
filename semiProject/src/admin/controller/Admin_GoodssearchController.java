@@ -20,17 +20,20 @@ public class Admin_GoodssearchController extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		
-		System.out.println("goods_search");
 		String ct_gory = req.getParameter("ct_gory");
 		String search = req.getParameter("search");
 		
 		ArrayList<Product_vo> list = new ArrayList<Product_vo>();
-		
-		System.out.println(ct_gory + " "+ search);
-		
 		Productdao productdao = Productdao.getinstance();
 		
-		list = productdao.admin_product_select(ct_gory, search);
+		if(ct_gory.equals("ALL")) {
+			list = productdao.admin_all_product_select(search);
+			
+		}else {
+			
+			list = productdao.admin_product_select(ct_gory, search);
+		}
+		
 		
 		if(list != null) {
 			
