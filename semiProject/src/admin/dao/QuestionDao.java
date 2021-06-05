@@ -18,7 +18,6 @@ public class QuestionDao {
 	public static QuestionDao getinstance() {
 		return instance;
 	}
-	
 	/*문의사항 답변*/
 	public int adminAnswer(int qnum,String answer) {
 		Connection con=null;
