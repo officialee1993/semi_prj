@@ -18,13 +18,159 @@ public class Productdao {
 		public static Productdao getinstance() {
 			return instnce;
 		}
-		
+		public ArrayList<Product_vo> pro_order_new_date(int cg_id){
+			Connection con = null; 
+			PreparedStatement pstmt = null; 
+			ResultSet rs= null; 
+			ArrayList< Product_vo> pro_order_new_date = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select * from product where cg_id=? order by p_date desc";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cg_id);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+													rs.getInt("p_click_num"), rs.getDate("p_date"),
+													rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					pro_order_new_date.add(vo);
+				}
+				return pro_order_new_date;
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
+		public ArrayList<Product_vo> pro_order_low_price(int cg_id){
+			Connection con = null; 
+			PreparedStatement pstmt = null; 
+			ResultSet rs= null; 
+			ArrayList< Product_vo> pro_order_low_price = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select * from product where cg_id=? order by p_price asc";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cg_id);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+													rs.getInt("p_click_num"), rs.getDate("p_date"),
+													rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					pro_order_low_price.add(vo);
+				}
+				return pro_order_low_price;
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
+		public ArrayList<Product_vo> pro_order_high_price(int cg_id){
+			Connection con = null; 
+			PreparedStatement pstmt = null; 
+			ResultSet rs= null; 
+			ArrayList< Product_vo> pro_order_high_price = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select * from product where cg_id=? order by p_price desc";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cg_id);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+													rs.getInt("p_click_num"), rs.getDate("p_date"),
+													rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					pro_order_high_price.add(vo);
+				}
+				return pro_order_high_price;
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
+		public ArrayList<Product_vo> order_new_date(){
+			Connection con = null; 
+			PreparedStatement pstmt = null; 
+			ResultSet rs= null; 
+			ArrayList< Product_vo> order_new_date = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select * from product order by p_date desc";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+													rs.getInt("p_click_num"), rs.getDate("p_date"),
+													rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					order_new_date.add(vo);
+				}
+				return order_new_date;
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
+		public ArrayList<Product_vo> order_low_price(){
+			Connection con = null; 
+			PreparedStatement pstmt = null; 
+			ResultSet rs= null; 
+			ArrayList< Product_vo> order_low_price = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select * from product order by p_price asc";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+													rs.getInt("p_click_num"), rs.getDate("p_date"),
+													rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					order_low_price.add(vo);
+				}
+				return order_low_price;
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
+		public ArrayList<Product_vo> order_high_price(){
+			Connection con = null; 
+			PreparedStatement pstmt = null; 
+			ResultSet rs= null; 
+			ArrayList< Product_vo> order_high_price = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select * from product order by p_price desc";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+													rs.getInt("p_click_num"), rs.getDate("p_date"),
+													rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					order_high_price.add(vo);
+				}
+				return order_high_price;
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
 		public ArrayList<Product_vo> pro_list(int cg_id){
 			
 			Connection con = null;
 			PreparedStatement pstmt = null; 
 			ResultSet rs = null;
-			ArrayList<Product_vo> wo_pro_list = new ArrayList<Product_vo>();
+			ArrayList<Product_vo> pro_list = new ArrayList<Product_vo>();
 			try {
 				con = MyDBCP.getConnection();
 				String sql = "select * from product where cg_id=?";
@@ -35,9 +181,9 @@ public class Productdao {
 					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
 							rs.getInt("p_click_num"), rs.getDate("p_date"),
 							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
-					wo_pro_list.add(vo);
+					pro_list.add(vo);
 				}
-				return wo_pro_list;
+				return pro_list;
 				
 			}catch (SQLException s) {
 				s.getMessage();
@@ -47,25 +193,26 @@ public class Productdao {
 				MyDBCP.close(con, pstmt, rs);
 			}
 		}
-		
-public ArrayList<Product_vo> wo_list_all(){
+		public ArrayList<Product_vo> new_pro_list(int cg_id,int cg_id1){
 			
 			Connection con = null;
 			PreparedStatement pstmt = null; 
 			ResultSet rs = null;
-			ArrayList<Product_vo> wo_list_all = new ArrayList<Product_vo>();
+			ArrayList<Product_vo> new_pro_list = new ArrayList<Product_vo>();
 			try {
 				con = MyDBCP.getConnection();
-				String sql = "select * from product where cg_id=any(3,4,5)";
+				String sql = "select * from product where cg_id=? or cg_id=? order by p_date desc";
 				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cg_id);
+				pstmt.setInt(2, cg_id1);
 				rs=pstmt.executeQuery();
 				while(rs.next()) {
 					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
 							rs.getInt("p_click_num"), rs.getDate("p_date"),
 							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
-					wo_list_all.add(vo);
+					new_pro_list.add(vo);
 				}
-				return wo_list_all;
+				return new_pro_list;
 				
 			}catch (SQLException s) {
 				s.getMessage();
@@ -75,7 +222,176 @@ public ArrayList<Product_vo> wo_list_all(){
 				MyDBCP.close(con, pstmt, rs);
 			}
 		}
-		
+		public ArrayList<Product_vo> low_pro_list(int cg_id,int cg_id1){
+			
+			Connection con = null;
+			PreparedStatement pstmt = null; 
+			ResultSet rs = null;
+			ArrayList<Product_vo> low_pro_list = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select * from product where cg_id=? or cg_id=? order by p_count asc";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cg_id);
+				pstmt.setInt(2, cg_id1);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+							rs.getInt("p_click_num"), rs.getDate("p_date"),
+							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					low_pro_list.add(vo);
+				}
+				return low_pro_list;
+				
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+				
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
+		public ArrayList<Product_vo> high_pro_list(int cg_id,int cg_id1){
+			
+			Connection con = null;
+			PreparedStatement pstmt = null; 
+			ResultSet rs = null;
+			ArrayList<Product_vo> high_pro_list = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select * from product where cg_id=? or cg_id=? order by p_count desc";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cg_id);
+				pstmt.setInt(2, cg_id1);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+							rs.getInt("p_click_num"), rs.getDate("p_date"),
+							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					high_pro_list.add(vo);
+				}
+				return high_pro_list;
+				
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+				
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
+		public ArrayList<Product_vo> list_all(int p_id){
+			
+			Connection con = null;
+			PreparedStatement pstmt = null; 
+			ResultSet rs = null;
+			ArrayList<Product_vo> list_all = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select p.* from product p,category c where p.cg_id=c.cg_id and p_id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, p_id);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+							rs.getInt("p_click_num"), rs.getDate("p_date"),
+							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					list_all.add(vo);
+				}
+				return list_all;
+				
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+				
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
+		public ArrayList<Product_vo> new_list_all(int p_id){
+			
+			Connection con = null;
+			PreparedStatement pstmt = null; 
+			ResultSet rs = null;
+			ArrayList<Product_vo> new_list_all = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select p.* from product p,category c where p.cg_id=c.cg_id and p_id=? order by p_date desc";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, p_id);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+							rs.getInt("p_click_num"), rs.getDate("p_date"),
+							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					new_list_all.add(vo);
+				}
+				return new_list_all;
+				
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+				
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
+		public ArrayList<Product_vo> low_list_all(int p_id){
+			
+			Connection con = null;
+			PreparedStatement pstmt = null; 
+			ResultSet rs = null;
+			ArrayList<Product_vo> low_list_all = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select p.* from product p,category c where p.cg_id=c.cg_id and p_id=? order by p_price asc";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, p_id);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+							rs.getInt("p_click_num"), rs.getDate("p_date"),
+							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					low_list_all.add(vo);
+				}
+				return low_list_all;
+				
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+				
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
+		public ArrayList<Product_vo> high_list_all(int p_id){
+			
+			Connection con = null;
+			PreparedStatement pstmt = null; 
+			ResultSet rs = null;
+			ArrayList<Product_vo> high_list_all = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select p.* from product p,category c where p.cg_id=c.cg_id and p_id=? order by p_price desc";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, p_id);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+							rs.getInt("p_click_num"), rs.getDate("p_date"),
+							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					high_list_all.add(vo);
+				}
+				return high_list_all;
+				
+			}catch (SQLException s) {
+				s.getMessage();
+				return null;
+				
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+		}
 		public int cg_idgetinfo(int cgb_num ,String cgs_name ) {
 			
 			Connection con = null;
