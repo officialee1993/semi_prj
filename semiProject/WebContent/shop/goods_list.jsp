@@ -15,7 +15,7 @@
 					<li><select class="form-select form-select-sm"
 						aria-label=".form-select-sm example"
 						onchange="if(this.value) location.href=(this.value);">
-							<option selected>카테고리</option>
+							<option disabled selected values>-- 정렬 --</option>
 							<option value="${cp }/shop/goods_list?order=1">신상품순</option>
 							<option value="${cp }/shop/goods_list?order=2">낮은가격순</option>
 							<option value="${cp }/shop/goods_list?order=3">높은가격순</option>
