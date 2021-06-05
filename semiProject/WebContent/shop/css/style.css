@@ -336,7 +336,7 @@ a:hover{
 	margin-top:20px;
 }
 .content .my_row .board{
-	margin-top:50px;
+	margin-top:200px;
 }
 .content .my_row .board h3{
 	font-size:20px;
@@ -369,9 +369,10 @@ a:hover{
 
 .content .my_row .question_board{
 	border-top:1px solid #222;
+	margin-bottom:200px;
 }
 .content .my_row .question_board h3{
-	margin-top:50px;
+	margin-top:200px;
 }
 .content .my_row .question_board .question_board_page{
 	position:relative;
@@ -858,4 +859,94 @@ a.find_success{
 }
 .content .my_row .questionDetail_pwdWrapper .questionDetail_pwdBox{
 	margin:auto;
+}
+/*리뷰*/
+.content .my_row .review_board .review_wrap{
+	box-sizing: border-box;
+	border:1px solid #ddd;
+	margin-top:50px;
+}
+.content .my_row .review_board .review_wrap .review_box{
+	padding:20px;
+	margin-top:40px;
+	box-sizing: border-box;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	
+}
+.content .my_row .review_board .review_wrap .review_box .review_id{
+	font-size:14px;
+	font-weight:700;
+}
+.content .my_row .review_board .review_wrap .review_box .review_con{
+	margin-top:20px;
+}
+.content .my_row .review_board .review_wrap .review_box .review_date{
+	margin-top:10px;
+	font-size:12px;
+	font-weight:100;
+	margin-top:10px;
+	color:#888;
+}
+.content .my_row .review_board .review_wrap .review_box .reply_wrap{
+	background-color:#f3f3f3;
+	border:1px solid #ddd;
+	margin-top:20px;
+}
+/* .content .my_row .review_board .review_wrap .review_box .reply_wrap .reply_box{
+	border:1px solid #ddd;
+	box-sizing: borderbox;
+	padding:10px;
+} */
+/*새 css*/
+.content .my_row .review_board .review_wrap .review_box .reply_wrap_box{
+	background-color:#f3f3f3;
+	padding:10px;
+	border:1px solid #ddd;
+}
+.content .my_row .review_board .review_wrap .review_box .reply_wrap_box .reply_box{
+	font-size:14px;
+	font-weight:700;
+	padding:10px;
+	border-bottom:1px solid #ddd;
+}
+
+.content .my_row .review_board .review_wrap .review_box .reply_wrap_box .reply_box .reply_id{
+	font-size:14px;
+	font-weight:700;
+}
+.content .my_row .review_board .review_wrap .review_box .reply_wrap_box .reply_box .reply_con{
+	font-size:14px;
+	font-weight:100;
+	margin-top:20px;
+}
+.content .my_row .review_board .review_wrap .review_box .reply_wrap_box .reply_box .reply_date{
+	font-size:12px;
+	font-weight:100;
+	margin-top:10px;
+	color:#888;
+}
+
+/* .content .my_row .review_board .review_wrap .review_box .reply_wrap .reply_box .reply_id{
+	font-size:14px;
+	font-weight:700;
+}
+.content .my_row .review_board .review_wrap .review_box .reply_wrap .reply_box .reply_con{
+	font-size:14px;
+	font-weight:100;
+	margin-top:20px;
+}
+.content .my_row .review_board .review_wrap .review_box .reply_wrap .reply_box .reply_date{
+	font-size:12px;
+	font-weight:100;
+	margin-top:10px;
+	color:#888;
+} */
+.content .my_row .review_board .review_wrap .review_box .reply_wrap .mb-3{
+	display:flex;
+	margin-bottom:0px!important;
+	padding:10px;
+}
+.content .my_row .review_board .review_wrap .review_box .reply_wrap .mb-3 button{
+	width:60px;
 }

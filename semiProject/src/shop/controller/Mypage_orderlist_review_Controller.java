@@ -7,6 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import shop_dao.ReviewDao;
 @WebServlet("/shop/mypage_orderlist_review")
 public class Mypage_orderlist_review_Controller extends HttpServlet{
 	@Override
@@ -18,5 +21,22 @@ public class Mypage_orderlist_review_Controller extends HttpServlet{
 		req.setAttribute("footer", "/shop/footer.jsp");
 
 		req.getRequestDispatcher("/shop/index.jsp").forward(req, resp);
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		int o_num=Integer.parseInt(req.getParameter("o_num"));
+		String reviewTitle=req.getParameter("reviewTitle");
+		String reviewContent=req.getParameter("reviewContent");
+
+		HttpSession session=req.getSession();
+		session.getAttribute("id");
+		
+		ReviewDao dao=ReviewDao.getinstance();
+		int n=dao.reviewInsert(reviewTitle, reviewContent, o_num);
+		
+		System.out.println("결과:"+n);
+		resp.sendRedirect(req.getContextPath()+"/shop/mypage_reviewlist");
+		//req.getRequestDispatcher("/shop/mypage_reviewlist").forward(req, resp);
 	}
 }
