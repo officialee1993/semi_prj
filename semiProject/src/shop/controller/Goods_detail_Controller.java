@@ -23,11 +23,7 @@ public class Goods_detail_Controller extends HttpServlet{
 		req.setCharacterEncoding("utf-8");
 		int p_num = Integer.parseInt(req.getParameter("p_num"));
 		String spageNum=req.getParameter("pageNum");
-		
 
-		
-		
-		
 		//후기목록 불러오기
 		ReviewDao rdao=ReviewDao.getinstance();
 		ArrayList<A_board_vo> rlist=rdao.goodsReviewList(p_num);
@@ -45,12 +41,9 @@ public class Goods_detail_Controller extends HttpServlet{
 		QuestionDao qdao=QuestionDao.getinstance();
 		ArrayList<CommentsVo> list=qdao.questionList(p_num,startRow,endRow);
 		
-<<<<<<< HEAD
+
 		int pageCount=(int)Math.ceil(qdao.getCount(p_num)/10.0);
-		//시작페이지 번호
-=======
-		
->>>>>>> refs/remotes/origin/master
+
 		int startPageNum=((pageNum-1)/10*10)+1;//(pageNum%10)*10+1;
 		
 		int endPageNum=startPageNum+9;

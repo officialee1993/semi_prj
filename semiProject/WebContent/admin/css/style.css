@@ -113,13 +113,20 @@ a:hover{
 	font-size:14px;
 	font-weight:700;
 }
-.admin_content .admin_content_wrap .admin_content_box .admin_goods_list table tr td{
+.admin_content .admin_content_wrap .admin_content_box .admin_goods_list table tr{
 	padding:10px 0;
 	white-space:nowrap;  
 	text-overflow:ellipsis; 
 	overflow:hidden;
 	vertical-align:middle;
 	border-bottom:1px solid #ddd;
+}
+.admin_content .admin_content_wrap .admin_content_box .admin_goods_list table tr td{
+	height:60px;
+	white-space:nowrap;  
+	text-overflow:ellipsis; 
+	overflow:hidden;
+	vertical-align:middle;
 	font-size:14px;
 }
 .admin_content .admin_content_wrap .admin_content_box .admin_goods_list .goods_pagenum{

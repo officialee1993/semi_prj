@@ -56,11 +56,7 @@ public class OrderDao {
 
 			stmt2=con.createStatement();
 			int n3=stmt2.executeUpdate(sql3);
-<<<<<<< HEAD
-=======
 
-			
->>>>>>> refs/remotes/origin/master
 			con.commit();
 			System.out.println("주문성공");
 			return n3;
@@ -106,38 +102,71 @@ public Orders_vo ordervoinfo (){
 		}
 	}
 
-public ArrayList<Product_Orderlist_vo> ordervo_list_info (String id){
-	
-	Connection con = null; 
-	PreparedStatement pstmt = null; 
-	ResultSet rs = null;
-	Product_Orderlist_vo product_orderlist_vo = null;
-	ArrayList<Product_Orderlist_vo> list = new ArrayList<Product_Orderlist_vo>();
-	try {
-	
-		con = MyDBCP.getConnection();
+	public ArrayList<Product_Orderlist_vo> mypage_orderList(String id){
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
 		
-		String sql = "select * from orders o, product p , category c , basket b where o.p_num = p.p_num and p.cg_id =  c.cg_id and o.b_num = b.b_num and b.id =?";
-		
-		pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, id);
-		rs= pstmt.executeQuery();
-		
-		while(rs.next()) {
-			
-			product_orderlist_vo = new Product_Orderlist_vo(rs.getInt("O_NUM"), rs.getString("REC_NAME"), rs.getString("REC_PHONE"), rs.getString("REC_ADDR"),
-							rs.getInt("ALL_SUM_PRICE"), rs.getString("PAYNAME"), rs.getDate("O_DATE"), rs.getString("O_STATE"), rs.getString("ID")
-								, rs.getInt("P_NUM"), rs.getInt("B_NUM"), rs.getString("save_img_name"),rs.getString("cg_name") );
-			
-			list.add(product_orderlist_vo);
+		try {
+			con = MyDBCP.getConnection();
+			String sql="select o.p_num,p.p_name,p.save_img_name,o.o_num,o.all_sum_price,o.o_date,o.o_state,o.id,a.a_b_num,a.a_b_content from product p"
+					+ " join orders o"
+					+ " on p.p_num=o.p_num"
+					+ " join a_board a"
+					+ " on o.o_num=a.o_num"
+					+ " where o.id=?"
+					+ " order by o.o_date desc";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			ArrayList<Product_Orderlist_vo> list=new ArrayList<Product_Orderlist_vo>();
+			while(rs.next()) {
+				Product_Orderlist_vo vo=new Product_Orderlist_vo(
+						rs.getInt("p_num"),
+						rs.getString("p_name"),
+						rs.getString("save_img_name"),
+						rs.getInt("o_num"),
+						rs.getInt("all_sum_price"),
+						rs.getDate("o_date"),
+						rs.getString("o_state"),
+						rs.getString("id"),
+						rs.getInt("a_b_num"),
+						rs.getString("a_b_content")
+						);
+				list.add(vo);
+			}
+			return list;
+		}catch(SQLException s) {
+			System.out.println(s.getMessage());
+			return null; 
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
 		}
-		return list;
-	}catch(SQLException s) {
-		System.out.println(s.getMessage());
-		return null; 
-	}finally {
-		MyDBCP.close(con, pstmt, rs);
 	}
-}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

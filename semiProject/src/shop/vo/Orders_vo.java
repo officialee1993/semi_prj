@@ -14,12 +14,33 @@ public class Orders_vo {
 	private String id  ;
 	private int p_num ;
 	private int b_num  ;
+	private String p_name;
+	private int p_count;
+	private int p_price;
 	
 	public Orders_vo () {}
-
+	/*상품테이블 조인 생성자*/
+	public Orders_vo(int o_num, String rec_name, String rec_phone, String rec_addr, int all_sum_price, String payname,
+			Date o_date, String o_state, String id, int p_num, int b_num, String p_name, int p_count, int p_price) {
+		this.o_num = o_num;
+		this.rec_name = rec_name;
+		this.rec_phone = rec_phone;
+		this.rec_addr = rec_addr;
+		this.all_sum_price = all_sum_price;
+		this.payname = payname;
+		this.o_date = o_date;
+		this.o_state = o_state;
+		this.id = id;
+		this.p_num = p_num;
+		this.b_num = b_num;
+		this.p_name = p_name;
+		this.p_count = p_count;
+		this.p_price = p_price;
+	}
+	
+	/*기본 테이블 생성자*/
 	public Orders_vo(int o_num, String rec_name, String rec_phone, String rec_addr, int all_sum_price, String payname,
 			Date o_date, String o_state, String id, int p_num, int b_num) {
-		super();
 		this.o_num = o_num;
 		this.rec_name = rec_name;
 		this.rec_phone = rec_phone;
@@ -32,6 +53,37 @@ public class Orders_vo {
 		this.p_num = p_num;
 		this.b_num = b_num;
 	}
+
+
+	public String getP_name() {
+		return p_name;
+	}
+
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+
+
+	public int getP_count() {
+		return p_count;
+	}
+
+
+	public void setP_count(int p_count) {
+		this.p_count = p_count;
+	}
+
+
+	public int getP_price() {
+		return p_price;
+	}
+
+
+	public void setP_price(int p_price) {
+		this.p_price = p_price;
+	}
+
 
 	public int getO_num() {
 		return o_num;

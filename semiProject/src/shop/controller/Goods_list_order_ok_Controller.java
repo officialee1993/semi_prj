@@ -26,11 +26,11 @@ public class Goods_list_order_ok_Controller extends HttpServlet {
 		
 		
 	
-		String rec_name = req.getParameter("rec_name"); //¼ö·ÉÀÎ ÀÌ¸§
-		String rec_phone = req.getParameter("rec_phone"); // ¼ö·ÉÀÎ ÀüÈ­¹øÈ£
-		String rec_addr = req.getParameter("rec_addr"); // ¼ö·ÉÀÎ ÁÖ¼Ò 
-		String payname = req.getParameter("payname"); //°áÀç¹æ¹ý
-		String O_STATE = "ÁÖ¹®¿Ï·á";
+		String rec_name = req.getParameter("rec_name"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+		String rec_phone = req.getParameter("rec_phone"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½È£
+		String rec_addr = req.getParameter("rec_addr"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ 
+		String payname = req.getParameter("payname"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		String O_STATE = "ï¿½Ö¹ï¿½ï¿½Ï·ï¿½";
 		
 		HttpSession session = req.getSession();
 		String id =(String)session.getAttribute("id");
@@ -40,9 +40,9 @@ public class Goods_list_order_ok_Controller extends HttpServlet {
 		Basketdao basketdao = Basketdao.getinstance();
 		list = basketdao.basket_sum_price(id);
 		if(list != null) {
-	System.out.println("Àå¹Ù±¸´Ï sum_price Á¤º¸ list ¼º°ø ");
+	System.out.println("ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ sum_price ï¿½ï¿½ï¿½ï¿½ list ï¿½ï¿½ï¿½ï¿½ ");
 		}else {
-	System.out.println("Àå¹Ù±¸´Ï sum_price Á¤º¸ list ½ÇÆÐ ");
+	System.out.println("ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ sum_price ï¿½ï¿½ï¿½ï¿½ list ï¿½ï¿½ï¿½ï¿½ ");
 		}
 		list.forEach((Basket_sum_price_vo t) -> {
 			
@@ -51,10 +51,10 @@ public class Goods_list_order_ok_Controller extends HttpServlet {
 //			System.out.println(t.getP_num());
 			int n = orderdao.goodorder_insert(rec_name, rec_phone, rec_addr, t.getAll_sum_price(), payname, O_STATE, id, t.getP_num(), t.getB_num());
 			if(n>0) {
-				System.out.println("ÁÖ¹® ¼º°ø");
+				System.out.println("ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½");
 				
 			}else {
-				System.out.println("ÁÖ¹® ½ÇÆÐ");
+				System.out.println("ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}
 		});
 		

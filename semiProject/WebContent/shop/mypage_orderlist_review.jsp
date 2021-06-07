@@ -11,7 +11,7 @@
 					<h3>후기작성</h3>
 					<div class="mypage_reviewform" style="margin-top:20px;">
 						<form method="post" action="${pageContext.request.contextPath }/shop/mypage_orderlist_review">
-						<input name="o_num" type="hidden" value="11">
+						<input name="o_num" type="hidden" value="${o_num }">
 						<div class="mb-3">
   							<label for="" class="form-label"></label>
   							<input name="reviewTitle" type="text" class="form-control" id="" placeholder="제목">

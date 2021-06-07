@@ -25,12 +25,11 @@ function checkData(){
 }
 
 //댓글리스트 등록클릭시 새로고침
-	function list(status){
-	//var a_b_num=document.getElementById("a_b_num").value;
-//var reply_wrap=document.getElementById("reply_wrap");
-
+	function list(status){		 		
 var a_b_num=document.getElementsByClassName("a_b_num")[status].value;
 var reply_wrap_box=document.getElementsByClassName("reply_wrap_box")[status];
+document.getElementsByName("comments")[status].value='';
+
 
 let xhr=new XMLHttpRequest();
 xhr.onreadystatechange=function(){
@@ -45,12 +44,7 @@ if(xhr.readyState==4 && xhr.status==200){
 	let xml=xhr.responseXML;
 	let comm=xml.getElementsByTagName("comm");
 	for(let i=0;i<comm.length;i++){
-		
-		/*<div class="reply_box">
-		<p class="reply_id">댓글아이디</p>
-		<p class="reply_con">댓글내용</p>
-		<p class="reply_date">댓글날짜</p>
-		</div> */
+
 		let content=comm[i].getElementsByTagName("content")[0].textContent;
 		if(content!='null'){
 			let reply_box=document.createElement("div");
@@ -77,8 +71,9 @@ if(xhr.readyState==4 && xhr.status==200){
 			reply_date.innerHTML=date;
 							
 			reply_wrap_box.appendChild(reply_box);
+
 		}
-		
+
 		
 	
 		
@@ -144,6 +139,7 @@ xhr.send();
 					<div class="reply_wrap_box">
 
 					</div>
+					<div class=""></div>
 					</div>
 						<script>
 						/*페이지 접속시 댓글 노출*/
@@ -234,17 +230,14 @@ xhr.send();
 	 		//var comments=document.getElementById("comments").value;
 	 		var comments=document.getElementsByName("comments")[status].value;
 	 		
-	 		
+
 	 		
 	 		let xhr=new XMLHttpRequest();
 	 		xhr.onreadystatechange=function(){
 	 			if(xhr.readyState==4 && xhr.status==200){
 	 				let xml=xhr.responseXML;
 	 				let result=xml.getElementsByTagName("code")[0].textContent;
-
-	 				if(result=='success')
-	 					list();
-	 					
+	 				listAllReply();
 	 			}
 	 		};
 	 		xhr.open('post','${pageContext.request.contextPath }/shop/comments.do',true);
@@ -255,74 +248,9 @@ xhr.send();
 	 	}
 	 	</script>
 
-
-
-
 		</div>
 		</div>
-
-
-		
-		<!-- <!-- 후기 게시판
-		<div class="board review_board">
-			<h3>상품후기</h3>
-			<table class="table table-striped table-hover" style="font-size:14px;">
-			<tr style="text-align:center;border-bottom:1px solid #222;">
-				<th scope="col" style="width:10%;">분류</th>
-				<th scope="col" style="width:15%;">작성자</th>
-				<th scope="col" style="width:55%;">제목</th>
-				<th scope="col" style="width:20%;">작성일</th>
-			</tr>
-			반복문 시작
-			<tr style="text-align:center;">
-				<td>후기</td>
-				<td>이찬호</td>
-				<td>
-				<a id="review_title" href="">제목
-				</a>
-				<div class="board_content review_content"><p>시들어 이는 모래뿐일 관현악이며, 같은 원대하고, 봄바람이다. 영락과 얼마나 넣는 장식하는 두손을 보이는 동산에는 아름다우냐? 못할 든 이상의 전인 것이다. 뜨거운지라, 공자는 그들은 운다. 용감하고 열락의 위하여서 것이다. 꽃이 생생하며, 밝은 그들은 꽃 바이며, 낙원을 어디 것이다. 할지니, 청춘을 충분히 열락의 새가 힘차게 두기 방지하는 끓는다. 밝은 듣기만 구하지 가진 것이 없으면 끓는 용기가 동력은 사막이다. 들어 청춘에서만 인간이 타오르고 찾아 노래하며 끓는 것이다. 영락과 청춘을 보이는 뿐이다.</p>
-				<div class="comment_list review_comment_list">
-				댓글입력시 추가될 div className
-				<div class="comment_box">
-				<p class="writer">작성자</p>
-				<span class="content">영락과 얼마나 넣는 장식하는 두손을 보이는 동산에는 아름다우냐? 못할 든 이상의 전인 것이다. 뜨거운지라, 공자는 그들은 운다. 용감하고 열락의 위하여서 것이다. </span>
-				</div>
-				
-				<div class="comment_box review_comment_box">
-				<p class="writer">작성자</p>
-				<span class="content">영락과 얼마나 넣는 장식하는 두손을 보이는 동산에는 아름다우냐? 못할 든 이상의 전인 것이다. 뜨거운지라, 공자는 그들은 운다. 용감하고 열락의 위하여서 것이다. </span>
-				</div>
-				댓글입력시 추가될 div className 끝
-				</div>
-				댓글 입력폼
-				<div class="mb-3" style="display:flex">
-  				<label for="" class="form-label"></label>
-  				<textarea class="form-control" id="" rows="1"></textarea>
-  				<button type="button" class="btn btn-secondary" style="width:70px;margin-left:10px;">등록</button>
-				</div>
-				댓글 입력폼 끝
-				</div>
-				</td>
-				<td>2021-05-28</td>
-				
-			</tr>
-			반복문 종료
-			</table>
-			후기 게시판 페이징 번호
-			<div class="board_page review_board_page">
-			<span>이전</span>
-			<span>1</span>
-			<span>다음</span>
-			</div>
-		</div>
-		후기 게시판 END --> 
-		
-		
-		
-		
-		
-		
-		
+	
 		<!-- 문의 게시판 -->
 		<div class="board question_board">
 			<h3>문의게시판</h3>
@@ -333,34 +261,7 @@ xhr.send();
 				<th scope="col" style="width:55%;">제목</th>
 				<th scope="col" style="width:20%;">작성일</th>
 			</tr>
-			<!-- 반복문 시작 -->
-				<c:forEach var="list" items="${qlist }">
-					<tr style="text-align:center;">
-					<td>${list.category }</td>
-					<td>${list.id }</td>
-					<td id="thirdTd">
-					<c:choose>
-						<c:when test="${sessionScope.id==list.id }">
-							<a href="${cp }/shop/question_detail?qnum=${list.q_num}&p_num=${vo.p_num}" id="review_title">${list.q_title }
-							</a>
-						</c:when>
-						<c:otherwise>
-						<a href="javascript:void();" onclick="questionRead();" id="review_title">${list.q_title }
-							</a>
-						<script>
-						function questionRead(){
-							alert("작성자만 조회가능합니다");
-						}
-						</script>
-						</c:otherwise>
-					</c:choose>
-					</td>
-					<td>${list.q_date }</td>
-				</tr>
-				</c:forEach>
-			<!-- 반복문 종료 -->
-			
-			
+				
 			</table>
 			<!-- 문의 게시판 페이징 번호 -->
 			<div class="board_page question_board_page">
@@ -453,23 +354,29 @@ xhr.send();
 
 	
 <script type="text/javascript">
-//리스트 불러오기 	function questionList(){
-/* 	var question_table=document.getElementById("question_table");
+
+	function questionList(){
+ 	var question_table=document.getElementById("question_table");
 	let xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
 			
+			let childs=question_table.childNodes;
 
-			//기존 댓글목록 지우기
+			for(let i=childs.length-1;i>=2;i--){
+				question_table.removeChild(childs.item(i));
+			}  
 			
-
 			let xml=xhr.responseXML;
 			let comm=xml.getElementsByTagName("comm");
-			
-			if(comm.length>0)//댓글이 1개이상 존재하면 내용이 존재하지 않는 문구 tr을 삭제함
-				document.getElementById("noneContent").style.display="none";
+			var category=document.getElementById("category");
+
+			document.getElementById("title").value='';
+			document.getElementById("pwd").value='';
+			document.getElementById("content").value='';
 
 			for(let i=0;i<comm.length;i++){
+				let qnum=comm[i].getElementsByTagName("q_num")[0].textContent;
 				let id=comm[i].getElementsByTagName("id")[0].textContent;
 				let category=comm[i].getElementsByTagName("category")[0].textContent;
 				let qtitle=comm[i].getElementsByTagName("qtitle")[0].textContent;
@@ -492,6 +399,17 @@ xhr.send();
 				div.appendChild(p);//div에 p를 삽입
 				td3.appendChild(a);
 				a.innerHTML=qtitle;
+				a.style.fontSize="bold";
+				a.style.cursor="pointer";
+				a.onclick=function(){
+					if('${sessionScope.id}'==id){
+						this.href="${cp }/shop/question_detail?qnum="+qnum+"&p_num=${vo.p_num}";
+					}else{
+						alert("작성자만 조회가능합니다");
+					}
+				}
+
+
 				p.innerHTML=qcontent;
 
 				
@@ -510,10 +428,10 @@ xhr.send();
 				question_table.appendChild(tr);
 				
 				//문자열 변수는 따옴표로 묶어줘야하는데, 따옴표끼리 겹치는 경우가 발생한다
-				이럴때는 아래처럼 코드를 작성한다..*역슬러시를 사용하자
+				/* 이럴때는 아래처럼 코드를 작성한다..*역슬러시를 사용하자
 				let a='aaa';
 				div.innerHTML="작성자:" + id +"<br>" + "내용"	+ comments +"<br>" +
-						"<a href=\"javascript:delComments('" + a + "')\"> 삭제</a>";
+						"<a href=\"javascript:delComments('" + a + "')\"> 삭제</a>"; */
 				
 				
 			}
@@ -521,7 +439,10 @@ xhr.send();
 	};
 	xhr.open('get','${pageContext.request.contextPath }/shop/question.do?p_num=${vo.p_num}',true);
 	xhr.send();
-} questionList();  */
+} questionList();
+
+
+
 //로그인 메세지
 function questionLoginMsg(){
 	alert("로그인하세요");
@@ -566,12 +487,9 @@ function questionA(id){
 
 			
 			if(json.result==true){
-
 				document.getElementById("closeBtn").click();
-				title="";
-				pwd="";
-				content="";
-				location.href="${pageContext.request.contextPath }/shop/goods_detail?p_num="+p_num;
+
+				questionList();
 
 			}else{
 				alert("문의글 등록 실패");
@@ -584,11 +502,6 @@ function questionA(id){
 	let params="category="+category+"&title="+title+"&content="+content+"&pwd="+pwd+"&p_num="+p_num;
 	xhr.send(params);
 }
-
-
-
-
-
 </script>
 	
 	

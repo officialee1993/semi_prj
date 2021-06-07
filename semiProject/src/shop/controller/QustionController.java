@@ -25,29 +25,30 @@ import shop_dao.QuestionDao;
 public class QustionController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		/*
-		 * req.setCharacterEncoding("utf-8"); int
-		 * p_num=Integer.parseInt(req.getParameter("p_num")); QuestionDao
-		 * dao=QuestionDao.getinstance(); ArrayList<CommentsVo>
-		 * list=dao.questionList(p_num);
-		 * 
-		 * resp.setCharacterEncoding("utf-8");
-		 * resp.setContentType("text/xml;charset=utf-8");
-		 * 
-		 * PrintWriter pw=resp.getWriter();
-		 * 
-		 * pw.print("<?xml version=\"1.0\" encoding=\"utf-8\"?>"); pw.print("<result>");
-		 * for(CommentsVo vo:list){ pw.print("<comm>");
-		 * pw.print("<id>"+vo.getId()+"</id>");
-		 * pw.print("<category>"+vo.getCategory()+"</category>");
-		 * pw.print("<qtitle>"+vo.getQ_title()+"</qtitle>");
-		 * pw.print("<qcontent>"+vo.getQ_content()+"</qcontent>");
-		 * pw.print("<qdate>"+vo.getQ_date()+"</qdate>");
-		 * pw.print("<atitle>"+vo.getA_title()+"</atitle>");
-		 * pw.print("<acontent>"+vo.getA_content()+"</acontent>");
-		 * pw.print("<adate>"+vo.getA_date()+"</adate>"); pw.print("</comm>"); }
-		 * pw.print("</result>");
-		 */
+		
+		  req.setCharacterEncoding("utf-8");
+		  int p_num=Integer.parseInt(req.getParameter("p_num")); QuestionDao
+		  dao=QuestionDao.getinstance(); ArrayList<CommentsVo>
+		  list=dao.questionListTest(p_num);
+		  
+		  resp.setCharacterEncoding("utf-8");
+		  resp.setContentType("text/xml;charset=utf-8");
+		  
+		  PrintWriter pw=resp.getWriter();
+		  
+		  pw.print("<?xml version=\"1.0\" encoding=\"utf-8\"?>"); pw.print("<result>");
+		  for(CommentsVo vo:list){ pw.print("<comm>");
+		  pw.print("<q_num>"+vo.getQ_num()+"</q_num>");
+		  pw.print("<id>"+vo.getId()+"</id>");
+		  pw.print("<category>"+vo.getCategory()+"</category>");
+		  pw.print("<qtitle>"+vo.getQ_title()+"</qtitle>");
+		  pw.print("<qcontent>"+vo.getQ_content()+"</qcontent>");
+		  pw.print("<qdate>"+vo.getQ_date()+"</qdate>");
+		  pw.print("<atitle>"+vo.getA_title()+"</atitle>");
+		  pw.print("<acontent>"+vo.getA_content()+"</acontent>");
+		  pw.print("<adate>"+vo.getA_date()+"</adate>"); pw.print("</comm>"); }
+		  pw.print("</result>");
+		 
 	}
 	
 	@Override
@@ -68,7 +69,7 @@ public class QustionController extends HttpServlet{
 		int n=dao.questionInsert(vo);
 		
 		  JSONObject json=new JSONObject(); PrintWriter pw=resp.getWriter();
-
+		  
 		boolean result=false;
 		if(n>0) {
 
@@ -80,14 +81,14 @@ public class QustionController extends HttpServlet{
 
 			 json.put("id",id); json.put("category",category); json.put("title",title);
 			 json.put("content",content); json.put("date",time1);
-			 json.put("result",result); resp.setContentType("text/plain;charset=utf-8");
-			 pw.print(json);
+			 json.put("result",result); 
+			 
 			 
 			
 
-		}else {
-			
 		}
+		resp.setContentType("text/plain;charset=utf-8");
+		pw.print(json);
 		
 	}
 }

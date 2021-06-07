@@ -37,7 +37,7 @@
 						let a=document.createElement("a");
 						p.innerHTML=result;
 						p.style.textAlign="center";
-						p.style.marginTop="100px"
+						p.style.marginTop="100px";
 						document.getElementById("form_title").innerHTML="비밀번호 찾기 성공";
 						document.getElementById("find_pwd_lch").appendChild(p);
 						document.getElementById("find_pwd_lch").appendChild(a);

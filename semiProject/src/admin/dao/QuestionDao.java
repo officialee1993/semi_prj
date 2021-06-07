@@ -18,6 +18,33 @@ public class QuestionDao {
 	public static QuestionDao getinstance() {
 		return instance;
 	}
+	public int getCount(String fieldCategory) {
+		String sql="";
+		if(fieldCategory==null||fieldCategory.equals("")) {//검색아닐때
+			sql="select NVL(count(q_b_num),0) from q_board";
+		}else {
+			sql="select NVL(count(q_b_num),0) from q_board where q_b_category='"+fieldCategory+"'";
+		}
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=MyDBCP.getConnection();
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				int n=rs.getInt(1);
+				System.out.println(n);
+				return n;
+			}
+			return -1;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			MyDBCP.close(con,pstmt,rs);
+		}
+	}
 	
 	/*문의사항 답변*/
 	public int adminAnswer(int qnum,String answer) {
@@ -95,13 +122,24 @@ public class QuestionDao {
 	}
 	
 	/*문의사항 조회*/
-	public ArrayList<Q_board_vo> adminQList() {
+	public ArrayList<Q_board_vo> adminQList(String fieldCategory,int startRow,int endRow) {
+		String sql="";
+		if(fieldCategory==null||fieldCategory.equals("")) {
+			sql="select * from("
+					+ " select q.*,rownum rnum from("
+					+ " select * from q_board order by wr_date desc) q)"
+					+ " where rnum>="+startRow+" and rnum<="+endRow;
+		}else {
+			sql="select * from ("
+					+ "select q.*,rownum rnum from("
+					+ "select * from q_board where q_b_category='"+fieldCategory+"' order by wr_date desc) q)"
+					+ "where rnum>="+startRow+" and rnum<="+endRow;
+		}
 		Connection con=null;
 		Statement stmt=null;
 		ResultSet rs=null;
 		try {
 			con=MyDBCP.getConnection();
-			String sql="select * from q_board order by wr_date desc";
 			stmt=con.createStatement();
 			rs=stmt.executeQuery(sql);
 			ArrayList<Q_board_vo> list=new ArrayList<Q_board_vo>();

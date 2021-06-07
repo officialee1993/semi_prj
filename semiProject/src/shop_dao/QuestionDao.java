@@ -269,7 +269,6 @@ public class QuestionDao {
 		String sql1="insert into Q_board(q_b_num,id,q_b_category,q_b_title,q_b_content,q_b__pwd,wr_date,p_num) values(q_board_seq.nextval,?,?,?,?,?,sysdate,?)";
 		String sql2="insert into q_a(q_a_num) values(q_board_seq.currval)";
 		try {
-			System.out.println("start");
 			con=MyDBCP.getConnection();
 			con.setAutoCommit(false);
 			pstmt=con.prepareStatement(sql1);
@@ -281,7 +280,7 @@ public class QuestionDao {
 			pstmt.setInt(6, vo.getP_num());
 			int qboard=pstmt.executeUpdate();
 			
-			System.out.println("qboard="+qboard);
+			System.out.println("문의사항 등록:"+qboard);
 			
 			stmt=con.createStatement();
 			int n=stmt.executeUpdate(sql2);
@@ -301,6 +300,50 @@ public class QuestionDao {
 			MyDBCP.close(stmt);
 			MyDBCP.close(pstmt);
 			MyDBCP.close(con);
+		}
+	}
+	
+	
+	/*문의사항 리스트 불러오기(상품상세페이지)*/
+	public ArrayList<CommentsVo> questionListTest(int p_num){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql="select * from ("
+				+ " select qlist.*, rownum rnum from("
+				+ " select q.q_b_num q_num,q.id id,q.q_b_category category,"
+				+ " q.q_b_title q_title,q.q_b_content "
+				+ " q_content,q.wr_date q_date,a.q_a_content a_content,"
+				+ " a.q_a_date a_date from product p"
+				+ " join Q_board q"
+				+ " on p.p_num=q.p_num"
+				+ " join q_a a"
+				+ " on q.q_b_num=a.q_a_num"
+				+ " where p.p_num=? order by q_date desc) qlist)";
+		try {
+			con=MyDBCP.getConnection();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, p_num);
+			rs=pstmt.executeQuery();
+			ArrayList<CommentsVo> list=new ArrayList<CommentsVo>();
+			while(rs.next()) {
+				int qnum=rs.getInt("q_num");
+				String id=rs.getString("id");
+				String category=rs.getString("category");
+				String qtitle=rs.getString("q_title");
+				String qcontent=rs.getString("q_content");
+				Date qdate=rs.getDate("q_date");
+				String acontent=rs.getString("a_content");
+				Date adate=rs.getDate("a_date");
+				CommentsVo vo=new CommentsVo(qnum,id,category,qtitle,qcontent,qdate,null,acontent,adate);
+				list.add(vo);
+			}
+			return list;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			MyDBCP.close(con,pstmt,rs);
 		}
 	}
 	

@@ -14,7 +14,9 @@ import shop_dao.ReviewDao;
 public class Mypage_orderlist_review_Controller extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int o_num=Integer.parseInt(req.getParameter("o_num"));
 		
+		req.setAttribute("o_num", o_num);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("sidemenu", "/shop/mypage_sidemenu.jsp");
 		req.setAttribute("content", "/shop/mypage_orderlist_review.jsp");
@@ -35,7 +37,7 @@ public class Mypage_orderlist_review_Controller extends HttpServlet{
 		ReviewDao dao=ReviewDao.getinstance();
 		int n=dao.reviewInsert(reviewTitle, reviewContent, o_num);
 		
-		System.out.println("결과:"+n);
+		System.out.println("리뷰등록결과:"+n);
 		resp.sendRedirect(req.getContextPath()+"/shop/mypage_reviewlist");
 		//req.getRequestDispatcher("/shop/mypage_reviewlist").forward(req, resp);
 	}

@@ -18,10 +18,10 @@
 					<th>주문상태</th>
 				</tr>
 				<tr>
-					<td>20123124</td>
-					<td>2021.12.12</td>
-					<td>50,000원</td>
-					<td>입금완료</td>
+					<td>${vo.o_num }</td>
+					<td>${vo.o_date }</td>
+					<td>${vo.all_sum_price }</td>
+					<td>${vo.o_state }</td>
 				</tr>
 				</table>
 			</div>
@@ -36,10 +36,10 @@
 					<th>배송지 주소</th>
 				</tr>
 				<tr>
-					<td>test</td>
-					<td>이찬호</td>
-					<td>010-1234-1234</td>
-					<td>서울</td>
+					<td>${vo.id }</td>
+					<td>${vo.rec_name }</td>
+					<td>${vo.rec_phone }</td>
+					<td>${vo.rec_addr }</td>
 				</tr>
 				</table>
 			</div>
@@ -54,10 +54,10 @@
 					<th>상품금액</th>
 				</tr>
 				<tr>
-					<td>23</td>
-					<td>반팔</td>
-					<td>10</td>
-					<td>50,000원</td>
+					<td>${vo.p_num }</td>
+					<td>${vo.p_name }</td>
+					<td>${vo.p_count }</td>
+					<td>${vo.p_price }</td>
 				</tr>
 				</table>
 			</div>

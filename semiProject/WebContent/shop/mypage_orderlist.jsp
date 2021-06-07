@@ -23,26 +23,40 @@
 								<th></th>
 							</tr>
 							
-							<c:forEach var="vo" items="${requestScope.list}">
-							
-								<tr>
-							
-								<td><img src="${cp}/shop/productimgs/${vo.save_img_name}"></td>
-								<td>${vo.cg_name}</td>
-								<td>${vo.all_sum_price}원</td>
-								<td>${vo.o_date}</td>
-								<td>${vo.o_num}</td>
-								<td>${vo.o_state}</td>
-								<td></td>
-							</tr>
-							
+							<c:forEach var="orderList" items="${requestScope.myOrderlist}">
+								<c:choose>
+									<c:when test="${orderList.o_state=='주문완료' }">
+										<tr>
+											<td><img src="${cp}/shop/productimgs/${orderList.save_img_name}"></td>
+											<td>${orderList.p_name}</td>
+											<td>${orderList.all_sum_price}원</td>
+											<td>${orderList.o_date}</td>
+											<td>${orderList.o_num}</td>
+											<td>${orderList.o_state}</td>
+											<td></td>
+										</tr>
+									</c:when>
+									<c:when test="${orderList.o_state=='배송완료' }">
+										<tr>
+											<td><img src="${cp}/shop/productimgs/${orderList.save_img_name}"></td>
+											<td>${orderList.p_name}</td>
+											<td>${orderList.all_sum_price}원</td>
+											<td>${orderList.o_date}</td>
+											<td>${orderList.o_num}</td>
+											<td>${orderList.o_state}</td>
+											<c:choose>
+												<c:when test="${orderList.a_b_content!=null }">
+												<td><span style="font-size:14px">후기작성완료</span></td>
+												</c:when>
+												<c:otherwise>
+												<td><button onclick="location.href='${cp}/shop/mypage_orderlist_review?o_num=${orderList.o_num}'" type="button" class="btn btn-outline-dark" style="font-size:12px">후기작성</button></td>
+												</c:otherwise>
+											</c:choose>
+										</tr>
+									</c:when>
+								</c:choose>
 							</c:forEach>
-							
-					
-							
-						
 						</table>
-						
 					</div>
 				</div>
 			</div>

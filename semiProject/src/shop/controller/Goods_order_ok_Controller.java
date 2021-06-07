@@ -15,14 +15,14 @@ public class Goods_order_ok_Controller extends HttpServlet{
 @Override
 protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	req.setCharacterEncoding("utf-8");
-	int b_num_max = Integer.parseInt(req.getParameter("b_num_max"));//Àå¹Ù±¸´Ï¹øÈ£
-	int p_num = Integer.parseInt(req.getParameter("p_num"));//»óÇ°¹øÈ£
-	int ALL_SUM_PRICE = Integer.parseInt(req.getParameter("ALL_SUM_PRICE"));// ÃÑ±Ý¾× 
-	String rec_name = req.getParameter("rec_name"); //¼ö·ÉÀÎ ÀÌ¸§
-	String rec_phone = req.getParameter("rec_phone"); // ¼ö·ÉÀÎ ÀüÈ­¹øÈ£
-	String rec_addr = req.getParameter("rec_addr"); // ¼ö·ÉÀÎ ÁÖ¼Ò 
-	String payname = req.getParameter("payname"); //°áÀç¹æ¹ý
-	String O_STATE = "ÁÖ¹®¿Ï·á";
+	int b_num_max = Integer.parseInt(req.getParameter("b_num_max"));//ï¿½ï¿½Ù±ï¿½ï¿½Ï¹ï¿½È£
+	int p_num = Integer.parseInt(req.getParameter("p_num"));//ï¿½ï¿½Ç°ï¿½ï¿½È£
+	int ALL_SUM_PRICE = Integer.parseInt(req.getParameter("ALL_SUM_PRICE"));// ï¿½Ñ±Ý¾ï¿½ 
+	String rec_name = req.getParameter("rec_name"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+	String rec_phone = req.getParameter("rec_phone"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½È£
+	String rec_addr = req.getParameter("rec_addr"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ 
+	String payname = req.getParameter("payname"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	String O_STATE = "ì£¼ë¬¸ì™„ë£Œ";
 	HttpSession session = req.getSession();
 	String id =(String)session.getAttribute("id");
 	
@@ -31,10 +31,10 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	OrderDao orderdao = OrderDao.getinstance();
 	int n = orderdao.goodorder_insert(rec_name, rec_phone, rec_addr, ALL_SUM_PRICE, payname, O_STATE, id, p_num, b_num_max);
 	if(n>0) {
-		System.out.println("ÁÖ¹® ¼º°ø");
+		System.out.println("ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		
 	}else {
-		System.out.println("ÁÖ¹® ½ÇÆÐ");
+		System.out.println("ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½");
 	}
 	
 	req.setAttribute("top", "/shop/header.jsp");

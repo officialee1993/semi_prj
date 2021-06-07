@@ -48,7 +48,6 @@ public class Q_board_vo {
 
 	public Q_board_vo(int q_b_num, String id, String q_b_category, String q_b_title, String q_b_content,
 			String q_b__pwd, Date wr_date, String q_b_state, int p_num) {
-		super();
 		this.q_b_num = q_b_num;
 		this.id = id;
 		this.q_b_category = q_b_category;
