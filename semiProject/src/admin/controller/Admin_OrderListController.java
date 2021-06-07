@@ -33,11 +33,10 @@ public class Admin_OrderListController extends HttpServlet{
 		
 	}
 	
-	//주문상태 업데이트
 	private void update(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		int o_num=Integer.parseInt(req.getParameter("o_num"));
-		System.out.println("주문번호:"+o_num);
+		System.out.println("二쇰Ц踰덊샇:"+o_num);
 		OrderDao dao=OrderDao.getinstance();
 		int n=dao.adminOrderStateUpdate(o_num);
 		
@@ -45,11 +44,11 @@ public class Admin_OrderListController extends HttpServlet{
 		
 		String result="";
 		if(n>0) {
-			System.out.println("업데이트성공");
+			System.out.println("�뾽�뜲�씠�듃�꽦怨�");
 			result="success";
 			json.put("result", result);
 		}else {
-			System.out.println("업데이트실패");
+			System.out.println("�뾽�뜲�씠�듃�떎�뙣");
 			json.put("result", result);
 		}	
 		
@@ -58,7 +57,7 @@ public class Admin_OrderListController extends HttpServlet{
 		pw.print(json);
 	}
 
-	//리스팅
+	//由ъ뒪�똿
 	private void list(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String spageNum=req.getParameter("pageNum");

@@ -19,6 +19,33 @@ public class Productdao {
 		public static Productdao getinstance() {
 			return instnce;
 		}
+		
+		public ArrayList<Product_vo> admin_sex_product_list(String p_id){
+			
+			Connection con = null;
+			PreparedStatement pstmt = null; 
+			ResultSet rs= null; 
+			ArrayList<Product_vo> admin_sex_product_list = new ArrayList<Product_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select * from category c , product p where p.cg_id=c.cg_id and p_id =?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, p_id);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					
+					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+							rs.getInt("p_click_num"), rs.getDate("p_date"),
+							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+					admin_sex_product_list.add(vo);
+				}
+				return admin_sex_product_list;
+			}catch (SQLException s) {
+				System.out.println(s.getMessage());
+				return null; 
+			}
+			
+		}
 		public ArrayList<Product_vo> admin_all_product_select (String p_name){
 			
 			Connection con = null;

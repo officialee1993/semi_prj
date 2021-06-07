@@ -30,8 +30,8 @@
 		<div class="admin_content_box">
 			<div class="admin_goods_menu">
 				<ul>
-					<li><a class="menu_btn" href="">남성</a></li>
-					<li><a class="menu_btn" href="">여성</a></li>
+					<li><a class="menu_btn" href="${pageContext.request.contextPath}/admin/goods_search?sex=${1}">남성</a></li>
+					<li><a class="menu_btn" href="${pageContext.request.contextPath}/admin/goods_search?sex=${2}">여성</a></li>
 					
 					
 					

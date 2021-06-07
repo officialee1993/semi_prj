@@ -3,5 +3,6 @@
 >>>>>>>=branch 'master' of https\://github.com/officialee1993/semi_prj.git
 eclipse.preferences.version=1
 encoding//src/admin/controller/Admin_GoodsInsertController.java=UTF-8
+encoding//src/admin/controller/Admin_OrderListController.java=UTF-8
 encoding//src/shop/controller/Goods_detail_Controller.java=UTF-8
 encoding//src/shop_dao/OrderDao.java=UTF-8
