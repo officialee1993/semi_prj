@@ -56,7 +56,7 @@
 						<span style="color:black">[${i }]</span>
 					</c:when>
 				<c:otherwise>
-						<a href="${cp }/shop/mypage_questionlist?pageNum=${i } style="color:grey">[${i }]</a>
+						<a href="${cp }/shop/mypage_questionlist?pageNum=${i }" style="color:grey">[${i }]</a>
 				</c:otherwise>
 						</c:choose>
 				</c:forEach>

@@ -108,7 +108,9 @@
 					
 					let xml=xhr.responseXML;
 					let comm=xml.getElementsByTagName("comm");
-					//페이징처리 태그
+					
+					
+					
 					let pageCount=xml.getElementsByTagName("pageCount")[0].textContent;
 					let startPageNum=xml.getElementsByTagName("startPageNum")[0].textContent;
 					let endPageNum=xml.getElementsByTagName("endPageNum")[0].textContent;

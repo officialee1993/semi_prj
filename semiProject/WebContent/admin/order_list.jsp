@@ -56,7 +56,7 @@
 							<td>${list.rec_name }</td>
 							<td>${list.all_sum_price }</td>
 							<td>${list.payname }</td>
-							<td>${list.o_state }</td>
+							<td style="color:orange">${list.o_state }</td>
 							<td></td>
 							</tr>
 						</c:when>

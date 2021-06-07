@@ -305,7 +305,7 @@ public class QuestionDao {
 	
 	
 	/*문의사항 리스트 불러오기(상품상세페이지)*/
-	public ArrayList<CommentsVo> questionListTest(int p_num){
+	public ArrayList<CommentsVo> questionListTest(int p_num,int startRow,int endRow){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -319,11 +319,13 @@ public class QuestionDao {
 				+ " on p.p_num=q.p_num"
 				+ " join q_a a"
 				+ " on q.q_b_num=a.q_a_num"
-				+ " where p.p_num=? order by q_date desc) qlist)";
+				+ " where p.p_num=? order by q_date desc) qlist) where rnum>=? and rnum<=?";
 		try {
 			con=MyDBCP.getConnection();
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, p_num);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rs=pstmt.executeQuery();
 			ArrayList<CommentsVo> list=new ArrayList<CommentsVo>();
 			while(rs.next()) {

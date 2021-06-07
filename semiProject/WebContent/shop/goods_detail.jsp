@@ -264,32 +264,8 @@ xhr.send();
 				
 			</table>
 			<!-- 문의 게시판 페이징 번호 -->
-			<div class="board_page question_board_page">
+			<div id="question_board_page" class="board_page question_board_page">
 
-		<c:if test="${startPageNum>10}">
-				<a href="${cp }/shop/goods_detail?pageNum=${startPageNum-1 }&p_num=${vo.p_num}">이전페이지</a>
-		</c:if>
-		<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
-		<c:choose>
-			<c:when test="${pageNum==i }"><%--현재 페이지인경우 --%>
-				<span style="color:black">[${i }]</span>
-			</c:when>
-		<c:otherwise>
-				<a href="${cp }/shop/goods_detail?pageNum=${i }&p_num=${vo.p_num}" style="color:grey">[${i }]</a>
-		</c:otherwise>
-				</c:choose>
-		</c:forEach>
-		<c:if test="${endPageNum<pageCount}">
-				<a href="${cp }/shop/goods_detail?pageNum=${endPageNum+1 }&p_num=${vo.p_num}">다음페이지</a>
-		</c:if>
-			
-			
-			
-			
-			
-			
-			
-			
 			<!-- 로그인해야만 작성하기 가능 -->
 			<c:choose>
         	<c:when test="${not empty sessionScope.id }">
@@ -355,8 +331,11 @@ xhr.send();
 	
 <script type="text/javascript">
 
-	function questionList(){
+	function questionList(pgNum){
  	var question_table=document.getElementById("question_table");
+ 	var question_board_page=document.getElementById("question_board_page");
+ 	
+ 	
 	let xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
@@ -365,11 +344,51 @@ xhr.send();
 
 			for(let i=childs.length-1;i>=2;i--){
 				question_table.removeChild(childs.item(i));
+			}
+			
+			let pagenumchilds=question_board_page.childNodes;
+			for(let i=pagenumchilds.length-1;i>=1;i--){
+				question_board_page.removeChild(pagenumchilds.item(i));
 			}  
+			
+			
 			
 			let xml=xhr.responseXML;
 			let comm=xml.getElementsByTagName("comm");
-			var category=document.getElementById("category");
+
+			
+			
+			
+			let pageCount=xml.getElementsByTagName("pageCount")[0].textContent;
+			let startPageNum=xml.getElementsByTagName("startPageNum")[0].textContent;
+			let endPageNum=xml.getElementsByTagName("endPageNum")[0].textContent;
+			let pageNum=xml.getElementsByTagName("pageNum")[0].textContent;
+			
+			for(let i=startPageNum;i<=endPageNum;i++){
+				if(pageNum==i){
+					let span=document.createElement("span");
+					span.innerHTML="["+i+"]";
+					span.style.color="black";
+					span.style.fontWeight="700";
+					question_board_page.appendChild(span);
+				}else{
+					let a=document.createElement("a");
+					a.innerHTML="["+i+"]";
+					a.style.color="grey";
+					a.style.fontWeight="300";
+					a.style.cursor="pointer";
+					
+					a.onclick=function(){
+						questionList(i);
+					}
+					question_board_page.appendChild(a);
+				}
+			}
+			
+			
+			
+			
+			
 
 			document.getElementById("title").value='';
 			document.getElementById("pwd").value='';
@@ -437,7 +456,7 @@ xhr.send();
 			}
 		}
 	};
-	xhr.open('get','${pageContext.request.contextPath }/shop/question.do?p_num=${vo.p_num}',true);
+	xhr.open('get','${pageContext.request.contextPath }/shop/question.do?p_num=${vo.p_num}&pageNum='+pgNum,true);
 	xhr.send();
 } questionList();
 

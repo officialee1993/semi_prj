@@ -27,17 +27,43 @@ public class QustionController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		  req.setCharacterEncoding("utf-8");
-		  int p_num=Integer.parseInt(req.getParameter("p_num")); QuestionDao
-		  dao=QuestionDao.getinstance(); ArrayList<CommentsVo>
-		  list=dao.questionListTest(p_num);
+		  int p_num=Integer.parseInt(req.getParameter("p_num")); 
+		  String spageNum=req.getParameter("pageNum");
+		  
+		  if(spageNum.equals("undefined")) {
+			  spageNum=null;
+		  }
+		  
+		  int pageNum=1;
+		  if(spageNum!=null) {
+			pageNum=Integer.parseInt(spageNum);
+		  }
+		  
+		  
+		  QuestionDao dao=QuestionDao.getinstance();
+		  int startRow=(pageNum-1)*10+1;
+		  int endRow=startRow+9;
+		  ArrayList<CommentsVo> list=dao.questionListTest(p_num,startRow,endRow);
+		  int pageCount=(int)Math.ceil(dao.getCount(p_num)/10.0);		
+		  int startPageNum=((pageNum-1)/10*10)+1;
+		  int endPageNum=startPageNum+9;
+		  if(endPageNum>pageCount) {
+				endPageNum=pageCount;
+			}
+		  
+		  
+		  
+		  
 		  
 		  resp.setCharacterEncoding("utf-8");
 		  resp.setContentType("text/xml;charset=utf-8");
 		  
 		  PrintWriter pw=resp.getWriter();
 		  
-		  pw.print("<?xml version=\"1.0\" encoding=\"utf-8\"?>"); pw.print("<result>");
-		  for(CommentsVo vo:list){ pw.print("<comm>");
+		  pw.print("<?xml version=\"1.0\" encoding=\"utf-8\"?>"); 
+		  pw.print("<result>");
+		  for(CommentsVo vo:list){ 
+		  pw.print("<comm>");
 		  pw.print("<q_num>"+vo.getQ_num()+"</q_num>");
 		  pw.print("<id>"+vo.getId()+"</id>");
 		  pw.print("<category>"+vo.getCategory()+"</category>");
@@ -46,7 +72,15 @@ public class QustionController extends HttpServlet{
 		  pw.print("<qdate>"+vo.getQ_date()+"</qdate>");
 		  pw.print("<atitle>"+vo.getA_title()+"</atitle>");
 		  pw.print("<acontent>"+vo.getA_content()+"</acontent>");
-		  pw.print("<adate>"+vo.getA_date()+"</adate>"); pw.print("</comm>"); }
+		  pw.print("<adate>"+vo.getA_date()+"</adate>"); 
+		  pw.print("</comm>");
+		  }
+		  
+		  pw.print("<pageCount>"+pageCount+"</pageCount>");
+		  pw.print("<startPageNum>"+startPageNum+"</startPageNum>");
+		  pw.print("<endPageNum>"+endPageNum+"</endPageNum>");
+		  pw.print("<pageNum>"+pageNum+"</pageNum>");
+		  
 		  pw.print("</result>");
 		 
 	}
