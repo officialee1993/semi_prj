@@ -20,6 +20,7 @@ public class IndexController extends HttpServlet {
 		String top=(String)req.getAttribute("top");
 		String content=(String)req.getAttribute("content");
 		String footer=(String)req.getAttribute("footer");
+		
 		if(top==null) {
 			top="/shop/header.jsp";
 		}
@@ -29,6 +30,7 @@ public class IndexController extends HttpServlet {
 		if(footer==null) {
 			footer="/shop/footer.jsp";
 		}
+		
 		String cp=req.getContextPath();
 		ServletContext application=getServletContext();
 		application.setAttribute("cp", cp);

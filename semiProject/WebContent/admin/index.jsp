@@ -15,10 +15,10 @@
 <body>
 <div class="admin_content">
 <!-- side menu -->
-<jsp:include page="${sidemenu }"/>
+<jsp:include page="${sidemenu}"/>
 
 <!-- content -->
-<jsp:include page="${content }"/>
+<jsp:include page="${content}"/>
 </div>
 
 

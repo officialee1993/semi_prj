@@ -18,6 +18,7 @@ public class QuestionDao {
 	public static QuestionDao getinstance() {
 		return instance;
 	}
+
 	public int getCount(String fieldCategory) {
 		String sql="";
 		if(fieldCategory==null||fieldCategory.equals("")) {//검색아닐때
@@ -46,6 +47,7 @@ public class QuestionDao {
 		}
 	}
 	
+
 	/*문의사항 답변*/
 	public int adminAnswer(int qnum,String answer) {
 		Connection con=null;

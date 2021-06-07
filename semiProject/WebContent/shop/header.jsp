@@ -9,9 +9,9 @@
 			</div>
 			<div class="header_menu" id="header_menu">
 			<ul>
-				<li><a href="${cp }/shop/goods_list">신상품</a></li>
-				<li><a href="${cp }/shop/goods_list">남성</a></li>
-				<li><a href="${cp }/shop/goods_list_women">여성</a></li>
+				<li><a href="${cp }/shop/goods_list?order=1">신상품</a></li>
+				<li><a href="${cp }/shop/goods_list_pro?p_id=1">남성</a></li>
+				<li><a href="${cp }/shop/goods_list_pro?p_id=2">여성</a></li>
 			</ul>
 			</div>
 		<div class="btn_wrap">
@@ -41,17 +41,17 @@
 		</div>
 		<div class="menu_dropdown" id="menu_dropdown">
 					<ul>
-					<li><a href="${cp }/shop/goods_list">신상품</a></li>
+					<li><a href="${cp }/shop/goods_list?order=1">신상품</a></li>
 					</ul>
 					<ul>
-					<li><a href="${cp }/shop/goods_list">상의</a></li>
-					<li><a href="${cp }/shop/goods_list">하의</a></li>
-					<li><a href="${cp }/shop/goods_list">신발</a></li>
+					<li><a href="${cp }/shop/goods_list_pro_top?p_id=1&cg_id=6">상의</a></li>
+					<li><a href="${cp }/shop/goods_list_pro_bottom?p_id=1&cg_id=7">하의</a></li>
+					<li><a href="${cp }/shop/goods_list_pro_shoes?p_id=1&cg_id=8">신발</a></li>
 					</ul>
 					<ul>
-					<li><a href="${cp }/shop/goods_list_women_under?cg_id=${3}">상의</a></li>
-					<li><a href="${cp }/shop/goods_list_women_under?cg_id=${4}">하의</a></li>
-					<li><a href="${cp }/shop/goods_list_women_under?cg_id=${5}">신발</a></li>
+					<li><a href="${cp }/shop/goods_list_pro_top?p_id=2&cg_id=3">상의</a></li>
+					<li><a href="${cp }/shop/goods_list_pro_bottom?p_id=2&cg_id=4">하의</a></li>
+					<li><a href="${cp }/shop/goods_list_pro_shoes?p_id=2&cg_id=5">신발</a></li>
 					</ul>
 					
 			</div>

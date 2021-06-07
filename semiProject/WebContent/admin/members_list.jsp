@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<!-- 관리자 페이지 콘텐츠 영역 -->
 	<div class="admin_content_wrap">
 		<div class="title_wrap">
@@ -35,78 +36,16 @@
 					<th></th>
 				</tr>
 				<!-- 반복문 실행 -->
-				<tr>
-					<td>test</td>
-					<td>홍길동</td>
-					<td>010-1234-1234</td>
-					<td>asd@asd.com</td>
-					<td>서울</td>
-					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
-				</tr>
-				<tr>
-					<td>test</td>
-					<td>홍길동</td>
-					<td>010-1234-1234</td>
-					<td>asd@asd.com</td>
-					<td>서울</td>
-					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
-				</tr>
-				<tr>
-					<td>test</td>
-					<td>홍길동</td>
-					<td>010-1234-1234</td>
-					<td>asd@asd.com</td>
-					<td>서울</td>
-					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
-				</tr>
-				<tr>
-					<td>test</td>
-					<td>홍길동</td>
-					<td>010-1234-1234</td>
-					<td>asd@asd.com</td>
-					<td>서울</td>
-					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
-				</tr>
-				<tr>
-					<td>test</td>
-					<td>홍길동</td>
-					<td>010-1234-1234</td>
-					<td>asd@asd.com</td>
-					<td>서울</td>
-					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
-				</tr>
-				<tr>
-					<td>test</td>
-					<td>홍길동</td>
-					<td>010-1234-1234</td>
-					<td>asd@asd.com</td>
-					<td>서울</td>
-					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
-				</tr>
-				<tr>
-					<td>test</td>
-					<td>홍길동</td>
-					<td>010-1234-1234</td>
-					<td>asd@asd.com</td>
-					<td>서울</td>
-					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
-				</tr>
-				<tr>
-					<td>test</td>
-					<td>홍길동</td>
-					<td>010-1234-1234</td>
-					<td>asd@asd.com</td>
-					<td>서울</td>
-					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
-				</tr>
-				<tr>
-					<td>test</td>
-					<td>홍길동</td>
-					<td>010-1234-1234</td>
-					<td>asd@asd.com</td>
-					<td>서울</td>
-					<td><button type="button" class="btn btn-outline-dark">삭제</button></td>
-				</tr>
+				<c:forEach var="vo" items="${all_members }">
+					<tr>
+						<td>${vo.id }</td>
+						<td>${vo.name }</td>
+						<td>${vo.phone }</td>
+						<td>${vo.email }</td>
+						<td>${vo.address }</td>
+						<td><button onclick="location.href='${cp}/admin/members_delete?id=${vo.id }'" type="button" class="btn btn-outline-dark">삭제</button></td>
+					</tr>
+				</c:forEach>
 
 				
 			</table>
