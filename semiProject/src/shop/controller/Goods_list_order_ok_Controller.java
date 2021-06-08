@@ -28,10 +28,17 @@ public class Goods_list_order_ok_Controller extends HttpServlet {
 		
 		
 	
+<<<<<<< HEAD
 		String rec_name = req.getParameter("rec_name"); //占쏙옙占쏙옙占쏙옙 占싱몌옙
 		String rec_phone = req.getParameter("rec_phone"); // 占쏙옙占쏙옙占쏙옙 占쏙옙화占쏙옙호
 		String rec_addr = req.getParameter("rec_addr"); // 占쏙옙占쏙옙占쏙옙 占쌍쇽옙 
 		String payname = req.getParameter("payname"); //占쏙옙占쏙옙占쏙옙
+=======
+		String rec_name = req.getParameter("rec_name"); //������ �̸�
+		String rec_phone = req.getParameter("rec_phone"); // ������ ��ȭ��ȣ
+		String rec_addr = req.getParameter("rec_addr"); // ������ �ּ� 
+		String payname = req.getParameter("payname"); //������
+>>>>>>> branch 'master' of https://github.com/officialee1993/semi_prj.git
 		String O_STATE = "주문완료";
 		
 		HttpSession session = req.getSession();
