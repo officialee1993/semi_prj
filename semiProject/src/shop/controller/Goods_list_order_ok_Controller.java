@@ -30,7 +30,7 @@ public class Goods_list_order_ok_Controller extends HttpServlet {
 		String rec_phone = req.getParameter("rec_phone"); // ������ ��ȭ��ȣ
 		String rec_addr = req.getParameter("rec_addr"); // ������ �ּ� 
 		String payname = req.getParameter("payname"); //������
-		String O_STATE = "�ֹ��Ϸ�";
+		String O_STATE = "주문완료";
 		
 		HttpSession session = req.getSession();
 		String id =(String)session.getAttribute("id");
