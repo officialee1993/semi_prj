@@ -21,8 +21,5 @@
 <jsp:include page="${content}"/>
 </div>
 
-
-
-
 </body>
 </html>

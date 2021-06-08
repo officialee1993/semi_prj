@@ -105,12 +105,12 @@ public class OrderDao {
 	
 	public ArrayList<Orders_vo> adminOrder(int startRow,int endRow,String field,String keyword){
 		String sql=null;
-		if(field==null||field.equals("")) {//검색아닐때
+		if(field==null||field.equals("")) {//寃��깋�븘�땺�븣
 			sql="select * from("
 					+ " select a.*,rownum rnum from ("
 					+ " select * from orders order by o_date desc) a)"
 					+ " where rnum>=? and rnum<=?";
-		}else { //검색일때
+		}else { //寃��깋�씪�븣
 			sql="select * from ("
 					+ " select o.*,rownum rnum from ("
 					+ " select * from orders where "+field+" like '%"+keyword+"%' order by o_date desc) o)"

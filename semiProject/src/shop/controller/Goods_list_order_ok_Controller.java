@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import shop.vo.Basket_sum_price_vo;
 import shop_dao.Basketdao;
 import shop_dao.OrderDao;
+import shop_dao.Salesdao;
 @WebServlet("/shop/goods_list_order_ok")
 public class Goods_list_order_ok_Controller extends HttpServlet {
 	@Override
@@ -22,15 +23,16 @@ public class Goods_list_order_ok_Controller extends HttpServlet {
 		ArrayList<Basket_sum_price_vo> list = new ArrayList<Basket_sum_price_vo>();
 
 		OrderDao orderdao = OrderDao.getinstance();
+		Salesdao salesdao = Salesdao.getinstance();
 		
 		
 		
 	
-		String rec_name = req.getParameter("rec_name"); //������ �̸�
-		String rec_phone = req.getParameter("rec_phone"); // ������ ��ȭ��ȣ
-		String rec_addr = req.getParameter("rec_addr"); // ������ �ּ� 
-		String payname = req.getParameter("payname"); //������
-		String O_STATE = "�ֹ��Ϸ�";
+		String rec_name = req.getParameter("rec_name"); //占쏙옙占쏙옙占쏙옙 占싱몌옙
+		String rec_phone = req.getParameter("rec_phone"); // 占쏙옙占쏙옙占쏙옙 占쏙옙화占쏙옙호
+		String rec_addr = req.getParameter("rec_addr"); // 占쏙옙占쏙옙占쏙옙 占쌍쇽옙 
+		String payname = req.getParameter("payname"); //占쏙옙占쏙옙占쏙옙
+		String O_STATE = "주문완료";
 		
 		HttpSession session = req.getSession();
 		String id =(String)session.getAttribute("id");
@@ -40,9 +42,9 @@ public class Goods_list_order_ok_Controller extends HttpServlet {
 		Basketdao basketdao = Basketdao.getinstance();
 		list = basketdao.basket_sum_price(id);
 		if(list != null) {
-	System.out.println("��ٱ��� sum_price ���� list ���� ");
+	System.out.println("占쏙옙袂占쏙옙占� sum_price 占쏙옙占쏙옙 list 占쏙옙占쏙옙 ");
 		}else {
-	System.out.println("��ٱ��� sum_price ���� list ���� ");
+	System.out.println("占쏙옙袂占쏙옙占� sum_price 占쏙옙占쏙옙 list 占쏙옙占쏙옙 ");
 		}
 		list.forEach((Basket_sum_price_vo t) -> {
 			
@@ -50,11 +52,12 @@ public class Goods_list_order_ok_Controller extends HttpServlet {
 //			System.out.println(t.getAll_sum_price());
 //			System.out.println(t.getP_num());
 			int n = orderdao.goodorder_insert(rec_name, rec_phone, rec_addr, t.getAll_sum_price(), payname, O_STATE, id, t.getP_num(), t.getB_num());
-			if(n>0) {
-				System.out.println("�ֹ� ����");
+			int m = salesdao.Sales_stats_insert(t.getAll_sum_price() ,t.getP_num() ,t.getP_count()); /////
+			if(m>0) {
+				System.out.println("성공");
 				
 			}else {
-				System.out.println("�ֹ� ����");
+				System.out.println("실패");
 			}
 		});
 		

@@ -29,7 +29,7 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id) {
 		ArrayList<Basket_sum_price_vo> list = new ArrayList<Basket_sum_price_vo>();
 		try {
 			con = MyDBCP.getConnection();
-			String sql = "SELECT p_num,b_num ,C*P all_sum_price\r\n"
+			String sql = "SELECT p_num,b_num ,C*P all_sum_price, c\r\n"
 					+ "FROM(\r\n"
 					+ "SELECT p_num, b_num,p_count C , P_PRICE P FROM (\r\n"
 					+ "select p.p_price ,b.p_count ,b.b_num, b.p_num from Product p,Basket b where b.id=? and p.p_num = b.p_num\r\n"
@@ -42,7 +42,7 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id) {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				
-				Basket_sum_price_vo basket_sum_price_vo = new Basket_sum_price_vo(rs.getInt("b_num"), rs.getInt("all_sum_price"),rs.getInt("p_num"));
+				Basket_sum_price_vo basket_sum_price_vo = new Basket_sum_price_vo(rs.getInt("b_num"), rs.getInt("all_sum_price"),rs.getInt("p_num"),rs.getInt("c"));
 				list.add(basket_sum_price_vo);
 			}
 			return list;

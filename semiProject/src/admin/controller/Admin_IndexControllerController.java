@@ -36,6 +36,7 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	ServletContext application=getServletContext();
 	application.setAttribute("cp", cp);
 	
+	
 	req.setAttribute("list", list);
 	req.setAttribute("sidemenu", sidemenu);
 	req.setAttribute("content", content);

@@ -4,5 +4,8 @@
 eclipse.preferences.version=1
 encoding//src/admin/controller/Admin_GoodsInsertController.java=UTF-8
 encoding//src/admin/controller/Admin_OrderListController.java=UTF-8
+encoding//src/admin/dao/OrderDao.java=UTF-8
 encoding//src/shop/controller/Goods_detail_Controller.java=UTF-8
+encoding//src/shop/controller/Goods_list_order_ok_Controller.java=UTF-8
+encoding//src/shop/controller/Goods_order_ok_Controller.java=UTF-8
 encoding//src/shop_dao/OrderDao.java=UTF-8
