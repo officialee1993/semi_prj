@@ -30,8 +30,8 @@ public class Salesdao {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
-				Sales_stats_vo sales_stats_vo = new Sales_stats_vo(rs.getInt("sales_stats_num"), rs.getInt("all_sales"), rs.getDate("o_date"), rs.getInt("p_count"), rs.getInt("p_num"));
-				list.add(sales_stats_vo);
+				Sales_stats_vo sales_stats_vo = new Sales_stats_vo(rs.getInt("sales_stats_num"), rs.getInt("all_sales"), rs.getDate("o_date"), rs.getInt("p_num"), rs.getInt("p_count") );
+				list.add(sales_stats_vo); 
 			}
 			return list;
 			
