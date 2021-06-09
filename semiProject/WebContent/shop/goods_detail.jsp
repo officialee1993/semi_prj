@@ -24,7 +24,7 @@ function checkData(){
 	
 }
 //댓글추가..
-function addComments(a_b_num,comments){
+function addComments(a_b_num,comments,index){
 if(${sessionScope.id==null}){
 	alert("로그인해주세요");
 	return;
@@ -36,6 +36,8 @@ if(${sessionScope.id==null}){
 	if(xhr.readyState==4 && xhr.status==200){
 		let xml=xhr.responseXML;
 		let result=xml.getElementsByTagName("code")[0].textContent;
+		list(a_b_num,index);
+		
 			}
 		};
 	xhr.open('post','${pageContext.request.contextPath }/shop/comments.do',true);
@@ -106,16 +108,21 @@ if(${sessionScope.id==null}){
 			<!-- 문의 게시판 페이징 번호 -->
 			<div id="question_board_page" class="board_page question_board_page">
 
+			
+
+			</div>
 			<!-- 로그인해야만 작성하기 가능 -->
+			<div style="text-align:right;">
 			<c:choose>
         	<c:when test="${not empty sessionScope.id }">
-        		<button class="btn btn-dark" id="question_write" data-bs-toggle="modal" data-bs-target="#question_modal" type="button">작성하기</button>
+        		<button class="btn btn-dark" id="question_write" data-bs-toggle="modal" data-bs-target="#question_modal" type="button">문의등록</button>
         	</c:when>
         	<c:otherwise>
-        		<button onclick="questionLoginMsg()" class="btn btn-dark" id="question_write" data-bs-toggle="" data-bs-target="" type="button">작성하기</button>
+        		<button onclick="questionLoginMsg()" class="btn btn-dark" id="question_write" data-bs-toggle="" data-bs-target="" type="button">문의등록</button>
         	</c:otherwise>
         	</c:choose>
 			</div>
+
 		</div>
 		<!-- 문의 게시판 END -->
 		</div>
@@ -257,8 +264,7 @@ if(${sessionScope.id==null}){
 						if(formControl.value==''){
 							alert("댓글을 입력해주세요");
 						}else{
-							addComments(a_b_num,formControl.value);
-							list(a_b_num,i);
+							addComments(a_b_num,formControl.value,i);
 							formControl.value='';
 						}
 					}

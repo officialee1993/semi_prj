@@ -127,4 +127,39 @@ public class Membersdao {
 			MyDBCP.close(con, pstmt, rs);
 		}
 	}
+	
+	/*admin login*/
+	public Members_vo adminLogin(String id,String pwd) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = MyDBCP.getConnection();
+			String sql = "select * from members"
+					+ " where id=? and pwd=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				Members_vo vo=new Members_vo(
+						rs.getString("id"),
+						rs.getString("pwd"),
+						null,
+						null,
+						null,
+						null
+						);
+				return vo;
+			}
+			return null;
+		}catch (SQLException s) {
+			s.printStackTrace();
+			return null;
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+	}
+	
+	
 }

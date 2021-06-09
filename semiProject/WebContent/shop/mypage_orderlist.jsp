@@ -10,8 +10,13 @@
 				</div>
 				<div class="mypage_orderlist">
 					<h3>주문내역</h3>
+					<form action="${cp}/shop/mypage_orderlist" method="post">
+					<div style="margin-top:20px;display:flex;" class="orderDateWrap">
+					<input type="date" name="startDate" ><span style="padding:10px">~</span><input type="date" name="firstDate">
+					<button type="submit" class="btn btn-outline-dark" style="font-size:14px;margin-left:10px">검색</button>
+					</div>
+					</form>
 					<div class="mypage_orderlist_wrap">
-					
 						<table>
 							<tr>
 								<th></th>
@@ -32,7 +37,7 @@
 											<td>${orderList.all_sum_price}원</td>
 											<td>${orderList.o_date}</td>
 											<td>${orderList.o_num}</td>
-											<td>${orderList.o_state}</td>
+											<td style="color:#81d4fa">${orderList.o_state}</td>
 											<td></td>
 										</tr>
 									</c:when>
@@ -43,10 +48,10 @@
 											<td>${orderList.all_sum_price}원</td>
 											<td>${orderList.o_date}</td>
 											<td>${orderList.o_num}</td>
-											<td>${orderList.o_state}</td>
+											<td style="font-weight:700">${orderList.o_state}</td>
 											<c:choose>
 												<c:when test="${orderList.a_b_content!=null }">
-												<td><span style="font-size:14px">후기작성완료</span></td>
+												<td><span style="font-size:14px;">후기작성완료</span></td>
 												</c:when>
 												<c:otherwise>
 												<td><button onclick="location.href='${cp}/shop/mypage_orderlist_review?o_num=${orderList.o_num}'" type="button" class="btn btn-outline-dark" style="font-size:12px">후기작성</button></td>

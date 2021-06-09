@@ -2,6 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- content -->
+<c:choose>
+	<c:when test="${param.p_id eq 1 && param.cg_id eq 7 }">
+	<div class="banner_goods">
+		<img src="images/banner_man2.png">
+	</div>
+	</c:when>
+	<c:when test="${param.p_id eq 2 && param.cg_id eq 4 }">
+	<div class="banner_goods">
+		<img src="images/banner_woman2.png">
+	</div>
+	</c:when>
+</c:choose>
+
 <div class="content">
 	<div class="my_row">
 		<div class="goods_list">
