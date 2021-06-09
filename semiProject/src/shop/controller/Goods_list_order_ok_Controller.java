@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import shop.vo.Basket_sum_price_vo;
 import shop_dao.Basketdao;
 import shop_dao.OrderDao;
+import shop_dao.Salesdao;
 @WebServlet("/shop/goods_list_order_ok")
 public class Goods_list_order_ok_Controller extends HttpServlet {
 	@Override
@@ -22,45 +23,48 @@ public class Goods_list_order_ok_Controller extends HttpServlet {
 		ArrayList<Basket_sum_price_vo> list = new ArrayList<Basket_sum_price_vo>();
 
 		OrderDao orderdao = OrderDao.getinstance();
+		Salesdao salesdao = Salesdao.getinstance();
+		
+		String rec_name = req.getParameter("rec_name"); 
+		String rec_phone = req.getParameter("rec_phone"); 
+		String rec_addr = req.getParameter("rec_addr"); 
+		String payname = req.getParameter("payname"); 
+		String[] b_num =req.getParameterValues("b_num");
 		
 		
-		
-	
-		String rec_name = req.getParameter("rec_name"); //������ �̸�
-		String rec_phone = req.getParameter("rec_phone"); // ������ ��ȭ��ȣ
-		String rec_addr = req.getParameter("rec_addr"); // ������ �ּ� 
-		String payname = req.getParameter("payname"); //������
-		String O_STATE = "�ֹ��Ϸ�";
+		String O_STATE = "주문완료";
 		
 		HttpSession session = req.getSession();
 		String id =(String)session.getAttribute("id");
 		
-		//System.out.println(b_num_max+" "+p_num+" "+rec_name+" "+rec_phone+" "+rec_addr+" "+payname+" "+ALL_SUM_PRICE);
-		
 		Basketdao basketdao = Basketdao.getinstance();
-		list = basketdao.basket_sum_price(id);
-		if(list != null) {
-	System.out.println("��ٱ��� sum_price ���� list ���� ");
-		}else {
-	System.out.println("��ٱ��� sum_price ���� list ���� ");
-		}
-		list.forEach((Basket_sum_price_vo t) -> {
+		
+		for(String s : b_num) {
 			
-//			System.out.println(t.getB_num());
-//			System.out.println(t.getAll_sum_price());
-//			System.out.println(t.getP_num());
-			int n = orderdao.goodorder_insert(rec_name, rec_phone, rec_addr, t.getAll_sum_price(), payname, O_STATE, id, t.getP_num(), t.getB_num());
-			if(n>0) {
-				System.out.println("�ֹ� ����");
+			int reb_num = Integer.parseInt(s);
+			
+			list = basketdao.basket_sum_price(id,reb_num);
+			
+			list.forEach((Basket_sum_price_vo t) -> {
 				
-			}else {
-				System.out.println("�ֹ� ����");
-			}
-		});
-		
-		
-		
+				int n = orderdao.goodorder_insert(rec_name, rec_phone, rec_addr, t.getAll_sum_price(), payname, O_STATE, id, t.getP_num(), t.getB_num());
+				int m = salesdao.Sales_stats_insert(t.getAll_sum_price() ,t.getP_num() ,t.getP_count()); 
+				
+				if(m>0) {
+				
+					System.out.println("성공");
+				
+				}else {
+				
+					System.out.println("실패");
+				
+				}
+				
+			});
+			
+		}
 
+		
 		
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content", "/shop/goods_order_ok.jsp");

@@ -23,42 +23,47 @@ public class Goods_list_order_Controller extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		String id = (String)session.getAttribute("id");
+		String id = (String) session.getAttribute("id");
 		Basketdao basketdao = Basketdao.getinstance();
 		ArrayList<BasketList_vo> basketlistvo = new ArrayList<BasketList_vo>();
-		
-		int all_sum_price = basketdao.basket_all_sum_price(id);
-		
+		String[] str = req.getParameterValues("c1");
 		OrderDao orderdao = OrderDao.getinstance();
-	 	Orders_vo  ordervo = orderdao.ordervoinfo();
-	 	if(ordervo ==null) {
-	 		
-	 		basketlistvo= basketdao.notorder_basketlist(id);
-	 		 
-		 	if( basketlistvo !=null) {
-		 		System.out.println("리스트 불러오기 성공");
-		 	}else {
-		 		System.out.println("리스트 불러오기 실패 ");
-		 	}
-	 	}else {
-	 		
-	 		basketlistvo= basketdao.basketlist(id);
-	 		 
-		 	if( basketlistvo !=null) {
-		 		System.out.println("리스트 불러오기 성공");
-		 	}else {
-		 		System.out.println("리스트 불러오기 실패 ");
-		 	}
-		 	
-	 	}
-	 	
-	 	req.setAttribute("all_sum_price", all_sum_price);
-	 	req.setAttribute("basketlistvo", basketlistvo);
+		Orders_vo ordervo = orderdao.ordervoinfo();
+		int all_sum_price = 0;
+		if (str != null) {
+			if (ordervo == null) {
+
+				for (int i = 0; i < str.length; i++) {
+					int b_num = Integer.parseInt(str[i]);
+					BasketList_vo vo = basketdao.notorder_checked_basketlistvo(id, b_num);
+					all_sum_price += vo.getP_price()*vo.getP_count();
+					basketlistvo.add(vo);
+
+					}
+				} else {
+				for (int i = 0; i < str.length; i++) {
+					int b_num = Integer.parseInt(str[i]);
+					BasketList_vo vo = basketdao.checked_basketlist(id, b_num);
+					all_sum_price += vo.getP_price()*vo.getP_count();
+					basketlistvo.add(vo);
+				}
+			}
+
+		} else {
+			all_sum_price = basketdao.basket_all_sum_price(id);
+			if (ordervo == null) {
+				basketlistvo = basketdao.notorder_basketlist(id);
+			} else {
+				basketlistvo = basketdao.basketlist(id);
+			}
+		}
+		req.setAttribute("all_sum_price", all_sum_price);
+		req.setAttribute("basketlistvo", basketlistvo);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content", "/shop/goods_list_order.jsp");
 		req.setAttribute("footer", "/shop/footer.jsp");
 
 		req.getRequestDispatcher("/shop/index.jsp").forward(req, resp);
-		
+
 	}
 }
