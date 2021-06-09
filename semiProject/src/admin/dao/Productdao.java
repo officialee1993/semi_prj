@@ -54,7 +54,7 @@ public class Productdao {
 			ArrayList< Product_vo> admin_all_product_select = new ArrayList<Product_vo>();
 			try {
 				con = MyDBCP.getConnection();
-				String sql = "select * from product p  where  p.p_name =?";
+				String sql = "select * from product p  where  p.p_name like '%'||?||'%' ";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, p_name);
 				rs = pstmt.executeQuery();
@@ -80,7 +80,7 @@ public class Productdao {
 			ArrayList< Product_vo> admin_product_select = new ArrayList<Product_vo>();
 			try {
 				con = MyDBCP.getConnection();
-				String sql = "select * from product p ,category c where p.cg_id = c.cg_id and c.cg_name=? and p.p_name =?";
+				String sql = "select * from product p ,category c where p.cg_id = c.cg_id and c.cg_name=? and p.p_name like '%'||?||'%' ";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, cg_name);
 				pstmt.setString(2, p_name);
