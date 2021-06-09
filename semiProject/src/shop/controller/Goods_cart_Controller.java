@@ -30,27 +30,56 @@ public class Goods_cart_Controller extends HttpServlet{
 		
 		OrderDao orderdao = OrderDao.getinstance();
 	 	Orders_vo  ordervo = orderdao.ordervoinfo();
+	 	
+	 	//íŽ˜ì´ì§• ì²˜ë¦¬ ë¶€ë¶„ 
+	 
+		
+		String spageNum = req.getParameter("pageNum");
+	 	int pageNum =1; 
+	 	if(spageNum != null) {
+	 		pageNum = Integer.parseInt(spageNum);
+	 	}
+		int startRow = (pageNum - 1) * 5 + 1; 
+		int endRow = startRow + 4;
+		int startPageNum = ((pageNum - 1) / 5 * 5) + 1; 
+		int endPageNum = startPageNum + 4;
+		
 	 	if(ordervo ==null) {
 	 		
-	 		basketlistvo= basketdao.notorder_basketlist(id);
-	 		 
-		 	if( basketlistvo !=null) {
-		 		System.out.println("¸®½ºÆ® ºÒ·¯¿À±â ¼º°ø");
-		 	}else {
-		 		System.out.println("¸®½ºÆ® ºÒ·¯¿À±â ½ÇÆÐ ");
-		 	}
+	 		basketlistvo= basketdao.notorder_basketlist(id,startRow,endRow);
+	 		int pageCount = (int)Math.ceil(basketdao.notorder_basketlist_getCount(id)/ 5.0);
+	 		System.out.println("pageCount "+pageCount);
+
+			if (endPageNum > pageCount) {
+				
+				endPageNum = pageCount;
+				
+			}
+			req.setAttribute("pageCount", pageCount);
+			req.setAttribute("endPageNum", endPageNum);
 	 	}else {
 	 		
-	 		basketlistvo= basketdao.basketlist(id);
-	 		 
-		 	if( basketlistvo !=null) {
-		 		System.out.println("¸®½ºÆ® ºÒ·¯¿À±â ¼º°ø");
-		 	}else {
-		 		System.out.println("¸®½ºÆ® ºÒ·¯¿À±â ½ÇÆÐ ");
-		 	}
-		 	
+	 		basketlistvo= basketdao.basketlist(id,startRow,endRow);
+	 		int pageCount =(int)Math.ceil(basketdao.basketlist_getCount(id)/ 5.0);
+	 		System.out.println("pageCount "+pageCount);
+
+			if (endPageNum > pageCount) {
+				
+				endPageNum = pageCount;
+				
+			}
+			req.setAttribute("pageCount", pageCount);
+			req.setAttribute("endPageNum", endPageNum);
 	 	}
 	 	
+	 	
+		
+		
+		req.setAttribute("startPageNum", startPageNum);
+		
+		req.setAttribute("pageNum", pageNum);
+		System.out.println("startRow "+startRow +" endRow "+endRow+" startPageNum "+startPageNum+" endPageNum "+endPageNum);
+
 	 	req.setAttribute("basketlistvo", basketlistvo);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content", "/shop/goods_cart.jsp");
@@ -63,43 +92,65 @@ public class Goods_cart_Controller extends HttpServlet{
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		int p_num = Integer.parseInt(req.getParameter("p_num"));
-		int p_count = Integer.parseInt(req.getParameter("p_count")); // ¼ö·® 
-		String p_size = req.getParameter("p_size"); // »çÀÌÁî 
+		int p_count = Integer.parseInt(req.getParameter("p_count")); // ï¿½ï¿½ï¿½ï¿½ 
+		String p_size = req.getParameter("p_size"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		ArrayList<BasketList_vo> basketlistvo = new ArrayList<BasketList_vo>();
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
 		
+		// íŽ˜ì´ì§• ì²˜ë¦¬ ë¶€ë¶„ 
+		
+		String spageNum = req.getParameter("pageNum");
+	 	int pageNum =1; 
+	 	if(spageNum != null) {
+	 		pageNum = Integer.parseInt(spageNum);
+	 	}
+	 	
+		int startRow = (pageNum - 1) * 5 + 1; 
+		int endRow = startRow + 4;
+		int startPageNum = ((pageNum - 1) / 5 * 5) + 1; 
+		int endPageNum = startPageNum + 4;
+	
+		
 	 	Basketdao basketdao = Basketdao.getinstance();
 	 	int n = basketdao.insert(p_count, p_num, id, p_size);
-	 	if(n>0) {
-	 		System.out.println("Àå¹Ù±¸´Ï ÀúÀå ¼º°ø ");
-	 	}else {
-	 		System.out.println("Àå¹Ù±¸´Ï ÀúÀå ½ÇÆÐ");
-	 	}
+	 
 	 	
 	 	OrderDao orderdao = OrderDao.getinstance();
 	 	Orders_vo  ordervo = orderdao.ordervoinfo();
 	 	if(ordervo ==null) {
 	 		
-	 		basketlistvo= basketdao.notorder_basketlist(id);
-	 		 
-		 	if( basketlistvo !=null) {
-		 		System.out.println("¸®½ºÆ® ºÒ·¯¿À±â ¼º°ø");
-		 	}else {
-		 		System.out.println("¸®½ºÆ® ºÒ·¯¿À±â ½ÇÆÐ ");
-		 	}
+	 		basketlistvo= basketdao.notorder_basketlist(id,startRow,endRow );
+	 		int pageCount = (int) Math.ceil(basketdao.notorder_basketlist_getCount(id)/ 5.0);
+	 		if (endPageNum > pageCount) {
+				
+				endPageNum = pageCount;
+				
+			}
+	 		req.setAttribute("endPageNum", endPageNum);
+	 		req.setAttribute("pageCount", pageCount);
 	 	}else {
 	 		
-	 		basketlistvo= basketdao.basketlist(id);
-	 		 
-		 	if( basketlistvo !=null) {
-		 		System.out.println("¸®½ºÆ® ºÒ·¯¿À±â ¼º°ø");
-		 	}else {
-		 		System.out.println("¸®½ºÆ® ºÒ·¯¿À±â ½ÇÆÐ ");
-		 	}
-		 	
+	 		basketlistvo= basketdao.basketlist(id,startRow,endRow);
+	 		int n1 = basketdao.basketlist_getCount(id);
+	 		System.out.println("ê²Œì‹œê¸€ ê°œìˆ˜ "+ n1);
+	 		int pageCount =(int)Math.ceil(basketdao.basketlist_getCount(id)/ 5.0);
+	 		
+	 		if (endPageNum > pageCount) {
+				
+				endPageNum = pageCount;
+				
+			}
+	 		req.setAttribute("pageCount", pageCount);
+	 		req.setAttribute("endPageNum", endPageNum);
 	 	}
 	 	
+	 	req.setAttribute("startPageNum", startPageNum);
+		
+		req.setAttribute("pageNum", pageNum);
+	 	
+		
+		
 	 	req.setAttribute("basketlistvo", basketlistvo);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content", "/shop/goods_cart.jsp");

@@ -91,8 +91,25 @@
 			
 			<div class="goods_pagenum">
 				
-				<span><a href="">1</a></span>
-				
+						<c:if test="${startPageNum>10 }">
+							<a href="${cp }/admin/goods_list?pageNum=${startPageNum-1 }">[이전]</a>
+						</c:if>
+						<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+							<c:choose>
+								<c:when test="${i==pageNum }">
+									<a href="${cp }/admin/goods_list?pageNum=${i}">
+									<span style="color:black">[${i }]</span></a>
+								</c:when>
+								<c:otherwise>
+									<a href="${cp }/admin/goods_list?pageNum=${i}">
+									<span style="color:gray">[${i }]</span></a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>	
+						<c:if test="${endPageNum<pageCount }">
+							<a href="${cp }/admin/goods_list?pageNum=${endPageNum+1 }">[다음]</a>
+						</c:if>
+
 			</div>
 			
 			</div>

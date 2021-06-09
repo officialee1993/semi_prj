@@ -23,7 +23,27 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	
 	ArrayList<Product_category_vo> list = new ArrayList<Product_category_vo>();
 	Productdao prodductdao = Productdao.getinstance();
-	list = prodductdao.pro_cate_list();
+	
+	String spageNum = req.getParameter("pageNum");  //현제 페이지(쪽수) 
+	int pageNum = 1;
+	if (spageNum != null) {
+		pageNum = Integer.parseInt(spageNum);
+	}
+	int startRow = (pageNum - 1) * 8 + 1; 
+	int endRow = startRow + 7;
+	
+	int pageCount = (int) Math.ceil(prodductdao.pro_cate_list_getCount() / 8.0);
+	System.out.println(pageCount);
+	int startPageNum = ((pageNum - 1) / 10 * 10) + 1; 
+	int endPageNum = startPageNum + 9;
+	if (endPageNum > pageCount) {
+		
+		endPageNum = pageCount;
+		
+	}
+	
+	list = prodductdao.pro_cate_list(startRow, endRow);
+	
 	
 	if(sidemenu==null) {
 		sidemenu="/admin/sidemenu.jsp";
@@ -31,11 +51,17 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	if(content==null) {
 		content="/admin/goods_list.jsp";
 	}
+	 
 	
 	String cp=req.getContextPath();
 	ServletContext application=getServletContext();
 	application.setAttribute("cp", cp);
 	
+	
+	req.setAttribute("pageCount", pageCount);
+	req.setAttribute("startPageNum", startPageNum);
+	req.setAttribute("endPageNum", endPageNum);
+	req.setAttribute("pageNum", pageNum);
 	
 	req.setAttribute("list", list);
 	req.setAttribute("sidemenu", sidemenu);

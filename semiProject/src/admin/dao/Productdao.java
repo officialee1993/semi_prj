@@ -54,7 +54,7 @@ public class Productdao {
 			ArrayList< Product_vo> admin_all_product_select = new ArrayList<Product_vo>();
 			try {
 				con = MyDBCP.getConnection();
-				String sql = "select * from product p  where  p.p_name =?";
+				String sql = "select * from product p  where  p.p_name like '%'||?||'%' ";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, p_name);
 				rs = pstmt.executeQuery();
@@ -80,7 +80,7 @@ public class Productdao {
 			ArrayList< Product_vo> admin_product_select = new ArrayList<Product_vo>();
 			try {
 				con = MyDBCP.getConnection();
-				String sql = "select * from product p ,category c where p.cg_id = c.cg_id and c.cg_name=? and p.p_name =?";
+				String sql = "select * from product p ,category c where p.cg_id = c.cg_id and c.cg_name=? and p.p_name like '%'||?||'%' ";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, cg_name);
 				pstmt.setString(2, p_name);
@@ -316,6 +316,29 @@ public class Productdao {
 				return -1;
 			}
 		}
+		
+		public int pro_cate_list_getCount() {
+			Connection con = null; 
+			PreparedStatement pstmt = null; 
+			ResultSet rs = null; 
+			try{
+				con = MyDBCP.getConnection();
+				String sql = "select NVL(count(*),0) from\r\n"
+						+ "(select p.p_num,p.p_name,p.p_count,p.p_price,p.p_click_num,p.p_date,p.save_img_name,c.cg_name "
+						+ "from product p , category c where p.cg_id=c.cg_id)";
+				pstmt = con.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					int n = rs.getInt(1);
+					return n ; 
+				}
+				return -1; 
+				
+			}catch(SQLException s) {
+				s.getMessage();
+				return -1; 
+			}
+		}
 		public ArrayList<Product_category_vo> pro_cate_list(){
 			
 			Connection con = null; 
@@ -343,7 +366,38 @@ public class Productdao {
 			}
 			
 		}
-		
+public ArrayList<Product_category_vo> pro_cate_list(int startRow, int endRow){
+			
+			Connection con = null; 
+			PreparedStatement pstmt = null; 
+			ResultSet rs = null; 
+			Product_category_vo vo =null;
+			ArrayList<Product_category_vo> list = new ArrayList<Product_category_vo>();
+			try {
+				
+				con = MyDBCP.getConnection();
+				String sql = "select * from (select pro_cate_list.*, rownum rnum from (select p.p_num,p.p_name,p.p_count,p.p_price,p.p_click_num,p.p_date,p.save_img_name,c.cg_name "
+						+ "from product p , category c where p.cg_id=c.cg_id order by p_num desc)pro_cate_list)where rnum>=? and rnum<=?";
+				pstmt =con .prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					
+					vo = new Product_category_vo(rs.getInt("p_num") ,rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),rs.getInt("p_click_num"),
+								rs.getDate("p_date"), rs.getString("save_img_name"), rs.getString("cg_name"));
+					list.add(vo);
+									
+				}
+				return list; 
+			}catch(SQLException s) {
+				s.getMessage();
+				return null; 
+			}
+			
+		}
+
 
 		public ArrayList<Product_vo> pro_list(int cg_id){
 			

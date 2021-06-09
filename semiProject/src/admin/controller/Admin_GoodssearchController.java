@@ -53,13 +53,7 @@ public class Admin_GoodssearchController extends HttpServlet {
 			
 			list = productdao.admin_product_select(ct_gory, search);
 		}
-		if(list != null) {
-			
-			System.out.println("카테고리 검색에 따른 상품 출력 성공 ");
-			
-		}else {
-			System.out.println("카테고리 검색에 따른 상품 출력 실패 ");
-		}
+		
 		
 		req.setAttribute("list", list);
 	}

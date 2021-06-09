@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 import oracle.jdbc.driver.DBConversion;
 import shop.db.MyDBCP;
 import shop.vo.BasketList_vo;
@@ -20,7 +21,8 @@ public class Basketdao {
 		return instance; 
 	}
 	private Basketdao () {}
-	
+
+
 public ArrayList<Basket_sum_price_vo> basket_sum_price(String id, int b_num) {
 		
 		Connection con = null; 
@@ -175,7 +177,7 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id, int b_num) {
 			con = MyDBCP.getConnection();
 			
 			String sql = "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id=? and p.p_num = b.p_num";
-			// ȸ���� ���� ��� ��ٱ��� (�ֹ� ���� ��ٱ��ϵ� ���� ) 
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs= pstmt.executeQuery();
@@ -198,6 +200,75 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id, int b_num) {
 			MyDBCP.close(con, pstmt, rs);
 		}
 	}
+	
+	public ArrayList<BasketList_vo> notorder_basketlist(String id ,int startRow,int endRow){ 
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+	
+		
+		try {
+			ArrayList< BasketList_vo> basketlist = new ArrayList<BasketList_vo>();
+			con = MyDBCP.getConnection();
+			
+			String sql = "select * from "
+					+ "(select notorder_basketlist.*,rownum rnum "
+					+ "from (select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id='one' and p.p_num = b.p_num order by b.b_num desc)notorder_basketlist) "
+					+ "where rnum>=? and rnum<=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+			BasketList_vo basketlistvo = new BasketList_vo(rs.getString("save_img_name"), rs.getString("p_name"),
+						rs.getInt("p_price"), rs.getInt("p_count"),rs.getString("p_size"),rs.getInt("b_num"));
+				
+			basketlist.add(basketlistvo);
+				
+			}
+			return basketlist;
+			
+			
+		}catch(SQLException s) {
+			System.out.println(s.getMessage());
+			return null; 
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+	}
+
+	
+	public int notorder_basketlist_getCount(String id) {
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=MyDBCP.getConnection();
+			String sql="select NVL(count(*),0) from (select p.save_img_name,b.p_size,p.p_name,p.p_price,"
+					+ "b.p_count,b.b_num from Product p,Basket b where b.id=? and p.p_num = b.p_num)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				int n=rs.getInt(1);
+				return n;
+			}
+			return -1;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+	}
+
 	public BasketList_vo checked_basketlist(String id , int b_num){ 
 		
 		Connection con = null; 
@@ -236,8 +307,47 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id, int b_num) {
 			MyDBCP.close(con, pstmt, rs);
 		}
 	}
+	public ArrayList<BasketList_vo> basketlist(String id, int startRow, int endRow ){ 
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+	
+		
+		try {
+			ArrayList< BasketList_vo> basketlist = new ArrayList<BasketList_vo>();
+			con = MyDBCP.getConnection();
+			
+			String sql = "select * from(select basketlist.*,rownum rnum from(select * from (select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id=? and p.p_num = b.p_num minus select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,o.b_num from Product p,orders o ,Basket b where o.id=? and p.p_num = o.p_num and o.b_num=b.b_num )order by b_num desc) basketlist ) where rnum>=? and rnum<=?"
+					;
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, id);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+			BasketList_vo basketlistvo = new BasketList_vo(rs.getString("save_img_name"), rs.getString("p_name"),
+						rs.getInt("p_price"), rs.getInt("p_count"),rs.getString("p_size"),rs.getInt("b_num"));
+				
+			basketlist.add(basketlistvo);
+				
+			}
+			return basketlist;
+			
+			
+		}catch(SQLException s) {
+			System.out.println(s.getMessage());
+			return null; 
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+	}
 
-	public ArrayList<BasketList_vo> basketlist(String id){ //���� �ѹ� �� ��ٱ��� list ���� // �̰� �ľ� �Ѵ�. 
+	public ArrayList<BasketList_vo> basketlist(String id){ 
 		
 		Connection con = null; 
 		PreparedStatement pstmt = null; 
@@ -252,7 +362,7 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id, int b_num) {
 					+ "minus\r\n"
 					+ "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,o.b_num from Product p,orders o ,Basket b where o.id=? and p.p_num = o.p_num and o.b_num=b.b_num\r\n"
 					;
-			// ��ٱ��̳׼� �ֹ��� ��ٱ��� �����ϰ� �̾� ��� sql ���� �ϱ� 
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, id);
@@ -272,6 +382,34 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id, int b_num) {
 		}catch(SQLException s) {
 			System.out.println(s.getMessage());
 			return null; 
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+	}
+	public int basketlist_getCount(String id) {
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=MyDBCP.getConnection();
+			String sql="select NVL(count(*),0) from \r\n"
+					+ "(select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id=? and p.p_num = b.p_num\r\n"
+					+ "minus\r\n"
+					+ "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,o.b_num from Product p,orders o ,Basket b where o.id=? and p.p_num = o.p_num and o.b_num=b.b_num)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, id);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				int n=rs.getInt(1);
+				return n;
+			}
+			return -1;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
 		}finally {
 			MyDBCP.close(con, pstmt, rs);
 		}

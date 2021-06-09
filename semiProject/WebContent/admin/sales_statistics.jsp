@@ -12,7 +12,7 @@
 			<div class="admin_goods_list admin_order_detail">
 			<div class="order_info">
 				<h5>매출 통계</h5>
-				<div class="sales_date">
+				<div class="sales_date" >
 				
 					<button type="button" class="btn btn-outline-dark" onclick="kal_send(this.value)" value="1" name ="todays">오늘</button>
 					<button type="button" class="btn btn-outline-dark" onclick="kal_send(this.value)" value="2" name ="months">이번달</button>
@@ -21,7 +21,8 @@
 					<!-- 날짜선택 -->
 					<input type="date" name ="beforekal" ><span>~</span><input type="date" name = "afterkal">
 					<button type="button" class="btn btn-outline-dark" onclick="kal_send()">검색</button>
-					<span class="sales_result">총 주문금액 : ${all_sum}</span>
+					<span class="sales_result" id = "all_sum">총 주문금액 : ${all_sum}</span>
+					
 				</div>
 				
 			<script type="text/javascript">
@@ -81,12 +82,15 @@
 	
 			xhr.onreadystatechange = function(){
 				if(xhr.readyState == 4 && xhr.status == 200){
+					let all_sum = document.getElementById("all_sum");
 					
 					let childs=searchlist.childNodes;
 					
+					
 					for(let i=childs.length-1;i>=1;i--){
 						searchlist.removeChild(childs.item(i));
-					}  
+					}
+					
 					
 					let xml = xhr.responseXML;
 					let comm=xml.getElementsByTagName("comm");
@@ -113,7 +117,7 @@
 					trHead.appendChild(th4);
 					
 					searchlist.appendChild(trHead);
-					
+					let sum=0;
 						for(let i=0;i<comm.length;i++){
 						
 						
@@ -121,7 +125,7 @@
 						let all_sales=comm[i].getElementsByTagName("all_sales")[0].textContent;
 						let p_count=comm[i].getElementsByTagName("p_count")[0].textContent;
 						let p_num=comm[i].getElementsByTagName("p_num")[0].textContent;
-					
+						sum = sum + parseInt(all_sales);
 						let tr=document.createElement("tr");
 						let td1=document.createElement("td");
 						let td2=document.createElement("td");
@@ -141,7 +145,7 @@
 						searchlist.appendChild(tr);
 						
 					}
-						
+						all_sum.innerHTML= "총 주문금액 : "+sum;
 				}
 			};
 			
