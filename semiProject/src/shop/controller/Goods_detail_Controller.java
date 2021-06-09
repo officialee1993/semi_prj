@@ -25,9 +25,9 @@ public class Goods_detail_Controller extends HttpServlet{
 		String spageNum=req.getParameter("pageNum");
 
 
-		ReviewDao rdao=ReviewDao.getinstance();
-		ArrayList<A_board_vo> rlist=rdao.goodsReviewList(p_num);
-		System.out.println("test4"+rlist);
+		//ReviewDao rdao=ReviewDao.getinstance();
+		//ArrayList<A_board_vo> rlist=rdao.goodsReviewList(p_num);
+		//System.out.println("test4"+rlist);
 		
 		
 		int pageNum=1;
@@ -53,7 +53,7 @@ public class Goods_detail_Controller extends HttpServlet{
 		Productdao dao = Productdao.getinstance();
 		Product_vo vo= dao.getinfo(p_num);
 		
-		req.setAttribute("rlist", rlist);
+		//req.setAttribute("rlist", rlist);
 		req.setAttribute("qlist", list);
 		req.setAttribute("pageCount", pageCount);
 		req.setAttribute("startPageNum", startPageNum);

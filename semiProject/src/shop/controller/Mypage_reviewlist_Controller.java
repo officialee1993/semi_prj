@@ -19,13 +19,32 @@ public class Mypage_reviewlist_Controller extends HttpServlet{
 		req.setCharacterEncoding("utf-8");
 		HttpSession session=req.getSession();
 		String id=(String)session.getAttribute("id");
+		String spageNum=req.getParameter("pageNum");
+		
+		int pageNum=1;
+		if(spageNum!=null) {
+			pageNum=Integer.parseInt(spageNum);
+		}
+		int startRow=(pageNum-1)*10+1;
+		int endRow=startRow+9;
 		
 		ReviewDao dao=ReviewDao.getinstance();
-		ArrayList<A_board_vo> list=new ArrayList<A_board_vo>();
+		ArrayList<A_board_vo> list=dao.myReviewList(id,startRow,endRow);
 		
-		list=dao.myReviewList(id);
+		int pageCount=(int)Math.ceil(dao.getCountMyReview(id)/10.0);
 		
+		//시작페이지 번호
+		int startPageNum=((pageNum-1)/10*10)+1;//(pageNum%10)*10+1;
+		//끝페이지 번호 
+		int endPageNum=startPageNum+9;
+		if(endPageNum>pageCount) {
+			endPageNum=pageCount;
+		}
 		
+		req.setAttribute("pageCount", pageCount);
+		req.setAttribute("startPageNum", startPageNum);
+		req.setAttribute("endPageNum", endPageNum);
+		req.setAttribute("pageNum", pageNum);
 		req.setAttribute("myReviewList", list);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("sidemenu", "/shop/mypage_sidemenu.jsp");

@@ -23,66 +23,28 @@ function checkData(){
 	}
 	
 }
-
-//댓글리스트 등록클릭시 새로고침
-	function list(status){		 		
-var a_b_num=document.getElementsByClassName("a_b_num")[status].value;
-var reply_wrap_box=document.getElementsByClassName("reply_wrap_box")[status];
-document.getElementsByName("comments")[status].value='';
-
-
-let xhr=new XMLHttpRequest();
-xhr.onreadystatechange=function(){
-if(xhr.readyState==4 && xhr.status==200){
-	
-	let childs=reply_wrap_box.childNodes;
-
-	for(let i=childs.length-1;i>=1;i--){
-		reply_wrap_box.removeChild(childs.item(i));
-	}  
-	
-	let xml=xhr.responseXML;
-	let comm=xml.getElementsByTagName("comm");
-	for(let i=0;i<comm.length;i++){
-
-		let content=comm[i].getElementsByTagName("content")[0].textContent;
-		if(content!='null'){
-			let reply_box=document.createElement("div");
-			let reply_id=document.createElement("p");
-			let reply_con=document.createElement("p");
-			let reply_date=document.createElement("p");
-			
-			reply_box.className="reply_box";
-			reply_id.className="reply_id";
-			reply_con.className="reply_con";
-			reply_date.className="reply_date";
-			
-			reply_box.appendChild(reply_id);
-			reply_box.appendChild(reply_con);
-			reply_box.appendChild(reply_date);
-			
-			let renum=comm[i].getElementsByTagName("renum")[0].textContent;
-			let id=comm[i].getElementsByTagName("id")[0].textContent;
-			let date=comm[i].getElementsByTagName("date")[0].textContent;
-			let abnum=comm[i].getElementsByTagName("abnum")[0].textContent;
-			
-			reply_id.innerHTML=id;
-			reply_con.innerHTML=content;
-			reply_date.innerHTML=date;
-							
-			reply_wrap_box.appendChild(reply_box);
-
-		}
-
-		
-	
-		
+//댓글추가..
+function addComments(a_b_num,comments){
+if(${sessionScope.id==null}){
+	alert("로그인해주세요");
+	return;
 	}
-}
-};
-xhr.open('get','${pageContext.request.contextPath }/shop/commentlist?a_b_num='+a_b_num,true);
-xhr.send();
-}
+	//var comments=document.getElementById("comments").value;
+	//var comments=document.getElementsByName("comments")[status].value;
+	let xhr=new XMLHttpRequest();
+	xhr.onreadystatechange=function(){
+	if(xhr.readyState==4 && xhr.status==200){
+		let xml=xhr.responseXML;
+		let result=xml.getElementsByTagName("code")[0].textContent;
+			}
+		};
+	xhr.open('post','${pageContext.request.contextPath }/shop/comments.do',true);
+	//post방식으로 요청시 콘텐트타입에서 인코딩방식 설정하기 - 꼭 해줘야 함
+	xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	let params="a_b_num="+a_b_num+"&comments="+comments;
+	xhr.send(params);
+	}
+
 
 
 </script>
@@ -120,135 +82,13 @@ xhr.send();
 		
 		<div class="board review_board">
 		<h3>상품후기</h3>
-		<div class="review_wrap">
-		<c:forEach var="list" items="${rlist }" varStatus="status">
-			<c:choose>			
-				<c:when test="${not empty list.a_b_content }">
-					<input class="a_b_num" id="a_b_num" type="hidden" value="${list.a_b_num }">
-					<div class="review_box">
-					<p class="review_id">${list.wr_id }</p>
-					<p class="review_con">${list.a_b_content }</p>
-					<p class="review_date">${list.wr_date }</p>
-					<div class="reply_wrap" id="reply_wrap" class="reply_wrap">
-					<div class="mb-3">
-  						<label for="" class="form-label"></label>
-						<textarea name="comments" id="comments" class="form-control" rows="1"></textarea>
-						<button onclick="addComments(${list.a_b_num },${status.index });list(${status.index });" type="button" class="btn btn-outline-secondary">등록</button>
-					</div>
-					</div>
-					<div class="reply_wrap_box">
-
-					</div>
-					<div class=""></div>
-					</div>
-						<script>
-						/*페이지 접속시 댓글 노출*/
-					 	function listAllReply(){
-						 	//var a_b_num=document.getElementById("a_b_num").value;
-							//var reply_wrap=document.getElementById("reply_wrap");
-							
-							var a_b_num=document.getElementsByClassName("a_b_num")[${status.index }].value;
-							var reply_wrap_box=document.getElementsByClassName("reply_wrap_box")[${status.index }];
-							
-							let xhr=new XMLHttpRequest();
-							xhr.onreadystatechange=function(){
-							if(xhr.readyState==4 && xhr.status==200){
-								
-								let childs=reply_wrap_box.childNodes;
-
-								for(let i=childs.length-1;i>=1;i--){
-									reply_wrap_box.removeChild(childs.item(i));
-								}  
-								
-								let xml=xhr.responseXML;
-								let comm=xml.getElementsByTagName("comm");
-								for(let i=0;i<comm.length;i++){
-									
-									/*<div class="reply_box">
-									<p class="reply_id">댓글아이디</p>
-									<p class="reply_con">댓글내용</p>
-									<p class="reply_date">댓글날짜</p>
-									</div> */
-									let content=comm[i].getElementsByTagName("content")[0].textContent;
-									if(content!='null'){
-										let reply_box=document.createElement("div");
-										let reply_id=document.createElement("p");
-										let reply_con=document.createElement("p");
-										let reply_date=document.createElement("p");
-										
-										reply_box.className="reply_box";
-										reply_id.className="reply_id";
-										reply_con.className="reply_con";
-										reply_date.className="reply_date";
-										
-										reply_box.appendChild(reply_id);
-										reply_box.appendChild(reply_con);
-										reply_box.appendChild(reply_date);
-										
-										let renum=comm[i].getElementsByTagName("renum")[0].textContent;
-										let id=comm[i].getElementsByTagName("id")[0].textContent;
-										let date=comm[i].getElementsByTagName("date")[0].textContent;
-										let abnum=comm[i].getElementsByTagName("abnum")[0].textContent;
-										
-										reply_id.innerHTML=id;
-										reply_con.innerHTML=content;
-										reply_date.innerHTML=date;
-														
-										reply_wrap_box.appendChild(reply_box);
-									}
-									
-									
-								
-									
-								}
-							}
-						};
-						xhr.open('get','${pageContext.request.contextPath }/shop/commentlist?a_b_num='+a_b_num,true);
-						xhr.send();
-					}listAllReply();
-						</script>
-				</c:when>
-			</c:choose>
-		</c:forEach>
-		
-
-							
-
-
-	 	<script>
-
-	 	
-	 	
-	 	//댓글추가..
-	 	function addComments(a_b_num,status){
-	 		
-	 		if(${sessionScope.id==null}){
-	 			alert("로그인해주세요");
-	 			return;
-	 		}
-	 		
-	 		//var comments=document.getElementById("comments").value;
-	 		var comments=document.getElementsByName("comments")[status].value;
-	 		
-
-	 		
-	 		let xhr=new XMLHttpRequest();
-	 		xhr.onreadystatechange=function(){
-	 			if(xhr.readyState==4 && xhr.status==200){
-	 				let xml=xhr.responseXML;
-	 				let result=xml.getElementsByTagName("code")[0].textContent;
-	 				listAllReply();
-	 			}
-	 		};
-	 		xhr.open('post','${pageContext.request.contextPath }/shop/comments.do',true);
-	 		//post방식으로 요청시 콘텐트타입에서 인코딩방식 설정하기 - 꼭 해줘야 함
-	 		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	 		let params="a_b_num="+a_b_num+"&comments="+comments;
-	 		xhr.send(params);
-	 	}
-	 	</script>
+		<div id="review_wrap" class="review_wrap">
+					
+		</div>
 
 		</div>
+				<div class="reviewPageNum" id="reviewPageNum" style="margin-top:16px;text-align:center">
+		
 		</div>
 	
 		<!-- 문의 게시판 -->
@@ -330,33 +170,17 @@ xhr.send();
 
 	
 <script type="text/javascript">
-
-	function questionList(pgNum){
- 	var question_table=document.getElementById("question_table");
- 	var question_board_page=document.getElementById("question_board_page");
- 	
+	/*후기게시판 리스트*/
+	function reviewList(pgNum){
+ 	var review_wrap=document.getElementById("review_wrap");
+ 	var reviewPageNum=document.getElementById("reviewPageNum");
  	
 	let xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
-			
-			let childs=question_table.childNodes;
 
-			for(let i=childs.length-1;i>=2;i--){
-				question_table.removeChild(childs.item(i));
-			}
-			
-			let pagenumchilds=question_board_page.childNodes;
-			for(let i=pagenumchilds.length-1;i>=1;i--){
-				question_board_page.removeChild(pagenumchilds.item(i));
-			}  
-			
-			
-			
 			let xml=xhr.responseXML;
 			let comm=xml.getElementsByTagName("comm");
-
-			
 			
 			
 			let pageCount=xml.getElementsByTagName("pageCount")[0].textContent;
@@ -364,6 +188,243 @@ xhr.send();
 			let endPageNum=xml.getElementsByTagName("endPageNum")[0].textContent;
 			let pageNum=xml.getElementsByTagName("pageNum")[0].textContent;
 			
+			
+			let pagenumchilds=reviewPageNum.childNodes;
+			for(let i=pagenumchilds.length-1;i>=1;i--){
+				reviewPageNum.removeChild(pagenumchilds.item(i));
+			}  
+			
+			
+			for(let i=startPageNum;i<=endPageNum;i++){
+				if(pageNum==i){
+					let span=document.createElement("span");
+					span.innerHTML="["+i+"]";
+					span.style.color="black";
+					span.style.fontWeight="700";
+					reviewPageNum.appendChild(span);
+				}else{
+					let a=document.createElement("a");
+					a.innerHTML="["+i+"]";
+					a.style.color="grey";
+					a.style.fontWeight="300";
+					a.style.cursor="pointer";
+					
+					a.onclick=function(){
+						let review_wrapchilds=review_wrap.childNodes;
+						for(let i=review_wrapchilds.length-1;i>=1;i--){
+							review_wrap.removeChild(review_wrapchilds.item(i));
+						}  
+						reviewList(i);
+						window.scrollTo({top:800, left:0, behavior:'auto'});
+					}
+					reviewPageNum.appendChild(a);
+				}
+			}
+			
+
+			for(let i=0;i<comm.length;i++){
+					let a_b_content=comm[i].getElementsByTagName("a_b_content")[0].textContent;
+					let wr_id=comm[i].getElementsByTagName("wr_id")[0].textContent;
+					let a_b_num=comm[i].getElementsByTagName("a_b_num")[0].textContent;
+					let wr_date=comm[i].getElementsByTagName("wr_date")[0].textContent;
+					
+					let replyNum=document.createElement("input");
+					replyNum.type="hidden";
+					replyNum.value=a_b_num;
+					replyNum.className="replyNum";
+					replyNum.name="replyNum";
+					
+					let review_box=document.createElement("div");
+					review_box.className="review_box";
+					let review_id=document.createElement("p");
+					review_id.className="review_id";
+					let review_con=document.createElement("p");
+					review_con.className="review_con";
+					let review_date=document.createElement("p");
+					review_date.className="review_date";
+					let reply_wrap=document.createElement("div");
+					reply_wrap.className="reply_wrap";
+					let mb3=document.createElement("div");
+					mb3.className="mb-3";
+					let formLabel=document.createElement("label");
+					formLabel.className="form-label";
+					let formControl=document.createElement("textarea");
+					formControl.className="form-control";
+					let btnOutlineSecondary=document.createElement("button");
+					btnOutlineSecondary.className="btn";
+					btnOutlineSecondary.innerHTML="등록";
+					btnOutlineSecondary.onclick=function(){
+						if(formControl.value==''){
+							alert("댓글을 입력해주세요");
+						}else{
+							addComments(a_b_num,formControl.value);
+							list(a_b_num,i);
+							formControl.value='';
+						}
+					}
+					let reply_wrap_box=document.createElement("div");
+					reply_wrap_box.className="reply_wrap_box";
+					
+					review_box.appendChild(replyNum);
+					review_box.appendChild(review_id);
+					review_box.appendChild(review_con);
+					review_box.appendChild(review_date);
+					review_box.appendChild(reply_wrap);
+					reply_wrap.appendChild(mb3);
+					mb3.appendChild(formLabel);
+					mb3.appendChild(formControl);
+					mb3.appendChild(btnOutlineSecondary);
+					review_box.appendChild(reply_wrap_box);
+					
+					review_id.innerHTML=wr_id;
+					review_con.innerHTML=a_b_content;
+					review_date.innerHTML=wr_date;
+
+					review_wrap.appendChild(review_box);
+					
+					function listAllReply(){
+						let xhr=new XMLHttpRequest();
+						xhr.onreadystatechange=function(){
+						if(xhr.readyState==4 && xhr.status==200){
+							
+							 let childs=reply_wrap_box.childNodes;
+
+							for(let i=childs.length-1;i>=1;i--){
+								reply_wrap_box.removeChild(childs.item(i));
+							}    
+							
+							let xml=xhr.responseXML;
+							let comm=xml.getElementsByTagName("comm");
+							for(let i=0;i<comm.length;i++){
+								
+								
+
+									let reply_box=document.createElement("div");
+									let reply_id=document.createElement("p");
+									let reply_con=document.createElement("p");
+									let reply_date=document.createElement("p");
+									
+									reply_box.className="reply_box";
+									reply_id.className="reply_id";
+									reply_con.className="reply_con";
+									reply_date.className="reply_date";
+									
+									reply_box.appendChild(reply_id);
+									reply_box.appendChild(reply_con);
+									reply_box.appendChild(reply_date);
+									
+									let content=comm[i].getElementsByTagName("content")[0].textContent;
+									let renum=comm[i].getElementsByTagName("renum")[0].textContent;
+									let id=comm[i].getElementsByTagName("id")[0].textContent;
+									let date=comm[i].getElementsByTagName("date")[0].textContent;
+									let abnum=comm[i].getElementsByTagName("abnum")[0].textContent;
+									
+									reply_id.innerHTML=id;
+									reply_con.innerHTML=content;
+									reply_date.innerHTML=date;
+													
+									reply_wrap_box.appendChild(reply_box);
+								
+							}
+						}
+					};
+					xhr.open('get','${pageContext.request.contextPath }/shop/commentlist?a_b_num='+a_b_num,true);
+					xhr.send();
+					}listAllReply();
+			}
+		}
+	};
+	xhr.open('post','${pageContext.request.contextPath }/admin/review_list.do',true);
+	//post방식으로 요청시 콘텐트타입에서 인코딩방식 설정하기 - 꼭 해줘야 함
+	xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	let params="p_num=${vo.p_num}&pageNum="+pgNum;
+	xhr.send(params);
+}reviewList();
+
+
+//댓글리스트 등록클릭시 새로고침
+function list(a_b_num,index){	 		
+var reply_wrap_box=document.getElementsByClassName("reply_wrap_box")[index];
+
+
+let xhr=new XMLHttpRequest();
+xhr.onreadystatechange=function(){
+if(xhr.readyState==4 && xhr.status==200){
+
+let childs=reply_wrap_box.childNodes;
+
+for(let i=childs.length-1;i>=0;i--){
+	reply_wrap_box.removeChild(childs.item(i));
+}  
+
+let xml=xhr.responseXML;
+let comm=xml.getElementsByTagName("comm");
+for(let i=0;i<comm.length;i++){
+		let reply_box=document.createElement("div");
+		let reply_id=document.createElement("p");
+		let reply_con=document.createElement("p");
+		let reply_date=document.createElement("p");
+		
+		reply_box.className="reply_box";
+		reply_id.className="reply_id";
+		reply_con.className="reply_con";
+		reply_date.className="reply_date";
+		
+		reply_box.appendChild(reply_id);
+		reply_box.appendChild(reply_con);
+		reply_box.appendChild(reply_date);
+		
+		let content=comm[i].getElementsByTagName("content")[0].textContent;
+		let renum=comm[i].getElementsByTagName("renum")[0].textContent;
+		let id=comm[i].getElementsByTagName("id")[0].textContent;
+		let date=comm[i].getElementsByTagName("date")[0].textContent;
+		let abnum=comm[i].getElementsByTagName("abnum")[0].textContent;
+		
+		reply_id.innerHTML=id;
+		reply_con.innerHTML=content;
+		reply_date.innerHTML=date;
+						
+		reply_wrap_box.appendChild(reply_box);
+
+}
+}
+};
+xhr.open('get','${pageContext.request.contextPath }/shop/commentlist?a_b_num='+a_b_num,true);
+xhr.send();
+}
+
+
+
+
+
+
+
+
+
+
+
+	
+	/*문의글 리스트*/
+	function questionList(pgNum){
+ 	var question_table=document.getElementById("question_table");
+ 	var question_board_page=document.getElementById("question_board_page");
+	let xhr=new XMLHttpRequest();
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4 && xhr.status==200){
+			let childs=question_table.childNodes;
+			for(let i=childs.length-1;i>=2;i--){
+				question_table.removeChild(childs.item(i));
+			}
+			let pagenumchilds=question_board_page.childNodes;
+			for(let i=pagenumchilds.length-1;i>=1;i--){
+				question_board_page.removeChild(pagenumchilds.item(i));
+			}  
+			let xml=xhr.responseXML;
+			let comm=xml.getElementsByTagName("comm");
+			let pageCount=xml.getElementsByTagName("pageCount")[0].textContent;
+			let startPageNum=xml.getElementsByTagName("startPageNum")[0].textContent;
+			let endPageNum=xml.getElementsByTagName("endPageNum")[0].textContent;
+			let pageNum=xml.getElementsByTagName("pageNum")[0].textContent;
 			for(let i=startPageNum;i<=endPageNum;i++){
 				if(pageNum==i){
 					let span=document.createElement("span");
@@ -377,23 +438,15 @@ xhr.send();
 					a.style.color="grey";
 					a.style.fontWeight="300";
 					a.style.cursor="pointer";
-					
 					a.onclick=function(){
 						questionList(i);
 					}
 					question_board_page.appendChild(a);
 				}
 			}
-			
-			
-			
-			
-			
-
 			document.getElementById("title").value='';
 			document.getElementById("pwd").value='';
 			document.getElementById("content").value='';
-
 			for(let i=0;i<comm.length;i++){
 				let qnum=comm[i].getElementsByTagName("q_num")[0].textContent;
 				let id=comm[i].getElementsByTagName("id")[0].textContent;
@@ -427,12 +480,7 @@ xhr.send();
 						alert("작성자만 조회가능합니다");
 					}
 				}
-
-
 				p.innerHTML=qcontent;
-
-				
-				
 				td3.appendChild(div);
 				var td4=document.createElement("td");
 				td1.innerHTML=category;
@@ -445,13 +493,6 @@ xhr.send();
 				tr.appendChild(td4);
 				
 				question_table.appendChild(tr);
-				
-				//문자열 변수는 따옴표로 묶어줘야하는데, 따옴표끼리 겹치는 경우가 발생한다
-				/* 이럴때는 아래처럼 코드를 작성한다..*역슬러시를 사용하자
-				let a='aaa';
-				div.innerHTML="작성자:" + id +"<br>" + "내용"	+ comments +"<br>" +
-						"<a href=\"javascript:delComments('" + a + "')\"> 삭제</a>"; */
-				
 				
 			}
 		}

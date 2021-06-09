@@ -71,10 +71,10 @@
 				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
 				<c:choose>
 					<c:when test="${pageNum==i }"><%--현재 페이지인경우 --%>
-						<span style="color:black">[${i }]</span>
+						<span style="color:black;font-weight:700">[${i }]</span>
 					</c:when>
 				<c:otherwise>
-						<a href="${cp }/admin/order_list?pageNum=${i }" style="color:grey">[${i }]</a>
+						<a href="${cp }/admin/order_list?pageNum=${i }&field=${param.field}&keyword=${param.keyword}" style="color:grey;font-weight:300;">[${i }]</a>
 				</c:otherwise>
 						</c:choose>
 				</c:forEach>

@@ -62,6 +62,13 @@ public class A_board_vo {
 		this.re_a_b_num = re_a_b_num;
 	}
 
+	
+
+	public A_board_vo(int a_b_num,String a_b_title, String a_b_content) {
+		this.a_b_num = a_b_num;
+		this.a_b_title = a_b_title;
+		this.a_b_content = a_b_content;
+	}
 
 	public int getA_r_no() {
 		return a_r_no;

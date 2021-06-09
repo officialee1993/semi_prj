@@ -32,8 +32,10 @@ public class CommentsController extends HttpServlet{
 		pw.print("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 		pw.print("<result>");
 		if(n>0) {
+			System.out.println("댓글등록성공");
 			pw.print("<code>success</code>");
 		}else {
+			System.out.println("댓글등록실패");
 			pw.print("<code>fail</code>");
 		}
 		pw.print("</result>");

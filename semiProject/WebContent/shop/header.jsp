@@ -7,6 +7,17 @@
 			<div class="logo">
 			<a href="${cp }/shop/index"><img onmouseover="this.src='images/logo_a.png'" onmouseout="this.src='images/logo_org.png'" style="width:60px;height:61px;" src="images/logo_org.png"/></a>
 			</div>
+			<c:choose>
+			<c:when test="${empty sessionScope.id}">
+			<div class="header_menu" id="header_menu" style="flex:1.26 1 0">
+			<ul>
+				<li><a href="${cp }/shop/goods_list?order=1">신상품</a></li>
+				<li><a href="${cp }/shop/goods_list_pro?p_id=1">남성</a></li>
+				<li><a href="${cp }/shop/goods_list_pro?p_id=2">여성</a></li>
+			</ul>
+			</div>
+			</c:when>
+			<c:otherwise>
 			<div class="header_menu" id="header_menu">
 			<ul>
 				<li><a href="${cp }/shop/goods_list?order=1">신상품</a></li>
@@ -14,6 +25,11 @@
 				<li><a href="${cp }/shop/goods_list_pro?p_id=2">여성</a></li>
 			</ul>
 			</div>
+			</c:otherwise>
+			</c:choose>
+
+
+
 		<div class="btn_wrap">
 			<c:choose>
 			
@@ -53,7 +69,6 @@
 					<li><a href="${cp }/shop/goods_list_pro_bottom?p_id=2&cg_id=4">하의</a></li>
 					<li><a href="${cp }/shop/goods_list_pro_shoes?p_id=2&cg_id=5">신발</a></li>
 					</ul>
-					
 			</div>
 	</div>
 	
