@@ -31,6 +31,7 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	if(content==null) {
 		content="/admin/goods_list.jsp";
 	}
+	 
 	
 	String cp=req.getContextPath();
 	ServletContext application=getServletContext();
