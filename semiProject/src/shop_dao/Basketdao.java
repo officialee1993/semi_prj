@@ -21,7 +21,7 @@ public class Basketdao {
 	}
 	private Basketdao () {}
 	
-public ArrayList<Basket_sum_price_vo> basket_sum_price(String id) {
+public ArrayList<Basket_sum_price_vo> basket_sum_price(String id, int b_num) {
 		
 		Connection con = null; 
 		PreparedStatement pstmt = null;
@@ -32,13 +32,15 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id) {
 			String sql = "SELECT p_num,b_num ,C*P all_sum_price, c\r\n"
 					+ "FROM(\r\n"
 					+ "SELECT p_num, b_num,p_count C , P_PRICE P FROM (\r\n"
-					+ "select p.p_price ,b.p_count ,b.b_num, b.p_num from Product p,Basket b where b.id=? and p.p_num = b.p_num\r\n"
+					+ "select p.p_price ,b.p_count ,b.b_num, b.p_num from Product p,Basket b where b.id=? and p.p_num = b.p_num and b_num =? \r\n"
 					+ "minus\r\n"
 					+ "select p.p_price ,b.p_count ,o.b_num, b.p_num from Product p,orders o ,Basket b where o.id=? and p.p_num = o.p_num and o.b_num=b.b_num\r\n"
 					+ "))";
+			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, id);
+			pstmt.setInt(2, b_num);
+			pstmt.setString(3, id);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				
@@ -127,7 +129,40 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id) {
 			MyDBCP.close(con, pstmt, null);
 		}
 	}
-	
+	public BasketList_vo notorder_checked_basketlistvo(String id,int b_num){ 
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		BasketList_vo basketlistvo =null; 
+		
+		try {
+			con = MyDBCP.getConnection();
+			
+			String sql = "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id=? and p.p_num = b.p_num and b.b_num =?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, b_num);
+			rs= pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+			basketlistvo = new BasketList_vo(rs.getString("save_img_name"), rs.getString("p_name"),
+						rs.getInt("p_price"), rs.getInt("p_count"),rs.getString("p_size"),rs.getInt("b_num"));
+				
+			}
+			return basketlistvo;
+			
+			
+		}catch(SQLException s) {
+			System.out.println(s.getMessage());
+			return null; 
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+	}
+
 	public ArrayList<BasketList_vo> notorder_basketlist(String id){ 
 		
 		Connection con = null; 
@@ -140,7 +175,7 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id) {
 			con = MyDBCP.getConnection();
 			
 			String sql = "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id=? and p.p_num = b.p_num";
-			// È¸¿ø¿¡ µû¸¥ ¸ðµç ¹æ¹Ù±¸´Ï (ÁÖ¹® ÅëÇÑ Àå¹Ù±¸´Ïµµ Æ÷ÇÔ ) 
+			// È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ (ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù±ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ ) 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs= pstmt.executeQuery();
@@ -163,8 +198,46 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id) {
 			MyDBCP.close(con, pstmt, rs);
 		}
 	}
+	public BasketList_vo checked_basketlist(String id , int b_num){ 
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		BasketList_vo basketlistvo = null; 
+		
+		try {
+			
+			con = MyDBCP.getConnection();
+			
+			String sql = "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id=? and p.p_num = b.p_num and b.b_num = ? \r\n"
+					+ "minus\r\n"
+					+ "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,o.b_num from Product p,orders o ,Basket b where o.id=? and p.p_num = o.p_num and o.b_num=b.b_num\r\n"
+					;
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, b_num);
+			pstmt.setString(3, id);
+			rs= pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+			basketlistvo = new BasketList_vo(rs.getString("save_img_name"), rs.getString("p_name"),
+						rs.getInt("p_price"), rs.getInt("p_count"),rs.getString("p_size"),rs.getInt("b_num"));
 
-	public ArrayList<BasketList_vo> basketlist(String id){ //±¸¸Å ÇÑ¹ø ÈÄ Àå¹Ù±¸´Ï list °¡´É // ÀÌ°Å ÃÄ¾ß ÇÑ´Ù. 
+			}
+			return basketlistvo;
+			
+			
+		}catch(SQLException s) {
+			System.out.println(s.getMessage());
+			return null; 
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+	}
+
+	public ArrayList<BasketList_vo> basketlist(String id){ //ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ ï¿½ï¿½ ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ list ï¿½ï¿½ï¿½ï¿½ // ï¿½Ì°ï¿½ ï¿½Ä¾ï¿½ ï¿½Ñ´ï¿½. 
 		
 		Connection con = null; 
 		PreparedStatement pstmt = null; 
@@ -179,7 +252,7 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id) {
 					+ "minus\r\n"
 					+ "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,o.b_num from Product p,orders o ,Basket b where o.id=? and p.p_num = o.p_num and o.b_num=b.b_num\r\n"
 					;
-			// Àå¹Ù±¸ÀÌ³×¼­ ÁÖ¹®ÇÑ Àå¹Ù±¸´Ï Á¦¿ÜÇÏ°í »Ì¾Æ ³ë´Â sql ±¸Çö ÇÏ±â 
+			// ï¿½ï¿½Ù±ï¿½ï¿½Ì³×¼ï¿½ ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ sql ï¿½ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½ 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, id);

@@ -32,6 +32,11 @@
 				<h3 class="form_title">상품주문</h3><!-- 여기서부터 수정 sql 수정 해야 하고 all_sum_price 부분 수정 해야한다. -->
 				
 				<form action="${cp}/shop/goods_list_order_ok?p_num=${vo.p_num}" method="post">
+				
+				<c:forEach var="basketvo" items="${basketlistvo}">
+				<input type="hidden" name="b_num" value="${basketvo.b_num}">
+				</c:forEach>
+				
 				<div class="mb-3">
   				<label for="" class="form-label">수령인</label>
   				<input type="text" class="form-control" name ="rec_name" placeholder="수령인 성함을 입력해주세요">
@@ -49,6 +54,7 @@
  				<option value="계좌이체">계좌이체</option>
  				<option value="카드">카드</option>
 				</select>
+				
   				<div class="btn_wrap">
   				<button type="submit" class="btn btn-dark">${all_sum_price}원 주문하기</button>
   				</div>

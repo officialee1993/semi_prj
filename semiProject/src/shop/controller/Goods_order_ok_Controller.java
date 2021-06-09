@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import shop.vo.BasketList_vo;
 import shop_dao.OrderDao;
 import shop_dao.Salesdao;
 @WebServlet("/shop/goods_order_ok")
@@ -25,6 +26,8 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	String payname = req.getParameter("payname"); //占쏙옙占쏙옙占쏙옙
 	int p_count = Integer.parseInt(req.getParameter("p_count"));
 	String O_STATE = "주문완료";
+	
+	
 	HttpSession session = req.getSession();
 	String id =(String)session.getAttribute("id");
 	
