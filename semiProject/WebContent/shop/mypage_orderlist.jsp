@@ -58,6 +58,26 @@
 							</c:forEach>
 						</table>
 					</div>
+					
+				<div style="margin-top:30px;text-align:center;">
+				<c:if test="${startPageNum>10}">
+				<a href="${cp }/shop/mypage_orderlist?pageNum=${startPageNum-1 }">이전페이지</a>
+				</c:if>
+				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+				<c:choose>
+					<c:when test="${pageNum==i }"><%--현재 페이지인경우 --%>
+						<span style="color:black">[${i }]</span>
+					</c:when>
+				<c:otherwise>
+						<a href="${cp }/shop/mypage_orderlist?pageNum=${i }" style="color:grey">[${i }]</a>
+				</c:otherwise>
+						</c:choose>
+				</c:forEach>
+				<c:if test="${endPageNum<pageCount}">
+						<a href="${cp }/shop/mypage_orderlist?pageNum=${endPageNum+1 }">다음페이지</a>
+				</c:if>
+				</div>
+					
 				</div>
 			</div>
 		</div>

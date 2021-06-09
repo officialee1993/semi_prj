@@ -67,7 +67,7 @@
 				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
 				<c:choose>
 					<c:when test="${pageNum==i }"><%--현재 페이지인경우 --%>
-						<span style="color:orange;font-weight:700">[${i }]</span>
+						<span style="color:black;font-weight:700">[${i }]</span>
 					</c:when>
 				<c:otherwise>
 						<a href="${cp }/admin/question_list?pageNum=${i }" style="color:grey;font-weight:300;">[${i }]</a>
@@ -108,7 +108,9 @@
 					
 					let xml=xhr.responseXML;
 					let comm=xml.getElementsByTagName("comm");
-					//페이징처리 태그
+					
+					
+					
 					let pageCount=xml.getElementsByTagName("pageCount")[0].textContent;
 					let startPageNum=xml.getElementsByTagName("startPageNum")[0].textContent;
 					let endPageNum=xml.getElementsByTagName("endPageNum")[0].textContent;
@@ -118,7 +120,7 @@
 						if(pageNum==i){
 							let span=document.createElement("span");
 							span.innerHTML="["+i+"]";
-							span.style.color="orange";
+							span.style.color="black";
 							span.style.fontWeight="700";
 							pagenum.appendChild(span);
 						}else{
@@ -134,11 +136,7 @@
 							pagenum.appendChild(a);
 						}
 					}
-					
-					
-					
-					
-					
+
 					let trHead=document.createElement("tr");
 					let th1=document.createElement("th");
 					let th2=document.createElement("th");

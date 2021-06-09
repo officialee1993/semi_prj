@@ -23,6 +23,29 @@ public class OrderDao {
 		return instance; 
 	}
 	
+	/*mypage order list count*/
+	public int getCountMyOrder(String id) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=MyDBCP.getConnection();
+			String sql="select NVL(count(o_num),0) from orders"
+					+ " where id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			rs.next();
+			int q_b_num=rs.getInt(1); //첫번째 행 얻어옴
+			return q_b_num;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			MyDBCP.close(con,pstmt,rs);
+		}
+	}
+	
 	public int goodorder_insert(String rec_name, String rec_phone, String rec_addr,int ALL_SUM_PRICE, String payname, String O_STATE,String id,int p_num,int b_num_max) {
 		Connection con = null; 
 		PreparedStatement pstmt = null; 
@@ -58,7 +81,11 @@ public class OrderDao {
 			int n3=stmt2.executeUpdate(sql3);
 
 			con.commit();
+			
+			if(n3>0) 
 			System.out.println("주문성공");
+			
+			
 			return n3;
 			
 		}catch (SQLException s) {
@@ -102,22 +129,28 @@ public Orders_vo ordervoinfo (){
 		}
 	}
 
-	public ArrayList<Product_Orderlist_vo> mypage_orderList(String id){
+	public ArrayList<Product_Orderlist_vo> mypage_orderList(String id,int startRow,int endRow){
 		Connection con = null; 
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
 		
 		try {
 			con = MyDBCP.getConnection();
-			String sql="select o.p_num,p.p_name,p.save_img_name,o.o_num,o.all_sum_price,o.o_date,o.o_state,o.id,a.a_b_num,a.a_b_content from product p"
+			String sql="select * from("
+					+ " select orderlist.*,rownum rnum from("
+					+ " select o.p_num,p.p_name,p.save_img_name,o.o_num,o.all_sum_price,o.o_date,o.o_state,o.id,a.a_b_num,a.a_b_content from product p"
 					+ " join orders o"
 					+ " on p.p_num=o.p_num"
 					+ " join a_board a"
 					+ " on o.o_num=a.o_num"
 					+ " where o.id=?"
-					+ " order by o.o_date desc";
+					+ " order by o.o_date desc) orderlist)"
+					+ " where rnum>=? and rnum<=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
 			rs=pstmt.executeQuery();
 			ArrayList<Product_Orderlist_vo> list=new ArrayList<Product_Orderlist_vo>();
 			while(rs.next()) {

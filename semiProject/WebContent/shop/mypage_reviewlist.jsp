@@ -22,9 +22,10 @@
 							<c:forEach var="list" items="${myReviewList }">
 							<c:choose>
 								<c:when test="${not empty list.a_b_content }">
+								<input type="hidden" name="a_b_num" value="${list.a_b_num }">
 								<tr>
 								<td>${list.a_b_title }</td>
-								<td class="content"><a href="${cp }/shop/mypage_reviewlist_detail?title=${list.a_b_title }&content=${list.a_b_content }">${list.a_b_content }</a></td>
+								<td class="content"><a href="${cp }/shop/mypage_reviewlist_detail?cmd=list&a_b_num=${list.a_b_num }">${list.a_b_content }</a></td>
 								<td>${list.wr_date }</td>
 								</tr>
 								</c:when>
@@ -32,6 +33,26 @@
 							</c:forEach>
 						</table>
 					</div>
+					
+				<div style="margin-top:30px;text-align:center;">
+				<c:if test="${startPageNum>10}">
+				<a href="${cp }/shop/mypage_reviewlist?pageNum=${startPageNum-1 }">이전페이지</a>
+				</c:if>
+				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+				<c:choose>
+					<c:when test="${pageNum==i }"><%--현재 페이지인경우 --%>
+						<span style="color:black">[${i }]</span>
+					</c:when>
+				<c:otherwise>
+						<a href="${cp }/shop/mypage_reviewlist?pageNum=${i }" style="color:grey">[${i }]</a>
+				</c:otherwise>
+						</c:choose>
+				</c:forEach>
+				<c:if test="${endPageNum<pageCount}">
+						<a href="${cp }/shop/mypage_reviewlist?pageNum=${endPageNum+1 }">다음페이지</a>
+				</c:if>
+				</div>
+
 				</div>
 		</div>
 	</div>

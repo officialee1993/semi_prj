@@ -40,6 +40,15 @@ a:hover{
 	display:flex;
 	justify-content: space-between;
 }
+.header > .my_row > .header_box div:nth-of-type(1){
+	flex: 1 1 0;
+}
+.header > .my_row > .header_box div:nth-of-type(2){
+	flex: 1.06 1 0;
+}
+.header > .my_row > .header_box div:nth-of-type(3){
+	flex: 1 1 9;
+}
 .header > .my_row > .header_box >  .header_menu{
 	padding:20px 0;
 	font-size:16px;
@@ -797,6 +806,21 @@ a:hover{
 }
 /*마이페이지 문의내역 끝*/
 /*마이페이지 구매후기내역*/
+.content .mypage_orderlist .mypage_orderlist_reviewBox .mypage_questionlist_detail_reply{
+		margin-top:10px;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	padding:20px;
+}
+.content .mypage_orderlist .mypage_orderlist_reviewBox .mypage_questionlist_detail_reply span{
+	font-size:14px;color:#555;
+}
+.content .mypage_orderlist .mypage_orderlist_reviewBox .mypage_questionlist_detail_reply p{
+	font-size:14px;color:#333;
+	margin-top:10px;
+	line-height:22px;
+}
+
 .content .mypage_orderlist > mypage_reviewlist_wrap2{
 	font-size:14px;color:#333;
 	margin-top:10px;

@@ -36,7 +36,6 @@ public class Admin_OrderListController extends HttpServlet{
 	private void update(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		int o_num=Integer.parseInt(req.getParameter("o_num"));
-		System.out.println("二쇰Ц踰덊샇:"+o_num);
 		OrderDao dao=OrderDao.getinstance();
 		int n=dao.adminOrderStateUpdate(o_num);
 		
@@ -44,11 +43,11 @@ public class Admin_OrderListController extends HttpServlet{
 		
 		String result="";
 		if(n>0) {
-			System.out.println("�뾽�뜲�씠�듃�꽦怨�");
+			System.out.println("updateComplete");
 			result="success";
 			json.put("result", result);
 		}else {
-			System.out.println("�뾽�뜲�씠�듃�떎�뙣");
+			System.out.println("updateFail");
 			json.put("result", result);
 		}	
 		

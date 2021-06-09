@@ -46,7 +46,7 @@
 
 						</table>
 					</div>
-									<div style="margin-top:50px;text-align:center;">
+				<div style="margin-top:30px;text-align:center;">
 				<c:if test="${startPageNum>10}">
 				<a href="${cp }/shop/mypage_questionlist?pageNum=${startPageNum-1 }">이전페이지</a>
 				</c:if>
@@ -56,7 +56,7 @@
 						<span style="color:black">[${i }]</span>
 					</c:when>
 				<c:otherwise>
-						<a href="${cp }/shop/mypage_questionlist?pageNum=${i } style="color:grey">[${i }]</a>
+						<a href="${cp }/shop/mypage_questionlist?pageNum=${i }" style="color:grey">[${i }]</a>
 				</c:otherwise>
 						</c:choose>
 				</c:forEach>
