@@ -16,16 +16,35 @@ public class Admin_GoodsListController extends HttpServlet{
 @Override
 protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-	ArrayList<Product_category_vo> list = new ArrayList<Product_category_vo>();
 	Productdao prodductdao = Productdao.getinstance();
-	list = prodductdao.pro_cate_list();
-	
-	
-	if(list !=null) {
-		System.out.println("»óÇ° list ºÒ·¯¿À±â ¼º°ø");
-	}else {
-		System.out.println("»óÇ° list ºÒ·¯¿À±â ½ÇÆÐ ");
+	String spageNum = req.getParameter("pageNum");  //í˜„ì œ íŽ˜ì´ì§€(ìª½ìˆ˜) 
+	int pageNum = 1;
+	if (spageNum != null) {
+		pageNum = Integer.parseInt(spageNum);
 	}
+	int startRow = (pageNum - 1) * 8 + 1; 
+	int endRow = startRow + 7;
+	
+	int pageCount = (int) Math.ceil(prodductdao.pro_cate_list_getCount() / 8.0);
+	System.out.println(pageCount);
+	int startPageNum = ((pageNum - 1) / 10 * 10) + 1; 
+	int endPageNum = startPageNum + 9;
+	if (endPageNum > pageCount) {
+		
+		endPageNum = pageCount;
+		
+	}
+
+	ArrayList<Product_category_vo> list = new ArrayList<Product_category_vo>();
+	
+	list = prodductdao.pro_cate_list(startRow, endRow);
+	
+	req.setAttribute("pageCount", pageCount);
+	req.setAttribute("startPageNum", startPageNum);
+	req.setAttribute("endPageNum", endPageNum);
+	req.setAttribute("pageNum", pageNum);
+
+	
 	req.setAttribute("list", list);
 	req.setAttribute("sidemenu", "/admin/sidemenu.jsp");
 	req.setAttribute("content", "/admin/goods_list.jsp");
