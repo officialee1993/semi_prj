@@ -17,6 +17,34 @@ public class Salesdao {
 	public static Salesdao getinstance() {
 		return instance;
 	}
+	public ArrayList<Sales_stats_vo> sales_stats_all_selete(int startRow , int endRow){
+		
+		ArrayList<Sales_stats_vo> list = new ArrayList<Sales_stats_vo>();
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null; 
+		try {
+			
+			con = MyDBCP.getConnection();
+			String sql = "select * from(select sales_stats_all_selete.*, rownum rnum "
+					+ "from  (select * from Sales_stats order by sales_stats_num desc)sales_stats_all_selete)where rnum>=? and rnum<=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Sales_stats_vo sales_stats_vo = new Sales_stats_vo(rs.getInt("sales_stats_num"), rs.getInt("all_sales"), rs.getDate("o_date"), rs.getInt("p_num"), rs.getInt("p_count") );
+				list.add(sales_stats_vo); 
+			}
+			return list;
+			
+		}catch (SQLException s) {
+			s.getMessage();
+			return null; 
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+	}
 	public ArrayList<Sales_stats_vo> sales_stats_all_selete(){
 		
 		ArrayList<Sales_stats_vo> list = new ArrayList<Sales_stats_vo>();
@@ -42,6 +70,30 @@ public class Salesdao {
 			MyDBCP.close(con, stmt, rs);
 		}
 	}
+	
+	public int sales_stats_all_selete_getCount() {
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null; 
+		try {
+			con=MyDBCP.getConnection();
+			String sql = "select NVL(count(*),0) from (select * from Sales_stats)";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int n  = rs.getInt(1);
+				return n;
+			}
+			return -1;
+		}catch (SQLException s) {
+			s.getMessage();
+			return -1;
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+		
+	}
 	public int Sales_stats_insert(int all_Sales , int p_num,int p_count){
 		Connection con = null; 
 		PreparedStatement pstmt = null; 
@@ -62,7 +114,7 @@ public class Salesdao {
 			return -1; 
 		}finally {
 			
-			
+			MyDBCP.close(con, pstmt, null);
 		}
 	}
 	

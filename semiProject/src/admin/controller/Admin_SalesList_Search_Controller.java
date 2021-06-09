@@ -32,10 +32,10 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 		Salesdao salesdao = Salesdao.getinstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
-		String strToday = sdf.format(cal.getTime());
+		String strToday = sdf.format(cal.getTime());//현재 날짜 
 		int all_sum = 0;
 
-		if (todays.equals("1") && months.equals("undefined") && years.equals("undefined")) {
+		if (todays.equals("1") && months.equals("undefined") && years.equals("undefined")) {// 오늘
 
 			String strTodayend = strToday + "-23-59";
 
@@ -51,7 +51,7 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 
 			// System.out.println("Today=" + strToday);
 
-		} else if (todays.equals("undefined") && months.equals("2") && years.equals("undefined")) {
+		} else if (todays.equals("undefined") && months.equals("2") && years.equals("undefined")) {// 한당
 
 			String strmonths = strToday.substring(0, 8) + "01";
 
@@ -76,7 +76,7 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 			req.setAttribute("all_sum", all_sum);
 			req.setAttribute("list", list);
 
-		} else if (todays.equals("undefined") && months.equals("undefined") && years.equals("3")) {
+		} else if (todays.equals("undefined") && months.equals("undefined") && years.equals("3")) { // 1년 
 
 			String stryears = strToday.substring(0, 5) + "01-01";
 			String stryearsend = strToday.substring(0, 5) + "12-31";

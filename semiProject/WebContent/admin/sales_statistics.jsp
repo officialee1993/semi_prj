@@ -52,7 +52,28 @@
 			
 				<!-- 페이지번호 -->
 				<div class="goods_pagenum">
-				<span><a href="">1</a></span>
+					<c:if test="${startPageNum>10}">
+					<a href="${cp}//admin/sales?pageNum=${startPageNum-1}">
+					<span style="color: gray">[이전]</span>
+					</a>
+					</c:if>
+					<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}">
+					<c:choose>
+					<c:when test="${i==pageNum}">
+					<a href= "${cp}//admin/sales?pageNum=${i}">
+					<span style="color: black">[${i}]</span></a>
+					</c:when>
+					<c:otherwise>
+					<a href="${cp}//admin/sales?pageNum=${i}">
+					<span style="color: gray">[${i}]</span>
+					</a>
+					</c:otherwise>
+					</c:choose>
+					</c:forEach>
+					<c:if test="${endPageNum<pageCount}">
+					<a href="${cp}//admin/sales?pageNum=${endPageNum+1}">[다음]
+					<span style="color: gray">[다음]</span></a>
+					</c:if>
 				</div>
 				
 				</div>
