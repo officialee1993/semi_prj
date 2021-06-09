@@ -19,10 +19,14 @@ public class Mypage_orderlist_Controller extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		
 		HttpSession session = req.getSession();
 		String id =(String)session.getAttribute("id");
 		String spageNum=req.getParameter("pageNum");
+		String startDate=req.getParameter("startDate");
+		String firstDate=req.getParameter("firstDate");
+		
+		
+		
 		int pageNum=1;
 		if(spageNum!=null) {
 			pageNum=Integer.parseInt(spageNum);

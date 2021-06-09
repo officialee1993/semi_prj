@@ -20,6 +20,12 @@ body {
 
 }
 
+.adminLogin{
+	position:fixed;
+	right:20px;
+	bottom:20px
+}
+
 .form-control-plaintext{
 	border:1px solid #ddd;
 	border-radius:5px;
@@ -36,6 +42,14 @@ a:hover{
 	padding:10px 0;
 }
 /*헤더*/
+.header{
+	position:fixed;
+	left:50%;
+	transform:translateX(-50%);
+	width:100%;
+	background-color:white;
+	z-index:100;
+}
 .header > .my_row > .header_box{
 	display:flex;
 	justify-content: space-between;
@@ -133,8 +147,16 @@ a:hover{
 /*메인_배너*/
 .banner{
 	width:100%;
+	padding-top:82.6px;
 }
 /*메인_콘텐트*/
+.banner_goods{
+	width:100%;
+	padding-top:82.6px;
+}
+.banner_goods img{
+	width:100%;
+}
 .content{
 	padding-bottom:79px;
 }
@@ -625,7 +647,7 @@ a:hover{
 /*장바구니 끝*/
 /*상품리스트 페이지 시작*/
 .content .my_row .goods_list{
-	margin:100px 0;
+	margin:50px 0 100px 0;
 }
 .content .my_row .goods_list h3{
 	font-size:20px;
@@ -760,6 +782,9 @@ a:hover{
 	font-size:14px;
 	font-weight:300;
 	white-space:nowrap;  text-overflow:ellipsis; overflow:hidden;
+}
+.content .my_row .mypage .mypage_orderlist .mypage_orderlist_wrap table tr{
+	margin-top:50px;
 }
 /*마이페이지 주문내역 끝*/
 /*마이페이지 문의내역*/

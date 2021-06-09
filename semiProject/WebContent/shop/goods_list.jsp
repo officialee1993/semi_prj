@@ -3,6 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- content -->
+<div class="banner_goods">
+		<img src="images/banner_new.png">
+</div>
+
+
 <div class="content">
 	<div class="my_row">
 		<div class="goods_list">
