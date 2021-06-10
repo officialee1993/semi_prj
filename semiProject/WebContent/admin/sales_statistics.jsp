@@ -21,7 +21,7 @@
 					<!-- 날짜선택 -->
 					<input type="date" name ="beforekal" ><span>~</span><input type="date" name = "afterkal">
 					<button type="button" class="btn btn-outline-dark" onclick="kal_send()">검색</button>
-					<span class="sales_result" id = "all_sum">총 주문금액 : ${all_sum} 원</span>
+					<span class="sales_result" id = "all_sum">총 주문금액 : ${sall_sum} 원</span>
 					
 				</div>
 				
@@ -91,6 +91,7 @@
 			
 			if(str == 1 ){
 				var todays = document.getElementsByName("todays")[0].value;
+			
 			}else if(str ==2){
 				var months = document.getElementsByName("months")[0].value;
 			}else if(str ==3){
@@ -128,7 +129,7 @@
 					let endPageNum=xml.getElementsByTagName("endPageNum")[0].textContent;
 					let pageNum=xml.getElementsByTagName("pageNum")[0].textContent;
 					let choose=xml.getElementsByTagName("choose")[0].textContent;
-					let all_sum1=xml.getElementsByTagName("all_sum")[0].textContent;
+					let all_sum1=xml.getElementsByTagName("sall_sum")[0].textContent;
 				
 					
 					for(let i=startPageNum;i<=endPageNum;i++){

@@ -58,6 +58,7 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	application.setAttribute("cp", cp);
 	
 	
+	
 	req.setAttribute("pageCount", pageCount);
 	req.setAttribute("startPageNum", startPageNum);
 	req.setAttribute("endPageNum", endPageNum);

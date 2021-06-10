@@ -2,6 +2,7 @@ package admin.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,9 +36,9 @@ public class Admin_SalesController extends HttpServlet {
 
 	}
 
-	private void Sales_stats_list(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-
+	private void Sales_stats_list(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		String sall_sum=null;
 		int all_sum = 0;
 		Salesdao salesdao = Salesdao.getinstance();
 		
@@ -61,10 +62,10 @@ public class Admin_SalesController extends HttpServlet {
 		for (Sales_stats_vo vo : list1) {
 
 			all_sum += vo.getAll_Sales();
-
+			sall_sum = formatter.format(all_sum);
 		}
 
-		req.setAttribute("all_sum", all_sum);
+		req.setAttribute("sall_sum", sall_sum);
 		req.setAttribute("list", list);
 		
 		req.setAttribute("pageCount", pageCount);
