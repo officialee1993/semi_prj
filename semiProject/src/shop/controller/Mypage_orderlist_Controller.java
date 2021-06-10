@@ -1,7 +1,10 @@
 package shop.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,10 +25,19 @@ public class Mypage_orderlist_Controller extends HttpServlet {
 		HttpSession session = req.getSession();
 		String id =(String)session.getAttribute("id");
 		String spageNum=req.getParameter("pageNum");
-		String startDate=req.getParameter("startDate");
-		String firstDate=req.getParameter("firstDate");
+		String startDateStr=req.getParameter("startDate");
+		String endDateStr=req.getParameter("endDate");
 		
+		if(startDateStr!=null) {
+			if(!startDateStr.equals("")) {
+				startDateStr=startDateStr.replace("-", "");
+				endDateStr=endDateStr.replace("-", "");
+			}
+		}
+
 		
+		System.out.println(startDateStr);
+		System.out.println(endDateStr);
 		
 		int pageNum=1;
 		if(spageNum!=null) {
@@ -35,9 +47,9 @@ public class Mypage_orderlist_Controller extends HttpServlet {
 		int endRow=startRow+9;
 		
 		OrderDao orderdao = OrderDao.getinstance();
-		ArrayList<Product_Orderlist_vo> myOrderlist=orderdao.mypage_orderList(id,startRow,endRow);
+		ArrayList<Product_Orderlist_vo> myOrderlist=orderdao.mypage_orderList(id,startRow,endRow,startDateStr,endDateStr);
 		
-		int pageCount=(int)Math.ceil(orderdao.getCountMyOrder(id)/10.0);
+		int pageCount=(int)Math.ceil(orderdao.getCountMyOrder(id,startDateStr,endDateStr)/10.0);
 		
 		//시작페이지 번호
 				int startPageNum=((pageNum-1)/10*10)+1;//(pageNum%10)*10+1;
@@ -46,7 +58,21 @@ public class Mypage_orderlist_Controller extends HttpServlet {
 				if(endPageNum>pageCount) {
 					endPageNum=pageCount;
 				}
-		
+				
+		StringBuffer str=new StringBuffer();
+		StringBuffer str2=new StringBuffer();
+		if(startDateStr!=null) {
+			if(!startDateStr.equals("")) {
+				str=new StringBuffer(startDateStr);
+				str2=new StringBuffer(endDateStr);
+				str.insert(4, "-");
+				str.insert(7, "-");
+				str2.insert(4, "-");
+				str2.insert(7, "-");
+			}
+		}
+		req.setAttribute("startDateStr", str);
+		req.setAttribute("endDateStr", str2);
 		req.setAttribute("pageCount", pageCount);
 		req.setAttribute("startPageNum", startPageNum);
 		req.setAttribute("endPageNum", endPageNum);

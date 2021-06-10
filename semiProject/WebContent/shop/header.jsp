@@ -74,10 +74,7 @@
 		</div>
 		</div>
 		<div class="menu_dropdown" id="menu_dropdown">
-					<ul>
-					<li><a href="${cp }/shop/goods_list?order=1">신상품</a></li>
-					</ul>
-					<ul>
+					<ul style="margin-left:79px">
 					<li><a href="${cp }/shop/goods_list_pro_top?p_id=1&cg_id=6">상의</a></li>
 					<li><a href="${cp }/shop/goods_list_pro_bottom?p_id=1&cg_id=7">하의</a></li>
 					<li><a href="${cp }/shop/goods_list_pro_shoes?p_id=1&cg_id=8">신발</a></li>
