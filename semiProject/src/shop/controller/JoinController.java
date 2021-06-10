@@ -44,7 +44,7 @@ public class JoinController extends HttpServlet{
 			resp.sendRedirect(req.getContextPath()+"/shop/join_ok");
 			
 		}else {
-			System.out.println("½ÇÆÐ ");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ");
 			
 		}
 		

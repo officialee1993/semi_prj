@@ -26,7 +26,7 @@
 							<c:when test="${questionList.q_b_state=='답변대기' }">
 
 								<tr>
-								<td>${questionList.q_b_title }</td>
+								<td><a style="font-weight:700" href="${cp }/shop/mypage_questionlist_detail?qnum=${questionList.q_b_num }">${questionList.q_b_title }</a></td>
 								<td class="content">${questionList.q_b_content }
 								</td>
 								<td>${questionList.wr_date }</td>
@@ -35,8 +35,8 @@
 							</c:when>
 							<c:otherwise>
 								<tr>
-								<td class="title">${questionList.q_b_title }</td>
-								<td class="content"><a href="${cp }/shop/mypage_questionlist_detail?qnum=${questionList.q_b_num }">${questionList.q_b_content }</a></td>
+								<td class="title"><a style="font-weight:700" href="${cp }/shop/mypage_questionlist_detail?qnum=${questionList.q_b_num }">${questionList.q_b_title }</a></td>
+								<td class="content">${questionList.q_b_content }</td>
 								<td>${questionList.wr_date }</td>
 								<td style="color:#14aaff">${questionList.q_b_state }</td>
 								</tr>

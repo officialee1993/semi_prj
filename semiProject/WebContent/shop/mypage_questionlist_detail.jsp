@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="content">
 	<div class="my_row">
 		<div class="mypage">
@@ -25,10 +26,17 @@
 						</div>
 					</form>
 					<div class="mypage_questionlist_detail_reply">
-						<span>관리자</span>
-						<p>${vo.q_a_content }</p>
+						<c:choose>
+							<c:when test="${not empty vo.q_a_content }">
+							<span>관리자</span>
+							<p>${vo.q_a_content }</p>
+							</c:when>
+							<c:otherwise>
+							<span>등록된 답변이 없습니다</span>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					</div>
 					</div>
 				</div>
-		</div>
-	</div>
-</div>
+			</div>
