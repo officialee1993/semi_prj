@@ -78,9 +78,9 @@
 			<div class="mb-3">
 			<form method="post" action="${cp}/shop/goods_list_product" accept-charset="utf-8">
 			 	<label for="" class="form-label"></label>
-  				<textarea id="header_search_input" name="header_search_input" class="form-control" id="" rows="1" placeholder="상품명을 입력해주세요"></textarea>
+  				<input type="text" id="header_search_input" name="header_search_input" class="form-control" placeholder="상품명을 입력해주세요" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);" >
   				<button type="submit" class="btn btn-outline-light">검색</button>
-  				<div id="mdiv" onclick=>
+  				<div id="mdiv">
 				  <div class="mdiv">
 				    <div class="md"></div>
 				  </div>
@@ -108,5 +108,16 @@
 	document.getElementById("mdiv").addEventListener('click',function(){
 		searchWrap.style.display="none";
 	});
+	
+	function noSpaceForm(obj) { 
+		    var str_space = /\s/;  
+		    if(str_space.exec(obj.value)) { 
+		       
+		        obj.focus();
+		        obj.value = obj.value.replace(' ',''); 
+		        return false;
+		    }
+	
+		}
 
 	</script>
