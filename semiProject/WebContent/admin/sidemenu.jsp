@@ -22,7 +22,8 @@
 <script type="text/javascript">
 	document.getElementById("admin_goods").addEventListener('mouseover',function(){
 		document.getElementById("dropdown_menu").style.display='block';
-	})
+	}) 
+	
 	document.getElementById("dropdown_menu").addEventListener('mouseleave',function(){
 		document.getElementById("dropdown_menu").style.display='none';
 	})
