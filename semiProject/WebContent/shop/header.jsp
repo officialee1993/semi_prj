@@ -7,6 +7,7 @@
 			<div class="logo">
 			<a href="${cp }/shop/index"><img onmouseover="this.src='images/logo_a.png'" onmouseout="this.src='images/logo_org.png'" style="width:60px;height:61px;" src="images/logo_org.png"/></a>
 			</div>
+		
 			<c:choose>
 			<c:when test="${empty sessionScope.id}">
 			<div class="header_menu" id="header_menu" style="flex:1.26 1 0">
@@ -27,7 +28,10 @@
 			</div>
 			</c:otherwise>
 			</c:choose>
-
+			
+		<div>
+			
+		</div>
 
 
 		<div class="btn_wrap">
@@ -36,6 +40,7 @@
 			<c:when test="${empty sessionScope.id}">
 			<a href="${cp}/shop/login">로그인</a>
 			<a href="${cp}/shop/join">회원가입</a>
+			<span onclick="headerSearch()">검색</span>
 			</c:when>
 			
 			<c:otherwise>
@@ -43,6 +48,7 @@
 			<a href="${cp}/shop/goods_cart" class="header_basket" id="header_basket">장바구니 </a>
 			<a href="${cp}/shop/mypage_orderlist" class="header_mypage" id="header_mypage">마이페이지
 			</a>
+			<span onclick="headerSearch()">검색</span>
 			<ul class="header_mypage_menu" id="header_mypage_menu">
 			<li><a href="${cp }/shop/mypage_orderlist">주문내역</a></li>
 			<li><a href="${cp }/shop/mypage_reviewlist">구매후기</a></li>
@@ -52,6 +58,18 @@
 			</c:otherwise>
 			</c:choose>
 			
+		</div>
+		<div id="header_search" style="position:absolute; width:100%; max-width:1050px; margin-top:15px; display:none;">
+			<div class="header_search_inner" style="position:absolute; right:0; background:#fff;">
+				
+				<form method="post" action="${cp}/shop/goods_list_product" accept-charset="utf-8">
+				
+				<input type="text" name="header_search_input" >
+				
+				<input type="submit" value="검색"> 
+				<span style="margin-left:10px;" onclick="closeSearch();">X</span>
+				</form>
+			</div>
 		</div>
 		</div>
 		</div>
@@ -80,4 +98,18 @@
 	document.getElementById("menu_dropdown").addEventListener('mouseleave',function(){
 	menu_dropdown.style.display='none';
 	});
+	
+	
+	var searchBar = document.getElementById("header_search");
+	var searchInput = document.getElementById("header_search_input");
+	
+	function headerSearch(){
+		searchBar.style.display="block";
+		searchInput.focus();
+	}
+	
+	function closeSearch(){
+		searchBar.style.display="none";
+	}
+	
 	</script>
