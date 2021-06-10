@@ -49,15 +49,14 @@ public class Admin_GoodsInsertController extends HttpServlet{
 		int cg_id = dao.cg_idgetinfo(p_id , cg_name);
 		
 		
-		  Product_vo vo = new Product_vo(0, p_name, p_count, p_price, 0, null,
-		 orgfileName, savefileName, cg_id); 
-		  
-		 
+		  Product_vo vo = new Product_vo(0, p_name, p_count, p_price, 0, null, orgfileName, savefileName, cg_id); 
 		 int n = dao.insert(vo); 
+		 
 		 
 		 if(n>0) { 
 			 System.out.println("상품등록 성공 ");
-		 resp.sendRedirect(req.getContextPath()+"/admin/goods_insert"); } 
+		 resp.sendRedirect(req.getContextPath()+"/admin/goods_insert"); 
+		 		} 
 		 else {
 			 System.out.println("상품 등록 실패 ");
 		 }

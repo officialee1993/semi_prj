@@ -36,13 +36,14 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	OrderDao orderdao = OrderDao.getinstance();
 	int n = orderdao.goodorder_insert(rec_name, rec_phone, rec_addr, ALL_SUM_PRICE, payname, O_STATE, id, p_num, b_num_max);
 	Salesdao salesdao = Salesdao.getinstance();
+	
 	int m  = salesdao.Sales_stats_insert(ALL_SUM_PRICE, p_num,p_count);
 	
 	if(m>0) {
-		System.out.println("성공");
+		System.out.println("재고 테이블 입력 성공");
 		
 	}else {
-		System.out.println("실패");
+		System.out.println("재고 테이블 입력 실패");
 	}
 	
 	req.setAttribute("top", "/shop/header.jsp");

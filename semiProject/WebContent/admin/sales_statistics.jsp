@@ -130,7 +130,9 @@
 					let pageNum=xml.getElementsByTagName("pageNum")[0].textContent;
 					let choose=xml.getElementsByTagName("choose")[0].textContent;
 					let all_sum1=xml.getElementsByTagName("sall_sum")[0].textContent;
-				
+					if(all_sum1 =="null"){
+						all_sum1 = "0";
+					}
 					
 					for(let i=startPageNum;i<=endPageNum;i++){
 						if(pageNum==i){

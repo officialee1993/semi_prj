@@ -214,7 +214,7 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id, int b_num) {
 			
 			String sql = "select * from "
 					+ "(select notorder_basketlist.*,rownum rnum "
-					+ "from (select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id='one' and p.p_num = b.p_num order by b.b_num desc)notorder_basketlist) "
+					+ "from (select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id=? and p.p_num = b.p_num order by b.b_num desc)notorder_basketlist) "
 					+ "where rnum>=? and rnum<=?";
 			
 			pstmt = con.prepareStatement(sql);

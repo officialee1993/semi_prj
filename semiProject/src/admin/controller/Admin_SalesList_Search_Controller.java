@@ -179,7 +179,8 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 			req.setAttribute("list", list);
 
 		}
-
+		System.out.println("sall_sum: "+ sall_sum);
+		
 		PrintWriter pw = resp.getWriter();
 		resp.setContentType("text/xml;charset=utf-8");
 		pw.print("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
