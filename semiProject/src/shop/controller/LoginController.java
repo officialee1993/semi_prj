@@ -1,6 +1,7 @@
 package shop.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,19 +35,26 @@ public class LoginController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			String id = req.getParameter("id");
 			String pwd = req.getParameter("pwd");
-
+			
+			System.out.println("id ; "+id + " pwd :" + pwd);
+			
+			
 			Membersdao dao = Membersdao.getinstance();
 			boolean find =  dao.isMember(id, pwd);
-			
-			
 			
 			if(find) {
 				HttpSession session = req.getSession();
 				session.setAttribute("id", id);
-				resp.sendRedirect(req.getContextPath()+"/shop/index");
+				//resp.sendRedirect(req.getContextPath()+"/shop/index");
 			}else {
 
-				resp.sendRedirect(req.getContextPath()+"/shop/login");
+				//resp.sendRedirect(req.getContextPath()+"/shop/login");
 			}	
+			
+			resp.setContentType("text/xml;charset=utf-8");
+			PrintWriter pw=resp.getWriter();
+			pw.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+			pw.print("<result>"+find+"</result>");
+			
 	}
 }

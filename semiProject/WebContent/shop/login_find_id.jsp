@@ -10,12 +10,12 @@
 				<div id ="find_id">
 				
 				
-				<div class="mb-3">
+				<div class="mb-3" style="text-align: center;">
 				  <label for="" class=""></label>
 				  <input name="name" type="text" class="form-control" id="name" placeholder="이름을 입력해주세요">
 				  <label for="" class=""></label>
 				  <input name="email" type="email" class="form-control" id="email" placeholder="이메일을 입력해주세요">
-				  <span id="not_found"></span>
+				  <span id="not_found" style="color: red;"></span>
 				</div>
 				<button onclick="idfind()" class="btn btn-dark">찾기</button>
 				</div>
@@ -56,7 +56,7 @@
 						document.getElementById("find_id").innerHTML="<br><br><br><br><br><br> 찾는 아이디 : "+result;
 					
 					}else{
-						document.getElementById("not_found").innerHTML="정보를 찾을수 없습니다.";
+						document.getElementById("not_found").innerHTML="<br>정보를 찾을수 없습니다.";
 					//	alert("정보가 없습니다");
 					}
 				}

@@ -7,12 +7,12 @@
 				<h3 class="form_title" id="form_title">비밀번호 찾기</h3>
 				<div id="find_pwd_lch" style="text-align:center;"></div>
 				<div id ="find_pwd">
-				<div class="mb-3">
+				<div class="mb-3" style="text-align: center;">
 				  <label for="" class=""></label>
 				  <input name="id" type="text" class="form-control" id="id" placeholder="아이디를 입력해주세요">
 				  <label for="" class=""></label>
 				  <input name="email" type="email" class="form-control" id="email" placeholder="이메일을 입력해주세요">
-				  <span id="not_found"></span>
+				  <span id="not_found" style="color: red;"></span>
 				</div>
 				<button onclick="pwdfind()" class="btn btn-dark">찾기</button>
 			</div>
@@ -47,7 +47,7 @@
 						
 						
 					}else{
-						document.getElementById("not_found").innerHTML="정보를 찾을수 없습니다."
+						document.getElementById("not_found").innerHTML="<br>정보를 찾을수 없습니다."
 						
 					
 					}
