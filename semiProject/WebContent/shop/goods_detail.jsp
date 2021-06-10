@@ -24,28 +24,6 @@ function checkData(){
 	
 }
 //댓글추가..
-function addComments(a_b_num,comments,index){
-if(${sessionScope.id==null}){
-	alert("로그인해주세요");
-	return;
-	}
-	//var comments=document.getElementById("comments").value;
-	//var comments=document.getElementsByName("comments")[status].value;
-	let xhr=new XMLHttpRequest();
-	xhr.onreadystatechange=function(){
-	if(xhr.readyState==4 && xhr.status==200){
-		let xml=xhr.responseXML;
-		let result=xml.getElementsByTagName("code")[0].textContent;
-		list(a_b_num,index);
-		
-			}
-		};
-	xhr.open('post','${pageContext.request.contextPath }/shop/comments.do',true);
-	//post방식으로 요청시 콘텐트타입에서 인코딩방식 설정하기 - 꼭 해줘야 함
-	xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	let params="a_b_num="+a_b_num+"&comments="+comments;
-	xhr.send(params);
-	}
 
 
 
@@ -89,7 +67,7 @@ if(${sessionScope.id==null}){
 		</div>
 
 		</div>
-				<div class="reviewPageNum" id="reviewPageNum" style="margin-top:16px;text-align:center">
+				<div class="reviewPageNum" id="reviewPageNum" style="margin-top:10px;text-align:center">
 		
 		</div>
 	
@@ -181,6 +159,7 @@ if(${sessionScope.id==null}){
 	function reviewList(pgNum){
  	var review_wrap=document.getElementById("review_wrap");
  	var reviewPageNum=document.getElementById("reviewPageNum");
+
  	
 	let xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function(){
@@ -260,16 +239,124 @@ if(${sessionScope.id==null}){
 					let btnOutlineSecondary=document.createElement("button");
 					btnOutlineSecondary.className="btn";
 					btnOutlineSecondary.innerHTML="등록";
-					btnOutlineSecondary.onclick=function(){
-						if(formControl.value==''){
-							alert("댓글을 입력해주세요");
-						}else{
-							addComments(a_b_num,formControl.value,i);
-							formControl.value='';
-						}
-					}
 					let reply_wrap_box=document.createElement("div");
 					reply_wrap_box.className="reply_wrap_box";
+					btnOutlineSecondary.onclick=function addComments(){
+						
+						if(${sessionScope.id==null}){
+							alert("로그인해주세요");
+							formControl.value='';
+							return;
+							}
+						if(formControl.value==''){
+							alert("댓글을 입력해주세요");
+							return;
+							}
+						
+							//var comments=document.getElementById("comments").value;
+							//var comments=document.getElementsByName("comments")[status].value;
+							let xhr=new XMLHttpRequest();
+							xhr.onreadystatechange=function(){
+							if(xhr.readyState==4 && xhr.status==200){
+								formControl.value='';
+								let xml=xhr.responseXML;
+								let result=xml.getElementsByTagName("code")[0].textContent;
+								
+								function list(){	 		
+									/* var reply_wrap_box=document.getElementsByClassName("reply_wrap_box")[i]; */
+
+
+									let xhr=new XMLHttpRequest();
+									xhr.onreadystatechange=function(){
+									if(xhr.readyState==4 && xhr.status==200){
+
+									let childs=reply_wrap_box.childNodes;
+
+									for(let i=childs.length-1;i>=0;i--){
+										reply_wrap_box.removeChild(childs.item(i));
+									}  
+
+									let xml=xhr.responseXML;
+									
+									let comm=xml.getElementsByTagName("comm");
+									
+									let repageCount=xml.getElementsByTagName("pageCount")[0].textContent;
+									let restartPageNum=xml.getElementsByTagName("startPageNum")[0].textContent;
+									let reendPageNum=xml.getElementsByTagName("endPageNum")[0].textContent;
+									let repageNum=xml.getElementsByTagName("pageNum")[0].textContent;
+									let replyPageNum=document.createElement("div");
+									replyPageNum.style.textAlign="center";
+									replyPageNum.style.marginTop="5px";
+
+									for(let i=0;i<comm.length;i++){
+											let reply_box=document.createElement("div");
+											let reply_id=document.createElement("p");
+											let reply_con=document.createElement("p");
+											let reply_date=document.createElement("p");
+											
+											reply_box.className="reply_box";
+											reply_id.className="reply_id";
+											reply_con.className="reply_con";
+											reply_date.className="reply_date";
+											
+											reply_box.appendChild(reply_id);
+											reply_box.appendChild(reply_con);
+											reply_box.appendChild(reply_date);
+											
+											let content=comm[i].getElementsByTagName("content")[0].textContent;
+											let renum=comm[i].getElementsByTagName("renum")[0].textContent;
+											let id=comm[i].getElementsByTagName("id")[0].textContent;
+											let date=comm[i].getElementsByTagName("date")[0].textContent;
+											let abnum=comm[i].getElementsByTagName("abnum")[0].textContent;
+											
+											reply_id.innerHTML=id;
+											reply_con.innerHTML=content;
+											reply_date.innerHTML=date;
+															
+											reply_wrap_box.appendChild(reply_box);
+											reply_wrap_box.appendChild(replyPageNum);
+											if(reendPageNum>1){
+												if(i==comm.length-1){
+													for(let j=restartPageNum;j<=reendPageNum;j++){
+														if(repageNum==j){
+															let span=document.createElement("span");
+															span.innerHTML=j;
+															span.style.color="black";
+															span.style.fontWeight="700";
+															span.style.margin="0 5px 0 5px";
+															replyPageNum.appendChild(span);
+														}else{
+															let a=document.createElement("a");
+															a.innerHTML=j;
+															a.style.color="grey";
+															a.style.fontWeight="300";
+															a.style.cursor="pointer";
+															a.style.margin="0 5px 0 5px";
+															a.onclick=function(){
+																listAllReply(j);
+															}
+															replyPageNum.appendChild(a);
+														}
+													}
+												}
+											}
+
+									}
+									}
+									};
+									xhr.open('get','${pageContext.request.contextPath }/shop/commentlist?a_b_num='+a_b_num+'&pageNum=1',true);
+									xhr.send();
+									}list();
+								
+									}
+								};
+							xhr.open('post','${pageContext.request.contextPath }/shop/comments.do',true);
+							//post방식으로 요청시 콘텐트타입에서 인코딩방식 설정하기 - 꼭 해줘야 함
+							xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+							let params="a_b_num="+a_b_num+"&comments="+formControl.value;
+							xhr.send(params);
+							}
+
 					
 					review_box.appendChild(replyNum);
 					review_box.appendChild(review_id);
@@ -288,19 +375,28 @@ if(${sessionScope.id==null}){
 
 					review_wrap.appendChild(review_box);
 					
-					function listAllReply(){
+					
+
+					
+					function listAllReply(pgNum){
 						let xhr=new XMLHttpRequest();
 						xhr.onreadystatechange=function(){
 						if(xhr.readyState==4 && xhr.status==200){
 							
 							 let childs=reply_wrap_box.childNodes;
 
-							for(let i=childs.length-1;i>=1;i--){
+							for(let i=childs.length-1;i>=0;i--){
 								reply_wrap_box.removeChild(childs.item(i));
 							}    
 							
 							let xml=xhr.responseXML;
 							let comm=xml.getElementsByTagName("comm");
+							
+							let repageCount=xml.getElementsByTagName("pageCount")[0].textContent;
+							let restartPageNum=xml.getElementsByTagName("startPageNum")[0].textContent;
+							let reendPageNum=xml.getElementsByTagName("endPageNum")[0].textContent;
+							let repageNum=xml.getElementsByTagName("pageNum")[0].textContent;
+
 							for(let i=0;i<comm.length;i++){
 								
 								
@@ -309,6 +405,10 @@ if(${sessionScope.id==null}){
 									let reply_id=document.createElement("p");
 									let reply_con=document.createElement("p");
 									let reply_date=document.createElement("p");
+									let replyPageNum=document.createElement("div");
+									replyPageNum.style.textAlign="center";
+									replyPageNum.style.marginTop="5px";
+
 									
 									reply_box.className="reply_box";
 									reply_id.className="reply_id";
@@ -330,14 +430,46 @@ if(${sessionScope.id==null}){
 									reply_date.innerHTML=date;
 													
 									reply_wrap_box.appendChild(reply_box);
-								
+									reply_wrap_box.appendChild(replyPageNum);
+									if(reendPageNum>1){
+										if(i==comm.length-1){
+											for(let j=restartPageNum;j<=reendPageNum;j++){
+												if(repageNum==j){
+													let span=document.createElement("span");
+													span.innerHTML=j;
+													span.style.color="black";
+													span.style.fontWeight="700";
+													span.style.margin="0 5px 0 5px";
+													replyPageNum.appendChild(span);
+												}else{
+													let a=document.createElement("a");
+													a.innerHTML=j;
+													a.style.color="grey";
+													a.style.fontWeight="300";
+													a.style.cursor="pointer";
+													a.style.margin="0 5px 0 5px";
+													a.onclick=function(){
+														let repchilds=replyPageNum.childNodes;
+														for(let i=repchilds.length-1;i>=0;i--){
+															replyPageNum.removeChild(repchilds.item(i));
+														}  
+														listAllReply(j);
+													}
+													replyPageNum.appendChild(a);
+												}
+											}
+										}
+									}
+									
 							}
+							
 						}
 					};
-					xhr.open('get','${pageContext.request.contextPath }/shop/commentlist?a_b_num='+a_b_num,true);
+					xhr.open('get','${pageContext.request.contextPath }/shop/commentlist?a_b_num='+a_b_num+'&pageNum='+pgNum,true);
 					xhr.send();
 					}listAllReply();
 			}
+			
 		}
 	};
 	xhr.open('post','${pageContext.request.contextPath }/admin/review_list.do',true);
@@ -349,55 +481,8 @@ if(${sessionScope.id==null}){
 
 
 //댓글리스트 등록클릭시 새로고침
-function list(a_b_num,index){	 		
-var reply_wrap_box=document.getElementsByClassName("reply_wrap_box")[index];
 
 
-let xhr=new XMLHttpRequest();
-xhr.onreadystatechange=function(){
-if(xhr.readyState==4 && xhr.status==200){
-
-let childs=reply_wrap_box.childNodes;
-
-for(let i=childs.length-1;i>=0;i--){
-	reply_wrap_box.removeChild(childs.item(i));
-}  
-
-let xml=xhr.responseXML;
-let comm=xml.getElementsByTagName("comm");
-for(let i=0;i<comm.length;i++){
-		let reply_box=document.createElement("div");
-		let reply_id=document.createElement("p");
-		let reply_con=document.createElement("p");
-		let reply_date=document.createElement("p");
-		
-		reply_box.className="reply_box";
-		reply_id.className="reply_id";
-		reply_con.className="reply_con";
-		reply_date.className="reply_date";
-		
-		reply_box.appendChild(reply_id);
-		reply_box.appendChild(reply_con);
-		reply_box.appendChild(reply_date);
-		
-		let content=comm[i].getElementsByTagName("content")[0].textContent;
-		let renum=comm[i].getElementsByTagName("renum")[0].textContent;
-		let id=comm[i].getElementsByTagName("id")[0].textContent;
-		let date=comm[i].getElementsByTagName("date")[0].textContent;
-		let abnum=comm[i].getElementsByTagName("abnum")[0].textContent;
-		
-		reply_id.innerHTML=id;
-		reply_con.innerHTML=content;
-		reply_date.innerHTML=date;
-						
-		reply_wrap_box.appendChild(reply_box);
-
-}
-}
-};
-xhr.open('get','${pageContext.request.contextPath }/shop/commentlist?a_b_num='+a_b_num,true);
-xhr.send();
-}
 
 
 

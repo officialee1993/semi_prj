@@ -24,8 +24,8 @@
 								<c:when test="${not empty list.a_b_content }">
 								<input type="hidden" name="a_b_num" value="${list.a_b_num }">
 								<tr>
-								<td>${list.a_b_title }</td>
-								<td class="content"><a href="${cp }/shop/mypage_reviewlist_detail?cmd=list&a_b_num=${list.a_b_num }">${list.a_b_content }</a></td>
+								<td><a style="font-weight:700" href="${cp }/shop/mypage_reviewlist_detail?cmd=list&a_b_num=${list.a_b_num }">${list.a_b_title }</a></td>
+								<td>${list.a_b_content }</td>
 								<td>${list.wr_date }</td>
 								</tr>
 								</c:when>
