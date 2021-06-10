@@ -76,21 +76,26 @@ public class ReviewDao {
 	}
 	
 	/*댓글 새로고침*/
-	public ArrayList<A_board_vo> replyListRef(int num){
+	public ArrayList<A_board_vo> replyListRef(int num,int startRow,int endRow){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql="select * from("
+				+ " select z.*,rownum rnum from("
+				+ " select * from("
 				+ " select * from("
 				+ " select r.* from a_board a"
 				+ " join a_reply r"
 				+ " on a.a_b_num=r.a_b_num)"
 				+ " where a_b_num=? and a_r_content!='null')"
-				+ " order by wr_date desc";
+				+ " order by wr_date desc) z)"
+				+ " where rnum>=? and rnum<=?";
 		try {
 			con=MyDBCP.getConnection();
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, num);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rs=pstmt.executeQuery();
 			ArrayList<A_board_vo> list=new ArrayList<A_board_vo>();
 			while(rs.next()) {
