@@ -10,7 +10,7 @@
 		
 			<c:choose>
 			<c:when test="${empty sessionScope.id}">
-			<div class="header_menu" id="header_menu" style="flex:1.26 1 0">
+			<div class="header_menu" id="header_menu" style="flex:1.22 1 0">
 			<ul>
 				<li><a href="${cp }/shop/goods_list?order=1">신상품</a></li>
 				<li><a href="${cp }/shop/goods_list_pro?p_id=1">남성</a></li>
@@ -48,7 +48,7 @@
 			<a href="${cp}/shop/goods_cart" class="header_basket" id="header_basket">장바구니 </a>
 			<a href="${cp}/shop/mypage_orderlist" class="header_mypage" id="header_mypage">마이페이지
 			</a>
-			<span onclick="headerSearch()">검색</span>
+			<span id="magnifying-glass" onclick="headerSearch()"></span>
 			<ul class="header_mypage_menu" id="header_mypage_menu">
 			<li><a href="${cp }/shop/mypage_orderlist">주문내역</a></li>
 			<li><a href="${cp }/shop/mypage_reviewlist">구매후기</a></li>
