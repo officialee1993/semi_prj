@@ -10,12 +10,25 @@
 				</div>
 				<div class="mypage_orderlist">
 					<h3>주문내역</h3>
-					<form action="${cp}/shop/mypage_orderlist" method="post">
+					<form action="${cp}/shop/mypage_orderlist" method="post" onsubmit="return dateCheck()">
 					<div style="margin-top:20px;display:flex;" class="orderDateWrap">
-					<input type="date" name="startDate" ><span style="padding:10px">~</span><input type="date" name="firstDate">
+					<input value="${startDateStr }" type="date" id="startDate" name="startDate" value="${startDateStr }"><span style="padding:10px">~</span><input id="endDate" value="${endDateStr }" type="date" name="endDate" value="${endDateStr }">
 					<button type="submit" class="btn btn-outline-dark" style="font-size:14px;margin-left:10px">검색</button>
 					</div>
 					</form>
+					<script>
+						function dateCheck(){
+							var startDate=document.getElementById("startDate").value;
+							var endDate=document.getElementById("endDate").value;
+							if(startDate=='' || endDate==''){
+								alert("시작일과 종료일을 모두 지정해주세요");
+								return false;
+							}else{
+								return true;
+							}
+						}
+					</script>
+
 					<div class="mypage_orderlist_wrap">
 						<table>
 							<tr>
@@ -74,7 +87,7 @@
 						<span style="color:black">[${i }]</span>
 					</c:when>
 				<c:otherwise>
-						<a href="${cp }/shop/mypage_orderlist?pageNum=${i }" style="color:grey">[${i }]</a>
+						<a href="${cp }/shop/mypage_orderlist?pageNum=${i }&startDate=${startDateStr}&endDate=${endDateStr}" style="color:grey">[${i }]</a>
 				</c:otherwise>
 						</c:choose>
 				</c:forEach>
