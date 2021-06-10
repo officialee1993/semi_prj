@@ -21,7 +21,7 @@
 					<!-- 날짜선택 -->
 					<input type="date" name ="beforekal" ><span>~</span><input type="date" name = "afterkal">
 					<button type="button" class="btn btn-outline-dark" onclick="kal_send()">검색</button>
-					<span class="sales_result" id = "all_sum">총 주문금액 : ${all_sum}</span>
+					<span class="sales_result" id = "all_sum">총 주문금액 : ${all_sum} 원</span>
 					
 				</div>
 				
@@ -51,7 +51,7 @@
 				</table>
 			
 				<!-- 페이지번호 -->
-				<div class="goods_pagenum">
+				<div id = "pagenum" class="goods_pagenum" >
 					<c:if test="${startPageNum>10}">
 					<a href="${cp}//admin/sales?pageNum=${startPageNum-1}">
 					<span style="color: gray">[이전]</span>
@@ -83,7 +83,11 @@
 		<script type="text/javascript">
 		
 		
-		function kal_send(str){
+		function kal_send(str,pgNum){
+			
+			var pagenum=document.getElementById("pagenum");
+			let pgnum = pgNum;
+			
 			
 			if(str == 1 ){
 				var todays = document.getElementsByName("todays")[0].value;
@@ -106,15 +110,55 @@
 					let all_sum = document.getElementById("all_sum");
 					
 					let childs=searchlist.childNodes;
-					
-					
 					for(let i=childs.length-1;i>=1;i--){
 						searchlist.removeChild(childs.item(i));
 					}
 					
+					let pagenumchilds=pagenum.childNodes;
+					for(let i=pagenumchilds.length-1;i>=1;i--){
+						pagenum.removeChild(pagenumchilds.item(i));
+					}  
 					
 					let xml = xhr.responseXML;
 					let comm=xml.getElementsByTagName("comm");
+					
+					
+					let pageCount=xml.getElementsByTagName("pageCount")[0].textContent;
+					let startPageNum=xml.getElementsByTagName("startPageNum")[0].textContent;
+					let endPageNum=xml.getElementsByTagName("endPageNum")[0].textContent;
+					let pageNum=xml.getElementsByTagName("pageNum")[0].textContent;
+					let choose=xml.getElementsByTagName("choose")[0].textContent;
+					let all_sum1=xml.getElementsByTagName("all_sum")[0].textContent;
+				
+					
+					for(let i=startPageNum;i<=endPageNum;i++){
+						if(pageNum==i){
+							let span=document.createElement("span");
+							span.innerHTML="["+i+"]";
+							span.style.color="black";
+							span.style.fontWeight="700";
+							pagenum.appendChild(span);
+							
+						}else{
+							
+
+
+							let a=document.createElement("a");
+							a.innerHTML="["+i+"]";
+							a.style.color="gray";
+							a.style.fontWeight="300";
+							a.style.cursor="pointer"; 
+							
+							a.onclick=function(){
+								kal_send(choose,i);
+							}
+							pagenum.appendChild(a);
+						}
+					}
+					
+					
+
+					
 					
 					let trHead=document.createElement("tr");
 					let th1=document.createElement("th");
@@ -138,7 +182,9 @@
 					trHead.appendChild(th4);
 					
 					searchlist.appendChild(trHead);
-					let sum=0;
+					/* let sum=0; */
+					
+					
 						for(let i=0;i<comm.length;i++){
 						
 						
@@ -146,7 +192,9 @@
 						let all_sales=comm[i].getElementsByTagName("all_sales")[0].textContent;
 						let p_count=comm[i].getElementsByTagName("p_count")[0].textContent;
 						let p_num=comm[i].getElementsByTagName("p_num")[0].textContent;
-						sum = sum + parseInt(all_sales);
+						
+						/* sum = sum + parseInt(all_sales); */
+						
 						let tr=document.createElement("tr");
 						let td1=document.createElement("td");
 						let td2=document.createElement("td");
@@ -166,13 +214,13 @@
 						searchlist.appendChild(tr);
 						
 					}
-						all_sum.innerHTML= "총 주문금액 : "+sum;
+						all_sum.innerHTML= "총 주문금액 : "+all_sum1 +" 원";
 				}
 			};
-			
+		
 			xhr.open('post','${pageContext.request.contextPath}/admin/sales_search_list',true)
 			xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-			let params = "beforekal=" + beforekal + "&afterkal=" + afterkal+ "&todays=" + todays + "&months=" + months+ "&years=" + years;
+			let params = "beforekal=" + beforekal + "&afterkal=" + afterkal+ "&todays=" + todays + "&months=" + months+ "&years=" + years+ "&pageNum="+pgnum;
 			xhr.send(params);
 		}
 

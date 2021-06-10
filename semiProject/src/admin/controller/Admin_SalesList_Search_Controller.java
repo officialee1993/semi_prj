@@ -23,32 +23,69 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 
 		req.setCharacterEncoding("utf-8");
 		ArrayList<Sales_stats_vo> list = null;
+		ArrayList<Sales_stats_vo> list1 = null;
 		String todays = req.getParameter("todays");
 		String months = req.getParameter("months");
 		String years = req.getParameter("years");
-
-		System.out.println(todays + " " + months + " " + years);
+		String spageNum = req.getParameter("pageNum");
+		String sum = req.getParameter("sum");
+		
+		//System.out.println(todays + " " + months + " " + years);
 
 		Salesdao salesdao = Salesdao.getinstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
 		String strToday = sdf.format(cal.getTime());//현재 날짜 
+		
 		int all_sum = 0;
 
+		
+	
+		int pageNum=1;
+		System.out.println(spageNum);	
+		
+		if(!spageNum.equals("undefined")) {
+			pageNum=Integer.parseInt(spageNum);
+			//System.out.println("pageNum: "+pageNum);
+		}
+		
+		int startRow=(pageNum-1)*15+1;
+		int endRow=startRow+14;
+		
+		int startPageNum= 0;
+		int endPageNum=0;
+		
+		int pageCount =0;
+		
+		String choose = null; 
+		
 		if (todays.equals("1") && months.equals("undefined") && years.equals("undefined")) {// 오늘
 
 			String strTodayend = strToday + "-23-59";
 
-			list = salesdao.Sales_stats_kal_select(strToday, strTodayend);
-			for (Sales_stats_vo vo : list) {
+		//	 System.out.println(strToday+" "+ strTodayend+" " +startRow+" " + endRow);
+			 
+			list = salesdao.Sales_stats_kal_select(strToday, strTodayend,startRow,endRow );
+			
+			list1 = salesdao.Sales_stats_kal_select(strToday, strTodayend);
+			for (Sales_stats_vo vo : list1) {
 				all_sum += vo.getAll_Sales();
 
 			}
-			System.out.println("all_sum" + all_sum);
+			
+			pageCount=(int)Math.ceil(salesdao.sales_stats_search_all_selete_getCount(strToday,strTodayend)/15.0);
+			startPageNum= ((pageNum - 1) / 10 * 10) + 1; 
+			endPageNum = startPageNum + 9;
+			 
+			if(endPageNum>pageCount) {
+				endPageNum=pageCount;
+			}
+			
+			//System.out.println("all_sum" + all_sum);
 
 			req.setAttribute("all_sum", all_sum);
 			req.setAttribute("list", list);
-
+			choose = "1"; 
 			// System.out.println("Today=" + strToday);
 
 		} else if (todays.equals("undefined") && months.equals("2") && years.equals("undefined")) {// 한당
@@ -67,35 +104,77 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 
 			System.out.println(strmonths + " " + strmonthsend);
 
-			list = salesdao.Sales_stats_kal_select(strmonths, strmonthsend);
-			for (Sales_stats_vo vo : list) {
+			
+			list = salesdao.Sales_stats_kal_select(strmonths, strmonthsend,startRow,endRow );
+			
+			list1 = salesdao.Sales_stats_kal_select(strmonths, strmonthsend );
+			for (Sales_stats_vo vo : list1) {
 				all_sum += vo.getAll_Sales();
 
 			}
+			
+			pageCount=(int)Math.ceil(salesdao.sales_stats_search_all_selete_getCount(strmonths,strmonthsend)/15.0);
+			startPageNum= ((pageNum - 1) / 10 * 10) + 1; 
+			endPageNum = startPageNum + 9;
+			 
+			if(endPageNum>pageCount) {
+				endPageNum=pageCount;
+			}
+			
+			
+			
 			System.out.println("all_sum" + all_sum);
 			req.setAttribute("all_sum", all_sum);
 			req.setAttribute("list", list);
-
+			choose = "2"; 
 		} else if (todays.equals("undefined") && months.equals("undefined") && years.equals("3")) { // 1년 
 
 			String stryears = strToday.substring(0, 5) + "01-01";
 			String stryearsend = strToday.substring(0, 5) + "12-31";
 
-			list = salesdao.Sales_stats_kal_select(stryears, stryearsend);
-			for (Sales_stats_vo vo : list) {
+			list = salesdao.Sales_stats_kal_select(stryears, stryearsend,startRow,endRow );
+			list1 = salesdao.Sales_stats_kal_select(stryears, stryearsend );
+			for (Sales_stats_vo vo : list1) {
 				all_sum += vo.getAll_Sales();
 
 			}
+			pageCount=(int)Math.ceil(salesdao.sales_stats_search_all_selete_getCount(stryears,stryearsend)/15.0);
+			startPageNum= ((pageNum - 1) / 10 * 10) + 1; 
+			endPageNum = startPageNum + 9;
+			 
+			if(endPageNum>pageCount) {
+				endPageNum=pageCount;
+			}
+			
+			
+			
 			System.out.println("all_sum" + all_sum);
 			req.setAttribute("all_sum", all_sum);
 			req.setAttribute("list", list);
+			choose = "3"; 
 		} else {
 
 			String beforekal = req.getParameter("beforekal");
 			String afterkal = req.getParameter("afterkal");
 			String afterkal2 = afterkal + "-23-59";
 
-			list = salesdao.Sales_stats_kal_select(beforekal, afterkal2);
+			list = salesdao.Sales_stats_kal_select(beforekal, afterkal2,startRow,endRow);
+			
+			list1 = salesdao.Sales_stats_kal_select(beforekal, afterkal2 );
+			for (Sales_stats_vo vo : list1) {
+				all_sum += vo.getAll_Sales();
+
+			}
+			
+			pageCount=(int)Math.ceil(salesdao.sales_stats_search_all_selete_getCount(beforekal,afterkal2)/15.0);
+			startPageNum= ((pageNum - 1) / 10 * 10) + 1; 
+			endPageNum = startPageNum + 9;
+			 
+			if(endPageNum>pageCount) {
+				endPageNum=pageCount;
+			}
+			
+			
 			req.setAttribute("list", list);
 
 		}
@@ -114,6 +193,13 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 			pw.print("<p_num>" + vo.getP_num() + "</p_num>");
 			pw.print("</comm>");
 		}
+		
+		pw.print("<pageCount>"+pageCount+"</pageCount>");
+		pw.print("<startPageNum>"+startPageNum+"</startPageNum>");
+		pw.print("<endPageNum>"+endPageNum+"</endPageNum>");
+		pw.print("<pageNum>"+pageNum+"</pageNum>");
+		pw.print("<choose>"+choose+"</choose>");
+		pw.print("<all_sum>"+all_sum+"</all_sum>");
 		pw.print("</result>");
 
 	}
