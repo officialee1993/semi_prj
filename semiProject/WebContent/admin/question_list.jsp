@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+
 	<!-- 관리자 페이지 콘텐츠 영역 -->
 	<div class="admin_content_wrap">
 		<div class="title_wrap">

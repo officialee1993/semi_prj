@@ -10,7 +10,7 @@
 		
 			<c:choose>
 			<c:when test="${empty sessionScope.id}">
-			<div class="header_menu" id="header_menu" style="flex:1.26 1 0">
+			<div class="header_menu" id="header_menu" style="flex:1.22 1 0">
 			<ul>
 				<li><a href="${cp }/shop/goods_list?order=1">신상품</a></li>
 				<li><a href="${cp }/shop/goods_list_pro?p_id=1">남성</a></li>
@@ -40,7 +40,7 @@
 			<c:when test="${empty sessionScope.id}">
 			<a href="${cp}/shop/login">로그인</a>
 			<a href="${cp}/shop/join">회원가입</a>
-			<span onclick="headerSearch()">검색</span>
+			<span id="magnifying-glass" onclick="headerSearch()"></span>
 			</c:when>
 			
 			<c:otherwise>
@@ -48,7 +48,7 @@
 			<a href="${cp}/shop/goods_cart" class="header_basket" id="header_basket">장바구니 </a>
 			<a href="${cp}/shop/mypage_orderlist" class="header_mypage" id="header_mypage">마이페이지
 			</a>
-			<span onclick="headerSearch()">검색</span>
+			<span id="magnifying-glass" onclick="headerSearch()"></span>
 			<ul class="header_mypage_menu" id="header_mypage_menu">
 			<li><a href="${cp }/shop/mypage_orderlist">주문내역</a></li>
 			<li><a href="${cp }/shop/mypage_reviewlist">구매후기</a></li>
@@ -58,18 +58,6 @@
 			</c:otherwise>
 			</c:choose>
 			
-		</div>
-		<div id="header_search" style="position:absolute; width:100%; max-width:1050px; margin-top:15px; display:none;">
-			<div class="header_search_inner" style="position:absolute; right:0; background:#fff;">
-				
-				<form method="post" action="${cp}/shop/goods_list_product" accept-charset="utf-8">
-				
-				<input type="text" name="header_search_input" >
-				
-				<input type="submit" value="검색"> 
-				<span style="margin-left:10px;" onclick="closeSearch();">X</span>
-				</form>
-			</div>
 		</div>
 		</div>
 		</div>
@@ -86,7 +74,20 @@
 					</ul>
 			</div>
 	</div>
-	
+			<div id="searchWrap" class="searchWrap">
+			<div class="mb-3">
+			<form method="post" action="${cp}/shop/goods_list_product" accept-charset="utf-8">
+			 	<label for="" class="form-label"></label>
+  				<textarea id="header_search_input" name="header_search_input" class="form-control" id="" rows="1" placeholder="상품명을 입력해주세요"></textarea>
+  				<button type="submit" class="btn btn-outline-light">검색</button>
+  				<div id="mdiv" onclick=>
+				  <div class="mdiv">
+				    <div class="md"></div>
+				  </div>
+				</div>
+			</form>
+			</div>
+			</div>
 	<script>
 	/*헤더 드롭다운*/
 	document.getElementById("header_menu").addEventListener('mouseover',function(){
@@ -97,16 +98,15 @@
 	});
 	
 	
-	var searchBar = document.getElementById("header_search");
+	var searchWrap = document.getElementById("searchWrap");
 	var searchInput = document.getElementById("header_search_input");
 	
 	function headerSearch(){
-		searchBar.style.display="block";
+		searchWrap.style.display="block";
 		searchInput.focus();
 	}
-	
-	function closeSearch(){
-		searchBar.style.display="none";
-	}
-	
+	document.getElementById("mdiv").addEventListener('click',function(){
+		searchWrap.style.display="none";
+	});
+
 	</script>
