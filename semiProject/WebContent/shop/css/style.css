@@ -50,6 +50,79 @@ a:hover{
 	background-color:white;
 	z-index:100;
 }
+.searchWrap{
+	width:100%;
+	height:100%;
+	background-color:black;
+	position:fixed;
+	z-index:9999;
+	left:50%;
+	transform:translate(-50%);
+	background-color: rgba(0, 0, 0, 0.8);
+	display:none;
+}
+.searchWrap .mb-3{
+	position:absolute;
+	top:30%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	width:300px;
+}
+.searchWrap .mb-3 form{
+	display:flex;
+}
+.searchWrap .mb-3 form .btn-outline-light{
+	width:63px;
+	font-size:14px;
+	margin-left:5px;
+}
+.searchWrap .mb-3 form #mdiv{
+	width: 25px;
+  height: 25px;
+  margin-top:6px;
+  margin-left:5px;
+  cursor:pointer;
+}
+.searchWrap .mb-3 form .mdiv{
+ height: 25px;
+  width: 2px;
+  margin-left: 12px;
+  background-color: white;
+  transform: rotate(45deg);
+  Z-index: 1;
+}
+.searchWrap .mb-3 form .md{
+ height: 25px;
+  width: 2px;
+  background-color: white;
+  transform: rotate(90deg);
+  Z-index: 2;
+}
+
+ #magnifying-glass {
+      font-size:1.4em;
+      display: inline-block;
+      width: 0.4em;
+      box-sizing: content-box;
+      height: 0.4em;
+      border: 0.1em solid #777;
+      position: relative;
+      border-radius: 0.35em;
+      cursor:pointer;
+    }
+    #magnifying-glass:before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      right: -0.25em;
+      bottom: -0.1em;
+      border-width: 0;
+      background: #777;
+      width: 0.35em;
+      height: 0.08em;
+      transform: rotate(45deg);
+    }
+
 .header > .my_row > .header_box{
 	display:flex;
 	justify-content: space-between;

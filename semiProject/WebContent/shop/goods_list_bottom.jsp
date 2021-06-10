@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<div class="banner_goods">
+		<img src="images/banner_new2.png">
+</div>
 <!-- content -->
+
 <div class="content">
+
 	<div class="my_row">
 		<div class="goods_list">
 			<h3>신상품</h3>

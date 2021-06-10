@@ -17,6 +17,7 @@
 
 
 <div class="content">
+
 	<div class="my_row">
 		<div class="goods_list">
 			<c:choose>
