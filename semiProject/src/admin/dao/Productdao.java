@@ -762,13 +762,19 @@ public ArrayList<Product_category_vo> pro_cate_list(int startRow, int endRow){
 			
 			Connection con = null;
 			PreparedStatement pstmt = null; 
+			PreparedStatement pstmt1= null; 
+			PreparedStatement pstmt2= null; 
+			PreparedStatement pstmt3= null; 
 			try {
 				
 				System.out.println(vo.getP_name()+"/ "+vo.getP_count()+"/"+vo.getP_price()+"/"+vo.getP_click_num()+"/"+vo.getOri_img_name()+"/"+vo.getSave_img_name()+"/"+vo.getCg_id());
 				con = MyDBCP.getConnection();
 				String sql = "insert into product values(product_seq.nextval,?,?,?,?,sysdate,?,?,?)";
-				
+				String sql1 = "insert into storages(s_num,s_count,p_size,p_num) values(storages_seq.nextval,?,'M',product_seq.currval)";
+				String sql2 = "insert into storages(s_num,s_count,p_size,p_num) values(storages_seq.nextval,?,'L',product_seq.currval)";
+				String sql3 = "insert into storages(s_num,s_count,p_size,p_num) values(storages_seq.nextval,?,'XL',product_seq.currval)";
 				pstmt = con.prepareStatement(sql);
+				
 				pstmt.setString(1, vo.getP_name());
 				pstmt.setInt(2,	vo.getP_count());
 				pstmt.setInt(3,	vo.getP_price());
@@ -776,16 +782,28 @@ public ArrayList<Product_category_vo> pro_cate_list(int startRow, int endRow){
 				pstmt.setString(5,	vo.getOri_img_name());
 				pstmt.setString(6,	vo.getSave_img_name());
 				pstmt.setInt(7,	vo.getCg_id());
+				pstmt.executeUpdate();
 				
-				int n = pstmt.executeUpdate();
-				//System.out.println(n);
+				pstmt1 = con.prepareStatement(sql1);
+				pstmt1.setInt(1, vo.getP_count());
+				pstmt1.executeUpdate();
+				
+				pstmt2 = con.prepareStatement(sql2);
+				pstmt2.setInt(1, vo.getP_count());
+				pstmt2.executeUpdate();
+				
+				pstmt3 = con.prepareStatement(sql3);
+				pstmt3.setInt(1, vo.getP_count());
+				int n = pstmt3.executeUpdate();
+				
 				return n ; 
 				
 			}catch(SQLException s) {
-				s.getMessage();
+				System.out.println(s.getMessage());
 				return -1;
 			}finally {
-				MyDBCP.close(con, pstmt, null);
+				MyDBCP.close(con, pstmt3, null);
+				
 			}
 		}
 }

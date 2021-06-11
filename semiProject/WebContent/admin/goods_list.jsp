@@ -69,7 +69,6 @@
 					<th>가격</th>
 					<th>재고</th>
 					<th>생성일</th>
-					<th>조회수</th>
 					<th width="5%"></th>
 					<th width="5%"></th>
 				</tr>
@@ -81,7 +80,6 @@
 					<td>${vo.p_price}원</td>
 					<td>${vo.p_count}</td>
 					<td>${vo.p_date}</td>
-					<td>${vo.p_click_num}</td>
 					<td><button onclick="location.href='${cp}/admin/goods_modify?p_num=${vo.p_num}'" type="button" class="btn btn-outline-dark">수정</button></td>
 					<td><button onclick="location.href='${cp}/admin/goods_delete?p_num=${vo.p_num}'" type="button" class="btn btn-outline-dark">삭제</button></td>
 				</tr>

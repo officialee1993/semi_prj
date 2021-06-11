@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import admin.dao.Productdao;
+import admin.dao.StoragesDao;
 import shop.vo.BasketList_vo;
+import shop.vo.Basket_vo;
 import shop.vo.Orders_vo;
 import shop.vo.Product_vo;
 import shop_dao.Basketdao;
@@ -26,9 +28,14 @@ public class Goods_list_order_Controller extends HttpServlet {
 		String id = (String) session.getAttribute("id");
 		Basketdao basketdao = Basketdao.getinstance();
 		ArrayList<BasketList_vo> basketlistvo = new ArrayList<BasketList_vo>();
-		String[] str = req.getParameterValues("c1");
+		ArrayList<Basket_vo> basket_all_list_vo = new ArrayList<Basket_vo>();
+		String[] str = req.getParameterValues("c1"); // 장바구니 번호  
 		OrderDao orderdao = OrderDao.getinstance();
 		Orders_vo ordervo = orderdao.ordervoinfo();
+		StoragesDao storagesDao = StoragesDao.getinstance();
+
+		
+		
 		int all_sum_price = 0;
 		if (str != null) {
 			if (ordervo == null) {

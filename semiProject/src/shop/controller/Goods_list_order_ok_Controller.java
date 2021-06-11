@@ -64,8 +64,6 @@ public class Goods_list_order_ok_Controller extends HttpServlet {
 			
 		}
 
-		
-		
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content", "/shop/goods_order_ok.jsp");
 		req.setAttribute("footer", "/shop/footer.jsp");
