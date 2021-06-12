@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<div class="content">
 		<div class="my_row">
+		
+		
+		
 			<div class="goods_order_detail">
 				<table>
 					<tr>
@@ -25,7 +29,7 @@
 			<div class="join_box">
 				<h3 class="form_title">상품주문</h3>
 				
-				<form action="${cp}/shop/goods_order_ok?p_num=${vo.p_num}&b_num_max=${b_num_max}&ALL_SUM_PRICE=${vo.p_price*p_count}&p_count=${p_count}" method="post">
+				<form action="${cp}/shop/goods_order_ok?p_num=${vo.p_num}&b_num_max=${b_num_max}&ALL_SUM_PRICE=${vo.p_price*p_count}&p_count=${p_count}&p_size=${p_size}" method="post">
 				<div class="mb-3">
   				<label for="" class="form-label">수령인</label>
   				<input type="text" class="form-control" name ="rec_name" placeholder="수령인 성함을 입력해주세요">

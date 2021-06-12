@@ -11,6 +11,7 @@ import oracle.jdbc.driver.DBConversion;
 import shop.db.MyDBCP;
 import shop.vo.BasketList_vo;
 import shop.vo.Basket_sum_price_vo;
+import shop.vo.Basket_vo;
 
 
 public class Basketdao {
@@ -23,6 +24,35 @@ public class Basketdao {
 	private Basketdao () {}
 
 
+	
+	public ArrayList< Basket_vo> basket_select (int b_num) {
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null; 
+		ArrayList< Basket_vo> list = new ArrayList<Basket_vo>();
+		try {
+			con = MyDBCP.getConnection();
+			String sql = "select * from basket where b_num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, b_num);
+			rs= pstmt.executeQuery();
+			while(rs.next()) {
+				
+				Basket_vo vo = new Basket_vo(rs.getInt("b_num"), rs.getInt("p_count"), rs.getInt("p_num"), rs.getString("id"), rs.getString("p_size"));
+				list.add(vo);
+				
+			}
+			return list;
+			
+		}catch (SQLException s) {
+			s.getMessage();
+			return null;
+			
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+	}
 public ArrayList<Basket_sum_price_vo> basket_sum_price(String id, int b_num) {
 		
 		Connection con = null; 
@@ -214,7 +244,7 @@ public ArrayList<Basket_sum_price_vo> basket_sum_price(String id, int b_num) {
 			
 			String sql = "select * from "
 					+ "(select notorder_basketlist.*,rownum rnum "
-					+ "from (select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id='one' and p.p_num = b.p_num order by b.b_num desc)notorder_basketlist) "
+					+ "from (select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id=? and p.p_num = b.p_num order by b.b_num desc)notorder_basketlist) "
 					+ "where rnum>=? and rnum<=?";
 			
 			pstmt = con.prepareStatement(sql);

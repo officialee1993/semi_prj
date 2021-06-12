@@ -2,6 +2,7 @@ package admin.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,9 +37,9 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
 		String strToday = sdf.format(cal.getTime());//현재 날짜 
-		
+		DecimalFormat formatter = new DecimalFormat("###,###");
 		int all_sum = 0;
-
+		String sall_sum = null; 
 		
 	
 		int pageNum=1;
@@ -70,7 +71,7 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 			list1 = salesdao.Sales_stats_kal_select(strToday, strTodayend);
 			for (Sales_stats_vo vo : list1) {
 				all_sum += vo.getAll_Sales();
-
+				sall_sum = formatter.format(all_sum);
 			}
 			
 			pageCount=(int)Math.ceil(salesdao.sales_stats_search_all_selete_getCount(strToday,strTodayend)/15.0);
@@ -110,7 +111,7 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 			list1 = salesdao.Sales_stats_kal_select(strmonths, strmonthsend );
 			for (Sales_stats_vo vo : list1) {
 				all_sum += vo.getAll_Sales();
-
+				sall_sum = formatter.format(all_sum);
 			}
 			
 			pageCount=(int)Math.ceil(salesdao.sales_stats_search_all_selete_getCount(strmonths,strmonthsend)/15.0);
@@ -136,7 +137,7 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 			list1 = salesdao.Sales_stats_kal_select(stryears, stryearsend );
 			for (Sales_stats_vo vo : list1) {
 				all_sum += vo.getAll_Sales();
-
+				sall_sum = formatter.format(all_sum);
 			}
 			pageCount=(int)Math.ceil(salesdao.sales_stats_search_all_selete_getCount(stryears,stryearsend)/15.0);
 			startPageNum= ((pageNum - 1) / 10 * 10) + 1; 
@@ -163,7 +164,7 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 			list1 = salesdao.Sales_stats_kal_select(beforekal, afterkal2 );
 			for (Sales_stats_vo vo : list1) {
 				all_sum += vo.getAll_Sales();
-
+				sall_sum = formatter.format(all_sum);
 			}
 			
 			pageCount=(int)Math.ceil(salesdao.sales_stats_search_all_selete_getCount(beforekal,afterkal2)/15.0);
@@ -178,7 +179,8 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 			req.setAttribute("list", list);
 
 		}
-
+		System.out.println("sall_sum: "+ sall_sum);
+		
 		PrintWriter pw = resp.getWriter();
 		resp.setContentType("text/xml;charset=utf-8");
 		pw.print("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
@@ -199,7 +201,7 @@ public class Admin_SalesList_Search_Controller extends HttpServlet {
 		pw.print("<endPageNum>"+endPageNum+"</endPageNum>");
 		pw.print("<pageNum>"+pageNum+"</pageNum>");
 		pw.print("<choose>"+choose+"</choose>");
-		pw.print("<all_sum>"+all_sum+"</all_sum>");
+		pw.print("<sall_sum>"+sall_sum+"</sall_sum>");
 		pw.print("</result>");
 
 	}

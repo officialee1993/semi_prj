@@ -29,12 +29,15 @@
 							<td>${basketvo.p_price*basketvo.p_count}원</td>
 							<td><input type="checkbox" name="c1" value="${basketvo.b_num}"></td>
 							<td><a href="${cp}/shop/goods_cart_delete?b_num=${basketvo.b_num}">삭제</a></td>
+							
 						</tr>
 						
 						</c:forEach>
 					
 					</table>
-					
+							
+						
+							
 							<div style="margin-top:30px;text-align:center;"><!-- 페이징 처리 -->
 								<c:if test="${startPageNum>10 }">
 									<a href="${cp }/shop/goods_cart?pageNum=${startPageNum-1 }">[이전]</a>

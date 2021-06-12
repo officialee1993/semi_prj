@@ -21,6 +21,7 @@ function checkData(){
 		p_size.focus();
 		return false;	
 	}
+
 	
 }
 //댓글추가..
@@ -42,6 +43,9 @@ function checkData(){
 					<h5 style="margin-top:50px;">가격</h5>
 					<p>${vo.p_price}원</p>
 					<input type="number" class="form-control" min="0" placeholder="수량" name="p_count" >
+					<c:if test="${!empty requestScope.fail}">
+						<br><span style="color: red;"> 상품 수량 : ${requestScope.Storages_getcount} </span>
+					</c:if>
 					<select name="p_size" class="form-select form-select-sm" aria-label=".form-select-sm example">
 					  <option selected>사이즈</option>
 					  <option value="M">M</option>
