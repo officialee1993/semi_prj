@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import admin.dao.Productdao;
 import shop.vo.A_board_vo;
@@ -23,8 +24,11 @@ public class Goods_detail_Controller extends HttpServlet{
 		req.setCharacterEncoding("utf-8");
 		int p_num = Integer.parseInt(req.getParameter("p_num"));
 		String spageNum=req.getParameter("pageNum");
-
-
+		
+		HttpSession session = req.getSession(); 
+		String id = (String) session.getAttribute("id");
+		req.setAttribute("id", id);
+		
 		//ReviewDao rdao=ReviewDao.getinstance();
 		//ArrayList<A_board_vo> rlist=rdao.goodsReviewList(p_num);
 		//System.out.println("test4"+rlist);
@@ -50,6 +54,7 @@ public class Goods_detail_Controller extends HttpServlet{
 		if(endPageNum>pageCount) {
 			endPageNum=pageCount;
 		}
+		
 		Productdao dao = Productdao.getinstance();
 		Product_vo vo= dao.getinfo(p_num);
 		
