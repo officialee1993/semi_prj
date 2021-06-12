@@ -47,6 +47,7 @@ public class Goods_cart_Controller extends HttpServlet{
 	 	if(ordervo ==null) {
 	 		
 	 		basketlistvo= basketdao.notorder_basketlist(id,startRow,endRow);
+	 		
 	 		int pageCount = (int)Math.ceil(basketdao.notorder_basketlist_getCount(id)/ 5.0);
 	 		System.out.println("pageCount "+pageCount);
 
@@ -60,6 +61,7 @@ public class Goods_cart_Controller extends HttpServlet{
 	 	}else {
 	 		
 	 		basketlistvo= basketdao.basketlist(id,startRow,endRow);
+	 		
 	 		int pageCount =(int)Math.ceil(basketdao.basketlist_getCount(id)/ 5.0);
 	 		System.out.println("pageCount "+pageCount);
 

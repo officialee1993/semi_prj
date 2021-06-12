@@ -10,6 +10,8 @@ import shop.db.MyDBCP;
 import shop.vo.Category_vo;
 import shop.vo.Product_category_vo;
 import shop.vo.Product_vo;
+import shop.vo.pro_cate_storage_list_vo;
+import shop.vo.product_add_p_size_vo;
 import shop_dao.Membersdao;
 
 public class Productdao {
@@ -28,7 +30,7 @@ public class Productdao {
 			ArrayList<Product_vo> admin_sex_product_list = new ArrayList<Product_vo>();
 			try {
 				con = MyDBCP.getConnection();
-				String sql = "select * from category c , product p where p.cg_id=c.cg_id and p_id =?";
+				String sql = "select * from category c , product p, Storages s where p.cg_id=c.cg_id and s.p_num=p.p_num and  p_id =?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, p_id);
 				rs = pstmt.executeQuery();
@@ -43,35 +45,127 @@ public class Productdao {
 			}catch (SQLException s) {
 				System.out.println(s.getMessage());
 				return null; 
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
 			}
 			
 		}
-		public ArrayList<Product_vo> admin_all_product_select (String p_name){
+		
+		public ArrayList<product_add_p_size_vo> admin_sex_pro_size_list(String p_id,int startRow,int endRow ){
 			
 			Connection con = null;
 			PreparedStatement pstmt = null; 
 			ResultSet rs= null; 
-			ArrayList< Product_vo> admin_all_product_select = new ArrayList<Product_vo>();
+			ArrayList<product_add_p_size_vo> admin_sex_product_list = new ArrayList<product_add_p_size_vo>();
 			try {
 				con = MyDBCP.getConnection();
-				String sql = "select * from product p  where  p.p_name like '%'||?||'%' ";
+				String sql = "select * from(\r\n"
+						+ "select admin_sex_pro_size_list.*,rownum rnum from \r\n"
+						+ "(select p.p_num,p.p_name,p.p_count,p.p_price,p.p_click_num,p.p_date,p.ori_img_name,p.save_img_name,p.cg_id,s.p_size,s.s_count \r\n"
+						+ "from category c , product p, Storages s \r\n"
+						+ "where p.cg_id=c.cg_id and s.p_num=p.p_num and  p_id =? order by p.p_num desc) admin_sex_pro_size_list) where rnum>=? and rnum<=?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, p_name);
+				pstmt.setString(1, p_id);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
 				rs = pstmt.executeQuery();
 				while(rs.next()) {
 					
-					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+					product_add_p_size_vo vo = new product_add_p_size_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
 							rs.getInt("p_click_num"), rs.getDate("p_date"),
-							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"),rs.getString("p_size"),rs.getInt("s_count"));
+					admin_sex_product_list.add(vo);
+				}
+				return admin_sex_product_list;
+			}catch (SQLException s) {
+				System.out.println(s.getMessage());
+				return null; 
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+			
+		}
+		public int admin_sex_pro_size_list_getCount(String p_id) {
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			try {
+				con=MyDBCP.getConnection();
+				String sql="select NVL(count(*),0) from (  \r\n"
+						+ "select * from category c , product p, Storages s where p.cg_id=c.cg_id and s.p_num=p.p_num and  p_id =?)";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, p_id);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					int n=rs.getInt(1);
+					return n;
+				}
+				return -1;
+			}catch(SQLException se) {
+				se.printStackTrace();
+				return -1;
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+	}
+		
+		public ArrayList<product_add_p_size_vo> admin_all_product_select (String p_name,int startRow,int endRow){
+			
+			Connection con = null;
+			PreparedStatement pstmt = null; 
+			ResultSet rs= null; 
+			ArrayList< product_add_p_size_vo> admin_all_product_select = new ArrayList<product_add_p_size_vo>();
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "select * from\r\n"
+						+ "(select admin_all_product_select.*,rownum rnum from\r\n"
+						+ "(select p.p_num,p.p_name,p.p_count,p.p_price,p.p_click_num,p.p_date,p.ori_img_name,p.save_img_name,p.cg_id,s.p_size,s.s_count  \r\n"
+						+ "from product p , Storages s  \r\n"
+						+ "where  s.p_num=p.p_num and p.p_name like '%'||?||'%' order by p.p_num desc)admin_all_product_select) where rnum>=? and rnum<=? ";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, p_name);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					
+					product_add_p_size_vo vo = new product_add_p_size_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+							rs.getInt("p_click_num"), rs.getDate("p_date"),
+							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"),rs.getString("p_size"),rs.getInt("s_count"));
 					admin_all_product_select.add(vo);
 				}
 				return admin_all_product_select;
 			}catch (SQLException s) {
 				System.out.println(s.getMessage());
 				return null; 
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
 			}
 			
 		}
+		public int admin_all_product_select_getCount(String p_name) {
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			try {
+				con=MyDBCP.getConnection();
+				String sql="select NVL(count(*),0) from (  \r\n"
+						+ "select * from product p , Storages s  where  s.p_num=p.p_num and p.p_name like '%'||?||'%')";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, p_name);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					int n=rs.getInt(1);
+					return n;
+				}
+				return -1;
+			}catch(SQLException se) {
+				se.printStackTrace();
+				return -1;
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+	}
 		public ArrayList<Product_vo> list_product (String p_name){
 			
 			Connection con = null;
@@ -95,36 +189,72 @@ public class Productdao {
 			}catch (SQLException s) {
 				System.out.println(s.getMessage());
 				return null; 
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
 			}
 		}
 		
-		public ArrayList<Product_vo> admin_product_select (String cg_name , String p_name){
+		public ArrayList<product_add_p_size_vo> admin_product_select (String cg_name , String p_name,int startRow,int endRow){
 			
 			Connection con = null;
 			PreparedStatement pstmt = null; 
 			ResultSet rs= null; 
-			ArrayList< Product_vo> admin_product_select = new ArrayList<Product_vo>();
+			ArrayList< product_add_p_size_vo> admin_product_select = new ArrayList<product_add_p_size_vo>();
 			try {
 				con = MyDBCP.getConnection();
-				String sql = "select * from product p ,category c where p.cg_id = c.cg_id and c.cg_name=? and p.p_name like '%'||?||'%' ";
+				String sql = "select * from\r\n"
+						+ "(select admin_all_product_select.*,rownum rnum from\r\n"
+						+ "(select p.p_num,p.p_name,p.p_count,p.p_price,p.p_click_num,p.p_date,p.ori_img_name,p.save_img_name,p.cg_id,s.p_size,s.s_count  \r\n"
+						+ "from product p ,category c , Storages s where s.p_num=p.p_num and p.cg_id = c.cg_id and c.cg_name=? and p.p_name like '%'||?||'%' order by p.p_num desc)admin_all_product_select) "
+						+ "where rnum>=? and rnum<=?  ";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, cg_name);
 				pstmt.setString(2, p_name);
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
 				rs = pstmt.executeQuery();
 				while(rs.next()) {
 					
-					Product_vo vo = new Product_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
+					product_add_p_size_vo vo = new product_add_p_size_vo(rs.getInt("p_num"),rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),
 							rs.getInt("p_click_num"), rs.getDate("p_date"),
-							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"));
+							rs.getString("ori_img_name"), rs.getString("save_img_name"), rs.getInt("cg_id"),rs.getString("p_size"),rs.getInt("s_count"));
 					admin_product_select.add(vo);
 				}
 				return admin_product_select;
 			}catch (SQLException s) {
 				System.out.println(s.getMessage());
 				return null; 
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
 			}
 			
 		}
+		public int admin_product_select_getCount(String ct_gory,String search) {
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			try {
+				con=MyDBCP.getConnection();
+				String sql="select nvl(count(*),0)from(\r\n"
+						+ "select p.p_num,p.p_name,p.p_count,p.p_price,p.p_click_num,p.p_date,p.ori_img_name,p.save_img_name,p.cg_id,s.p_size,s.s_count   \r\n"
+						+ "from product p ,category c , Storages s \r\n"
+						+ "where s.p_num=p.p_num and p.cg_id = c.cg_id and c.cg_name=? and p.p_name like '%'||?||'%' order by p.p_num desc)";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, ct_gory);
+				pstmt.setString(2, search);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					int n=rs.getInt(1);
+					return n;
+				}
+				return -1;
+			}catch(SQLException se) {
+				se.printStackTrace();
+				return -1;
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+	}
 		
 		public ArrayList<Product_vo> pro_order_new_date(int cg_id){
 			Connection con = null; 
@@ -317,6 +447,8 @@ public class Productdao {
 				
 				System.out.println(s.getMessage());
 				return -1;
+			}finally {
+				MyDBCP.close(con, pstmt, null);
 			}
 		}
 		public int productupdate(int p_num , String p_name, int p_price, int p_count,String save_img_name, int cg_id) {
@@ -340,6 +472,8 @@ public class Productdao {
 				
 				System.out.println(s.getMessage());
 				return -1;
+			}finally {
+				MyDBCP.close(con, pstmt, null);
 			}
 		}
 		
@@ -350,8 +484,8 @@ public class Productdao {
 			try{
 				con = MyDBCP.getConnection();
 				String sql = "select NVL(count(*),0) from\r\n"
-						+ "(select p.p_num,p.p_name,p.p_count,p.p_price,p.p_click_num,p.p_date,p.save_img_name,c.cg_name "
-						+ "from product p , category c where p.cg_id=c.cg_id)";
+						+ "(select p.p_num,p.p_name,p.p_count,p.p_price,p.p_click_num,p.p_date,p.save_img_name,c.cg_name,s.s_count,s.p_size\r\n"
+						+ "from product p , category c, storages s where p.cg_id=c.cg_id and s.p_num = p.p_num)";
 				pstmt = con.prepareStatement(sql);
 				rs=pstmt.executeQuery();
 				if(rs.next()) {
@@ -363,6 +497,8 @@ public class Productdao {
 			}catch(SQLException s) {
 				s.getMessage();
 				return -1; 
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
 			}
 		}
 		public ArrayList<Product_category_vo> pro_cate_list(){
@@ -389,10 +525,12 @@ public class Productdao {
 			}catch(SQLException s) {
 				s.getMessage();
 				return null; 
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
 			}
 			
 		}
-public ArrayList<Product_category_vo> pro_cate_list(int startRow, int endRow){
+		public ArrayList<Product_category_vo> pro_cate_list(int startRow, int endRow){
 			
 			Connection con = null; 
 			PreparedStatement pstmt = null; 
@@ -420,6 +558,42 @@ public ArrayList<Product_category_vo> pro_cate_list(int startRow, int endRow){
 			}catch(SQLException s) {
 				s.getMessage();
 				return null; 
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
+			}
+			
+		}
+		public ArrayList<pro_cate_storage_list_vo> pro_cate_storage_list(int startRow, int endRow){
+			
+			Connection con = null; 
+			PreparedStatement pstmt = null; 
+			ResultSet rs = null; 
+			pro_cate_storage_list_vo vo =null;
+			ArrayList<pro_cate_storage_list_vo> list = new ArrayList<pro_cate_storage_list_vo>();
+			try {
+				
+				con = MyDBCP.getConnection();
+				String sql = "select * from (select pro_cate_list.*, rownum rnum from \r\n"
+						+ "(select p.p_num,p.p_name,p.p_count,p.p_price,p.p_click_num,p.p_date,p.save_img_name,c.cg_name,s.s_count,s.p_size\r\n"
+						+ "from product p , category c, storages s where p.cg_id=c.cg_id and s.p_num = p.p_num order by p_num desc)pro_cate_list)where rnum>=? and rnum<=?";
+				pstmt =con .prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					
+					vo = new pro_cate_storage_list_vo(rs.getInt("p_num") ,rs.getString("p_name"), rs.getInt("p_count"), rs.getInt("p_price"),rs.getInt("p_click_num"),
+								rs.getDate("p_date"), rs.getString("save_img_name"), rs.getString("cg_name"),rs.getInt("s_count"),rs.getString("p_size"));
+					list.add(vo);
+									
+				}
+				return list; 
+			}catch(SQLException s) {
+				System.out.println(s.getMessage());
+				return null; 
+			}finally {
+				MyDBCP.close(con, pstmt, rs);
 			}
 			
 		}

@@ -44,6 +44,29 @@ public int Storages_getcount(int p_num ,String p_size) {
 	}
 }
 	
+public int Storages_update_add(int p_count, int p_num ,String p_size) {
+	 
+	 Connection con = null; 
+	 PreparedStatement pstmt = null; 
+	 
+	 try {
+		 con = MyDBCP.getConnection();
+		 String sql = "update Storages set s_count = ? where  p_num=? and p_size=?";
+		 pstmt = con.prepareStatement(sql);
+		 pstmt.setInt(1, p_count);
+		 pstmt.setInt(2, p_num);
+		 pstmt.setString(3, p_size);
+		 
+		 int n = pstmt.executeUpdate();
+		 
+		 return n ; 
+	 }catch (SQLException s) {
+		 s.getMessage();
+		 return -1;
+	}finally {
+		MyDBCP.close(con, pstmt, null);
+	}
+}
 
  public int Storages_update(int p_count, int p_num ,String p_size) {
 	 

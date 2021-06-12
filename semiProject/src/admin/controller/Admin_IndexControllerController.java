@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import admin.dao.Productdao;
 import shop.vo.Product_category_vo;
+import shop.vo.pro_cate_storage_list_vo;
 
 @WebServlet("/admin/index")
 public class Admin_IndexControllerController extends HttpServlet{
@@ -21,7 +22,8 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	String sidemenu=(String)req.getAttribute("sidemenu");
 	String content=(String)req.getAttribute("content");
 	
-	ArrayList<Product_category_vo> list = new ArrayList<Product_category_vo>();
+	//ArrayList<Product_category_vo> list = new ArrayList<Product_category_vo>();
+	ArrayList<pro_cate_storage_list_vo> list1 = new ArrayList<pro_cate_storage_list_vo>();
 	Productdao prodductdao = Productdao.getinstance();
 	
 	String spageNum = req.getParameter("pageNum");  //현제 페이지(쪽수) 
@@ -42,8 +44,9 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 		
 	}
 	
-	list = prodductdao.pro_cate_list(startRow, endRow);
+	//list = prodductdao.pro_cate_list(startRow, endRow);
 	
+	list1= prodductdao.pro_cate_storage_list(startRow, endRow);
 	
 	if(sidemenu==null) {
 		sidemenu="/admin/sidemenu.jsp";
@@ -63,8 +66,8 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	req.setAttribute("startPageNum", startPageNum);
 	req.setAttribute("endPageNum", endPageNum);
 	req.setAttribute("pageNum", pageNum);
-	
-	req.setAttribute("list", list);
+	req.setAttribute("list", list1);
+	//req.setAttribute("list", list);
 	req.setAttribute("sidemenu", sidemenu);
 	req.setAttribute("content", content);
 

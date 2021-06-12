@@ -2,7 +2,7 @@ package shop.vo;
 
 import java.util.Date;
 
-public class Product_vo {
+public class product_add_p_size_vo {
 
 	private int p_num ;
 	private String p_name ;
@@ -13,11 +13,13 @@ public class Product_vo {
 	private String ori_img_name ;
 	private String save_img_name  ;
 	private int cg_id ; 
+	private String p_size;
+	private int s_count;
+	
+	product_add_p_size_vo(){}
 
-	public Product_vo() {}
-
-	public Product_vo(int p_num, String p_name, int p_count, int p_price, int p_click_num, Date p_date,
-			String ori_img_name, String save_img_name, int cg_id) {
+	public product_add_p_size_vo(int p_num, String p_name, int p_count, int p_price, int p_click_num, Date p_date,
+			String ori_img_name, String save_img_name, int cg_id, String p_size, int s_count) {
 		super();
 		this.p_num = p_num;
 		this.p_name = p_name;
@@ -28,6 +30,8 @@ public class Product_vo {
 		this.ori_img_name = ori_img_name;
 		this.save_img_name = save_img_name;
 		this.cg_id = cg_id;
+		this.p_size = p_size;
+		this.s_count = s_count;
 	}
 
 	public int getP_num() {
@@ -102,7 +106,23 @@ public class Product_vo {
 		this.cg_id = cg_id;
 	}
 
+	public String getP_size() {
+		return p_size;
+	}
+
+	public void setP_size(String p_size) {
+		this.p_size = p_size;
+	}
+
+	public int getS_count() {
+		return s_count;
+	}
+
+	public void setS_count(int s_count) {
+		this.s_count = s_count;
+	}
 	
 	
 	
+
 }
