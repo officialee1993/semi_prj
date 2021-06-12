@@ -15,9 +15,22 @@ public class A_board_vo {
 	private String a_r_content;
 	private Date re_wr_date;
 	private int re_a_b_num;
-	
+	private int repcnt;
+	private int p_num;
+	private String p_name;
+	private int p_price;
+	private String save_img_name;
+
 	public A_board_vo() {}
-	
+
+	public A_board_vo(int p_num, String p_name, int p_price, String save_img_name) {
+
+		this.p_num = p_num;
+		this.p_name = p_name;
+		this.p_price = p_price;
+		this.save_img_name = save_img_name;
+	}
+
 	/*댓글리스트 가져오기*/
 	public A_board_vo(int a_r_no, String re_wr_id, String a_r_content, Date re_wr_date, int re_a_b_num) {
 		super();
@@ -38,13 +51,14 @@ public class A_board_vo {
 
 	
 	/*글조회 생성자*/
-	public A_board_vo(int a_b_num, String a_b_title, String a_b_content, String wr_id, Date wr_date, int o_num) {
+	public A_board_vo(int a_b_num, String a_b_title, String a_b_content, String wr_id, Date wr_date, int o_num,int repcnt) {
 		this.a_b_num = a_b_num;
 		this.a_b_title = a_b_title;
 		this.a_b_content = a_b_content;
 		this.wr_id = wr_id;
 		this.wr_date = wr_date;
 		this.o_num = o_num;
+		this.repcnt=repcnt;
 	}
 	public A_board_vo(int a_b_num, String a_b_title, String a_b_content, String wr_id, Date wr_date, int o_num,
 			int a_r_no, String re_wr_id, String a_r_content, Date re_wr_date, int re_a_b_num) {
@@ -64,12 +78,57 @@ public class A_board_vo {
 
 	
 
-	public A_board_vo(int a_b_num,String a_b_title, String a_b_content) {
+	public A_board_vo(int a_b_num,String a_b_title, String a_b_content,int p_num,String p_name,int p_price,String save_img_name) {
 		this.a_b_num = a_b_num;
 		this.a_b_title = a_b_title;
 		this.a_b_content = a_b_content;
+		this.p_num = p_num;
+		this.p_name = p_name;
+		this.p_price = p_price;
+		this.save_img_name = save_img_name;
 	}
 
+	public int getP_num() {
+		return p_num;
+	}
+
+	public void setP_num(int p_num) {
+		this.p_num = p_num;
+	}
+
+	public String getP_name() {
+		return p_name;
+	}
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+
+	public int getP_price() {
+		return p_price;
+	}
+
+	public void setP_price(int p_price) {
+		this.p_price = p_price;
+	}
+
+	public String getSave_img_name() {
+		return save_img_name;
+	}
+
+	public void setSave_img_name(String save_img_name) {
+		this.save_img_name = save_img_name;
+	}
+
+	public int getRepcnt() {
+		return repcnt;
+	}
+
+	public void setRepcnt(int repcnt) {
+		this.repcnt = repcnt;
+	}
+	
+	
 	public int getA_r_no() {
 		return a_r_no;
 	}

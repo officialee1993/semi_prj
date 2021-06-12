@@ -19,12 +19,24 @@ public class QuestionDao {
 		return instance;
 	}
 
-	public int getCount(String fieldCategory) {
+	public int getCount(String fieldCategory,String fieldState) {
 		String sql="";
-		if(fieldCategory==null||fieldCategory.equals("")) {//검색아닐때
-			sql="select NVL(count(q_b_num),0) from q_board";
-		}else {
+		
+		if(fieldCategory==null||fieldCategory.equals("")||fieldCategory.equals("undefined")) {
+			fieldCategory=null;
+		}
+		if(fieldState==null||fieldState.equals("")||fieldState.equals("undefined")) {
+			fieldState=null;
+		}
+		
+		if(fieldCategory!=null && fieldState==null) {
 			sql="select NVL(count(q_b_num),0) from q_board where q_b_category='"+fieldCategory+"'";
+		}else if(fieldState!=null && fieldCategory==null ) {
+			sql="select NVL(count(q_b_num),0) from q_board where q_b_state='"+fieldState+"'";
+		}else if(fieldCategory!=null && fieldState!=null ) {
+			sql="select NVL(count(q_b_num),0) from q_board where q_b_category='"+fieldCategory+"' and q_b_state='"+fieldState+"'";
+		}else if(fieldCategory==null && fieldState==null) {
+			sql="select NVL(count(q_b_num),0) from q_board";
 		}
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -124,18 +136,35 @@ public class QuestionDao {
 	}
 	
 	/*문의사항 조회*/
-	public ArrayList<Q_board_vo> adminQList(String fieldCategory,int startRow,int endRow) {
+	public ArrayList<Q_board_vo> adminQList(String fieldCategory,String fieldState,int startRow,int endRow) {
+
+		if(fieldCategory==null||fieldCategory.equals("")||fieldCategory.equals("undefined")) {
+			fieldCategory=null;
+		}
+		if(fieldState==null||fieldState.equals("")||fieldState.equals("undefined")) {
+			fieldState=null;
+		}
 		String sql="";
-		if(fieldCategory==null||fieldCategory.equals("")) {
+		if(fieldCategory!=null && fieldState==null) {
+			sql="select * from ("
+					+ " select q.*,rownum rnum from("
+					+ " select * from q_board where q_b_category='"+fieldCategory+"' order by wr_date desc) q)"
+					+ " where rnum>="+startRow+" and rnum<="+endRow;
+		}else if(fieldState!=null && fieldCategory==null ) {
+			sql="select * from ("
+					+ " select q.*,rownum rnum from("
+					+ " select * from q_board where q_b_state='"+fieldState+"' order by wr_date desc) q)"
+					+ " where rnum>="+startRow+" and rnum<="+endRow;
+		}else if(fieldCategory!=null && fieldState!=null ) {
+			sql="select * from ("
+					+ " select q.*,rownum rnum from("
+					+ " select * from q_board where q_b_state='"+fieldState+"' and q_b_category='"+fieldCategory+"' order by wr_date desc) q)"
+					+ " where rnum>="+startRow+" and rnum<="+endRow;
+		}else if(fieldCategory==null && fieldState==null) {
 			sql="select * from("
 					+ " select q.*,rownum rnum from("
 					+ " select * from q_board order by wr_date desc) q)"
 					+ " where rnum>="+startRow+" and rnum<="+endRow;
-		}else {
-			sql="select * from ("
-					+ "select q.*,rownum rnum from("
-					+ "select * from q_board where q_b_category='"+fieldCategory+"' order by wr_date desc) q)"
-					+ "where rnum>="+startRow+" and rnum<="+endRow;
 		}
 		Connection con=null;
 		Statement stmt=null;

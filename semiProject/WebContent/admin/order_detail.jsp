@@ -17,7 +17,7 @@
 					<th>결제금액</th>
 					<th>주문상태</th>
 				</tr>
-				<tr>
+				<tr style="background-color:#fdfdfd;">
 					<td>${vo.o_num }</td>
 					<td>${vo.o_date }</td>
 					<td>${vo.all_sum_price }</td>
@@ -35,7 +35,7 @@
 					<th>연락처</th>
 					<th>배송지 주소</th>
 				</tr>
-				<tr>
+				<tr style="background-color:#fdfdfd;">
 					<td>${vo.id }</td>
 					<td>${vo.rec_name }</td>
 					<td>${vo.rec_phone }</td>
@@ -53,7 +53,7 @@
 					<th>수량</th>
 					<th>상품금액</th>
 				</tr>
-				<tr>
+				<tr style="background-color:#fdfdfd;">
 					<td>${vo.p_num }</td>
 					<td>${vo.p_name }</td>
 					<td>${vo.p_count }</td>

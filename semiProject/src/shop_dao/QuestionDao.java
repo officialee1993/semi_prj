@@ -49,6 +49,8 @@ public class QuestionDao {
 		String sql="select * from q_board q"
 				+ " join q_a a"
 				+ " on q.q_b_num=a.q_a_num"
+				+ " join product p"
+				+ " on q.p_num=p.p_num"
 				+ " where q.q_b_num=?";
 		try {
 			con=MyDBCP.getConnection();
@@ -68,7 +70,10 @@ public class QuestionDao {
 					rs.getInt("p_num"),
 					rs.getInt("q_a_num"),
 					rs.getString("q_a_content"),
-					rs.getDate("q_a_date")
+					rs.getDate("q_a_date"),
+					rs.getString("p_name"),
+					rs.getInt("p_price"),
+					rs.getString("save_img_name")
 					);
 			return vo;
 		}catch(SQLException s) {

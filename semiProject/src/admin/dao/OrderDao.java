@@ -60,16 +60,37 @@ public class OrderDao {
 		}
 	}
 	
-	public int getCount(String field,String keyword) {
+	public int getCount(String field,String keyword,String startDate,String endDate) {
+		if(keyword==null || keyword.equals("")) {
+			field=null;
+			keyword=null;
+		}
+		if(field==null || field.equals("")) {
+			field=null;
+			keyword=null;
+		}
+		if(startDate==null || startDate.equals("")) {
+			startDate=null;
+			endDate=null;
+		}
+		if(endDate==null || endDate.equals("")) {
+			startDate=null;
+			endDate=null;
+		}
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			con=MyDBCP.getConnection();
 			String sql="select NVL(count(o_num),0) from orders";
-			if(field!=null&&!field.equals("")) {
+			if(startDate!=null && endDate!=null && field==null && keyword==null) {
+				sql += " where o_date between to_date("+startDate+",'yyyy/mm/dd') and to_date("+endDate+",'yyyy/mm/dd')+0.99999";
+			}else if(field!=null && keyword!=null && startDate==null && endDate==null) {
 				sql += " where " + field + " like '%"+ keyword +"%'";
+			}else if(field!=null && keyword!=null && startDate!=null && endDate!=null) {
+				sql += " where " + field + " like '%"+ keyword +"%' and o_date between to_date("+startDate+",'yyyy/mm/dd') and to_date("+endDate+",'yyyy/mm/dd')+0.99999";
 			}
+			System.out.println("getcount:"+sql);
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
@@ -103,19 +124,53 @@ public class OrderDao {
 		}
 	}
 	
-	public ArrayList<Orders_vo> adminOrder(int startRow,int endRow,String field,String keyword){
-		String sql=null;
-		if(field==null||field.equals("")) {//寃��깋�븘�땺�븣
+	public ArrayList<Orders_vo> adminOrder(int startRow,int endRow,String field,String keyword,String startDate,String endDate){
+		String sql="";
+		if(keyword==null || keyword.equals("")) {
+			field=null;
+			keyword=null;
+		}
+		if(field==null || field.equals("")) {
+			field=null;
+			keyword=null;
+		}
+		if(startDate==null || startDate.equals("")) {
+			startDate=null;
+			endDate=null;
+		}
+		if(endDate==null || endDate.equals("")) {
+			startDate=null;
+			endDate=null;
+		}
+		
+		if(startDate!=null && endDate!=null && field==null && keyword==null) {
 			sql="select * from("
 					+ " select a.*,rownum rnum from ("
-					+ " select * from orders order by o_date desc) a)"
+					+ " select * from orders "
+					+ " where o_date between to_date("+startDate+",'yyyy/mm/dd') and to_date("+endDate+",'yyyy/mm/dd')+0.99999"
+					+ " order by o_date desc"
+					+ " ) a)"
 					+ " where rnum>=? and rnum<=?";
-		}else { //寃��깋�씪�븣
+		}else if(field!=null && keyword!=null && startDate==null && endDate==null) {
 			sql="select * from ("
 					+ " select o.*,rownum rnum from ("
 					+ " select * from orders where "+field+" like '%"+keyword+"%' order by o_date desc) o)"
 					+ " where rnum>=? and rnum<=?";
+		}else if(field!=null && keyword!=null && startDate!=null && endDate!=null) {
+			sql="select * from ("
+					+ " select o.*,rownum rnum from ("
+					+ " select * from orders "
+					+ " where "+field+" like '%"+keyword+"%' "
+					+ " and o_date between to_date("+startDate+",'yyyy/mm/dd') and to_date("+endDate+",'yyyy/mm/dd')+0.99999"
+					+ " order by o_date desc) o)"
+					+ " where rnum>=? and rnum<=?";
+		}else if(field==null && keyword==null && startDate==null && endDate==null) {
+			sql="select * from("
+					+ " select a.*,rownum rnum from ("
+					+ " select * from orders order by o_date desc) a)"
+					+ " where rnum>=? and rnum<=?";
 		}
+		System.out.println("list:"+sql);
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

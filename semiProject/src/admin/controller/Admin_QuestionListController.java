@@ -37,6 +37,7 @@ public class Admin_QuestionListController extends HttpServlet{
 		resp.setContentType("application/x-json; charset=UTF-8");
 		req.setCharacterEncoding("utf-8");
 		String fieldCategory=req.getParameter("field");
+		String fieldState=req.getParameter("field_state");
 		String spageNum=req.getParameter("pageNum");
 		
 		if(spageNum.equals("undefined")) {
@@ -52,10 +53,10 @@ public class Admin_QuestionListController extends HttpServlet{
 		int endRow=startRow+7;
 		
 		QuestionDao dao=QuestionDao.getinstance();
-		ArrayList<Q_board_vo> list=new ArrayList<Q_board_vo>();
-		list=dao.adminQList(fieldCategory,startRow,endRow);
+		ArrayList<Q_board_vo> list=dao.adminQList(fieldCategory,fieldState,startRow,endRow);
 		
-		int pageCount=(int)Math.ceil(dao.getCount(fieldCategory)/8.0);
+		
+		int pageCount=(int)Math.ceil(dao.getCount(fieldCategory,fieldState)/8.0);
 		int startPageNum=((pageNum-1)/5*5)+1;
 		int endPageNum=startPageNum+4;
 		if(endPageNum>pageCount) {
@@ -104,9 +105,9 @@ public class Admin_QuestionListController extends HttpServlet{
 		
 		QuestionDao dao=QuestionDao.getinstance();
 		ArrayList<Q_board_vo> list=new ArrayList<Q_board_vo>();
-		list=dao.adminQList(null,startRow,endRow);
+		list=dao.adminQList(null,null,startRow,endRow);
 		
-		int pageCount=(int)Math.ceil(dao.getCount(null)/8.0);
+		int pageCount=(int)Math.ceil(dao.getCount(null,null)/8.0);
 		int startPageNum=((pageNum-1)/5*5)+1;
 		int endPageNum=startPageNum+4;
 		if(endPageNum>pageCount) {

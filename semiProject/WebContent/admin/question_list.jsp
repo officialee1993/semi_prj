@@ -15,11 +15,16 @@
 				<ul>
 					<!-- 카테고리 -->
 					<li class="category">
-						<select onchange="search(this.value)" id="fieldCategory" name="fieldCategory" class="form-select form-select-sm" aria-label=".form-select-sm example" style="height:30px;">
+						<select onchange="search(this.value,'')" id="fieldCategory" name="fieldCategory" class="form-select form-select-sm" aria-label=".form-select-sm example" style="height:30px;">
 						  <option selected>문의분류</option>
 						  <option value="상품문의">상품문의</option>
 						  <option value="배송문의">배송문의</option>
 						  <option value="기타문의">기타문의</option>
+						</select>
+						<select onchange="search('',this.value)" id="fieldCategory_state" name="fieldCategory_state" class="form-select form-select-sm" aria-label=".form-select-sm example" style="height:30px;">
+						  <option selected>답변상태</option>
+						  <option value="답변대기">답변대기</option>
+						  <option value="답변완료">답변완료</option>
 						</select>
 					</li>
 				</ul>
@@ -91,9 +96,24 @@
 	
 	<script>
 	
-		function search(str,pgNum){
+		function search(str,str_state,pgNum){
 			var question_table=document.getElementById("question_table");
 			var pagenum=document.getElementById("pagenum");
+			var fieldCategory=document.getElementById("fieldCategory").value;
+			var fieldCategory_state=document.getElementById("fieldCategory_state").value;
+			
+			if(str==''){
+				str=fieldCategory;
+			}
+			if(str=='문의분류'){
+				str='';
+			}
+			if(str_state==''){
+				str_state=fieldCategory_state;
+			}
+			if(str_state=='답변상태'){
+				str_state='';
+			}
 			
 			let xhr=new XMLHttpRequest();
 			xhr.onreadystatechange=function(){
@@ -134,7 +154,7 @@
 							a.style.cursor="pointer";
 							
 							a.onclick=function(){
-								search(str,i);
+								search(str,str_state,i);
 							}
 							pagenum.appendChild(a);
 						}
@@ -219,7 +239,7 @@
 			xhr.open('post','${pageContext.request.contextPath }/admin/question_list',true);
 			//post방식으로 요청시 콘텐트타입에서 인코딩방식 설정하기 - 꼭 해줘야 함
 			xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-			let params="cmd=search&field="+str+"&pageNum="+pgNum;
+			let params="cmd=search&field="+str+"&field_state="+str_state+"&pageNum="+pgNum;
 			xhr.send(params);
 		}
 	</script>

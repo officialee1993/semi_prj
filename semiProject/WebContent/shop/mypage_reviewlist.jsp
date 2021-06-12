@@ -24,8 +24,18 @@
 								<c:when test="${not empty list.a_b_content }">
 								<input type="hidden" name="a_b_num" value="${list.a_b_num }">
 								<tr>
-								<td><a style="font-weight:700" href="${cp }/shop/mypage_reviewlist_detail?cmd=list&a_b_num=${list.a_b_num }">${list.a_b_title }</a></td>
-								<td>${list.a_b_content }</td>
+								
+								<c:choose>
+									<c:when test="${list.repcnt==0 }">
+									<td><a href="${cp }/shop/mypage_reviewlist_detail?cmd=list&a_b_num=${list.a_b_num }">${list.a_b_title }</a></td>
+									</c:when>
+									<c:when test="${list.repcnt>0 }">
+									<td><a href="${cp }/shop/mypage_reviewlist_detail?cmd=list&a_b_num=${list.a_b_num }">${list.a_b_title }[${list.repcnt }]</a></td>
+									</c:when>
+								</c:choose>
+								
+								
+								<td style="color:#aaa">${list.a_b_content }</td>
 								<td>${list.wr_date }</td>
 								</tr>
 								</c:when>

@@ -12,6 +12,21 @@
 			<!-- 문의내역 자세히 보기 -->
 			<div id="mypage_orderlist" class="mypage_orderlist">
 					<h3>구매후기</h3>
+						<table class="goods_info">
+						<tr>
+							<th colspan="3">후기상품정보</th>
+						</tr>
+						<tr>
+							<td></td>
+							<td>상품명</td>
+							<td>상품가격</td>
+						</tr>
+						<tr>
+							<td><img src="${cp}/shop/productimgs/${vo.save_img_name}" style="width:100px"></td>
+							<td><a href="${cp}/shop/goods_detail?p_num=${vo.p_num}">${vo.p_name }</a></td>
+							<td>${vo.p_price }</td>
+						</tr>
+					</table>
 						<form class="mypage_questionlist_detail">
 						<div class="mb-3">
  						<label for="" class="form-label"></label>
@@ -22,7 +37,7 @@
 						<textarea readonly class="form-control-plaintext" id="" rows="5">${vo.a_b_content }</textarea>
 						</div>
 						<div class="btn_wrap" style="text-align:right;">
-						<button onclick="" type="button" class="btn btn-outline-dark" style="font-size:14px;">삭제</button>
+						<button type="button" class="btn btn-outline-dark" style="font-size:14px;" data-bs-toggle="modal" data-bs-target="#delete_modal">삭제</button>
 						</div>
 					</form>
 				<div id="mypage_orderlist_reviewBox" class="mypage_orderlist_reviewBox">
@@ -32,6 +47,23 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" tabindex="-1" id="delete_modal">
+  <div class="modal-dialog modal-dialog-centered" style="width:300px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p style="text-align:center">후기를 삭제하시겠습니까?</p>
+      </div>
+      <div class="modal-footer">
+        <button style="font-size:12px;" type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button style="background-color:#222;font-size:12px" onclick="location.href='${cp}/shop/mypage_reviewlist_detail?cmd=delete&a_b_num=${vo.a_b_num}'" type="button" class="btn btn-primary">삭제</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script>
 function replyList(pgNum){
@@ -117,6 +149,16 @@ function replyList(pgNum){
 	xhr.open('get','${pageContext.request.contextPath }/shop/mypage_reviewlist_detail?cmd=replylist&a_b_num=${vo.a_b_num }&pageNum='+pgNum,true);
 	xhr.send();
 }replyList();
+
+
+function deleteOk(){
+	
+}
+
+
+
+
+
 </script>
 
 

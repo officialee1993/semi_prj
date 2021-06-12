@@ -60,8 +60,20 @@ public class Admin_OrderListController extends HttpServlet{
 	private void list(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String spageNum=req.getParameter("pageNum");
+		String startDate=req.getParameter("startDate");
+		String endDate=req.getParameter("endDate");
 		String field=req.getParameter("field");
 		String keyword=req.getParameter("keyword");
+
+		if(startDate!=null) {
+			if(!startDate.equals("")) {
+				startDate=startDate.replace("-", "");
+				endDate=endDate.replace("-", "");
+			}
+		}
+		
+		
+		
 		
 		int pageNum=1;
 		if(spageNum!=null) {
@@ -70,16 +82,29 @@ public class Admin_OrderListController extends HttpServlet{
 		int startRow=(pageNum-1)*8+1;
 		int endRow=startRow+7;
 		OrderDao dao=OrderDao.getinstance();
-		ArrayList<Orders_vo> list=dao.adminOrder(startRow,endRow,field,keyword);
-		int pageCount=(int)Math.ceil(dao.getCount(field,keyword)/8.0);
+		ArrayList<Orders_vo> list=dao.adminOrder(startRow,endRow,field,keyword,startDate,endDate);
+		int pageCount=(int)Math.ceil(dao.getCount(field,keyword,startDate,endDate)/8.0);
 		int startPageNum=((pageNum-1)/5*5)+1;
 		int endPageNum=startPageNum+4;
 		if(endPageNum>pageCount) {
 			endPageNum=pageCount;
 		}
 
+		StringBuffer str=new StringBuffer();
+		StringBuffer str2=new StringBuffer();
+		if(startDate!=null) {
+			if(!startDate.equals("")) {
+				str=new StringBuffer(startDate);
+				str2=new StringBuffer(endDate);
+				str.insert(4, "-");
+				str.insert(7, "-");
+				str2.insert(4, "-");
+				str2.insert(7, "-");
+			}
+		}
 		
-		
+		req.setAttribute("startDate", str);
+		req.setAttribute("endDate", str2);
 		req.setAttribute("orderList", list);
 		req.setAttribute("pageCount", pageCount);
 		req.setAttribute("startPageNum", startPageNum);

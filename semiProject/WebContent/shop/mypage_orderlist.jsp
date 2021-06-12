@@ -12,7 +12,7 @@
 					<h3>주문내역</h3>
 					<form action="${cp}/shop/mypage_orderlist" method="post" onsubmit="return dateCheck()">
 					<div style="margin-top:20px;display:flex;" class="orderDateWrap">
-					<input value="${startDateStr }" type="date" id="startDate" name="startDate" value="${startDateStr }"><span style="padding:10px">~</span><input id="endDate" value="${endDateStr }" type="date" name="endDate" value="${endDateStr }">
+					<input value="${startDateStr }" type="date" id="startDate" name="startDate"><span style="padding:10px">~</span><input id="endDate" value="${endDateStr }" type="date" name="endDate">
 					<button type="submit" class="btn btn-outline-dark" style="font-size:14px;margin-left:10px">검색</button>
 					</div>
 					</form>

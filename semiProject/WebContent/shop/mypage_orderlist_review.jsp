@@ -9,6 +9,21 @@
 				</div>
 				<div class="mypage_orderlist">
 					<h3>후기작성</h3>
+					<table class="goods_info">
+						<tr>
+							<th colspan="3">구매상품정보</th>
+						</tr>
+						<tr>
+							<td></td>
+							<td>상품명</td>
+							<td>상품가격</td>
+						</tr>
+						<tr>
+							<td><img src="${cp}/shop/productimgs/${vo.save_img_name}" style="width:100px"></td>
+							<td>${vo.p_name }</td>
+							<td>${vo.p_price }</td>
+						</tr>
+					</table>
 					<div class="mypage_reviewform" style="margin-top:20px;">
 						<form method="post" action="${pageContext.request.contextPath }/shop/mypage_orderlist_review">
 						<input name="o_num" type="hidden" value="${o_num }">

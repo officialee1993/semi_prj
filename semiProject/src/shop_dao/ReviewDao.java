@@ -18,6 +18,53 @@ public class ReviewDao {
 	public static ReviewDao getinstance() {
 		return instance;
 	}
+	public A_board_vo reviewInsertInfo(int o_num) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=MyDBCP.getConnection();
+			String sql="select * from orders o"
+					+ " join product p"
+					+ " on o.p_num=p.p_num"
+					+ " where o.o_num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, o_num);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				A_board_vo vo=new A_board_vo(
+						rs.getInt("p_num"),
+						rs.getString("p_name"),
+						rs.getInt("p_price"),
+						rs.getString("save_img_name")
+						);
+				return vo;
+			}
+			return null;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return null;
+		}finally {
+			MyDBCP.close(con,pstmt,rs);
+		}
+	}
+	/*마이페이지 후기 삭제*/
+	public int deleteReivew(int a_b_num) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=MyDBCP.getConnection();
+			String sql="update a_board set a_b_content='null' where a_b_num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, a_b_num);
+			return pstmt.executeUpdate();
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			MyDBCP.close(con,pstmt,null);
+		}
+	}
 	/*댓글테이블 총 갯수 구하기*/
 	public int getCountReply(int a_b_num) {
 		Connection con=null;
@@ -278,7 +325,12 @@ public class ReviewDao {
 		ResultSet rs=null;
 		try {
 			con=MyDBCP.getConnection();
-			String sql="select * from a_board where a_b_num=?";
+			String sql="select * from a_board a"
+					+ " join orders o"
+					+ " on a.o_num=o.o_num"
+					+ " join product p"
+					+ " on o.p_num=p.p_num"
+					+ " where a.a_b_num=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, a_b_num);
 			rs=pstmt.executeQuery();
@@ -286,7 +338,11 @@ public class ReviewDao {
 				A_board_vo vo=new A_board_vo(
 						rs.getInt("a_b_num"),
 						rs.getString("a_b_title"),
-						rs.getString("a_b_content")
+						rs.getString("a_b_content"),
+						rs.getInt("p_num"),
+						rs.getString("p_name"),
+						rs.getInt("p_price"),
+						rs.getString("save_img_name")
 						);
 				return vo;
 			}
@@ -330,7 +386,7 @@ public class ReviewDao {
 			con=MyDBCP.getConnection();
 			String sql="select * from("
 					+ " select b.*,rownum rnum from("
-					+ " select * from a_board "
+					+ " select aboard.*,(select count(*) from a_reply r where r.a_b_num=aboard.a_b_num and r.a_r_content!='null'  ) repcnt from a_board aboard"
 					+ " where wr_id=? and a_b_content!='null' "
 					+ " order by wr_date desc) b)"
 					+ " where rnum>=? and rnum<=?";
@@ -347,7 +403,8 @@ public class ReviewDao {
 						rs.getString("a_b_content"),
 						rs.getString("wr_id"),
 						rs.getDate("wr_date"),
-						rs.getInt("o_num")
+						rs.getInt("o_num"),
+						rs.getInt("repcnt")
 						);
 				list.add(vo);
 			}

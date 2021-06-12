@@ -22,7 +22,7 @@ public class OrderDao {
 	public static OrderDao getinstance() {
 		return instance; 
 	}
-	
+
 	/*mypage order list count*/
 	public int getCountMyOrder(String id,String startDate,String endDate) {
 		Connection con=null;
