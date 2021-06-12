@@ -45,10 +45,6 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	req.setAttribute("endPageNum", endPageNum);
 	req.setAttribute("pageNum", pageNum);
 	
-	for(pro_cate_storage_list_vo vo : list1) {
-		
-		System.out.println(vo.getS_count());
-	}
 	
 	//req.setAttribute("list", list);
 	req.setAttribute("list", list1);
