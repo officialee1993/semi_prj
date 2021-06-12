@@ -95,6 +95,36 @@ public class Membersdao {
 			MyDBCP.close(con, pstmt, null);
 		}
 	}
+	
+	public boolean Idckeck(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null; 
+		ResultSet rs= null; 
+		try {
+		
+			con = MyDBCP.getConnection();
+			String sql="select * from members where id=? ";
+			
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch(SQLException s) {
+			s.getMessage();
+			return false;
+			
+		}finally {
+			MyDBCP.close(con, pstmt, rs);
+		}
+	}
+	
 	public boolean isMember(String id , String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null; 
