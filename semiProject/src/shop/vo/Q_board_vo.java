@@ -22,13 +22,15 @@ public class Q_board_vo {
 	private Date q_a_date;
 	private int q_a_num;
 
+	
+	
 	public Q_board_vo() {}
 	
 	
 	
 	/*회원마이페이지 상세보기용 오버로딩*/
 	public Q_board_vo(int q_b_num, String id, String q_b_category, String q_b_title, String q_b_content,
-			String q_b__pwd, Date wr_date, String q_b_state, int p_num,int q_a_num, String q_a_content, Date q_a_date) {
+			String q_b__pwd, Date wr_date, String q_b_state, int p_num,int q_a_num, String q_a_content, Date q_a_date,String p_name,int p_price,String save_img_name) {
 		this.q_b_num = q_b_num;
 		this.id = id;
 		this.q_b_category = q_b_category;
@@ -41,6 +43,9 @@ public class Q_board_vo {
 		this.q_a_num = q_a_num;
 		this.q_a_content = q_a_content;
 		this.q_a_date = q_a_date;
+		this.p_name=p_name;
+		this.p_price=p_price;
+		this.save_img_name=save_img_name;
 	}
 
 

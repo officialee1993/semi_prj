@@ -7,9 +7,12 @@
 			<h3>주문관리</h3>
 		</div>
 		<div class="admin_content_box">
-		<form method="post" action="${cp }/admin/order_list">
+		<form method="post" action="${cp }/admin/order_list" onsubmit="return dateCheck()">
 			<div class="admin_goods_menu">
 				<ul>
+					<li style="padding:15px">
+					<input value="${startDate }" type="date" id="startDate" name="startDate"><span style="padding:10px">~</span><input id="endDate" value="${endDate }" type="date" name="endDate" value="${endDate }">
+					</li>
 					<li class="category">
 						<select name="field" class="form-select form-select-sm" aria-label=".form-select-sm example">
 						  <option value="id" <c:if test="${field=='id'}">selected="selected"</c:if>>아이디</option>
@@ -23,7 +26,18 @@
 				</ul>
 			</div>
 		</form>
-
+					<script>
+						function dateCheck(){
+							var startDate=document.getElementById("startDate").value;
+							var endDate=document.getElementById("endDate").value;
+							if(startDate!='' && endDate=='' || startDate=='' && endDate!=''){
+								alert("시작일과 종료일을 모두 지정해주세요");
+								return false;
+							}else{
+								return true;
+							}
+						}
+					</script>
 			<div class="admin_goods_list admin_order_list">
 			<table>
 			<!-- 제목 -->
@@ -46,54 +60,17 @@
 							<td>${list.all_sum_price }</td>
 							<td>${list.payname }</td>
 							<td>${list.o_state }</td>
-							<td class="complete"><button onclick="oStateUpdate(${list.o_num },${status.index });" type="button" class="btn btn-outline-dark completeBtn">발송</button></td>
+							<td class="complete"><button onclick="oStateUpdate(${list.o_num },${status.index })" type="button" class="btn btn-outline-dark completeBtn">발송</button></td>
 							</tr>
-						</c:when>
-						<c:when test="${list.o_state=='배송완료' }">
-							<tr>
-							<td><a href="${cp }/admin/order_detail?onum=${list.o_num }">${list.o_num }</a></td>
-							<td>${list.id }</td>
-							<td>${list.rec_name }</td>
-							<td>${list.all_sum_price }</td>
-							<td>${list.payname }</td>
-							<td style="color:orange">${list.o_state }</td>
-							<td></td>
-							</tr>
-						</c:when>
-					</c:choose>
-			</c:forEach>
-			</table>
+							
+								<script>
+		function oStateUpdate(o_num,index){
 			
-			<div class="goods_pagenum">
-				<c:if test="${startPageNum>5}">
-				<a href="${cp }/shop/admin/order_list?pageNum=${startPageNum-1 }">이전페이지</a>
-				</c:if>
-				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
-				<c:choose>
-					<c:when test="${pageNum==i }"><%--현재 페이지인경우 --%>
-						<span style="color:black;font-weight:700">[${i }]</span>
-					</c:when>
-				<c:otherwise>
-						<a href="${cp }/admin/order_list?pageNum=${i }&field=${param.field}&keyword=${param.keyword}" style="color:grey;font-weight:300;">[${i }]</a>
-				</c:otherwise>
-						</c:choose>
-				</c:forEach>
-				<c:if test="${endPageNum<pageCount}">
-						<a href="${cp }/admin/order_list?pageNum=${endPageNum+1 }">다음페이지</a>
-				</c:if>
-				
-			</div>
+			var complete=document.getElementsByClassName("complete")[index];
+			var completeBtn=document.getElementsByClassName("completeBtn")[index];
 			
-			</div>
-
-		</div>
-	</div>
-	
-	<script>
-		function oStateUpdate(onum,status){
-			
-			var complete=document.getElementsByClassName("complete")[status];
-			var completeBtn=document.getElementsByClassName("completeBtn")[status];
+			console.log(${status.index });
+			console.log(completeBtn);
 			
 			let xhr=new XMLHttpRequest();
 			xhr.onreadystatechange=function(){
@@ -112,9 +89,55 @@
 			xhr.open('post','${pageContext.request.contextPath }/admin/order_list?cmd=update',true);
 			//post방식으로 요청시 콘텐트타입에서 인코딩방식 설정하기 - 꼭 해줘야 함
 			xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-			xhr.send("o_num="+onum);
+			xhr.send("o_num="+o_num);
 		}
 	</script>
+							
+						</c:when>
+						<c:when test="${list.o_state=='배송완료' }">
+							<tr>
+							<td><a href="${cp }/admin/order_detail?onum=${list.o_num }">${list.o_num }</a></td>
+							<td>${list.id }</td>
+							<td>${list.rec_name }</td>
+							<td>${list.all_sum_price }</td>
+							<td>${list.payname }</td>
+							<td style="color:orange">${list.o_state }</td>
+							<td></td>
+							</tr>
+						</c:when>
+					</c:choose>
+					
+					
+					
+			</c:forEach>
+			</table>
+			
+			<div class="goods_pagenum">
+				<c:if test="${startPageNum>5}">
+				<a style="font-weight:100" href="${cp }/admin/order_list?pageNum=${startPageNum-1 }">이전페이지</a>
+				</c:if>
+				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+				<c:choose>
+					<c:when test="${pageNum==i }"><%--현재 페이지인경우 --%>
+						<span style="color:black;font-weight:700">[${i }]</span>
+					</c:when>
+				<c:otherwise>
+						<a href="${cp }/admin/order_list?pageNum=${i }&field=${param.field}&keyword=${param.keyword}&startDate=${param.startDate}&endDate=${param.endDate}" style="color:grey;font-weight:300;">[${i }]</a>
+				</c:otherwise>
+						</c:choose>
+				</c:forEach>
+				<c:if test="${endPageNum<pageCount}">
+						<a style="font-weight:100" href="${cp }/admin/order_list?pageNum=${endPageNum+1 }">다음페이지</a>
+				</c:if>
+				
+			</div>
+			
+			</div>
+
+		</div>
+	</div>
+	
+
 	
 	
 	

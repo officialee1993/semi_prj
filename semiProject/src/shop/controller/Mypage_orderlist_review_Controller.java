@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import shop.vo.A_board_vo;
 import shop_dao.ReviewDao;
 @WebServlet("/shop/mypage_orderlist_review")
 public class Mypage_orderlist_review_Controller extends HttpServlet{
@@ -16,6 +17,10 @@ public class Mypage_orderlist_review_Controller extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int o_num=Integer.parseInt(req.getParameter("o_num"));
 		
+		ReviewDao dao=ReviewDao.getinstance();
+		A_board_vo vo=dao.reviewInsertInfo(o_num);
+		
+		req.setAttribute("vo", vo);
 		req.setAttribute("o_num", o_num);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("sidemenu", "/shop/mypage_sidemenu.jsp");

@@ -12,6 +12,22 @@
 			<!-- 문의내역 자세히 보기 -->
 			<div class="mypage_orderlist">
 					<h3>문의내역</h3>
+					<table class="goods_info">
+						<tr>
+							<th colspan="3">문의상품정보</th>
+						</tr>
+						<tr>
+							<td></td>
+							<td>상품명</td>
+							<td>상품가격</td>
+						</tr>
+						<tr>
+							<td><img src="${cp}/shop/productimgs/${vo.save_img_name}" style="width:100px"></td>
+							<td><a href="${cp}/shop/goods_detail?p_num=${vo.p_num}">${vo.p_name }</a></td>
+							<td>${vo.p_price }</td>
+							
+						</tr>
+					</table>
 					<form class="mypage_questionlist_detail">
 						<div class="mb-3">
  						<label for="" class="form-label"></label>
@@ -21,9 +37,9 @@
 						<label for="" class="form-label"></label>
 						<textarea readonly class="form-control-plaintext" id="" rows="5">${vo.q_b_content }</textarea>
 						</div>
-						<div class="btn_wrap" style="text-align:right;">
+<!-- 						<div class="btn_wrap" style="text-align:right;">
 						<button onclick="" type="button" class="btn btn-outline-dark" style="font-size:14px;">삭제</button>
-						</div>
+						</div> -->
 					</form>
 					<div class="mypage_questionlist_detail_reply">
 						<c:choose>

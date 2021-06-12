@@ -31,8 +31,7 @@
 			 	</div>
 			 	<div class="mb-3">
 				<label for="" class="form-label"> </label>
-				<textarea readonly class="form-control-plaintext" class="form-control" id="" rows="7">
-				${vo.q_b_content }
+				<textarea readonly class="form-control-plaintext" class="form-control" id="" rows="7">${vo.q_b_content }
 				</textarea>
 				</div>
 				<div class="btn_wrap">
@@ -74,13 +73,5 @@
 				</table>
 				</div>
 			</div>
-			
-			
-			
-			
-			
-			
-			
-			
 		</div>
 	</div>

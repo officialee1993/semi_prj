@@ -61,7 +61,7 @@
 					<c:choose>
 						<c:when test="${i==pageNum }">
 							<a href="${cp }/admin/members_list?pageNum=${i }&field=${field }&keyword=${keyword }">
-							<span style="color:red">[${i }]</span></a>
+							<span style="color:black">[${i }]</span></a>
 						</c:when>
 						<c:otherwise>
 							<a href="${cp }/admin/members_list?pageNum=${i }&field=${field }&keyword=${keyword }">

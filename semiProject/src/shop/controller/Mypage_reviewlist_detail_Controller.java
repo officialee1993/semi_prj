@@ -25,7 +25,21 @@ public class Mypage_reviewlist_detail_Controller extends HttpServlet{
 			list(req,resp);
 		}else if(cmd.equals("replylist")) {
 			replylist(req,resp);
+		}else if(cmd.equals("delete")) {
+			delete(req,resp);
 		}
+	}
+	
+	private void delete(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		int a_b_num=Integer.parseInt(req.getParameter("a_b_num"));
+
+		ReviewDao dao=ReviewDao.getinstance();
+
+		int n=dao.deleteReivew(a_b_num);
+		
+		System.out.println("삭제결과:"+n);
+		resp.sendRedirect(req.getContextPath()+"/shop/mypage_reviewlist");
 	}
 	
 	private void replylist(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
