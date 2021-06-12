@@ -581,7 +581,7 @@ public ArrayList<Basket_add_storae_list_vo> notorder_add_storage_basketlist(Stri
 			MyDBCP.close(con, pstmt, rs);
 		}
 	}
-public ArrayList<Basket_add_storae_list_vo> basket_all_list(String id){ 
+public ArrayList<Basket_add_storae_list_vo> basket_add_storage_all_list(String id){ 
 		
 		Connection con = null; 
 		PreparedStatement pstmt = null; 
@@ -589,7 +589,7 @@ public ArrayList<Basket_add_storae_list_vo> basket_all_list(String id){
 	
 		
 		try {
-			ArrayList< Basket_add_storae_list_vo> basketlist = new ArrayList<Basket_add_storae_list_vo>();
+			ArrayList< Basket_add_storae_list_vo> basket_add_storae_list = new ArrayList<Basket_add_storae_list_vo>();
 			con = MyDBCP.getConnection();
 			
 			String sql = "select a.save_img_name,a.p_size,a.p_name,a.p_price,a.p_count,a.b_num ,a.p_num ,s.s_count\r\n"
@@ -599,7 +599,7 @@ public ArrayList<Basket_add_storae_list_vo> basket_all_list(String id){
 					+ "minus \r\n"
 					+ "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,o.b_num ,b.p_num\r\n"
 					+ "from Product p,orders o ,Basket b where o.id=? and p.p_num = o.p_num and o.b_num=b.b_num )a , storages s \r\n"
-					+ "where a.p_num = s.p_num and a.p_size=s.p_size and s.s_count >= a.p_count order by a.b_num desc"
+					+ "where a.p_num = s.p_num and a.p_size=s.p_size and s.s_count >= a.p_count "
 					;
 			
 			pstmt = con.prepareStatement(sql);
@@ -609,13 +609,13 @@ public ArrayList<Basket_add_storae_list_vo> basket_all_list(String id){
 			
 			while(rs.next()) {
 				
-				Basket_add_storae_list_vo basketlistvo = new Basket_add_storae_list_vo(rs.getString("save_img_name"), rs.getString("p_name"),
+				Basket_add_storae_list_vo basket_add_storae_list_vo = new Basket_add_storae_list_vo(rs.getString("save_img_name"), rs.getString("p_name"),
 						rs.getInt("p_price"), rs.getInt("p_count"),rs.getString("p_size"),rs.getInt("b_num"),rs.getInt("s_count"));
 				
-			basketlist.add(basketlistvo);
+				basket_add_storae_list.add(basket_add_storae_list_vo);
 				
 			}
-			return basketlist;
+			return basket_add_storae_list;
 			
 			
 		}catch(SQLException s) {

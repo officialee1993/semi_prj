@@ -71,7 +71,7 @@ public class Goods_list_order_Controller extends HttpServlet {
 			if (ordervo == null) {
 				basket_add_storae_list_vo = basketdao.notorder_add_storage_basketlist(id);
 			} else {
-				basket_add_storae_list_vo = basketdao.basket_all_list(id);
+				basket_add_storae_list_vo = basketdao.basket_add_storage_all_list(id);
 			}
 			
 		}
