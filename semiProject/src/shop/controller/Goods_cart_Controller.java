@@ -23,7 +23,7 @@ import shop_dao.OrderDao;
 public class Goods_cart_Controller extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ArrayList<BasketList_vo> basketlistvo = new ArrayList<BasketList_vo>();
+		//ArrayList<BasketList_vo> basketlistvo = new ArrayList<BasketList_vo>();
 		ArrayList<Basket_add_storae_list_vo> basket_add_storae_list_vo = new ArrayList<Basket_add_storae_list_vo>();
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
@@ -47,7 +47,7 @@ public class Goods_cart_Controller extends HttpServlet{
 		
 	 	if(ordervo ==null) {
 	 		
-	 		basketlistvo= basketdao.notorder_basketlist(id,startRow,endRow);
+	 		basket_add_storae_list_vo= basketdao.notorder_add_storage_basketlist(id,startRow,endRow);
 	 		
 	 		int pageCount = (int)Math.ceil(basketdao.notorder_basketlist_getCount(id)/ 5.0);
 	 		System.out.println("pageCount "+pageCount);
@@ -98,7 +98,7 @@ public class Goods_cart_Controller extends HttpServlet{
 		int p_num = Integer.parseInt(req.getParameter("p_num"));
 		int p_count = Integer.parseInt(req.getParameter("p_count")); // ���� 
 		String p_size = req.getParameter("p_size"); // ������ 
-		ArrayList<BasketList_vo> basketlistvo = new ArrayList<BasketList_vo>();
+		//ArrayList<BasketList_vo> basketlistvo = new ArrayList<BasketList_vo>();
 		ArrayList<Basket_add_storae_list_vo> basket_add_storae_list_vo = new ArrayList<Basket_add_storae_list_vo>();
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
@@ -125,7 +125,7 @@ public class Goods_cart_Controller extends HttpServlet{
 	 	Orders_vo  ordervo = orderdao.ordervoinfo();
 	 	if(ordervo ==null) {
 	 		
-	 		basketlistvo= basketdao.notorder_basketlist(id,startRow,endRow );
+	 		basket_add_storae_list_vo= basketdao.notorder_add_storage_basketlist(id,startRow,endRow );
 	 		int pageCount = (int) Math.ceil(basketdao.notorder_basketlist_getCount(id)/ 5.0);
 	 		if (endPageNum > pageCount) {
 				

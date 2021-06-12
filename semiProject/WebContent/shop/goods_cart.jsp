@@ -36,7 +36,9 @@
 							</c:when>
 							
 							<c:otherwise>
+							
 							<td><input type="checkbox" name="c1" value="${basketvo.b_num}"></td>
+							
 							</c:otherwise>
 							</c:choose>
 							

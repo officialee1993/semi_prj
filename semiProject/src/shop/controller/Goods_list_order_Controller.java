@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import admin.dao.Productdao;
 import admin.dao.StoragesDao;
 import shop.vo.BasketList_vo;
+import shop.vo.Basket_add_storae_list_vo;
 import shop.vo.Basket_vo;
 import shop.vo.Orders_vo;
 import shop.vo.Product_vo;
@@ -28,8 +29,13 @@ public class Goods_list_order_Controller extends HttpServlet {
 		String id = (String) session.getAttribute("id");
 		Basketdao basketdao = Basketdao.getinstance();
 		ArrayList<BasketList_vo> basketlistvo = new ArrayList<BasketList_vo>();
-		ArrayList<Basket_vo> basket_all_list_vo = new ArrayList<Basket_vo>();
-		String[] str = req.getParameterValues("c1"); // 장바구니 번호  
+		//ArrayList<Basket_vo> basket_all_list_vo = new ArrayList<Basket_vo>();
+		ArrayList<Basket_add_storae_list_vo> basket_add_storae_list_vo = new ArrayList<Basket_add_storae_list_vo>();
+		String[] str = req.getParameterValues("c1"); // 장바구니 번호 
+		
+//		for(int i=0; i<str.length; i++) {
+//			System.out.println(str[i]);
+//		}
 		OrderDao orderdao = OrderDao.getinstance();
 		Orders_vo ordervo = orderdao.ordervoinfo();
 		StoragesDao storagesDao = StoragesDao.getinstance();
@@ -42,30 +48,35 @@ public class Goods_list_order_Controller extends HttpServlet {
 
 				for (int i = 0; i < str.length; i++) {
 					int b_num = Integer.parseInt(str[i]);
-					BasketList_vo vo = basketdao.notorder_checked_basketlistvo(id, b_num);
+					Basket_add_storae_list_vo vo = basketdao.notorder_checked_add_storage_basketlistvo(id, b_num);
 					all_sum_price += vo.getP_price()*vo.getP_count();
-					basketlistvo.add(vo);
+					basket_add_storae_list_vo.add(vo);
 
 					}
-				} else {
+				} 
+				else {
 				for (int i = 0; i < str.length; i++) {
 					int b_num = Integer.parseInt(str[i]);
-					BasketList_vo vo = basketdao.checked_basketlist(id, b_num);
+					Basket_add_storae_list_vo vo = basketdao.checked_basketlist(id, b_num);
 					all_sum_price += vo.getP_price()*vo.getP_count();
-					basketlistvo.add(vo);
+					basket_add_storae_list_vo.add(vo);
 				}
 			}
 
 		} else {
-			all_sum_price = basketdao.basket_all_sum_price(id);
+			
+			all_sum_price = basketdao.basket_nucheck_all_sum_price(id);
+			
+			
 			if (ordervo == null) {
-				basketlistvo = basketdao.notorder_basketlist(id);
+				basket_add_storae_list_vo = basketdao.notorder_add_storage_basketlist(id);
 			} else {
-				basketlistvo = basketdao.basketlist(id);
+				basket_add_storae_list_vo = basketdao.basket_all_list(id);
 			}
+			
 		}
 		req.setAttribute("all_sum_price", all_sum_price);
-		req.setAttribute("basketlistvo", basketlistvo);
+		req.setAttribute("basketlistvo", basket_add_storae_list_vo);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content", "/shop/goods_list_order.jsp");
 		req.setAttribute("footer", "/shop/footer.jsp");
