@@ -23,10 +23,10 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	if (spageNum != null) {
 		pageNum = Integer.parseInt(spageNum);
 	}
-	int startRow = (pageNum - 1) * 8 + 1; 
-	int endRow = startRow + 7;
+	int startRow = (pageNum - 1) * 9 + 1; 
+	int endRow = startRow + 8;
 	
-	int pageCount = (int) Math.ceil(prodductdao.pro_cate_list_getCount() / 8.0);
+	int pageCount = (int) Math.ceil(prodductdao.pro_cate_list_getCount() / 9.0);
 	System.out.println(pageCount);
 	int startPageNum = ((pageNum - 1) / 10 * 10) + 1; 
 	int endPageNum = startPageNum + 9;
