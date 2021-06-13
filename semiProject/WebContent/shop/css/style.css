@@ -247,7 +247,7 @@ a:hover{
 	position:relative;
 	width:1050px;
 	overflow:hidden;
-	height:383.6px;
+	height:451.6px;
 }
 .content > .my_row > .item_box > .slide_wrapper ul.slides{
 	position:absolute;
@@ -276,7 +276,7 @@ a:hover{
 .content > .my_row > .item_box > .controls{
 	text-align:center;
 	position:relative;
-	top:-230px;
+	top:-280px;
 }
 .content > .my_row > .item_box > .controls span:nth-child(1){
 	margin:0 10px;
@@ -395,7 +395,6 @@ a:hover{
 }
 .content .my_row .detail_box .left_box img{
 	width:430px;
-	height:430px;
 }
 .content .my_row .detail_box .right_box{
 	width:60%;
@@ -759,14 +758,14 @@ a:hover{
 	margin-top:10px;
 }
 .content .my_row .goods_list .goods_list_box .goods_list_imgbox_wrap .goods_list_imgbox .textbox .title{
-	font-size:20px;
-	font-weight:400;
-	color:#444;
+	font-size:16px;
+	font-weight:700;
+	color:#222;
 	display:block;
 }
 .content .my_row .goods_list .goods_list_box .goods_list_imgbox_wrap .goods_list_imgbox .textbox .price{
 	font-size:16px;
-	font-weight:700;
+	font-weight:100;
 	margin-top:10px;
 	display:block;
 	color:#222;
