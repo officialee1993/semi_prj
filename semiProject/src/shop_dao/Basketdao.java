@@ -276,7 +276,8 @@ public int basket_nucheck_all_sum_price(String id) {
 			ArrayList< Basket_add_storae_list_vo> basket_add_storae_list = new ArrayList<Basket_add_storae_list_vo>();
 			con = MyDBCP.getConnection();
 			
-			String sql = "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b, storages s where b.id=? and s.p_num=p.p_num and s.p_size=b.p_size and p.p_num = b.p_num";
+			String sql = "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num ,s.s_count from Product p,Basket b, storages s \r\n"
+					+ "where b.id=? and s.p_num=p.p_num and s.p_size=b.p_size and p.p_num = b.p_num and s.s_count >= b.p_count";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);

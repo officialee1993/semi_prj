@@ -405,15 +405,16 @@ public class Productdao {
 		}
 
 		
-		public int product_delete(int p_num) {
+		public int product_storages_delete(int p_num, String p_size) {
 			
 			Connection con =null; 
 			PreparedStatement pstmt = null; 
 			try {
 				con = MyDBCP.getConnection();
-				String sql = "delete from product where p_num =?";
+				String sql = "delete from storages where p_num =? and p_size=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, p_num);
+				pstmt.setString(2, p_size);
 				int n = pstmt.executeUpdate();
 				
 				return n ; 
@@ -426,6 +427,28 @@ public class Productdao {
 			}
 		}
 		
+		public int product_delete(int p_num) {
+			
+			Connection con =null; 
+			PreparedStatement pstmt = null; 
+			try {
+				con = MyDBCP.getConnection();
+				String sql = "delete from product where p_num =? ";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, p_num);
+				
+				int n = pstmt.executeUpdate();
+				
+				return n ; 
+				
+			}catch (SQLException s) {
+				System.out.println(s.getMessage());
+				return -1; 
+			}finally {
+				MyDBCP.close(con, pstmt, null);
+			}
+		}
+
 		
 		public int product_not_img_update(int p_num , String p_name, int p_price, int p_count, int cg_id) {
 			Connection con = null; 

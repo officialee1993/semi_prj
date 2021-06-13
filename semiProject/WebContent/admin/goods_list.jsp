@@ -83,7 +83,7 @@
 					<td>${vo.p_size}</td>
 					<td>${vo.p_date}</td>
 					<td><button onclick="location.href='${cp}/admin/goods_modify?p_num=${vo.p_num}&p_size=${vo.p_size}&s_count=${vo.s_count}'" type="button" class="btn btn-outline-dark">수정</button></td>
-					<td><button onclick="location.href='${cp}/admin/goods_delete?p_num=${vo.p_num}'" type="button" class="btn btn-outline-dark">삭제</button></td>
+					<td><button onclick="location.href='${cp}/admin/goods_delete?p_num=${vo.p_num}&p_size=${vo.p_size}'" type="button" class="btn btn-outline-dark">삭제</button></td>
 				</tr>
 				
 		</c:forEach>
