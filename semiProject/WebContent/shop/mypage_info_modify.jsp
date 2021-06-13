@@ -29,23 +29,23 @@
 	  				</div>
 	  				<div class="mb-3">
 	  				<label for="" class="form-label">비밀번호</label>
-	  				<input id="form_pwd" type="password" class="form-control">
+	  				<input name="password" id="form_pwd" type="password" class="form-control">
 	  				</div>
 	  				<div class="mb-3">
 	  				<label for="" class="form-label">이름</label>
-	  				<input id="form_name" type="text" class="form-control">
+	  				<input name="userName" id="form_name" type="text" class="form-control">
 	  				</div>
 	  				<div class="mb-3">
 	  				<label for="" class="form-label">주소</label>
-	  				<input id="form_addr" type="text" class="form-control">
+	  				<input name="addr" id="form_addr" type="text" class="form-control">
 	  				</div>
 	  				<div class="mb-3">
 	  				<label for="" class="form-label">이메일</label>
-	  				<input id="form_email" type="email" class="form-control">
+	  				<input name="email" id="form_email" type="email" class="form-control">
 	  				</div>
 	  				<div class="mb-3">
 	  				<label for="" class="form-label">전화번호</label>
-	  				<input id="form_phone" type="text" class="form-control">
+	  				<input name="phone" id="form_phone" type="text" class="form-control">
 	  				</div>
 	  				<div class="btn_wrap">
 	  				<button onclick="info_update()" class="btn btn-outline-dark">수정</button>
@@ -104,6 +104,55 @@ function pwdCheck(){
 
 
 function info_update(){
+	
+	
+	var password=document.getElementsByName("password")[0];
+	var userName=document.getElementsByName("userName")[0];
+	var addr=document.getElementsByName("addr")[0];
+	var email=document.getElementsByName("email")[0];
+	var phone=document.getElementsByName("phone")[0];
+
+	var RegExp = /^[a-zA-Z0-9]{4,12}$/;
+	 var e_RegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	 var n_RegExp = /^[가-힣]{2,15}$/;
+	 
+	 if(password.value==''){
+		 alert('비밀번호를 입력해주세요')
+		 return;
+	 }
+	 if(!RegExp.test(password.value)){
+		 alert('비밀번호는 4~12자의 영문 대소문자와 숫자로만 입력해주세요')
+		 return;
+	 }
+	 if(userName.value==''){
+		 alert('이름을 입력해주세요')
+		 return;
+	 }
+	 if(!n_RegExp.test(userName.value)){
+		 alert('이름은 한글로만 입력해주세요')
+		 return;
+	 }
+	 if(addr.value==''){
+		 alert('주소를 입력해주세요')
+		 return;
+	 }
+	 if(email.value==''){
+		 alert('이메일을 입력해주세요')
+		 return;
+	 }
+	 if(!e_RegExp.test(email.value)){
+		 alert('올바른 이메일 형식이 아닙니다')
+		 return;
+	 }
+	 if(phone.value==''){
+		 alert('전화번호를 입력해주세요')
+		 return;
+	 }
+	 if (!/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/.test(phone.value)) {
+		 alert('올바른 전화번호 형식이 아닙니다')
+	        return;
+	    }
+	
 	
 	var modifyForm=document.getElementById("mypage_info_modify");
 	
