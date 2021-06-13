@@ -45,6 +45,7 @@ public class Goods_list_Controller extends HttpServlet{
 			req.setAttribute("order_high_price", order_high_price);
 		}
 		
+		req.setAttribute("optionIndex", order);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content","/shop/goods_list.jsp" );
 		req.setAttribute("footer", "/shop/footer.jsp");

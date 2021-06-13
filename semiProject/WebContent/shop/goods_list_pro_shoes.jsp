@@ -32,11 +32,9 @@
 								aria-label=".form-select-sm example"
 								onchange="if(this.value) location.href=(this.value);">
 									<option disabled selected values>-- 정렬 --</option>
-									<option value="${cp }/shop/goods_list_pro_shoes?cg_id=8&order=1">신상품순</option>
-									<option value="${cp }/shop/goods_list_pro_shoes?cg_id=8&order=2">낮은
-										가격순</option>
-									<option value="${cp }/shop/goods_list_pro_shoes?cg_id=8&order=3">높은
-										가격순</option>
+									<option value="${cp }/shop/goods_list_pro_shoes?cg_id=8&order=1" <c:if test="${optionIndex=='1' }">selected='selected'</c:if>>신상품순</option>
+									<option value="${cp }/shop/goods_list_pro_shoes?cg_id=8&order=2" <c:if test="${optionIndex=='2' }">selected='selected'</c:if>>낮은가격순</option>
+									<option value="${cp }/shop/goods_list_pro_shoes?cg_id=8&order=3" <c:if test="${optionIndex=='3' }">selected='selected'</c:if>>높은가격순</option>
 							</select></li>
 						</ul>
 						<div class="goods_list_imgbox_wrap">
@@ -108,11 +106,9 @@
 								aria-label=".form-select-sm example"
 								onchange="if(this.value) location.href=(this.value);">
 									<option disabled selected values>-- 정렬 --</option>
-									<option value="${cp }/shop/goods_list_pro_shoes?p_id=2&cg_id=5&order=1">신상품순</option>
-									<option value="${cp }/shop/goods_list_pro_shoes?p_id=2&cg_id=5&order=2">낮은
-										가격순</option>
-									<option value="${cp }/shop/goods_list_pro_shoes?p_id=2&cg_id=5&order=3">높은
-										가격순</option>
+									<option value="${cp }/shop/goods_list_pro_shoes?p_id=2&cg_id=5&order=1" <c:if test="${optionIndex=='1' }">selected='selected'</c:if>>신상품순</option>
+									<option value="${cp }/shop/goods_list_pro_shoes?p_id=2&cg_id=5&order=2" <c:if test="${optionIndex=='2' }">selected='selected'</c:if>>낮은	가격순</option>
+									<option value="${cp }/shop/goods_list_pro_shoes?p_id=2&cg_id=5&order=3" <c:if test="${optionIndex=='3' }">selected='selected'</c:if>>높은	가격순</option>
 							</select></li>
 						</ul>
 						<div class="goods_list_imgbox_wrap">
