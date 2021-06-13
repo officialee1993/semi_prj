@@ -17,8 +17,33 @@ public class Orders_vo {
 	private String p_name;
 	private int p_count;
 	private int p_price;
-	
+	private String p_size;
+	private int s_count;
+	private String save_img_name;
+
 	public Orders_vo () {}
+	/*재고 및 주문 사이즈 갯수 추가 생성자*/
+	public Orders_vo(int o_num, String rec_name, String rec_phone, String rec_addr, int all_sum_price, String payname,
+			Date o_date, String o_state, String id, int p_num, String p_name, int p_count,String p_size, int p_price, 
+			String save_img_name) {
+		this.o_num = o_num;
+		this.rec_name = rec_name;
+		this.rec_phone = rec_phone;
+		this.rec_addr = rec_addr;
+		this.all_sum_price = all_sum_price;
+		this.payname = payname;
+		this.o_date = o_date;
+		this.o_state = o_state;
+		this.id = id;
+		this.p_num = p_num;
+		this.p_name = p_name;
+		this.p_count = p_count;
+		this.p_price = p_price;
+		this.p_size = p_size;
+		this.save_img_name = save_img_name;
+	}
+	
+	
 	/*상품테이블 조인 생성자*/
 	public Orders_vo(int o_num, String rec_name, String rec_phone, String rec_addr, int all_sum_price, String payname,
 			Date o_date, String o_state, String id, int p_num, int b_num, String p_name, int p_count, int p_price) {
@@ -38,6 +63,40 @@ public class Orders_vo {
 		this.p_price = p_price;
 	}
 	
+
+	
+	public String getSave_img_name() {
+		return save_img_name;
+	}
+	public void setSave_img_name(String save_img_name) {
+		this.save_img_name = save_img_name;
+	}
+
+
+	public String getP_size() {
+		return p_size;
+	}
+
+
+
+	public void setP_size(String p_size) {
+		this.p_size = p_size;
+	}
+
+
+
+	public int getS_count() {
+		return s_count;
+	}
+
+
+
+	public void setS_count(int s_count) {
+		this.s_count = s_count;
+	}
+
+
+
 	/*기본 테이블 생성자*/
 	public Orders_vo(int o_num, String rec_name, String rec_phone, String rec_addr, int all_sum_price, String payname,
 			Date o_date, String o_state, String id, int p_num, int b_num) {

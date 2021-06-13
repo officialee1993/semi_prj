@@ -21,7 +21,7 @@ public class Goods_list_Controller extends HttpServlet{
 		ArrayList<Product_vo> order_new_date = new ArrayList<Product_vo>();
 		ArrayList<Product_vo> order_low_price = new ArrayList<Product_vo>();
 		ArrayList<Product_vo> order_high_price = new ArrayList<Product_vo>();
-		//System.out.println(order);
+		
 		if(order==null) {
 			Productdao dao=Productdao.getinstance();
 			req.setAttribute("list", dao.list());
@@ -44,7 +44,8 @@ public class Goods_list_Controller extends HttpServlet{
 			
 			req.setAttribute("order_high_price", order_high_price);
 		}
-		
+		System.out.println(order);
+		req.setAttribute("optionIndex", order);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content","/shop/goods_list.jsp" );
 		req.setAttribute("footer", "/shop/footer.jsp");

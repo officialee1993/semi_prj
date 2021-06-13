@@ -14,13 +14,19 @@
 				<tr>
 					<th>주문번호</th>
 					<th>주문날짜</th>
+					<th>상품명</th>
+					<th>사이즈</th>
+					<th>주문수량</th>
 					<th>결제금액</th>
 					<th>주문상태</th>
 				</tr>
 				<tr style="background-color:#fdfdfd;">
 					<td>${vo.o_num }</td>
 					<td>${vo.o_date }</td>
-					<td>${vo.all_sum_price }</td>
+					<td>${vo.p_name }</td>
+					<td>${vo.p_size }</td>
+					<td>${vo.p_count }</td>
+					<td>${vo.all_sum_price }원</td>
 					<td>${vo.o_state }</td>
 				</tr>
 				</table>
@@ -48,16 +54,16 @@
 				<h5>상품 정보</h5>
 				<table>
 				<tr>
+					<th>상품이미지</th>
 					<th>상품번호</th>
 					<th>상품명</th>
-					<th>수량</th>
 					<th>상품금액</th>
 				</tr>
 				<tr style="background-color:#fdfdfd;">
+					<td><img src="${cp}/shop/productimgs/${vo.save_img_name}" width="150px" style="vertical-aling:middle"></td>
 					<td>${vo.p_num }</td>
 					<td>${vo.p_name }</td>
-					<td>${vo.p_count }</td>
-					<td>${vo.p_price }</td>
+					<td>${vo.p_price }원</td>
 				</tr>
 				</table>
 			</div>

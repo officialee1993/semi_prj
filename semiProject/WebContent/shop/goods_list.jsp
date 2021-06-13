@@ -7,7 +7,6 @@
 		<img src="images/banner_new.png">
 </div>
 
-
 <div class="content">
 
 	<div class="my_row">
@@ -18,16 +17,18 @@
 					<li><a href="${cp }/shop/goods_list_top?cg_id=3&cg_id1=6">상의</a></li>
 					<li><a href="${cp }/shop/goods_list_bottom?cg_id=4&cg_id1=7">하의</a></li>
 					<li><a href="${cp }/shop/goods_list_shoes?cg_id=5&cg_id1=8">신발</a></li>
-					<li><select class="form-select form-select-sm"
+					<li><select id="selectBox" class="form-select form-select-sm"
 						aria-label=".form-select-sm example"
 						onchange="if(this.value) location.href=(this.value);">
 							<option disabled selected values>-- 정렬 --</option>
-							<option value="${cp }/shop/goods_list?order=1">신상품순</option>
-							<option value="${cp }/shop/goods_list?order=2">낮은가격순</option>
-							<option value="${cp }/shop/goods_list?order=3">높은가격순</option>
+							<option value="${cp }/shop/goods_list?order=1" <c:if test="${optionIndex=='1' }">selected='selected'</c:if> >신상품순</option>
+							<option value="${cp }/shop/goods_list?order=2" <c:if test="${optionIndex=='2' }">selected='selected'</c:if> >낮은가격순</option>
+							<option value="${cp }/shop/goods_list?order=3" <c:if test="${optionIndex=='3' }">selected='selected'</c:if> >높은가격순</option>
 							
 					</select></li>
 				</ul>
+
+
 				<div class="goods_list_imgbox_wrap">
 					<!-- 반복문에 들어갈 엘리먼트 -->
 					<c:choose>

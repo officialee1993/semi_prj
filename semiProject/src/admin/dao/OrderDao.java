@@ -25,10 +25,12 @@ public class OrderDao {
 		ResultSet rs=null;
 		try {
 			con=MyDBCP.getConnection();
-			String sql="select * from orders o"
+			String sql="select o.o_num,o.rec_name,o.rec_phone,o.rec_addr,o.all_sum_price,o.payname,o.o_date,o.o_state,o.id,b.b_num,p.p_num,p.p_name,b.p_count,b.p_size,p.p_price,p.save_img_name from orders o"
 					+ " join product p"
 					+ " on o.p_num=p.p_num"
-					+ " where o_num=?";
+					+ " join basket b"
+					+ " on o.o_num=b.b_num"
+					+ " where o.o_num=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, o_num);
 			rs=pstmt.executeQuery();
@@ -44,10 +46,11 @@ public class OrderDao {
 						rs.getString("o_state"),
 						rs.getString("id"),
 						rs.getInt("p_num"),
-						rs.getInt("b_num"),
 						rs.getString("p_name"),
 						rs.getInt("p_count"),
-						rs.getInt("p_price")
+						rs.getString("p_size"),
+						rs.getInt("p_price"),
+						rs.getString("save_img_name")
 						);
 				return vo;
 			}

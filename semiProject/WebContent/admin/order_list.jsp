@@ -60,38 +60,10 @@
 							<td>${list.all_sum_price }</td>
 							<td>${list.payname }</td>
 							<td>${list.o_state }</td>
-							<td class="complete"><button onclick="oStateUpdate(${list.o_num },${status.index })" type="button" class="btn btn-outline-dark completeBtn">발송</button></td>
-							</tr>
+							<td class=""><a class="completeBtn" href="javascript:void(0);" onclick='oStateUpdate(${list.o_num },${status.index})'>발송</a></td>
 							
-								<script>
-		function oStateUpdate(o_num,index){
-			
-			var complete=document.getElementsByClassName("complete")[index];
-			var completeBtn=document.getElementsByClassName("completeBtn")[index];
-			
-			console.log(${status.index });
-			console.log(completeBtn);
-			
-			let xhr=new XMLHttpRequest();
-			xhr.onreadystatechange=function(){
-				if(xhr.readyState==4 && xhr.status==200){
-					
-					let result=xhr.responseText;
-					let json=JSON.parse(result);
-					if(json.result!=''){
-						completeBtn.style.display="none";
-						complete.innerHTML="상품발송완료";
-					}else{
-						alert("배송실패");
-					}
-				}
-			};
-			xhr.open('post','${pageContext.request.contextPath }/admin/order_list?cmd=update',true);
-			//post방식으로 요청시 콘텐트타입에서 인코딩방식 설정하기 - 꼭 해줘야 함
-			xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-			xhr.send("o_num="+o_num);
-		}
-	</script>
+							</tr>
+
 							
 						</c:when>
 						<c:when test="${list.o_state=='배송완료' }">
@@ -102,12 +74,38 @@
 							<td>${list.all_sum_price }</td>
 							<td>${list.payname }</td>
 							<td style="color:orange">${list.o_state }</td>
-							<td></td>
+							<td class=""><a class="completeBtn"></a></td>
 							</tr>
 						</c:when>
 					</c:choose>
 					
-					
+												
+								<script>
+								function oStateUpdate(o_num,index){
+									var completeBtn=document.getElementsByClassName("completeBtn")[index];
+									
+									console.log(index);
+									
+									let xhr=new XMLHttpRequest();
+									xhr.onreadystatechange=function(){
+										if(xhr.readyState==4 && xhr.status==200){
+											
+											let result=xhr.responseText;
+											let json=JSON.parse(result);
+											if(json.result!=''){
+												completeBtn.innerHTML='상품발송완료';
+
+											}else{
+												alert("배송실패");
+											}
+										}
+									};
+									xhr.open('post','${pageContext.request.contextPath }/admin/order_list?cmd=update',true);
+									//post방식으로 요청시 콘텐트타입에서 인코딩방식 설정하기 - 꼭 해줘야 함
+									xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+									xhr.send("o_num="+o_num);
+								}
+								</script>
 					
 			</c:forEach>
 			</table>
