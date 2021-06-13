@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.tomcat.dbcp.dbcp2.PStmtKey;
+
 import shop.db.MyDBCP;
 import shop.vo.Basket_product_storage_vo;
 
@@ -19,7 +21,34 @@ public class StoragesDao {
 		
 		return instance;
 	};
+
 	
+public int Storages_p_num_count(int p_num) {
+	
+	Connection con = null; 
+	PreparedStatement pstmt = null; 
+	ResultSet rs = null;
+	try {
+		con = MyDBCP.getConnection();
+		String sql = "select nvl(count(*),0) from storages where p_num = ?";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, p_num);
+		rs = pstmt.executeQuery();
+		if(rs.next()) {
+			int count = rs.getInt(1);
+			return count;
+			
+		}
+		return -1;
+		
+	}catch (SQLException s) {
+		
+		System.out.println(s.getMessage());
+		
+		return -1;
+	}
+}
+
 public int Storages_getcount(int p_num ,String p_size) {
 	
 	Connection con = null; 

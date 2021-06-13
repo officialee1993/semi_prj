@@ -48,7 +48,19 @@ function LoginMsg(){
 					<p>${vo.p_price}원</p>
 					<input type="number" class="form-control" min="0" placeholder="수량" name="p_count" >
 					<c:if test="${!empty requestScope.fail}">
+						
+						<c:choose>
+						<c:when test="${requestScope.Storages_getcount == -1}">
+						<br><span style="color: red;"> 품절 </span>
+						</c:when>
+						
+						<c:otherwise>
 						<br><span style="color: red;"> 상품 수량 : ${requestScope.Storages_getcount} </span>
+						</c:otherwise>
+						
+						</c:choose>
+					
+						
 					</c:if>
 					<select name="p_size" class="form-select form-select-sm" aria-label=".form-select-sm example">
 					  <option selected>사이즈</option>
