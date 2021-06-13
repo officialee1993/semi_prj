@@ -67,6 +67,8 @@ public class Goods_list_pro_Controller extends HttpServlet{
 				req.setAttribute("high_list_all", high_list_all);
 			}
 		}
+		
+		req.setAttribute("optionIndex", order);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content","/shop/goods_list_pro.jsp" );
 		req.setAttribute("footer", "/shop/footer.jsp");
