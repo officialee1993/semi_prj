@@ -62,7 +62,7 @@
 		</div>
 	</div>
 	<div class="adminLogin">
-		<a href="${cp}/admin/admin_login.jsp"><img src="images/logo_a.png" style="width:60px"></a>
+		<a target="blank" href="${cp}/admin/admin_login.jsp"><img src="images/logo_a.png" style="width:60px"></a>
 	</div>
 	<script>
 		var slides=document.querySelector('.slides'),
