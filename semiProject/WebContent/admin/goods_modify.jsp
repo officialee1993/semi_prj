@@ -50,7 +50,7 @@
 	</script>
 	<div class="admin_content_box">
 		<div class="goods_insert">
-			<form action="${cp}/admin/goods_modify_ok?p_num=${p_num}"
+			<form action="${cp}/admin/goods_modify_ok?p_num=${p_num}&p_size=${p_size}"
 				method="post" onsubmit="return checkData();">
 				<div class="category_wrap">
 					<select class="form-select form-select-sm"
@@ -76,7 +76,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="" class="form-label"></label> <input type="text"
-						class="form-control" id="p_count" placeholder="수량" name="p_count" value="${vo.p_count}">
+						class="form-control" id="p_count" placeholder="수량" name="p_count" value="${s_count}">
 				</div>
 				<div class="input-group mb-3">
 					<input type="file" class="form-control" id="save_img_name"

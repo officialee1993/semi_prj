@@ -16,6 +16,7 @@
 		<div class="admin_content_menu_list"><a href="${cp }/admin/question_list">문의관리</a></div>
 		<div class="admin_content_menu_list"><a href="${cp }/admin/members_list">회원관리</a></div>
 		<div class="admin_content_menu_list"><a href="${cp }/admin/sales">매출통계</a></div>
+		
 		</div>
 	</div>
 

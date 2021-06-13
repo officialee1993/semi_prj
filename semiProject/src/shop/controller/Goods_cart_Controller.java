@@ -13,6 +13,7 @@ import javax.websocket.Session;
 
 import admin.dao.Productdao;
 import shop.vo.BasketList_vo;
+import shop.vo.Basket_add_storae_list_vo;
 import shop.vo.Basket_vo;
 import shop.vo.Orders_vo;
 import shop.vo.Product_vo;
@@ -22,8 +23,8 @@ import shop_dao.OrderDao;
 public class Goods_cart_Controller extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ArrayList<BasketList_vo> basketlistvo = new ArrayList<BasketList_vo>();
-		
+		//ArrayList<BasketList_vo> basketlistvo = new ArrayList<BasketList_vo>();
+		ArrayList<Basket_add_storae_list_vo> basket_add_storae_list_vo = new ArrayList<Basket_add_storae_list_vo>();
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
 		Basketdao basketdao = Basketdao.getinstance();
@@ -46,7 +47,8 @@ public class Goods_cart_Controller extends HttpServlet{
 		
 	 	if(ordervo ==null) {
 	 		
-	 		basketlistvo= basketdao.notorder_basketlist(id,startRow,endRow);
+	 		basket_add_storae_list_vo= basketdao.notorder_add_storage_basketlist(id,startRow,endRow);
+	 		
 	 		int pageCount = (int)Math.ceil(basketdao.notorder_basketlist_getCount(id)/ 5.0);
 	 		System.out.println("pageCount "+pageCount);
 
@@ -59,7 +61,8 @@ public class Goods_cart_Controller extends HttpServlet{
 			req.setAttribute("endPageNum", endPageNum);
 	 	}else {
 	 		
-	 		basketlistvo= basketdao.basketlist(id,startRow,endRow);
+	 		basket_add_storae_list_vo= basketdao.basket_add_storae_list(id,startRow,endRow);
+	 		
 	 		int pageCount =(int)Math.ceil(basketdao.basketlist_getCount(id)/ 5.0);
 	 		System.out.println("pageCount "+pageCount);
 
@@ -80,7 +83,8 @@ public class Goods_cart_Controller extends HttpServlet{
 		req.setAttribute("pageNum", pageNum);
 		System.out.println("startRow "+startRow +" endRow "+endRow+" startPageNum "+startPageNum+" endPageNum "+endPageNum);
 
-	 	req.setAttribute("basketlistvo", basketlistvo);
+	 	req.setAttribute("basketlistvo", basket_add_storae_list_vo);
+	 	
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content", "/shop/goods_cart.jsp");
 		req.setAttribute("footer", "/shop/footer.jsp");
@@ -94,7 +98,8 @@ public class Goods_cart_Controller extends HttpServlet{
 		int p_num = Integer.parseInt(req.getParameter("p_num"));
 		int p_count = Integer.parseInt(req.getParameter("p_count")); // ���� 
 		String p_size = req.getParameter("p_size"); // ������ 
-		ArrayList<BasketList_vo> basketlistvo = new ArrayList<BasketList_vo>();
+		//ArrayList<BasketList_vo> basketlistvo = new ArrayList<BasketList_vo>();
+		ArrayList<Basket_add_storae_list_vo> basket_add_storae_list_vo = new ArrayList<Basket_add_storae_list_vo>();
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
 		
@@ -120,7 +125,7 @@ public class Goods_cart_Controller extends HttpServlet{
 	 	Orders_vo  ordervo = orderdao.ordervoinfo();
 	 	if(ordervo ==null) {
 	 		
-	 		basketlistvo= basketdao.notorder_basketlist(id,startRow,endRow );
+	 		basket_add_storae_list_vo= basketdao.notorder_add_storage_basketlist(id,startRow,endRow );
 	 		int pageCount = (int) Math.ceil(basketdao.notorder_basketlist_getCount(id)/ 5.0);
 	 		if (endPageNum > pageCount) {
 				
@@ -131,7 +136,7 @@ public class Goods_cart_Controller extends HttpServlet{
 	 		req.setAttribute("pageCount", pageCount);
 	 	}else {
 	 		
-	 		basketlistvo= basketdao.basketlist(id,startRow,endRow);
+	 		basket_add_storae_list_vo= basketdao.basket_add_storae_list(id,startRow,endRow);
 	 		int n1 = basketdao.basketlist_getCount(id);
 	 		System.out.println("게시글 개수 "+ n1);
 	 		int pageCount =(int)Math.ceil(basketdao.basketlist_getCount(id)/ 5.0);
@@ -151,7 +156,7 @@ public class Goods_cart_Controller extends HttpServlet{
 	 	
 		
 		
-	 	req.setAttribute("basketlistvo", basketlistvo);
+	 	req.setAttribute("basketlistvo", basket_add_storae_list_vo);
 		req.setAttribute("top", "/shop/header.jsp");
 		req.setAttribute("content", "/shop/goods_cart.jsp");
 		req.setAttribute("footer", "/shop/footer.jsp");

@@ -14,10 +14,12 @@
 							<th>상품명</th>
 							<th>사이즈</th>
 							<th>가격</th>
-							<th>수량</th>
+							<th style="color: blue">수량</th>
+							<th style="color: red">재고량</th>
 							<th>주문금액</th>
 							<th></th>
 						</tr>
+						
 						<c:forEach var="basketvo" items="${basketlistvo}">
 						
 							<tr>
@@ -25,12 +27,23 @@
 							<td>${basketvo.p_name}</td>
 							<td>${basketvo.p_size}</td>
 							<td>${basketvo.p_price}</td>
-							<td><input type="text" class="form-control" style="width:50px;height:20px;margin:0 auto;" value="${basketvo.p_count}"></td>
+							<td><input type="text" class="form-control" style="width:50px;height:20px;margin:0 auto; color: blue;" value="${basketvo.p_count}"> </td>
+							<td><input type="text" class="form-control" style="width:50px;height:20px;margin:0 auto; color: red;" value="${basketvo.s_count}"> </td>
 							<td>${basketvo.p_price*basketvo.p_count}원</td>
-							<td><input type="checkbox" name="c1" value="${basketvo.b_num}"></td>
-							<td><a href="${cp}/shop/goods_cart_delete?b_num=${basketvo.b_num}">삭제</a></td>
+							<c:choose>
+							<c:when test="${basketvo.p_count>basketvo.s_count}">
+							<td></td>
+							</c:when>
 							
-						</tr>
+							<c:otherwise>
+							
+							<td><input type="checkbox" name="c1" value="${basketvo.b_num}"></td>
+							
+							</c:otherwise>
+							</c:choose>
+							
+							<td><a href="${cp}/shop/goods_cart_delete?b_num=${basketvo.b_num}">삭제</a></td>
+							</tr>
 						
 						</c:forEach>
 					

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import admin.dao.Productdao;
 import shop.vo.Product_category_vo;
+import shop.vo.pro_cate_storage_list_vo;
 @WebServlet("/admin/goods_list")
 public class Admin_GoodsListController extends HttpServlet{
 @Override
@@ -35,17 +36,18 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 		
 	}
 
-	ArrayList<Product_category_vo> list = new ArrayList<Product_category_vo>();
-	
-	list = prodductdao.pro_cate_list(startRow, endRow);
-	
+	//ArrayList<Product_category_vo> list = new ArrayList<Product_category_vo>();
+	ArrayList<pro_cate_storage_list_vo> list1 = new ArrayList<pro_cate_storage_list_vo>();
+	//list = prodductdao.pro_cate_list(startRow, endRow);
+	list1= prodductdao.pro_cate_storage_list(startRow, endRow);
 	req.setAttribute("pageCount", pageCount);
 	req.setAttribute("startPageNum", startPageNum);
 	req.setAttribute("endPageNum", endPageNum);
 	req.setAttribute("pageNum", pageNum);
-
 	
-	req.setAttribute("list", list);
+	
+	//req.setAttribute("list", list);
+	req.setAttribute("list", list1);
 	req.setAttribute("sidemenu", "/admin/sidemenu.jsp");
 	req.setAttribute("content", "/admin/goods_list.jsp");
 	req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);

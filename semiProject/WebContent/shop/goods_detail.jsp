@@ -22,9 +22,13 @@ function checkData(){
 		return false;	
 	}
 
-	
 }
-//댓글추가..
+function LoginMsg(){
+	alert("로그인하세요");
+}
+
+
+
 
 
 
@@ -54,8 +58,21 @@ function checkData(){
 					</select>
 				</div>
 				<div class="btn_box">
+				<c:choose>
+				
+				<c:when test="${empty sessionScope.id}">
+					<button onclick="LoginMsg()" class="btn btn-dark" id="buyed" type="button">구매하기</button>
+					<button onclick="LoginMsg()" class="btn btn-dark" id="buyed" type="button">장바구니</button>
+				</c:when>
+				<c:otherwise>
+				
+				
 					<input type="submit" formaction="${cp}/shop/goods_order?p_num=${vo.p_num}" class="btn btn-outline-dark" value="구매하기">
-					<input type="submit" formaction="${cp}/shop/goods_cart?p_num=${vo.p_num}" class="btn btn-dark" style="margin-left:10px" value="장바구니">		
+					<input type="submit" formaction="${cp}/shop/goods_cart?p_num=${vo.p_num}" class="btn btn-dark" style="margin-left:10px" value="장바구니">
+					
+				</c:otherwise>
+						
+			</c:choose>
 				</div>
 				</form>
 			</div>

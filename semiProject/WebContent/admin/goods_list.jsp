@@ -68,6 +68,7 @@
 					<th>상품명</th>
 					<th>가격</th>
 					<th>재고</th>
+					<th>사이즈</th>
 					<th>생성일</th>
 					<th width="5%"></th>
 					<th width="5%"></th>
@@ -78,9 +79,10 @@
 					<td><img src="${cp}/shop/productimgs/${vo.save_img_name}" width="80px;" style="vertical-aling:middle"></td>
 					<td>${vo.p_name}</td>
 					<td>${vo.p_price}원</td>
-					<td>${vo.p_count}</td>
+					<td>${vo.s_count}</td>
+					<td>${vo.p_size}</td>
 					<td>${vo.p_date}</td>
-					<td><button onclick="location.href='${cp}/admin/goods_modify?p_num=${vo.p_num}'" type="button" class="btn btn-outline-dark">수정</button></td>
+					<td><button onclick="location.href='${cp}/admin/goods_modify?p_num=${vo.p_num}&p_size=${vo.p_size}&s_count=${vo.s_count}'" type="button" class="btn btn-outline-dark">수정</button></td>
 					<td><button onclick="location.href='${cp}/admin/goods_delete?p_num=${vo.p_num}'" type="button" class="btn btn-outline-dark">삭제</button></td>
 				</tr>
 				
@@ -89,7 +91,77 @@
 			
 			<div class="goods_pagenum">
 				
-						<c:if test="${startPageNum>10 }">
+				<c:choose>
+				<c:when test="${sex=='1' }">
+					<c:if test="${startPageNum>10 }">
+					
+							<a href="${cp }/admin/goods_search?sex=${1}&pageNum=${startPageNum-1 }">[이전]</a>
+						</c:if>
+						<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+							<c:choose>
+								<c:when test="${i==pageNum }">
+									<a href="${cp }/admin/goods_search?sex=${1}&pageNum=${i}">
+									<span style="color:black">[${i }]</span></a>
+								</c:when>
+								<c:otherwise>
+									<a href="${cp }/admin/goods_search?sex=${1}&pageNum=${i}">
+									<span style="color:gray">[${i }]</span></a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>	
+						<c:if test="${endPageNum<pageCount }">
+							<a href="${cp }/admin/goods_search?sex=${1}&pageNum=${endPageNum+1 }">[다음]</a>
+						</c:if>
+						
+					</c:when>
+				<c:when test="${sex=='2' }">
+					<c:if test="${startPageNum>10 }">
+					
+							<a href="${cp }/admin/goods_search?sex=${2}&pageNum=${startPageNum-1 }">[이전]</a>
+						</c:if>
+						<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+							<c:choose>
+								<c:when test="${i==pageNum }">
+									<a href="${cp }/admin/goods_search?sex=${2}&pageNum=${i}">
+									<span style="color:black">[${i }]</span></a>
+								</c:when>
+								<c:otherwise>
+									<a href="${cp }/admin/goods_search?sex=${2}&pageNum=${i}">
+									<span style="color:gray">[${i }]</span></a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>	
+						<c:if test="${endPageNum<pageCount }">
+							<a href="${cp }/admin/goods_search?sex=${2}&pageNum=${endPageNum+1 }">[다음]</a>
+						</c:if>
+						
+					</c:when>
+					
+					<c:when test="${all=='1' }">
+					<c:if test="${startPageNum>10 }">
+					
+							<a href="${cp }/admin/goods_search?ct_gory=${ct_gory}&search=${search}&pageNum=${startPageNum-1 }">[이전]</a>
+						</c:if>
+						<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+							<c:choose>
+								<c:when test="${i==pageNum }">
+									<a href="${cp }/admin/goods_search?ct_gory=${ct_gory}&search=${search}&pageNum=${i}">
+									<span style="color:black">[${i }]</span></a>
+								</c:when>
+								<c:otherwise>
+									<a href="${cp }/admin/goods_search?ct_gory=${ct_gory}&search=${search}&pageNum=${i}">
+									<span style="color:gray">[${i }]</span></a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>	
+						<c:if test="${endPageNum<pageCount }">
+							<a href="${cp }/admin/goods_search?ct_gory=${ct_gory}&search=${search}&pageNum=${endPageNum+1 }">[다음]</a>
+						</c:if>
+						
+					</c:when>
+					
+					<c:otherwise>
+					<c:if test="${startPageNum>10 }">
 							<a href="${cp }/admin/goods_list?pageNum=${startPageNum-1 }">[이전]</a>
 						</c:if>
 						<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
@@ -107,6 +179,10 @@
 						<c:if test="${endPageNum<pageCount }">
 							<a href="${cp }/admin/goods_list?pageNum=${endPageNum+1 }">[다음]</a>
 						</c:if>
+					</c:otherwise>
+				</c:choose>
+				
+						
 
 			</div>
 			

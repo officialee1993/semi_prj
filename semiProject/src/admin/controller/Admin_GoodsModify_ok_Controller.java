@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.dao.Productdao;
+import admin.dao.StoragesDao;
 import shop.vo.Product_category_vo;
 import shop.vo.Product_vo;
 import shop_dao.Categorydao;
@@ -24,11 +25,12 @@ public class Admin_GoodsModify_ok_Controller extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		int p_id =0; 
 		int p_num= Integer.parseInt(req.getParameter("p_num")) ;
+		String p_size = req.getParameter("p_size");
 		String str_p_id= req.getParameter("str_p_id") ;
-		System.out.println("####################"+str_p_id);
-		if(str_p_id.equals("巢己")  ) {
+		System.out.println(p_size+"####################"+str_p_id);
+		if(str_p_id.equals("雮劚")  ) {
 			p_id = 1 ; 
-		}else if(str_p_id.equals("咯己") ) {
+		}else if(str_p_id.equals("鞐劚") ) {
 			p_id = 2; 
 		}
 		String cg_name= req.getParameter("cg_name");
@@ -41,22 +43,31 @@ public class Admin_GoodsModify_ok_Controller extends HttpServlet {
 		
 		Categorydao categorydao = Categorydao.getinstance();
 		Productdao productdao = Productdao.getinstance();
+		StoragesDao storagesdao = StoragesDao.getinstance();
+		
 		int cg_id =categorydao.cg_id_select(cg_name,p_id);
 		
-		System.out.println("墨抛绊府"+cg_id);
+	
 		
 
 		if( save_img_name.length() ==0) {
-			System.out.println("梅何颇老 绝绰 版快 .");
-			int n =productdao.product_not_img_update(p_num, p_name, p_price, p_count,  cg_id);
-			System.out.println("梅何颇老 绝绰 荐沥肯丰");
+			
+			productdao.product_not_img_update(p_num, p_name, p_price, p_count,  cg_id);
+			int m = storagesdao.Storages_update_add(p_count, p_num, p_size);
+			
+			if(m>0) {
+				System.out.println("靹标车");
+			}else {
+				System.out.println("鞁ろ尐");
+			}
 		}else {
 			
-			int n =productdao.productupdate(p_num, p_name, p_price, p_count, save_img_name, cg_id);
-			if(n>0) {
-				System.out.println("惑前 荐沥 肯丰");
+			productdao.productupdate(p_num, p_name, p_price, p_count, save_img_name, cg_id);
+			int m = storagesdao.Storages_update_add(p_count, p_num, p_size);
+			if(m>0) {
+				System.out.println("靹标车");
 			}else {
-				System.out.println("惑前 荐沥 角菩 ");
+				System.out.println("鞁ろ尐");
 			}
 			
 		}

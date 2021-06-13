@@ -20,6 +20,8 @@ public class Admin_GoodsModifyController extends HttpServlet{
 protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 	int p_num = Integer.parseInt(req.getParameter("p_num")) ;
+	int s_count = Integer.parseInt(req.getParameter("s_count")) ;
+	String p_size = req.getParameter("p_size");
 	Productdao productdao = Productdao.getinstance();
 	
 	Product_vo vo = productdao.getinfo(p_num);
@@ -30,12 +32,14 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	String cg_name = cgname_pid_select_vo.getCg_name();
 	int p_id = cgname_pid_select_vo.getP_id();
 	if(p_id == 1) {
-		str_p_id = "³²¼º";
+		str_p_id = "ë‚¨ì„±";
 	}else if(p_id==2) {
-		str_p_id = "¿©¼º";
+		str_p_id = "ì—¬ì„±";
 	}
 	req.setAttribute("vo", vo);
 	req.setAttribute("p_num", p_num);
+	req.setAttribute("s_count", s_count);
+	req.setAttribute("p_size", p_size);
 	req.setAttribute("cg_name", cg_name);
 	req.setAttribute("str_p_id", str_p_id);
 	req.setAttribute("sidemenu", "/admin/sidemenu.jsp");

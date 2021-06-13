@@ -22,11 +22,6 @@ public class Admin_GoodsdeleteController extends HttpServlet{
 		Productdao productdao = Productdao.getinstance();
 		int n = productdao.product_delete(p_num);
 		
-		if(n>0) {
-			System.out.println("admin 包府磊 惑前 昏力 己傍");
-		}else {
-			System.out.println("admin 包府磊 惑前 昏力 角菩");
-		}
 		
 		ArrayList<Product_category_vo> list = new ArrayList<Product_category_vo>();
 		Productdao prodductdao = Productdao.getinstance();

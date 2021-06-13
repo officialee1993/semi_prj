@@ -20,7 +20,7 @@
 	String pwd="";
 	try{
 		con=MyDBCP.getConnection();
-		String sql="select rpad(substr(pwd,1,2),length(pwd),'*') pwd from members where id=? and email=?";
+		String sql="select rpad(substr(pwd,1,length(pwd)/2),length(pwd),'*') pwd from members where id=? and email=?";
 		pstmt=con.prepareStatement(sql);
 		pstmt.setString(1,id);
 		pstmt.setString(2,email);
