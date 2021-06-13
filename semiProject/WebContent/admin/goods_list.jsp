@@ -76,7 +76,7 @@
 		<c:forEach var="vo" items="${list}">
 		
 				<tr>
-					<td><img src="${cp}/shop/productimgs/${vo.save_img_name}" width="80px;" style="vertical-aling:middle"></td>
+					<td><img src="${cp}/shop/productimgs/${vo.save_img_name}" width="80px" height="80px" style="vertical-aling:middle"></td>
 					<td>${vo.p_name}</td>
 					<td>${vo.p_price}원</td>
 					<td>${vo.s_count}</td>

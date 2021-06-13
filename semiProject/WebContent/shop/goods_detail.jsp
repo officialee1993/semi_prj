@@ -61,7 +61,7 @@ function LoginMsg(){
 				<c:choose>
 				
 				<c:when test="${empty sessionScope.id}">
-					<button onclick="LoginMsg()" class="btn btn-dark" id="buyed" type="button">구매하기</button>
+					<button onclick="LoginMsg()" class="btn btn-outline-dark" id="buyed" type="button">구매하기</button>
 					<button onclick="LoginMsg()" class="btn btn-dark" id="buyed" type="button">장바구니</button>
 				</c:when>
 				<c:otherwise>
