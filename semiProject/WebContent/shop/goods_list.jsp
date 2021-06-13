@@ -25,11 +25,7 @@
 							<option value="${cp }/shop/goods_list?order=1" <c:if test="${optionIndex=='1' }">selected='selected'</c:if> >신상품순</option>
 							<option value="${cp }/shop/goods_list?order=2" <c:if test="${optionIndex=='2' }">selected='selected'</c:if> >낮은가격순</option>
 							<option value="${cp }/shop/goods_list?order=3" <c:if test="${optionIndex=='3' }">selected='selected'</c:if> >높은가격순</option>
-							
 
-							<option value="${cp }/shop/goods_list?order=1" <c:if test="${optionIndex=='1' }">selected='selected'</c:if>>신상품순</option>
-							<option value="${cp }/shop/goods_list?order=2" <c:if test="${optionIndex=='2' }">selected='selected'</c:if>>낮은가격순</option>
-							<option value="${cp }/shop/goods_list?order=3" <c:if test="${optionIndex=='3' }">selected='selected'</c:if>>높은가격순</option>
 
 					</select></li>
 				</ul>
