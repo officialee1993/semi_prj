@@ -91,7 +91,7 @@ public class QuestionDao {
 	}
 	
 	/*문의사항 상세보기*/
-	public Q_board_vo adminQDetail(int qnum) {
+	public ArrayList<Q_board_vo> adminQDetail(int qnum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -102,31 +102,38 @@ public class QuestionDao {
 					+ " on q.p_num=p.p_num"
 					+ " join q_a a"
 					+ " on q.q_b_num=a.q_a_num"
+					+ " join storages s"
+					+ " on q.p_num=s.p_num"
 					+ " where q_b_num=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, qnum);
 			rs=pstmt.executeQuery();
-			rs.next();
-			Q_board_vo vo=new Q_board_vo(
-					rs.getInt("q_b_num"),
-					rs.getString("id"),
-					rs.getString("q_b_category"),
-					rs.getString("q_b_title"),
-					rs.getString("q_b_content"),
-					rs.getString("q_b__pwd"),
-					rs.getDate("wr_date"),
-					rs.getString("q_b_state"),
-					rs.getInt("p_num"),
-					rs.getString("p_name"),
-					rs.getInt("p_count"),
-					rs.getInt("p_price"),
-					rs.getString("ori_img_name"),
-					rs.getString("save_img_name"),
-					rs.getInt("cg_id"),
-					rs.getString("q_a_content"),
-					rs.getDate("q_a_date")
-					);
-			return vo;
+			ArrayList<Q_board_vo> list=new ArrayList<Q_board_vo>();
+			while(rs.next()) {
+				Q_board_vo vo=new Q_board_vo(
+						rs.getInt("q_b_num"),
+						rs.getString("id"),
+						rs.getString("q_b_category"),
+						rs.getString("q_b_title"),
+						rs.getString("q_b_content"),
+						rs.getString("q_b__pwd"),
+						rs.getDate("wr_date"),
+						rs.getString("q_b_state"),
+						rs.getInt("p_num"),
+						rs.getString("p_name"),
+						rs.getInt("p_count"),
+						rs.getInt("p_price"),
+						rs.getString("ori_img_name"),
+						rs.getString("save_img_name"),
+						rs.getInt("cg_id"),
+						rs.getString("q_a_content"),
+						rs.getDate("q_a_date"),
+						rs.getInt("s_count"),
+						rs.getString("p_size")
+						);
+				list.add(vo);
+			}
+			return list;
 		}catch(SQLException s) {
 			s.printStackTrace();
 			return null;

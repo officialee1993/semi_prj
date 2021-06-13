@@ -21,9 +21,11 @@ public class Q_board_vo {
 	private String q_a_content;
 	private Date q_a_date;
 	private int q_a_num;
+	private int s_count;
+	private String p_size;
 
-	
-	
+
+
 	public Q_board_vo() {}
 	
 	
@@ -63,13 +65,12 @@ public class Q_board_vo {
 		this.q_b_state = q_b_state;
 		this.p_num = p_num;
 	}
+	
+	
 	/*회원 문의사항 상세보기용 오버로딩*/
-	
-	
-	
 	public Q_board_vo(int q_b_num, String id, String q_b_category, String q_b_title, String q_b_content,
 			String q_b__pwd, Date wr_date, String q_b_state, int p_num, String p_name, int p_count, int p_price,
-			String ori_img_name, String save_img_name, int cg_id,String q_a_content,Date q_a_date) {
+			String ori_img_name, String save_img_name, int cg_id,String q_a_content,Date q_a_date,int s_count,String p_size) {
 		this.q_b_num = q_b_num;
 		this.id = id;
 		this.q_b_category = q_b_category;
@@ -87,7 +88,35 @@ public class Q_board_vo {
 		this.cg_id = cg_id;
 		this.q_a_content = q_a_content;
 		this.q_a_date = q_a_date;
+		this.s_count = s_count;
+		this.p_size = p_size;
 	}
+	
+
+	
+	
+	public int getS_count() {
+		return s_count;
+	}
+
+
+
+	public void setS_count(int s_count) {
+		this.s_count = s_count;
+	}
+
+
+
+	public String getP_size() {
+		return p_size;
+	}
+
+
+
+	public void setP_size(String p_size) {
+		this.p_size = p_size;
+	}
+
 	
 	public String getQ_a_content() {
 		return q_a_content;

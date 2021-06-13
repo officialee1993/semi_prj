@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,9 +19,9 @@ public class Admin_QuestionDetailController extends HttpServlet{
 		
 		int qnum=Integer.parseInt(req.getParameter("qnum"));
 		QuestionDao dao=QuestionDao.getinstance();
-		Q_board_vo vo=dao.adminQDetail(qnum);
-		
-		req.setAttribute("vo", vo);
+		ArrayList<Q_board_vo> list=dao.adminQDetail(qnum);
+
+		req.setAttribute("vo", list);
 		req.setAttribute("sidemenu", "/admin/sidemenu.jsp");
 		req.setAttribute("content", "/admin/question_detail.jsp");
 
