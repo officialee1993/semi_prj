@@ -15,6 +15,7 @@ public class LogoutController extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 		session.invalidate();
+		
 		resp.sendRedirect(req.getContextPath()+"/shop/index");
 	}
 

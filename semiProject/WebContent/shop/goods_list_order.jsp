@@ -1,8 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
+			<script type="text/javascript">
+		
+		function checkData(){
+			
+			//alert("checkData");
+			var rec_name=document.getElementsByName("rec_name")[0];
+			var rec_phone=document.getElementsByName("rec_phone")[0];
+			var rec_addr=document.getElementsByName("rec_addr")[0];
+			var payname=document.getElementsByName("payname")[0];
+			
+			if(rec_name.value.length==0){
+				alert("수령인 체크하세요");
+				rec_name.focus();
+				return false;	
+			}
+			
+			if(rec_phone.value==0){
+				alert("연락처 체크하세요");
+				rec_phone.focus();
+				return false;	
+			}
+			if(rec_addr.value==0){
+				alert("주소 체크하세요");
+				rec_addr.focus();
+				return false;	
+			}
+			if(payname.value =='결제방법'){
+				alert("결제방법 체크하세요");
+				payname.focus();
+				return false;	
+			}
+				return true;
+		}
+		
+		
+		</script>
+	
 	<div class="content">
 		<div class="my_row">
+		
+
 			<div class="goods_order_detail">
 				<table>
 					<tr>
@@ -31,7 +71,7 @@
 			<div class="join_box">
 				<h3 class="form_title">상품주문</h3>
 				
-				<form action="${cp}/shop/goods_list_order_ok" method="post">
+				<form action="${cp}/shop/goods_list_order_ok" method="post" onsubmit="return checkData()">
 				
 				<c:forEach var="basketvo" items="${basketlistvo}">
 				<input type="hidden" name="b_num" value="${basketvo.b_num}">

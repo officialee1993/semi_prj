@@ -18,7 +18,7 @@
 					id.focus();
 					return false;	
 				}else if(!idJ.test(id.value)){
-					alert("4~12자리 아이디 입력하세요.");
+					alert("영어 소문자 4~12자리 아이디 입력하세요.");
 					id.focus();
 					return false;
 				}
@@ -93,7 +93,7 @@
 				<form action="${cp}/shop/join" method="post" onsubmit="return checkData();">
 				<div class="mb-3">
   				<label for="" class="form-label">아이디</label>
-  				<input type="text" class="form-control" id="id" name="id" placeholder="4~12자 이상의 아이디로 입력해주세요.">
+  				<input type="text" class="form-control" id="id" name="id" placeholder="영어 소문자 4~12자 이상의 아이디로 입력해주세요.">
   				<input type="button" class="form-control" id="idcheck" value="중복검사" >
   				</div>
   				<div class="mb-3">
@@ -110,7 +110,7 @@
   				</div>
   				<div class="mb-3">
   				<label for="" class="form-label">이메일</label>
-  				<input type="email" class="form-control" name="email" placeholder="xxx@xxx.com 형식으로 입력해주세요.">
+  				<input type="text" class="form-control" name="email" placeholder="xxx@xxx.com 형식으로 입력해주세요.">
   				</div>
   				<div class="mb-3">
   				<label for="" class="form-label">전화번호</label>

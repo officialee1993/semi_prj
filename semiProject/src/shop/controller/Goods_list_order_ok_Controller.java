@@ -52,7 +52,9 @@ public class Goods_list_order_ok_Controller extends HttpServlet {
 			
 			list.forEach((Basket_sum_price_vo t) -> {
 				
+				
 				int n = orderdao.goodorder_insert(rec_name, rec_phone, rec_addr, t.getAll_sum_price(), payname, O_STATE, id, t.getP_num(), t.getB_num());
+				
 				if(n>0) {
 					
 					System.out.println("주문 테이블 성공");
@@ -62,6 +64,7 @@ public class Goods_list_order_ok_Controller extends HttpServlet {
 					System.out.println("주문 테이블실패");
 				
 				}
+				
 				int m = salesdao.Sales_stats_insert(t.getAll_sum_price() ,t.getP_num() ,t.getP_count()); 
 				if(m>0) {
 					

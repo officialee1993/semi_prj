@@ -634,10 +634,16 @@ public ArrayList<Basket_add_storae_list_vo> basket_add_storage_all_list(String i
 		ResultSet rs=null;
 		try {
 			con=MyDBCP.getConnection();
-			String sql="select NVL(count(*),0) from \r\n"
-					+ "(select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num from Product p,Basket b where b.id=? and p.p_num = b.p_num\r\n"
-					+ "minus\r\n"
-					+ "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,o.b_num from Product p,orders o ,Basket b where o.id=? and p.p_num = o.p_num and o.b_num=b.b_num)";
+			String sql="select NVL(count(*),0) from (\r\n"
+					+ "select basketlist.*,rownum rnum from(\r\n"
+					+ "select a.save_img_name,a.p_size,a.p_name,a.p_price,a.p_count,a.b_num ,a.p_num ,s.s_count\r\n"
+					+ "from (select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,b.b_num ,b.p_num\r\n"
+					+ "from Product p,Basket b \r\n"
+					+ "where b.id=? and p.p_num = b.p_num \r\n"
+					+ "minus \r\n"
+					+ "select p.save_img_name,b.p_size,p.p_name,p.p_price,b.p_count,o.b_num ,b.p_num\r\n"
+					+ "from Product p,orders o ,Basket b where o.id=? and p.p_num = o.p_num and o.b_num=b.b_num )a , storages s \r\n"
+					+ "where a.p_num = s.p_num and a.p_size=s.p_size order by a.b_num desc)basketlist)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, id);

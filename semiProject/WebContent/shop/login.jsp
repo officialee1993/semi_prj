@@ -31,32 +31,47 @@
 				function logincheck() {
 				
 				var id = document.getElementById("id").value;
+				var id1 = document.getElementById("id");
 				var pwd = document.getElementById("pwd").value;
+				var pwd1 = document.getElementById("pwd");
 				var loginchecked = document.getElementById("not_found");
-				let xhr=new XMLHttpRequest();
-				xhr.onreadystatechange=function(){
-					if(xhr.readyState==4 && xhr.status==200){
+				
+				if(id.length ==0){
+					alert("ID 입력하세요.");
+					id1.focus();
+
+				}else if(pwd.length==0){
+					alert("PWD 입력하세요.");
+					pwd1.focus();
+				}else{
+					let xhr=new XMLHttpRequest();
+					xhr.onreadystatechange=function(){
+						if(xhr.readyState==4 && xhr.status==200){
+							
+							let xml=xhr.responseXML;
+							
+							let result=xml.getElementsByTagName("result")[0].textContent;
+							if(result =="true"){
+								
+								window.location.replace("${pageContext.request.contextPath}/shop/index");
+								
+							}else{
+								not_found.innerHTML="<br><br>아이디 혹은 비밀번호가 맞지 않습니다."
+								
+							}
+							
 						
-						let xml=xhr.responseXML;
-						
-						let result=xml.getElementsByTagName("result")[0].textContent;
-						if(result =="true"){
-							
-							window.location.replace("${pageContext.request.contextPath}/shop/index");
-							
-						}else{
-							not_found.innerHTML="<br><br>아이디 혹은 비밀번호가 맞지 않습니다."
-							
 						}
 						
+					};
+					xhr.open('post','${pageContext.request.contextPath}/shop/login',true);
+					xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+					let params="id="+id +"&pwd="+pwd;
+					xhr.send(params);
 					
-					}
-					
-				};
-				xhr.open('post','${pageContext.request.contextPath}/shop/login',true);
-				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-				let params="id="+id +"&pwd="+pwd;
-				xhr.send(params);
+				}
+				
+
 				
 			}
 			

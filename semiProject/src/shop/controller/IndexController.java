@@ -21,6 +21,7 @@ public class IndexController extends HttpServlet {
 		String content=(String)req.getAttribute("content");
 		String footer=(String)req.getAttribute("footer");
 		
+		
 		if(top==null) {
 			top="/shop/header.jsp";
 		}
